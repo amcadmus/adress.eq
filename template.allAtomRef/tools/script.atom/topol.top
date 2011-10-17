@@ -1,0 +1,5 @@
+#include "system.itp"
+[ molecules ]
+SOL 216
+TWALLA 150
+TWALLB 150
