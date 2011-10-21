@@ -20,5 +20,5 @@ TWALLB	        1
 
 [ position_restraints ]
 ; atnr  func   kx   ky   kz
-1	1	10000 10000 10000
+1	1	1e4 1e4 1e4
 

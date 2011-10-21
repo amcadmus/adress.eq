@@ -22,7 +22,7 @@ nstfout                  = 0
 nstcheckpoint            = 10000
 ; Output frequency for energies to log file and energy file
 nstlog                   = 0
-nstenergy                = 10
+nstenergy                = 100
 ; Output frequency and precision for xtc file
 nstxtcout                = 100
 xtc-precision            = 1000
@@ -39,21 +39,21 @@ ns-type                  = Grid
 pbc                      = xy
 periodic_molecules       = no
 ; nblist cut-off        
-rlist                    = 0.90
+rlist                    = 1.10
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
 ; Method for doing electrostatics
 coulombtype              = Reaction-Field
 rcoulomb-switch          = 0
-rcoulomb                 = 0.90
+rcoulomb                 = 1.10
 ; Relative dielectric constant for the medium and the reaction field
 epsilon_r                = 1
 epsilon_rf               = 80
 ; Method for doing Van der Waals
-vdw-type                 = user
+vdw-type                 = cut-off
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 0.90
+rvdw                     = 1.10
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
@@ -68,8 +68,8 @@ Tcoupl                   = no
 ; Groups to couple separately
 tc-grps                  = SOL WA WB 
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 1e8 0.5 0.5 
-ref_t                    = 300 100 500
+tau_t                    = 0.5 0.5 0.5 
+ref_t                    = 300 300 300
 ; Pressure coupling     
 Pcoupl                   = no
 Pcoupltype               = isotropic
@@ -80,7 +80,10 @@ ref_p                    = 1.0
 ; Scaling of reference coordinates, No, All or COM
 refcoord_scaling         = No
 
-gen-vel                  = yes
+;gen-vel                  = yes
+gen_vel                  = yes
+gen_temp                 = 300
+gen_seed                 = 1993
 
 userreal1                = 300  ; T1
 userreal2                = 300  ; T2
