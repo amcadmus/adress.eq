@@ -1,0 +1,40 @@
+;
+;	File 'topol.top' was generated
+;	By user: wanghan (199595)
+;	On host: gaia23
+;	At date: Fri Oct 21 15:06:47 2011
+;
+;	This is a standalone topology file
+;
+;	It was generated using program:
+;	pdb2gmx - VERSION 4.5.4-dev-20110913-f0517-dirty
+;
+;	Command line was:
+;	pdb2gmx -f spc216.pdb 
+;
+;	Force field was read from the standard Gromacs share directory.
+;
+
+; Include forcefield parameters
+#include "gromos43a1.ff/forcefield.itp"
+
+; Include water topology
+#include "gromos43a1.ff/spce.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "gromos43a1.ff/ions.itp"
+
+[ system ]
+; Name
+Protein
+
+[ molecules ]
+; Compound        #mols
+SOL               1728
