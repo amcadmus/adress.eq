@@ -1,0 +1,24 @@
+[ moleculetype ]
+; molname	nrexcl
+TWALLA	        1
+
+[ atoms ]
+;   nr   type  resnr residue  atom   cgnr     charge       mass
+     1     C      1       WA    C       1          0   
+
+[ position_restraints ]
+; atnr  func   kx   ky   kz
+1	1	10000 10000 10000
+     
+[ moleculetype ]
+; molname	nrexcl
+TWALLB	        1
+
+[ atoms ]
+;   nr   type  resnr residue  atom   cgnr     charge       mass
+     1     C      1       WB    C       1          0   
+
+[ position_restraints ]
+; atnr  func   kx   ky   kz
+1	1	1e4 1e4 1e4
+
