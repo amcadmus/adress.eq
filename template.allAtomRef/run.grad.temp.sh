@@ -6,10 +6,13 @@ source functions.sh
 dt=0.002
 nsteps=100
 
+# input & output
+input_dir=	out.init
+output_dir=	out.grad.temp
 # configs
-init_conf=confs/init.gro
-ref_conf=confs/ref.gro
-top=confs/topol.top
+init_conf=	$input_dir/confout.gro
+ref_conf=	$input_dir/conf.gro
+top=		$input_dir/topol.top
 
 # options generating initial conf
 nbox=4
@@ -72,3 +75,11 @@ echo "# end grompp            ==================================================
 echo "# mdrun                 ==================================================================" >> $runtime_log
 mdrun -v &>> $runtime_log
 echo "# end mdrun             ==================================================================" >> $runtime_log
+
+test ! -d $output_dir && mkdir $output_dir
+rm -f $output_dir/*
+cp conf.gro	$output_dir/
+cp confout.gro	$output_dir/
+cp topol.top	$output_dir/
+cp grompp.mdp   $output_dir/
+cp *itp		$output_dir/

@@ -3,6 +3,8 @@
 nbox=4
 scale=0.932
 
+output_dir=out.init
+
 runtime_log=run.log
 make_log=make.log
 
@@ -33,3 +35,12 @@ echo "# end grompp            ==================================================
 echo "# mdrun                 ==================================================================" >> $runtime_log
 mdrun -v &>> $runtime_log
 echo "# end mdrun             ==================================================================" >> $runtime_log
+
+test ! -d $output_dir && mkdir $output_dir
+rm -f $output_dir/*
+cp conf.gro	$output_dir/
+cp confout.gro	$output_dir/
+cp topol.top	$output_dir/
+cp grompp.mdp   $output_dir/
+cp *itp		$output_dir/
+
