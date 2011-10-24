@@ -4,7 +4,7 @@ source functions.sh
 
 # parameters
 dt=0.002
-nsteps=100
+nsteps=500000
 
 # input & output
 input_dir=out.grad.temp

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source functions.sh
+
 nbox=4
 scale=0.932
 
