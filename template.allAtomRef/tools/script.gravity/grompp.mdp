@@ -68,7 +68,7 @@ Tcoupl                   = no
 ; Groups to couple separately
 tc-grps                  = SOL WA WB 
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 1e-8 0.5 0.5 
+tau_t                    = 1e8 0.5 0.5 
 ref_t                    = 300 240 360		; \nabla T = 3.5e10 K/m
 ; Pressure coupling     
 Pcoupl                   = no

@@ -23,8 +23,8 @@ echo "# end rescale box       ==================================================
 
 grocleanit
 rm -f *.itp grompp.mdp
-cp tools/script.atom/*itp .
-cp tools/script.atom/grompp.mdp .
+cp tools/script.gravity/*itp .
+cp tools/script.gravity/grompp.mdp .
 cp conf.gro conf.start.gro
 
 echo "# grompp                ==================================================================" >> $runtime_log
