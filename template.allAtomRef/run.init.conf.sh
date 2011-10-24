@@ -35,12 +35,6 @@ echo "# end grompp            ==================================================
 echo "# mdrun                 ==================================================================" >> $runtime_log
 mdrun -v &>> $runtime_log
 echo "# end mdrun             ==================================================================" >> $runtime_log
-
-test ! -d $output_dir && mkdir $output_dir
-rm -f $output_dir/*
-cp conf.gro	$output_dir/
-cp confout.gro	$output_dir/
-cp topol.top	$output_dir/
-cp grompp.mdp   $output_dir/
-cp *itp		$output_dir/
-
+echo "# post process          ==================================================================" >> $runtime_log
+post_process $output_dir
+echo "# end post process      ==================================================================" >> $runtime_log

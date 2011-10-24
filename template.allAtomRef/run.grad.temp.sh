@@ -7,12 +7,12 @@ dt=0.002
 nsteps=100
 
 # input & output
-input_dir=	out.init
-output_dir=	out.grad.temp
+input_dir=out.init
+output_dir=out.grad.temp
 # configs
-init_conf=	$input_dir/confout.gro
-ref_conf=	$input_dir/conf.gro
-top=		$input_dir/topol.top
+init_conf=$input_dir/confout.gro
+ref_conf=$input_dir/conf.gro
+top=$input_dir/topol.top
 
 # options generating initial conf
 nbox=4
@@ -24,6 +24,10 @@ make_log=make.log
 rm -f $runtime_log $make_log
 make -C tools/gen.conf/ -j4 >> $make_log
 
+if test ! -d $input_dir ; then
+    echo "no file $input_dir, exit"
+    exit;
+fi
 
 if test -f $init_conf; then
     if test -f $ref_conf; then
@@ -64,6 +68,7 @@ grocleanit
 rm -f *.itp grompp.mdp
 cp tools/script.grad.temp/*itp .
 cp tools/script.grad.temp/grompp.mdp .
+rm -f conf.start.gro
 cp conf.gro conf.start.gro
 
 echo "# set parameters        ==================================================================" >> $runtime_log
@@ -75,11 +80,6 @@ echo "# end grompp            ==================================================
 echo "# mdrun                 ==================================================================" >> $runtime_log
 mdrun -v &>> $runtime_log
 echo "# end mdrun             ==================================================================" >> $runtime_log
-
-test ! -d $output_dir && mkdir $output_dir
-rm -f $output_dir/*
-cp conf.gro	$output_dir/
-cp confout.gro	$output_dir/
-cp topol.top	$output_dir/
-cp grompp.mdp   $output_dir/
-cp *itp		$output_dir/
+echo "# post process          ==================================================================" >> $runtime_log
+post_process $output_dir
+echo "# end post process      ==================================================================" >> $runtime_log
