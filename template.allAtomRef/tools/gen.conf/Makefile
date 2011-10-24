@@ -94,23 +94,3 @@ $(application_dir)/%.o:	$(application_dir)/%.cpp
 	$(call make-depend,$<,$@,$(application_dir)/$(notdir $(subst .o,.d,$@)))
 	$(COMPILE.cpp) $(OUTPUT_OPTION) $<	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
