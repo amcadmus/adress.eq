@@ -153,7 +153,7 @@ int main (int argc, char * argv[])
 	  else if (mycom[dd] < 0) mycom[dd] += boxsize[dd];
 	}
 	coms[countMol] = mycom;
-	values[countMol] = myvalue * 1e3 / (1.38*6.02) * 2/9;
+	values[countMol] = myvalue * 1e3 / (1.38*6.02) * 2/6;
 	countMol ++;
       }
     }
