@@ -4,6 +4,10 @@ function set_parameter () {
     file=$1
     seed=`date +%s`
     sed -e "/^nsteps /s/=.*/= $nsteps/g" $file |\
+    sed -e "/^nstxout /s/=.*/= $nstxout/g" |\
+    sed -e "/^nstvout /s/=.*/= $nstvout/g" |\
+    sed -e "/^nstenergy /s/=.*/= $nstenergy/g" |\
+    sed -e "/^nstxtcout /s/=.*/= $nstxtcout/g" |\
     sed -e "/^dt /s/=.*/= $dt/g" > tmp
     mv -f tmp $file
 }

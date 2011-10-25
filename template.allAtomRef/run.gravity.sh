@@ -1,10 +1,10 @@
 #!/bin/bash
 
 source functions.sh
+source parameters.sh
 
-# parameters
-dt=0.002
-nsteps=500000
+dt=$dt_gravity
+nsteps=$nsteps_gravity
 
 # input & output
 input_dir=out.grad.temp

@@ -1,10 +1,11 @@
 #!/bin/bash
 
 source functions.sh
+source parameters.sh
 
 # parameters
-dt=0.002
-nsteps=500000
+dt=$dt_grad_temp
+nsteps=$nsteps_grad_temp
 
 # input & output
 input_dir=out.init
