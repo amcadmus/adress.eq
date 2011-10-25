@@ -36,7 +36,7 @@ cobjects = 	$(addprefix $(cobjects_dir)/,$(tmp_cobjects))
 
 
 C:=		gcc
-CFLAGS +=	-g -O3 -Wall 
+CFLAGS +=	-g -O0 -Wall 
 CFLAGS += 	$(addprefix -I ,$(include_dirs))
 
 CXX:=		g++
@@ -79,7 +79,7 @@ define make-depend
 endef
 # $(call make-target,target,object-files-or-lib-files)
 define make-target
-  $(CXX) $(CXXFLAGS) -o $1 $2 -lm $(MKL_LINK) 
+  $(CXX) $(CXXFLAGS) -o $1 $2 -lm $(link-options) 
 endef
 
 
