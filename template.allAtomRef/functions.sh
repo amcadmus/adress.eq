@@ -18,6 +18,7 @@ function post_process () {
     mkdir  $output_dir
     cp conf.gro		$output_dir/
     cp confout.gro	$output_dir/
+    cp traj.trr		$output_dir/
     cp topol.top	$output_dir/
     cp grompp.mdp	$output_dir/
     cp *itp		$output_dir/
