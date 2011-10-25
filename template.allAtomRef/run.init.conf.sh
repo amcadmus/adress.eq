@@ -1,6 +1,10 @@
 #!/bin/bash
 
 source functions.sh
+source parameters.sh
+
+dt=$dt_init
+nsteps=$nsteps_init
 
 nbox=4
 scale=0.932
@@ -31,6 +35,9 @@ cp tools/script.atom/*itp .
 cp tools/script.atom/grompp.mdp .
 cp conf.gro conf.start.gro
 
+echo "# set parameters        ==================================================================" >> $runtime_log
+set_parameter grompp.mdp
+echo "# end set parameters    ==================================================================" >> $runtime_log
 echo "# grompp                ==================================================================" >> $runtime_log
 grompp &>> $runtime_log
 echo "# end grompp            ==================================================================" >> $runtime_log
