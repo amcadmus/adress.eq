@@ -1,12 +1,13 @@
 #!/bin/bash
 
+source env.sh
 source functions.sh
 source parameters.sh
 
 dt=$dt_init
 nsteps=$nsteps_init
 
-nbox=4
+nbox=2
 
 output_dir=out.init
 
@@ -15,7 +16,7 @@ make_log=make.log
 
 rm -f $runtime_log $make_log
 
-cp tools/script.init/spc216.gro .
+rm -f spc216.gro; cp tools/script.init/spc216.gro .
 echo "# genconf by spc216     ==================================================================" >> $runtime_log
 genconf -nbox $nbox $nbox $nbox -f spc216.gro -o conf.gro &>> $runtime_log
 echo "# end genconf by spc216 ==================================================================" >> $runtime_log
@@ -36,8 +37,8 @@ echo "# grompp                ==================================================
 grompp &>> $runtime_log
 echo "# end grompp            ==================================================================" >> $runtime_log
 echo "# mdrun                 ==================================================================" >> $runtime_log
-#mdrun -v &>> $runtime_log
+mdrun -v &>> $runtime_log
 echo "# end mdrun             ==================================================================" >> $runtime_log
 echo "# post process          ==================================================================" >> $runtime_log
-#post_process $output_dir
+post_process $output_dir
 echo "# end post process      ==================================================================" >> $runtime_log

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dt_init=0.001
-nsteps_init=100000
+nsteps_init=10000
 
 dt_grad_temp=0.002
 nsteps_grad_temp=500
