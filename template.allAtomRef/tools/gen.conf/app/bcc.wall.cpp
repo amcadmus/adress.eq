@@ -119,8 +119,14 @@ int main (int argc, char * argv[])
   for (int ix = 0; ix < nx; ++ix){
     for (int iy = 0; iy < ny; ++iy){
       for (int iz = 0; iz < nz; ++iz){
-	resdindex[natom+indexShift] = resdindex[natom-1] + indexShift + 1;
-	atomindex[natom+indexShift] = atomindex[natom-1] + indexShift + 1;
+	if (natom != 0){
+	  resdindex[natom+indexShift] = resdindex[natom-1] + indexShift + 1;
+	  atomindex[natom+indexShift] = atomindex[natom-1] + indexShift + 1;
+	}
+	else {
+	  resdindex[natom+indexShift] =  + indexShift + 1;
+	  atomindex[natom+indexShift] =  + indexShift + 1;
+	}
 	resdname[natom+indexShift] = "WA";
 	atomname[natom+indexShift] = "C";
 	posi[natom+indexShift].resize(3);
@@ -129,8 +135,14 @@ int main (int argc, char * argv[])
 	posi[natom+indexShift][2] = (iz+0.25) * hh[2];
 	velo[natom+indexShift].resize(3, 0.);
 	indexShift ++;
-	resdindex[natom+indexShift] = resdindex[natom-1] + indexShift + 1;
-	atomindex[natom+indexShift] = atomindex[natom-1] + indexShift + 1;
+	if (natom != 0){
+	  resdindex[natom+indexShift] = resdindex[natom-1] + indexShift + 1;
+	  atomindex[natom+indexShift] = atomindex[natom-1] + indexShift + 1;
+	}
+	else {
+	  resdindex[natom+indexShift] =  + indexShift + 1;
+	  atomindex[natom+indexShift] =  + indexShift + 1;
+	}
 	resdname[natom+indexShift] = "WA";
 	atomname[natom+indexShift] = "C";
 	posi[natom+indexShift].resize(3);
