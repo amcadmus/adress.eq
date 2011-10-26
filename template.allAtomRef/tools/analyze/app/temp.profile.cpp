@@ -84,10 +84,18 @@ int main (int argc, char * argv[])
   GroFileManager::read (cfilename, resdindex, resdname, atomname, atomindex,
 			posi, velo, boxsize);
   int nmol = 0;
+  int nmolwa = 0;
+  int nmolwb = 0;
   for (unsigned i = 0; i < atomname.size(); ++i){
     if (atomname[i] == "OW"){
       nmol ++;
     }
+    if (resdname[i] == "WA"){
+      nmolwa ++;
+    }
+    if (resdname[i] == "WB"){
+      nmolwb ++;
+    }    
   }
 
   char fname [1024];
@@ -115,8 +123,16 @@ int main (int argc, char * argv[])
   std::vector<double > tmp (3, 0.);
   std::vector<std::vector<double > > coms(nmol, tmp);
   std::vector<double > values(nmol, 1.);
+  std::vector<std::vector<double > > comswa(nmolwa, tmp);
+  std::vector<std::vector<double > > comswb(nmolwb, tmp);
+  std::vector<double > valueswa(nmolwa, 1.);
+  std::vector<double > valueswb(nmolwb, 1.);
   Profile_PiecewiseConst prof;
   prof.reinit (boxsize, h);
+  Profile_PiecewiseConst profwa;
+  Profile_PiecewiseConst profwb;
+  profwa.reinit (boxsize, h);
+  profwb.reinit (boxsize, h);
   
   while (
       read_trr(fp, natoms, &step, &time, &lambda, gbox, xx, vv, ff)
@@ -135,6 +151,8 @@ int main (int argc, char * argv[])
     std::cout << "#! loaded frame at time " << time << "ps   \r";  
     std::cout << std::flush;
     int countMol = 0;
+    int countMolwa = 0;
+    int countMolwb = 0;
     for (int i = 0; i < natoms; ++i){
       if (atomname[i] == "OW"){
 	regulateCoord (xx[i], xx[i+1], xx[i+2], boxsize);
@@ -153,13 +171,33 @@ int main (int argc, char * argv[])
 	  else if (mycom[dd] < 0) mycom[dd] += boxsize[dd];
 	}
 	coms[countMol] = mycom;
-	values[countMol] = myvalue * 1e3 / (1.38*6.02) * 2/6;
+	values[countMol] = myvalue * 1e3 / (1.38*6.02) * 2./6.;
 	countMol ++;
+      }
+      if (resdname[i] == "WA"){
+	double myvalue = 0.;
+	for (int dd = 0; dd < 3; ++dd){
+	  comswa[countMolwa][dd] = xx[i][dd];
+	  myvalue += 0.5 * (12. * vv[i][dd] * vv[i][dd]);
+	}
+	valueswa[countMolwa] = myvalue * 1e3 / (1.38*6.02) * 2./3.;
+	countMolwa ++;
+      }
+      if (resdname[i] == "WB"){
+	double myvalue = 0.;
+	for (int dd = 0; dd < 3; ++dd){
+	  comswb[countMolwb][dd] = xx[i][dd];
+	  myvalue += 0.5 * (12. * vv[i][dd] * vv[i][dd]);
+	}
+	valueswb[countMolwb] = myvalue * 1e3 / (1.38*6.02) * 2./3.;
+	countMolwb ++;
       }
     }
     std::cout << "nmol is " << countMol << std::endl;
     
     prof.deposit(coms, values);
+    profwa.deposit(comswa, valueswa);
+    profwb.deposit(comswb, valueswb);
   }
   
   // //////////////////////////////////////////////////
@@ -167,9 +205,17 @@ int main (int argc, char * argv[])
   // //////////////////////////////////////////////////
 
   prof.average();
-  prof.print_x ("density.x.out");
-  prof.print_xz ("density.xz.out");
-  
+  prof.print_x ("temp.water.x.out");
+  prof.print_xz ("temp.water.xz.out");
+
+  profwa.average();
+  profwa.print_x ("temp.wa.x.out");
+  profwa.print_xz ("temp.wa.xz.out");
+
+  profwb.average();
+  profwb.print_x ("temp.wb.x.out");
+  profwb.print_xz ("temp.wb.xz.out");
+
   // DensityProfile_PiecewiseConst dp (filename, h);
   // dp.deposit (filename, start_t, end_t);
   // dp.print_x ("density.x.out");
