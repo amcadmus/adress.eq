@@ -7,7 +7,7 @@ source parameters.sh
 dt=$dt_init
 nsteps=$nsteps_init
 
-nbox=2
+nbox=4
 
 output_dir=out.init
 
