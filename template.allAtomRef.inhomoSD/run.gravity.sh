@@ -63,6 +63,7 @@ grompp &>> $runtime_log
 echo "# end grompp            ==================================================================" >> $runtime_log
 echo "# mdrun                 ==================================================================" >> $runtime_log
 echo running on `cat /etc/hostname ` pid is $$ > pid.log
+echo "# location of mdrun is `which mdrun`" &>> $runtime_log
 mdrun -v &>> $runtime_log
 echo "# end mdrun             ==================================================================" >> $runtime_log
 echo "# post process          ==================================================================" >> $runtime_log
