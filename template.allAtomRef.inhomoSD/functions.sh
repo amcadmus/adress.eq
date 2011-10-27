@@ -8,6 +8,10 @@ function set_parameter () {
     sed -e "/^nstvout /s/=.*/= $nstvout/g" |\
     sed -e "/^nstenergy /s/=.*/= $nstenergy/g" |\
     sed -e "/^nstxtcout /s/=.*/= $nstxtcout/g" |\
+    sed -e "/^userreal1 /s/=.*/= $T1/g" |\
+    sed -e "/^userreal2 /s/=.*/= $T2/g" |\
+    sed -e "/^userreal3 /s/=.*/= $thick/g" |\
+    sed -e "/^userreal4 /s/=.*/= $tau_t/g" |\
     sed -e "/^dt /s/=.*/= $dt/g" > tmp
     mv -f tmp $file
 }

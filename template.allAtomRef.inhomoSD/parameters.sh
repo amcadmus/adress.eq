@@ -14,3 +14,9 @@ nstxout=1000
 nstvout=1000
 nstenergy=100
 nstxtcout=0
+
+# thermostat settings
+T1=200
+T2=600
+thick=2.0
+tau_t=0.5
