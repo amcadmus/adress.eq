@@ -4,12 +4,12 @@ source functions.sh
 source parameters.sh
 
 # parameters
-dt=$dt_grad_temp
-nsteps=$nsteps_grad_temp
+dt=$dt_gravity
+nsteps=$nsteps_gravity
 
 # input & output
-input_dir=out.init
-output_dir=out.grad.temp
+input_dir=out.grad.temp
+output_dir=out.gravity
 # configs
 init_conf=$input_dir/confout.gro
 ref_conf=$input_dir/conf.gro

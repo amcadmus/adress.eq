@@ -7,7 +7,7 @@ dt_grad_temp=0.002
 nsteps_grad_temp=500000
 
 dt_gravity=0.002
-nsteps_gravity=500
+nsteps_gravity=500000
 accelerate=-0.1
 
 # md parameters
