@@ -208,13 +208,13 @@ int main (int argc, char * argv[])
   prof.print_x ("temp.water.x.out");
   prof.print_xz ("temp.water.xz.out");
 
-  profwa.average();
-  profwa.print_x ("temp.wa.x.out");
-  profwa.print_xz ("temp.wa.xz.out");
+  // profwa.average();
+  // profwa.print_x ("temp.wa.x.out");
+  // profwa.print_xz ("temp.wa.xz.out");
 
-  profwb.average();
-  profwb.print_x ("temp.wb.x.out");
-  profwb.print_xz ("temp.wb.xz.out");
+  // profwb.average();
+  // profwb.print_x ("temp.wb.x.out");
+  // profwb.print_xz ("temp.wb.xz.out");
 
   // DensityProfile_PiecewiseConst dp (filename, h);
   // dp.deposit (filename, start_t, end_t);
