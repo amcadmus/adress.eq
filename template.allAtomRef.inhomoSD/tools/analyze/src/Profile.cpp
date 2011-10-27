@@ -275,7 +275,7 @@ print_x (const std::string & file) const
 // }
 
 void VectorProfile_PiecewiseConst::    
-print_xz (const std::string & file) const 
+print_avg_xz (const std::string & file) const 
 {
   FILE * fp = fopen (file.c_str(), "w");
   if (fp == NULL){
@@ -305,6 +305,34 @@ print_xz (const std::string & file) const
 	       sum[0],
 	       sum[1],
 	       sum[2]
+	  );
+      // fprintf (fp, "%f %f %f\n", vx, vy, profile[index3to1(i,j,0)]);
+    }
+    fprintf (fp, "\n");
+  }
+
+  fclose (fp);
+}
+
+
+void VectorProfile_PiecewiseConst::    
+print_xz (const std::string & file) const 
+{
+  FILE * fp = fopen (file.c_str(), "w");
+  if (fp == NULL){
+    std::cerr << "cannot open file " << file << std::endl;
+    exit(1);
+  }
+
+  for (unsigned i = 0; i < nx; ++i){
+    double vx = (i + 0.5) * hx;
+    for (unsigned j = 0; j < nz; ++j){
+      double vz = (j + 0.5) * hz;
+      std::vector<double > sum (3, 0.);
+      fprintf (fp, "%f %f   %f %f %f\n", vx, vz,
+	       profile[index3to1(i, ny/2, j)][0],
+	       profile[index3to1(i, ny/2, j)][1],
+	       profile[index3to1(i, ny/2, j)][2]
 	  );
       // fprintf (fp, "%f %f %f\n", vx, vy, profile[index3to1(i,j,0)]);
     }

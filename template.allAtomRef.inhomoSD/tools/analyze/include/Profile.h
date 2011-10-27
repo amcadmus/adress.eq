@@ -133,6 +133,7 @@ public:
   void print_x  (const std::string & filename) const;
   void print_avg_x (const std::string & filename) const;
   void print_xz (const std::string & filename) const;
+  void print_avg_xz (const std::string & filename) const;
 };
 
     

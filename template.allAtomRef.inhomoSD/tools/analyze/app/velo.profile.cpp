@@ -203,6 +203,7 @@ int main (int argc, char * argv[])
   prof.average();
   prof.print_x ("velo.water.x.out");
   prof.print_xz ("velo.water.xz.out");
+  prof.print_avg_xz ("velo.water.avg.xz.out");
 
   // DensityProfile_PiecewiseConst dp (filename, h);
   // dp.deposit (filename, start_t, end_t);
