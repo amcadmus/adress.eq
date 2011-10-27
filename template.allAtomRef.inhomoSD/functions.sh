@@ -12,6 +12,7 @@ function set_parameter () {
     sed -e "/^userreal2 /s/=.*/= $T2/g" |\
     sed -e "/^userreal3 /s/=.*/= $thick/g" |\
     sed -e "/^userreal4 /s/=.*/= $tau_t/g" |\
+    sed -e "/^accelerate /s/=.*/= 0.0 0.0 $accelerate/g" |\
     sed -e "/^dt /s/=.*/= $dt/g" > tmp
     mv -f tmp $file
 }

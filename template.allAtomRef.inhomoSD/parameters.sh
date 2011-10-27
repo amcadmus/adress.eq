@@ -8,6 +8,7 @@ nsteps_grad_temp=500000
 
 dt_gravity=0.002
 nsteps_gravity=500
+accelerate=-0.1
 
 # md parameters
 nstxout=1000
