@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source env.sh
 source functions.sh
 source parameters.sh
 
