@@ -10,7 +10,6 @@
   C    12.01100    0.000     A      0.0    0.33740E-05
 
 #include "spce.itp"
-#include "twall.itp"
 
 [ system ]
 Water
