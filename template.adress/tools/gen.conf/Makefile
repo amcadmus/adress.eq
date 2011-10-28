@@ -4,9 +4,10 @@
 #MKL_LINK= 	-L/home/wang/intel/mkl/8.0.1/lib/32 -lmkl_lapack -lmkl_ia32 -lguide -lpthread 
 # boost-include-path=	/people/thnfs/homes/wanghan/local/include/boost-1_36
 # boost-lib-path=		/people/thnfs/homes/wanghan/local/lib
-# boost-lib-option=	-lboost_program_options
+boost-lib-option=	-lboost_program_options
+link-options=		$(boost-lib-option) ~/local/lib/libxdrfile.a
 
-include_dirs = 	./include $(MKL_INCLUDE) $(boost-include-path)
+include_dirs = 	./include $(MKL_INCLUDE) $(boost-include-path) ~/local/include
 
 sources_dir =		src
 application_dir=	app
@@ -35,7 +36,7 @@ cobjects = 	$(addprefix $(cobjects_dir)/,$(tmp_cobjects))
 
 
 C:=		gcc
-CFLAGS +=	-g -O3 -Wall 
+CFLAGS +=	-g -O0 -Wall 
 CFLAGS += 	$(addprefix -I ,$(include_dirs))
 
 CXX:=		g++
@@ -78,7 +79,7 @@ define make-depend
 endef
 # $(call make-target,target,object-files-or-lib-files)
 define make-target
-  $(CXX) $(CXXFLAGS) -o $1 $2 -lm $(MKL_LINK) 
+  $(CXX) $(CXXFLAGS) -o $1 $2 -lm $(link-options) 
 endef
 
 
