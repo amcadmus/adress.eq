@@ -7,7 +7,7 @@ source parameters.sh
 dt=$dt_init
 nsteps=$nsteps_init
 
-nbox=4
+nbox="8 4 4"
 
 output_dir=out.init
 
@@ -18,7 +18,7 @@ rm -f $runtime_log $make_log
 
 rm -f spc216.gro; cp tools/script.init/spc216.gro .
 echo "# genconf by spc216     ==================================================================" >> $runtime_log
-genconf -nbox $nbox $nbox $nbox -f spc216.gro -o conf.gro &>> $runtime_log
+genconf -nbox $nbox -f spc216.gro -o conf.gro &>> $runtime_log
 echo "# end genconf by spc216 ==================================================================" >> $runtime_log
 
 grocleanit

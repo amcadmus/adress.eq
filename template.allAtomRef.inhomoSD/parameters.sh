@@ -19,5 +19,5 @@ nstxtcout=0
 # thermostat settings
 T1=200
 T2=600
-thick=2.0
+thick=3.5
 tau_t=0.1
