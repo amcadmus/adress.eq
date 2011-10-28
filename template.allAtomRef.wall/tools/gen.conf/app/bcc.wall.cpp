@@ -64,7 +64,7 @@ int main (int argc, char * argv[])
   desc.add_options()
       ("help,h", "print this message")
       ("refCellSize,n", po::value<double > (&refCellSize)->default_value (0.35),  "ref")
-      ("nx", po::value<int > (&nx)->default_value (3),  "number of layers on x")
+      ("nx", po::value<int > (&nx)->default_value (10),  "number of layers on x")
       ("gap,g", po::value<double > (&gap)->default_value (0.1),  "gap between the wall and original the simulation box")
       ("output-file-name,o", po::value<std::string > (&ofilename)->default_value (std::string("out.gro"), "output conf file name"))
       ("input-file-name,f",  po::value<std::string > (&ifilename)->default_value (std::string("conf.gro"), "input conf file name"));
