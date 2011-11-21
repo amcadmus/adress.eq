@@ -1,28 +1,17 @@
 #!/bin/bash
 
-# adress stuff
-init_ex_conf=conf.gro
-ex_region_size=3.0
-hy_region_size=1.25
+base_conf=tools/gen.conf/spc216.gro
+n_base_block="12 2 2"
+number_density=33.286      # 0.99577 g/cm^3
 
-dt_init=0.001
-nsteps_init=10000
-
-dt_grad_temp=0.002
-nsteps_grad_temp=500000
-
-dt_gravity=0.002
-nsteps_gravity=500000
-accelerate=-0.007
+ex_region_r=1.0
+hy_region_r=2.0
 
 # md parameters
+dt=0.002
+nsteps=500000
 nstxout=1000
 nstvout=1000
 nstenergy=100
 nstxtcout=0
 
-# thermostat settings
-T1=200
-T2=600
-thick=3.5
-tau_t=0.1
