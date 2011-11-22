@@ -8,7 +8,6 @@ nsteps_grad_temp=500000
 
 dt_gravity=0.002
 nsteps_gravity=500000
-accelerate=-0.007
 
 # md parameters
 nstxout=1000
@@ -21,3 +20,4 @@ T1=200
 T2=600
 thick=3.5
 tau_t=0.1
+accelerate=-0.007

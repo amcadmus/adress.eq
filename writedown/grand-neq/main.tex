@@ -1,0 +1,110 @@
+\documentclass[aps,pre,preprint]{revtex4-1}
+% \documentclass[aps,pre,twocolumn]{revtex4-1}
+% \documentclass[aps,jcp,groupedaddress,twocolumn,unsortedaddress]{revtex4}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[dvips]{graphicx}
+\usepackage{color}
+\usepackage{tabularx}
+
+\makeatletter
+\makeatother
+
+\newcommand{\recheck}[1]{{\color{red} #1}}
+\newcommand{\redc}[1]{{\color{red} #1}}
+\newcommand{\bluec}[1]{{\color{blue} #1}}
+\renewcommand{\v}[1]{\textbf{\textit{#1}}}
+\renewcommand{\d}[1]{\textsf{#1}}
+
+
+\begin{document}
+
+% \title{The Error Estimate of Force Calculation in the Inhomogeneous Molecular Systems}
+% \author{Han Wang}
+% \affiliation{LMAM and School of Mathematical
+%   Sciences, Peking University}
+% \author{Pingwen Zhang}
+% % \email{pzhang@pku.edu.cn}
+% \affiliation{LMAM and School of Mathematical
+%   Sciences, Peking University}
+
+% \begin{abstract}
+% \end{abstract}
+
+% \maketitle
+
+
+Macroscopic properties:
+\begin{align}\nonumber
+  O(t) &= \langle\,\langle O_N(t) \rangle\,\rangle_N\\\label{eqn:tmp1}
+  & = \lim_{T\rightarrow\infty}\frac1T\int_0^T\d d\tau\hat O\{\v r(t), \v p(t), N\}\\\label{eqn:tmp2}
+  & = \sum_{N=0}^\infty\int\d d\v r\,\d d\v p\,\rho_N(\v r, \v p, t)\,\hat O_N(\v r, \v p)
+\end{align}
+where $\rho_N = e^{\mu N}e^{-\beta H_N}$ and $\hat O_{\bar N}(\v r,\v
+p) = \hat O\{\v r(t), \v p(t), \bar N\}$. \bluec{in our case, the
+  perturbed system is not equilibrium, so assuming the distribution is
+  grand-canonical seems not right.}
+
+Liouville equation:
+\begin{align}\nonumber
+  \frac{\partial\rho_N}{\partial t}
+  & = iL_N\rho_N \\\nonumber
+  & = iL_O^N\rho_N + iL_P^N\rho_N \\
+  & = \{H_O^N, \rho_N\} + \{H_P^N, \rho_N\}
+\end{align}
+(\bluec{what are the subscripts $_O$ and $_P$ mean?}) with
+\begin{align}
+  \rho_N(\v r, \v p, t) = S^{\dagger}(t)\rho_N(\v r, \v p, t=0)
+\end{align}
+An observable $O$ of the system (... \bluec{I cannot read...})
+\begin{align}\nonumber
+  O_N(t)
+  &= O(\v r(t), \v p(t), N) \\
+  &= S_N(t) O_N(0)
+\end{align}
+
+
+The NE average of a given observable
+\begin{align}
+  \frac{\d d\hat J_N}{\d dt} = i L_N\hat J_N,
+  \quad \hat J_N(\epsilon) = S_N(\epsilon)\hat J_N
+\end{align}
+can be obtained via an ``equilibrium average'' as (Onsager-Kubo equation)
+\begin{align}\nonumber
+  J_N(t)
+  & = \langle J\rangle \\\nonumber
+  & = \int\d d \Gamma_N \hat J_N\rho_N(t)\\\nonumber
+  & = (\hat J_N, S_N^\dagger(t)\rho_0^N) \\\nonumber
+  & = (S_N(t)\hat J_N, \rho_0^N)
+\end{align}
+and
+\begin{align}
+  J(t) = \sum_N J_N(t)
+\end{align}
+\bluec{it seems should be $J(t) = \sum_Np(N)J_N(t)$.} beyond the \bluec{...}, is this
+\bluec{...}? what are the {...}.
+
+First problem to solve, start from one equilibrium distribution with let's say $N_1$,
+then (formally) I must follow $S_N(t)\hat J_N$, but during the simulation, I ... follow
+a $J(N(t))$ because $N$ ... fluctuates.
+what I .. think is that my simulation is long enough so that I have
+\bluec{a set of inital state near enough have particle number $N_1$,
+  $N_2$, $N_3$ ... etc, which is a good sampling of the
+  grand-canonical ensemble. From these initial states, a bundle of
+  trajectories are simulated. At a certain time $t$, we can find at
+  least one of the trajectories contains $N_1$ particles }.  then ...
+\begin{align}
+  \langle O(t)\rangle
+  = \langle\,\langle O_N(t)\rangle\,\rangle_N
+  = \sum_N\int\d d\v r\d d\v p \,O_N(t)\, \rho_N(\v r, \v p, t=0)
+\end{align}
+
+
+% \newpage
+
+% \bibliography{ref}{}
+% \bibliographystyle{unsrt}
+
+
+\end{document}
