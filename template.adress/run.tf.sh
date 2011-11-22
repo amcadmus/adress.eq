@@ -97,6 +97,6 @@ mv -f $tf_file tabletf.xvg.tmptmptmp
 mv -f tabletf.xvg.tmptmptmp tabletf.xvg
 
 # run adress
-grompp -n index.ndx
-mdrun -v
+grompp -n index.ndx &>> $mylog
+mdrun -dd 2 2 2 -v &>> $mylog
 
