@@ -113,3 +113,7 @@ echo "# copy files to tf"
 rm -fr tf/conf.gro tf/dens.SOL.xvg tf/grompp.mdp tf/index.ndx tf/settings.xml tf/topol.top
 mv -f conf.gro dens.SOL.xvg grompp.mdp index.ndx settings.xml topol.top tf/
 
+# calculate tf
+echo "# calculate tf"
+csg_inverse --options settings.xml
+
