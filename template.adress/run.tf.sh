@@ -7,6 +7,10 @@ mylog=`pwd`/run.tf.log
 makelog=`pwd`/make.log
 rm -f $mylog
 rm -f $makelog
+# if test ! -d $run_dir;
+#     then echo "# make dir $run_dir"
+#     mkdir -p $run_dir
+# fi
 
 # prepare conf.gro
 echo "# prepare conf.gro"
@@ -32,6 +36,9 @@ cd warmup
 mv ../conf.gro .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
+seed=` date +%s`
+sed -e "/^gen_seed/s/=.*/= $seed/g" grompp.mdp > tmp.mdp
+mv -f tmp.mdp grompp.mdp
 grompp &>> $mylog
 mdrun -v &>> $mylog
 rm -fr ../conf.gro
@@ -75,15 +82,17 @@ echo "q" >> command.tmp
 cat command.tmp  | make_ndx -f conf.gro &>> $mylog
 rm -fr command.tmp
 
-
 # prepare topol.top
-echo "# prepare to tf"
+echo "# prepare topol.top"
 rm -fr topol.top
 cp tools/tf.template/topol.top .
+cp tools/tf.template/adress_spce.itp .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
 
-# prepare tabletf
+# prepare tables
+cp tools/tf.template/table_CG_CG.xvg .
+cp tools/tf.template/table.xvg .
 mv -f $tf_file tabletf.xvg.tmptmptmp
 mv -f tabletf.xvg.tmptmptmp tabletf.xvg
 

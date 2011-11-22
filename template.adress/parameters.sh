@@ -15,6 +15,7 @@ tf_iterations_max=30
 
 
 # run.tf.sh parameters
+#run_dir=./run
 tf_file=tabletf.xvg
 dt=0.002
 nsteps=500000
