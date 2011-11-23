@@ -115,5 +115,7 @@ mv -f conf.gro dens.SOL.xvg grompp.mdp index.ndx settings.xml topol.top tf/
 
 # calculate tf
 echo "# calculate tf"
+cd tf
+sync
 csg_inverse --options settings.xml
-
+cd ..
