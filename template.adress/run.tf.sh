@@ -23,8 +23,8 @@ boxz=`tail conf.gro -n 1 | awk '{print $3}'`
 natom=`head -n 2 conf.gro | tail -n 1`
 nmol=`echo "$natom / 3" | bc`
 now_density=`echo "$natom / 3 / ($boxx * $boxy * $boxz)" | bc -l`
-scale=`echo "($number_density / $now_density)" | bc -l`
-editconf -f conf.gro -o out.gro -scale "$scale 1 1" &>> $mylog
+scale=`echo "($now_density / $number_density)" | bc -l`
+editconf -f conf.gro -o out.gro -scale $scale 1.0000 1.0000 &>> $mylog
 mv -f out.gro conf.gro
 boxx=`tail conf.gro -n 1 | awk '{print $1}'`
 boxy=`tail conf.gro -n 1 | awk '{print $2}'`
