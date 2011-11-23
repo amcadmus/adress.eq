@@ -71,7 +71,7 @@ tc-grps                  = SOL
 tau_t                    = 0.1
 ref_t                    = 300 		; \nabla T = 3.5e10 K/m
 ; Pressure coupling     
-Pcoupl                   = Parrinello-Rahman
+Pcoupl                   = No
 Pcoupltype               = isotropic
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
 tau_p                    = 0.5
