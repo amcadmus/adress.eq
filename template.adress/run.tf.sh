@@ -12,7 +12,7 @@ rm -f $makelog
 #     mkdir -p $run_dir
 # fi
 
-if test ! -f $tf_file then
+if test ! -f $tf_file; then
     echo "no tf table file found, exit"
     exit
 fi
