@@ -12,6 +12,11 @@ rm -f $makelog
 #     mkdir -p $run_dir
 # fi
 
+if test ! -f $tf_file then
+    echo "no tf table file found, exit"
+    exit
+fi
+
 # prepare conf.gro
 echo "# prepare conf.gro"
 ## gen from base (default spc216.gro)
