@@ -24,6 +24,16 @@ mv -f out.gro conf.gro
 boxx=`tail conf.gro -n 1 | awk '{print $1}'`
 boxy=`tail conf.gro -n 1 | awk '{print $2}'`
 boxz=`tail conf.gro -n 1 | awk '{print $3}'`
+
+newboxx=`printf "%.1f" $boxx`
+scalex=`echo "$newboxx / $boxx" | bc -l`
+scaleyz=`echo "sqrt(1./$scalex)" | bc -l`
+editconf -f conf.gro -o out.gro -scale $scalex $scaleyz $scaleyz &>> $mylog
+mv -f out.gro conf.gro
+boxx=`tail conf.gro -n 1 | awk '{print $1}'`
+boxy=`tail conf.gro -n 1 | awk '{print $2}'`
+boxz=`tail conf.gro -n 1 | awk '{print $3}'`
+
 ## warm run
 rm -fr warmup
 cp -a tools/atom.template ./warmup
