@@ -6,5 +6,5 @@ gromacs_install_dir=~/study/thermo.convection/local.inhomo.thermostat
 source $gromacs_install_dir/bin/GMXRC.bash
 
 votca_install_dir=~/study/thermo.convection/local.inhomo.thermostat
-source $gromacs_install_dir/bin/VOTCARC.bash
+source $votca_install_dir/bin/VOTCARC.bash
 
