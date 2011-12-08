@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function ibi_setting () {
-    sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$tf_iterations_max<\/iterations_max>/g" settings.xml > settings.xml.tmp
+    sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$ibi_iterations_max<\/iterations_max>/g" settings.xml > settings.xml.tmp
     mv -f settings.xml.tmp settings.xml
 }
 
