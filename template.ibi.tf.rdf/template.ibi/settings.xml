@@ -48,7 +48,7 @@
       </mdrun>
     </gromacs>
     <!-- these files are copied for each new run -->
-    <filelist>grompp.mdp topol.top adress_spce.itp index.ndx table.xvg tabletf.xvg table_CG_CG.xvg</filelist>
+    <filelist>adress_spce.itp grompp.mdp topol.top index.ndx table.xvg tabletf.xvg table_CG_CG.xvg</filelist>
     <!-- do so many iterations -->
     <iterations_max>900</iterations_max>
     <!-- ibi: inverse biltzmann imc: inverse monte carlo -->

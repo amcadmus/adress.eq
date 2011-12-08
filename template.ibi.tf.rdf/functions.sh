@@ -6,6 +6,13 @@ function ibi_setting () {
 }
 
 function tf_setting () {
+    boxx=`tail conf.gro -n 1 | awk '{print $1}'`
+    half_boxx=`echo "$boxx/2.0" | bc -l`
+    tf_min=`echo "$ex_region_r - $tf_extension" | bc -l`
+    tf_max=`echo "$ex_region_r + $hy_region_r + $tf_extension" | bc -l`
+    tf_spline_start=`echo "$ex_region_r - $tf_spline_extension" | bc -l`
+    tf_spline_end=`  echo "$ex_region_r + $hy_region_r + $tf_spline_extension" | bc -l`
+    half_boxx_1=`echo "$half_boxx + 1." | bc -l`
     sed -e "s/<min>.*<\/min>/<min>$tf_min<\/min>/g" settings.xml |\
     sed -e "s/<max>.*<\/max>/<max>$tf_max<\/max>/g" |\
     sed -e "s/<step>.*<\/step>/<step>$tf_step<\/step>/g" |\
