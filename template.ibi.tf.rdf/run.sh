@@ -9,7 +9,7 @@ tf_iterations_max=`printf "%03d" $tf_iterations_max`
 ibi_resultDir=step_$ibi_iterations_max
 tf_resultDir=step_$tf_iterations_max
 
-for i in `seq 1 $num_iter`
+for i in `seq 1 $rdf_iterations`
 do
     thisNum=`printf "%03d" $i`
     ibiDir=step.${thisNum}.ibi
