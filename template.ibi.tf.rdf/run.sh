@@ -26,7 +26,8 @@ do
 	cp ../$last_ibiDir/$ibi_resultDir/CG-CG.pot.new ./CG-CG.pot.in
 	./run.sh
     fi
-    csg_call --ia-type C12 --options settings.xml convert_potential gromacs $ibi_resultDir/CG-CG.pot.new tablerdf.xvg
+    csg_call --ia-type C12 --options settings.xml convert_potential gromacs $ibi_resultDir/CG-CG.pot.new tablerdf.xvg &>> inverse.log
+    clean_ibi
     cd ..
 
     cp -a template.tf $tfDir
@@ -42,7 +43,8 @@ do
 	cp ../$last_tfDir/$tf_resultDir/SOL.pot.new ./SOL.pot.in
 	./run.sh
     fi
-    csg_call --ia-type bonded --options settings.xml convert_potential gromacs $tf_resultDir/SOL.pot.new tabletf.xvg
+    csg_call --ia-type bonded --options settings.xml convert_potential gromacs $tf_resultDir/SOL.pot.new tabletf.xvg &>> inverse.log
+    clean_tf
     cd ..
 
     last_tfDir=$tfDir

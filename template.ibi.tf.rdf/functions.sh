@@ -24,3 +24,32 @@ function tf_setting () {
     mv -f settings.xml.tmp settings.xml
 }
 
+function clean_ibi () {
+    for mystep in `seq 1 $ibi_iterations_max`;
+    do
+	dirName=step_`printf "%03d" $mystep`
+	echo "# clean $dirName"
+	cd $dirName
+	echo 2 | g_density -b 10 -d X -xvg none -nice 0 &> g_density.log
+	rm -f traj.xtc
+	cd ..
+    done
+}
+
+function clean_tf () {
+    for mystep in `seq 1 $(($tf_iterations_max-1))`;
+    do
+	dirName=step_`printf "%03d" $mystep`
+	echo "# clean $dirName"
+	cd $dirName
+	rm -f traj.xtc
+	cd ..
+    done
+    mystep=$tf_iterations_max
+    dirName=step_`printf "%03d" $mystep`
+    echo "# clean $dirName"
+    cd $dirName
+    echo 2 2 | g_rdf -b 10 -rdf mol_com -xvg none -nice 0 -bin 0.01 -dt 1 &> g_rdf.log
+    cd ..
+}
+

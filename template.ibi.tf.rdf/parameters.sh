@@ -3,7 +3,7 @@
 rdf_iterations=10
 
 # ibi parameters
-ibi_iterations_max=2
+ibi_iterations_max=30
 
 # tf parameters
 
@@ -13,7 +13,7 @@ tf_extension=0.1
 tf_step=0.01
 tf_spline_extension=0.1
 tf_spline_step=0.4
-tf_iterations_max=2
+tf_iterations_max=30
 
 
 
