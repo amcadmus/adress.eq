@@ -1,4 +1,4 @@
-\documentclass[aps,pre,preprint]{revtex4-1}
+\documentclass[aps,pre,preprint]{revtex4}
 % \documentclass[aps,pre,twocolumn]{revtex4-1}
 % \documentclass[aps,jcp,groupedaddress,twocolumn,unsortedaddress]{revtex4}
 
@@ -106,18 +106,13 @@ Here it is assumed that the width of the hybrid region is larger than
 the cut-off of the pairwise interaction $\v F_{ij}$, so the molecule
 in the explicit region is not interacting with the molecules in the
 coarse-grained region, as this happens in all applications.
-The Adress force scheme reads:
-\begin{align}
+The Adress force interpolation scheme reads:
+\begin{align}\label{eqn:f-interp}
   \v F_{ij} = w_iw_j\v F^{\textrm{ex}}_{ij} + [1-w_iw_j]\v F^{\textrm{cg}}_{ij},
 \end{align}
-and
-\begin{align}
-  \v F_i = \sum_j\v F_{ij} + \v F_i^{\textrm{th}}
-\end{align}
-where $\v F_i^{\textrm{th}}$ is the thermodynamic force acting on the
-$i$-th molecule in the hybrid region, and $w_i = w(\v r_i)$ represents
+where $w_i = w(\v r_i)$ represents
 the resolution of the molecule:
-\begin{align}
+\begin{align}\label{eqn:w1}
   w(\v r) =
   \left\{
     \begin{array}{lcl}
@@ -128,35 +123,53 @@ the resolution of the molecule:
   \right.
 \end{align}
 Specifically, we have the weighting function:
-\begin{align}
+\begin{align}\label{eqn:w2}
   w(\v r) =
   \left\{
     \begin{array}{lcl}
-      1 &\quad& \xi < d_{\textrm{ex}}\\
-      1  && d_{\textrm{ex}} < \xi < d_{\textrm{ex}} + r_c\\
-      \cos^2\big[\frac{\pi}{2d_{\textrm{hy}}} (\xi - d_{\textrm{ex}} - r_c)\big] && d_{\textrm{ex}} + r_c < \xi < d_{\textrm{ex}} + d_{\textrm{hg}} \\
-      0 && d_{\textrm{ex}} + d_{\textrm{hg}}  < \xi.
+      1 &\quad& \chi < d_{\textrm{ex}}\\
+      1  && d_{\textrm{ex}} < \chi < d_{\textrm{ex}} + r_c\\
+      \cos^2\big[\frac{\pi}{2(d_{\textrm{hy}} - r_c)} (\chi - d_{\textrm{ex}} - r_c)\big] && d_{\textrm{ex}} + r_c < \chi < d_{\textrm{ex}} + d_{\textrm{hg}} \\
+      0 && d_{\textrm{ex}} + d_{\textrm{hg}}  < \chi.
     \end{array}
   \right.
 \end{align}
 Where $d_{\textrm{ex}}$ and $d_{\textrm{hy}}$ are the size of the
 explicit and hybrid region, respectively. $r_c$ is the cut-off
-radius. Here $d_{\textrm{hy}} \geq 2r_c$. $\xi$ is the distance to the
-border of the explicit region.
+radius. Here $d_{\textrm{hy}} \geq 2r_c$. $\chi$ is the distance to
+the border of the explicit region.  The molecules in the hybrid region
+is applied a thermodynamic force $\v F^{\textrm{th}}(\v x)$
+\begin{align}
+  \v F_i = \sum_j\v F_{ij} + \v F^{\textrm{th}}(\v x_i),
+\end{align}
+which is defined to ensure a uniform grand potential:
+\begin{align}
+  \bigg(
+  p(\v x_0) +
+  \frac{\rho}{M}\int_{\v x_0}^{\v x_1}\v F^{\textrm{th}}(\v s)\,\d d\v s
+  \bigg) V
+  =
+  p(\v x_1) V
+\end{align}
+From thermodynamic point of view, the thermodynamic force will lead
+to the same chemical potential for the explicit and coarse-grained regions.
 % This definition of $w(\v r)$ is \emph{different from the convention}, which
 % has a value of 1 for the atomistic region and 0 for the coarse-grained
 % region.
-The interaction between the explicit molecules and hybrid
-molecules is therefore
+
+By the definition of the force interpolation scheme
+\eqref{eqn:f-interp} and \eqref{eqn:w2}, the interaction between the
+explicit molecules and hybrid molecules is
 \begin{align}
   \v F_{ij} = \v F^{\textrm{ex}}_{ij}
 \end{align}
-and obviously
+and obviously in the explicit region
 \begin{align}
   \v F_i =
   \sum_{j=1}^{N_1}\v F^{\textrm{ex}}_{ij} + \sum_{j=N_1+1}^{N_2}\v F^{\textrm{ex}}_{ij}, \quad 1\leq i \leq N_1
 \end{align}
-Therefore the Hamiltonian of the explicit region can be written as
+Therefore, if we fix the coordinates of the molecules in the hybrid
+region, the Hamiltonian of the explicit region can be written as
 \begin{align}
   \mathcal H^{\textrm{ex}}(\v x_1; \v x_2) =
   \sum_{j=1}^{N_1}\frac12 m_i\v v_i^2 + 
@@ -168,7 +181,7 @@ r_{N_1}, \v v_1, \cdots, \v v_{N_1})$,  $\v x_2 = (\v r_{N_1+1},
 \cdots, \v r_{N_2}, \v v_{N_1+1}, \cdots, \v v_{N_2})$ and
 $\v x_3 = (\v r_{N_2+1},
 \cdots, \v r_{N_3}, \v v_{N_2+1}, \cdots, \v v_{N_3})$.
-Here $\v x_1$ is the variable and $\v x_2$ is known as environment, 
+Here $\v x_1$ is the variable and $\v x_2$ is considered as environment, 
 by the Langevin dynamics, we have the conditional probability distribution
 \begin{align}
   p (\v x_1 \vert \v x_2)  =
@@ -178,19 +191,55 @@ The phase space distribution of the explicit region:
 \begin{align}
   p(\v x_1) = \int p(\v x_1\vert\v x_2)\cdot p (\v x_2) \,\d d\v x_2
 \end{align}
-If the phase space distribution $p(\v x_2)$ is the same as the
+If the phase space distribution $p(\v x_2)$ is the same as the explicit
 Boltzmann distribution, then the explicit region is
 equivalently embeded in to a explicit molecular environment and can be
 viewed as a sub-system of a very big explicit molecular
 system.
 
-The crucial question is if $p(\v x_2)$ is correct.  The necessary
+The crucial question is if $p(\v x_2)$ is correct.  A necessary
 condition is that both the density and the radial distribution
 function (RDF) are correct in the hybrid region. By the thermodynamic
 force correction, the density is correct. Now the RDF...  If the
 coarse-grained potential is generated by fitting the explicit RDF,
 \redc{then in the hybrid region, it seems the RDF should not deviate very
   far from the correct.}
+
+\begin{figure}
+  \centering
+  \includegraphics[]{fig/rdfs.eps}
+  \caption{The RDF is independent with the size of the hybrid region.
+    In the Adress simulation, the whole region is defined hybrid. They
+    are compared with the explicit water RDF.}
+  \label{fig:tmp2}
+\end{figure}
+
+\bluec{
+  What we want to do next is
+  \begin{itemize}
+  \item Theoretically show under what kind of condition the RDF is
+    correct.
+  \item We find the current Adress scheme (with thermodynamic force
+    applied) will not give perfect RDF in the hybrid region. However,
+    the RDF profile is independent with the size of the hybrid region
+    see Fig. \ref{fig:tmp2}. This fact gives rise to the idea of
+    applying addtional correction force in the hybrid region to fit
+    the RDF, a possible form is
+    \begin{align}
+      \v F_{ij} = w_iw_j\v F^{\textrm{ex}}_{ij} + [1-w_iw_j]\v F^{\textrm{cg}}_{ij} +
+      4 w_iw_j (1 - w_iw_j)\v F_{ij}^{\textrm{rdf}},
+    \end{align}
+    notice the thermodynamic force should also be added
+    \begin{align}
+      \v F_i = \sum_j\v F_{ij} + \v F^{\textrm{th}}(\v x_i),
+    \end{align}
+    The correction force $\v F_{ij}^{\textrm{rdf}}$ that is only
+    applied in the hybrid region can be obtained by the
+    coarse-graining method that fits the RDF, for example, the inverse
+    Boltzmann interation. 
+  \end{itemize}
+}
+  
 
 \section{The distribution of $N$}
 Fix the number in the three regions, both the explicit and the
@@ -284,8 +333,9 @@ negligible. Calculate the prefactor:
 \end{align}
 We assume the fluctuation of the particle number $N_1$ is small. Also
 $n_1\sim \langle N_1\rangle$, otherwise the contribution of the free
-energy is small.  By the thermodynamic force, $\mu_1 = \mu_3 = \mu$, which
-means
+energy is small.  By the thermodynamic force, $\mu_1 = \mu_3 = \mu$
+(see also \cite{poblete2010coupling} for a chemical potential
+correction method), which means
 \begin{align}
   \frac{\partial A_1}{\partial N_1}\bigg\vert_{N_1=\langle N_1\rangle}
   =
@@ -311,7 +361,7 @@ Therefore
 
 % \newpage
 
-% \bibliography{ref}{}
-% \bibliographystyle{unsrt}
+\bibliography{ref}{}
+\bibliographystyle{unsrt}
 
 \end{document}
