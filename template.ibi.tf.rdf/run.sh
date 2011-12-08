@@ -13,6 +13,14 @@ do
     thisNum=`printf "%03d" $i`
     ibiDir=step.${thisNum}.ibi
     tfDir=step.${thisNum}.tf
+    if test -d $ibiDir; then
+	echo "# dir $ibiDir exists, quit!"
+	mv -f $ibiDir $ibiDir.`date +%s`
+    fi
+    if test -d $tfDir; then
+	echo "# dir $tfDir exists, quit!"
+	mv -f $tfDir $tfDir.`date +%s`
+    fi
 
     cp -a template.ibi $ibiDir
     cd $ibiDir
