@@ -10,7 +10,7 @@ SOL		2
 1 OW	1  SOL	     OW	       1	-0.8476
 2 HW	1  SOL	     HW1       1	 0.4238
 3 HW	1  SOL	     HW2       1	 0.4238
-4 COM	1  SOL	     COM        2	 0.0000
+4 CG	1  SOL	     CG        2	 0.0000
 
 [ virtual_sites3 ]
 ; Site from funct a d
