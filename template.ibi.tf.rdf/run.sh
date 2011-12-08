@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source template.ibi/env.sh
 source parameters.sh
 source functions.sh
 
