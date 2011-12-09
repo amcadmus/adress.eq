@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function ibi_setting () {
-    sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$ibi_iterations_max<\/iterations_max>/g" settings.xml > settings.xml.tmp
+    sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$old_ibi_iterations_max<\/iterations_max>/g" settings.xml > settings.xml.tmp
     mv -f settings.xml.tmp settings.xml
 }
 
@@ -20,36 +20,44 @@ function tf_setting () {
     sed -e "s/<spline_end>.*<\/spline_end>/<spline_end>$tf_spline_end<\/spline_end>/g" |\
     sed -e "s/<spline_step>.*<\/spline_step>/<spline_step>$tf_spline_step<\/spline_step>/g" |\
     sed -e "s/<table_end>.*<\/table_end>/<table_end>$half_boxx_1<\/table_end>/g" |\
-    sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$tf_iterations_max<\/iterations_max>/g" > settings.xml.tmp
+    sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$old_tf_iterations_max<\/iterations_max>/g" > settings.xml.tmp
     mv -f settings.xml.tmp settings.xml
 }
 
 function clean_ibi () {
-    for mystep in `seq 1 $ibi_iterations_max`;
+    for dirName in `ls | grep step_`;
     do
-	dirName=step_`printf "%03d" $mystep`
 	echo "# clean $dirName"
 	cd $dirName
-	echo 2 | g_density -b 10 -d X -xvg none -nice 0 &> g_density.log
-	rm -f traj.xtc
+	if test -f traj.xtc; then
+	    echo 2 | g_density -b 10 -d X -xvg none -nice 0 &> g_density.log
+	    rm -f traj.xtc
+	fi
 	cd ..
     done
 }
 
 function clean_tf () {
-    for mystep in `seq 1 $(($tf_iterations_max-1))`;
+    total_num_step=`ls | grep step_ | wc -l`
+    count=1
+    for dirName in `ls | grep step_`;
     do
-	dirName=step_`printf "%03d" $mystep`
+	if test $count -eq $total_num_step; then
+	    break
+	fi
 	echo "# clean $dirName"
 	cd $dirName
-	rm -f traj.xtc
+	if test -f traj.xtc; then
+	    rm -f traj.xtc
+	fi
 	cd ..
+	count=$(($count+1))
     done
-    mystep=$tf_iterations_max
-    dirName=step_`printf "%03d" $mystep`
     echo "# clean $dirName"
     cd $dirName
-    echo 2 2 | g_rdf -b 10 -rdf mol_com -xvg none -nice 0 -bin 0.01 -dt 1 &> g_rdf.log
+    if test -f traj.xtc; then
+	echo 2 2 | g_rdf -b 10 -rdf mol_com -xvg none -nice 0 -bin 0.01 -dt 1 &> g_rdf.log
+    fi
     cd ..
 }
 
