@@ -48,6 +48,7 @@ function clean_tf () {
 	echo "# clean $dirName"
 	cd $dirName
 	if test -f traj.xtc; then
+	    echo 2 | g_density -b 10 -d X -xvg none -nice 0 &> g_density.log
 	    rm -f traj.xtc
 	fi
 	cd ..
