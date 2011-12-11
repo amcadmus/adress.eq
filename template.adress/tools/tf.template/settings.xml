@@ -55,7 +55,7 @@
       <table_end>10.0</table_end>
     </gromacs>
     <!-- these files are copied for each new run -->
-    <filelist>adress_spce.itp grompp.mdp topol.top table.xvg index.ndx table_CG_CG.xvg</filelist>
+    <filelist>adress_spce.itp grompp.mdp topol.top table.xvg tablerdf.xvg index.ndx table_CG_CG.xvg</filelist>
     <!-- do so many iterations -->
     <iterations_max>100</iterations_max>
     <!-- ibi: inverse biltzmann imc: inverse monte carlo tf: thermody force -->
