@@ -4,6 +4,8 @@ source template.ibi/env.sh
 source parameters.sh
 source functions.sh
 
+uname -n > host
+
 old_ibi_iterations_max=$ibi_iterations_max
 old_tf_iterations_max=$tf_iterations_max
 ibi_iterations_max=`printf "%03d" $ibi_iterations_max`
