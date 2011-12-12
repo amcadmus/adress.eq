@@ -25,7 +25,8 @@ cp ../env.sh .
 cp ../$init_lastdir/confout.gro ./conf.gro
 sed -e 's/COM/ CG/g' conf.gro > tmp.gro
 mv -f tmp.gro conf.gro
-cp ../env.sh .
+rm -f grompp.mdp
+cp ../$init_lastdir/grompp.mdp .
 rm -f index.ndx
 cp ../$init_lastdir/index.ndx .
 rm -f tabletf.xvg SOL.pot.new
@@ -41,8 +42,9 @@ echo "## enter template.tf"
 cd template.tf
 rm -f env.sh
 cp ../env.sh .
-rm -f conf.gro dens.SOL.xvg index.ndx topol.top
+rm -f conf.gro dens.SOL.xvg index.ndx topol.top grompp.mdp
 cp ../$init_lastdir/confout.gro ./conf.gro
+cp ../$init_lastdir/grompp.mdp .
 cp ../step.000.tf/tf/dens.SOL.xvg .
 cp ../$init_lastdir/index.ndx .
 cp ../$init_lastdir/topol.top .
@@ -80,10 +82,12 @@ do
 	cp ../$last_tfDir/tabletf.xvg .
 #	cp ../$last_ibiDir/$ibi_resultDir/tablerdf.xvg .
 	cp ../$last_ibiDir/CG-CG.pot.new ./CG-CG.pot.in
+	cp ../$last_ibiDir/confout.gro ./conf.gro
 	./run.sh
     fi
     ibi_last_step=`ls | grep step_ | tail -n 1`
     cp $ibi_last_step/CG-CG.pot.new .
+    cp $ibi_last_step/confout.gro .
     csg_call --ia-type C12 --options settings.xml convert_potential gromacs CG-CG.pot.new tablerdf.xvg &>> inverse.log
     clean_ibi
     cd ..
@@ -100,10 +104,12 @@ do
     else
 #	cp ../$last_tfDir/$tf_resultDir/tabletf.xvg .
 	cp ../$last_tfDir/SOL.pot.new ./SOL.pot.in
+	cp ../$last_tfDir/confout.gro ./conf.gro
 	./run.sh
     fi
     tf_last_step=`ls | grep step_ | tail -n 1`
     cp $tf_last_step/SOL.pot.new .
+    cp $tf_last_step/confout.gro .
     csg_call --ia-type bonded --options settings.xml convert_potential gromacs SOL.pot.new tabletf.xvg &>> inverse.log
     clean_tf
     cd ..
