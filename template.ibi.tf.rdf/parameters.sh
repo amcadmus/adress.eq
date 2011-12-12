@@ -1,19 +1,24 @@
 #!/bin/bash
 
-rdf_iterations=10
+base_conf=tools/gen.conf/spc216.gro
+n_base_block="4 2 2"
+number_density=33.286      # 0.99577 g/cm^3
+
+# rdf interation
+rdf_iterations=50
 
 # ibi parameters
-ibi_iterations_max=30
+ibi_iterations_max=1
 
 # tf parameters
-
 ex_region_r=0.5
-hy_region_r=1.8
-tf_extension=0.02
+hy_region_r=2.75
+tf_extension=0.05
 tf_step=0.01
 tf_spline_extension=0.1
-tf_spline_step=0.4
-tf_iterations_max=30
+tf_spline_step=0.42142857142857142857 # 2.95/7
+tf_iterations_max=1
+tf_iterations_init=3
 
 
 
