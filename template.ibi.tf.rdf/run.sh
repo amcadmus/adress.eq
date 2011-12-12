@@ -70,6 +70,7 @@ do
     fi
 
     cp -a template.ibi $ibiDir
+    echo "# rdf iter: doing $ibiDir"
     cd $ibiDir
     ibi_setting
     if test $i -eq 1; then
@@ -88,6 +89,7 @@ do
     cd ..
 
     cp -a template.tf $tfDir
+    echo "# rdf iter: doing $tfDir"
     cd $tfDir
     tf_setting
     rm -f tabletf.xvg tablerdf.xvg
