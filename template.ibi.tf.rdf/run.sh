@@ -4,7 +4,8 @@ source template.ibi/env.sh
 source parameters.sh
 source functions.sh
 
-uname -n > host
+echo running on `uname -n`
+echo with gromacs command `which mdrun`
 
 old_ibi_iterations_max=$ibi_iterations_max
 old_tf_iterations_max=$tf_iterations_max
