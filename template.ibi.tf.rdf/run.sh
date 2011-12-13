@@ -7,6 +7,10 @@ source functions.sh
 echo running on `uname -n`
 echo with gromacs command `which mdrun`
 
+if test -f done; then
+    echo "all work is done, do nothing."
+    exit
+fi
 
 echo "# prepare working files"
 if test ! -f step.000.tf/tf/done; then
@@ -118,4 +122,4 @@ do
     last_ibiDir=$ibiDir
 done
 
-
+touch done
