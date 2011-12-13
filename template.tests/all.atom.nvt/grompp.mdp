@@ -55,7 +55,7 @@ vdw-type                 = cut-off
 rvdw-switch              = 0
 rvdw                     = 0.9
 ; Apply long range dispersion corrections for Energy and Pressure
-DispCorr                 = EnerPres
+DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
 table-extension          = 1
 
@@ -71,7 +71,7 @@ tc-grps                  = SOL
 tau_t                    = 0.1
 ref_t                    = 300 		; \nabla T = 3.5e10 K/m
 ; Pressure coupling     
-Pcoupl                   = Parrinello-Rahman
+Pcoupl                   = no
 Pcoupltype               = isotropic
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
 tau_p                    = 0.5
