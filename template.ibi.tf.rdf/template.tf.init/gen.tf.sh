@@ -79,6 +79,9 @@ half_boxy=`echo "$boxy/2.0" | bc -l`
 half_boxz=`echo "$boxz/2.0" | bc -l`
 sed -e "/^adress_ex_width/s/=.*/= $ex_region_r/g" grompp.mdp |\
 sed -e "/^adress_hy_width/s/=.*/= $hy_region_r/g" |\
+sed -e "/^nsteps/s/=.*/= $gmx_nsteps/g" |\
+sed -e "/^nstenergy/s/=.*/= $gmx_nstenergy/g" |\
+sed -e "/^nstxtcout/s/=.*/= $gmx_nstxtcout/g" |\
 sed -e "/^adress_reference_coords/s/=.*/= $half_boxx $half_boxy $half_boxz/g" > grompp.mdp.tmp
 mv -f grompp.mdp.tmp grompp.mdp
 

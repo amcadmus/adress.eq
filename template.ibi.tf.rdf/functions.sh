@@ -1,5 +1,19 @@
 #!/bin/bash
 
+function ibi_grompp () {
+    sed -e "/^nsteps/s/=.*/= $ibi_gmx_nsteps/g" grompp.mdp |\
+    sed -e "/^nstenergy/s/=.*/= $ibi_gmx_nstenergy/g" |\
+    sed -e "/^nstxtcout/s/=.*/= $ibi_gmx_nstxtcout/g" > tmp.mdp
+    mv -f tmp.mdp grompp.mdp
+}
+
+function tf_grompp () {
+    sed -e "/^nsteps/s/=.*/= $tf_gmx_nsteps/g" grompp.mdp |\
+    sed -e "/^nstenergy/s/=.*/= $tf_gmx_nstenergy/g" |\
+    sed -e "/^nstxtcout/s/=.*/= $tf_gmx_nstxtcout/g" > tmp.mdp
+    mv -f tmp.mdp grompp.mdp
+}
+
 function ibi_setting () {
     sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$old_ibi_iterations_max<\/iterations_max>/g" settings.xml > settings.xml.tmp
     mv -f settings.xml.tmp settings.xml
@@ -20,6 +34,7 @@ function tf_setting () {
     sed -e "s/<spline_end>.*<\/spline_end>/<spline_end>$tf_spline_end<\/spline_end>/g" |\
     sed -e "s/<spline_step>.*<\/spline_step>/<spline_step>$tf_spline_step<\/spline_step>/g" |\
     sed -e "s/<table_end>.*<\/table_end>/<table_end>$half_boxx_1<\/table_end>/g" |\
+    sed -e "s/<prefactor>.*<\/prefactor>/<prefactor>$tf_prefactor<\/prefactor>/g" |\
     sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$old_tf_iterations_max<\/iterations_max>/g" > settings.xml.tmp
     mv -f settings.xml.tmp settings.xml
 }

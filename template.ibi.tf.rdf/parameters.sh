@@ -10,15 +10,27 @@ rdf_iterations=50
 # ibi parameters
 ibi_iterations_max=1
 
+ibi_gmx_nsteps=500000
+ibi_gmx_nstenergy=500
+ibi_gmx_nstxtcout=500
+
 # tf parameters
+tf_iterations_max=1
+tf_iterations_init=10
+
+tf_gmx_nsteps=500000
+tf_gmx_nstenergy=500
+tf_gmx_nstxtcout=500
+
 ex_region_r=0.5
 hy_region_r=2.75
 tf_extension=0.05
 tf_step=0.01
 tf_spline_extension=0.1
 tf_spline_step=0.42142857142857142857 # 2.95/7
-tf_iterations_max=1
-tf_iterations_init=3
+tf_prefactor=0.039
+
+
 
 
 

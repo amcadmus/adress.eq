@@ -8,6 +8,9 @@ function set_param () {
     sed -e "s,base_conf=.*,base_conf=$base_conf,g" $targetfile |
     sed -e "s/n_base_block=.*/n_base_block=\"$n_base_block\"/g" |
     sed -e "s/number_density=.*/number_density=$number_density/g" |
+    sed -e "s/gmx_nsteps=.*/gmx_nsteps=$tf_gmx_nsteps/g" |
+    sed -e "s/gmx_nstenergy=.*/gmx_nstenergy=$tf_gmx_nstenergy/g" |
+    sed -e "s/gmx_nstxtcout=.*/gmx_nstxtcout=$tf_gmx_nstxtcout/g" |
     sed -e "s/ex_region_r=.*/ex_region_r=$ex_region_r/g" |
     sed -e "s/hy_region_r=.*/hy_region_r=$hy_region_r/g" |
     sed -e "s/tf_extension=.*/tf_extension=$tf_extension/g" |
