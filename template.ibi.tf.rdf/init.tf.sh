@@ -17,6 +17,7 @@ function set_param () {
     sed -e "s/tf_step=.*/tf_step=$tf_step/g" |
     sed -e "s/tf_spline_extension=.*/tf_spline_extension=$tf_spline_extension/g" |
     sed -e "s/tf_spline_step=.*/tf_spline_step=$tf_spline_step/g" |
+    sed -e "s/tf_prefactor=.*/tf_prefactor=$tf_prefactor/g" |
     sed -e "s/tf_iterations_max=.*/tf_iterations_max=$tf_iterations_init/g" > tmp.param
     mv -f tmp.param $targetfile
 }
@@ -31,6 +32,8 @@ cp -a template.tf.init step.000.tf
 rm -f step.000.tf/env.sh
 cp env.sh step.000.tf
 
+echo "# running on `uname -n`"
+echo "# with mdrun command located at `which mdrun`"
 cd step.000.tf
 set_param parameters.sh
 ./gen.tf.sh

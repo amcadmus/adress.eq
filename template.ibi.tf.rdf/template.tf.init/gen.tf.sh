@@ -111,6 +111,7 @@ sed -e "s/<spline_start>.*<\/spline_start>/<spline_start>$tf_spline_start<\/spli
 sed -e "s/<spline_end>.*<\/spline_end>/<spline_end>$tf_spline_end<\/spline_end>/g" |\
 sed -e "s/<spline_step>.*<\/spline_step>/<spline_step>$tf_spline_step<\/spline_step>/g" |\
 sed -e "s/<table_end>.*<\/table_end>/<table_end>$half_boxx_1<\/table_end>/g" |\
+sed -e "s/<prefactor>.*<\/prefactor>/<prefactor>$tf_prefactor<\/prefactor>/g" |\
 sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$tf_iterations_max<\/iterations_max>/g" > settings.xml.tmp
 mv -f settings.xml.tmp settings.xml
 

@@ -15,6 +15,8 @@ tf_extension=0.2
 tf_step=0.01
 tf_spline_extension=0.6
 tf_spline_step=0.4
+tf_prefactor=0.0391
+
 tf_iterations_max=60
 
 # run.tf.sh parameters
