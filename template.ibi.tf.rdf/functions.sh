@@ -14,6 +14,13 @@ function tf_grompp () {
     mv -f tmp.mdp grompp.mdp
 }
 
+function prod_grompp () {
+    sed -e "/^nsteps/s/=.*/= $prod_gmx_nsteps/g" grompp.mdp |\
+    sed -e "/^nstenergy/s/=.*/= $prod_gmx_nstenergy/g" |\
+    sed -e "/^nstxtcout/s/=.*/= $prod_gmx_nstxtcout/g" > tmp.mdp
+    mv -f tmp.mdp grompp.mdp
+}
+
 function ibi_setting () {
     sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$old_ibi_iterations_max<\/iterations_max>/g" settings.xml > settings.xml.tmp
     mv -f settings.xml.tmp settings.xml

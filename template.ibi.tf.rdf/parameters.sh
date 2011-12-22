@@ -31,6 +31,9 @@ tf_spline_step=0.42142857142857142857 # 2.95/7
 tf_prefactor=0.039
 
 
+# productive run.
+prod_gmx_nsteps=500000
+prod_gmx_nstenergy=500
+prod_gmx_nstxtcout=500
 
-
-
+last_step_num=10
