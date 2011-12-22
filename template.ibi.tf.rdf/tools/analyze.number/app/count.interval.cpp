@@ -50,16 +50,20 @@ int main(int argc, char * argv[])
   float prec = 1000;
   float time_prec = .01;
 
-  fp = xdrfile_open (ifile.c_str(), "w");
   char tmpfname[1024];
   strncpy (tmpfname, ifile.c_str(), 1023);
-  if (read_xtc_natoms (tmpfname, &natoms) == 0) {
+  int c;
+  if ((c = read_xtc_natoms (tmpfname, &natoms)) == 0) {
+    // printf ("%d %d\n", c, natoms);
     xx = (rvec *) malloc (sizeof(rvec) * natoms);
   }
   else {
+    // printf ("%d %d\n", c, natoms);
     fprintf (stderr, "error read_xtc_natoms");
     exit (1);
   }
+
+  fp = xdrfile_open (ifile.c_str(), "r");
 
   while (read_xtc (fp, natoms, &step, &time, box, xx, &prec) == 0){
     if (end != 0.f) {
