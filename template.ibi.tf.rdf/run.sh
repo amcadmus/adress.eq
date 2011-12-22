@@ -31,6 +31,7 @@ sed -e 's/COM/ CG/g' conf.gro > tmp.gro
 mv -f tmp.gro conf.gro
 rm -f grompp.mdp
 cp ../$init_lastdir/grompp.mdp .
+ibi_grompp
 rm -f index.ndx
 cp ../$init_lastdir/index.ndx .
 rm -f tabletf.xvg SOL.pot.new
@@ -49,6 +50,7 @@ cp ../env.sh .
 rm -f conf.gro dens.SOL.xvg index.ndx topol.top grompp.mdp
 cp ../$init_lastdir/confout.gro ./conf.gro
 cp ../$init_lastdir/grompp.mdp .
+tf_grompp
 cp ../step.000.tf/tf/dens.SOL.xvg .
 cp ../$init_lastdir/index.ndx .
 cp ../$init_lastdir/topol.top .
@@ -97,7 +99,7 @@ do
     cd ..
 
     cp -a template.tf $tfDir
-    echo "# rdf iter: doing $tfDir"
+    echo "# tf iter: doing $tfDir"
     cd $tfDir
     tf_setting
     rm -f tabletf.xvg tablerdf.xvg
