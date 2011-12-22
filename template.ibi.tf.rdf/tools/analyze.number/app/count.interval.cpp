@@ -93,7 +93,9 @@ int main(int argc, char * argv[])
     else {
       if (time < begin - time_prec) continue;
     }
-
+    printf ("# load frame at time: %f ps\r", time);
+    fflush (stdout);
+    
     int count = 0;
     if (method == std::string ("adress")){
       int nmol = natoms / 4;

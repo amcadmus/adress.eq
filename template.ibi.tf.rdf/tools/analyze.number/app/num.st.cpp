@@ -30,7 +30,7 @@ int main(int argc, char * argv[])
       ("help,h", "print this message")
       ("every,e", po::value<unsigned > (&every)->default_value (1),  "cal average every * numbers")
       ("col,c", po::value<unsigned > (&col)->default_value(1), "colume to analyze")
-      ("nblock,n", po::value<unsigned > (&numBlocks)->default_value(1), "number of blocks")
+      ("nblock,n", po::value<unsigned > (&numBlocks)->default_value(16), "number of blocks")
       ("input,f",   po::value<std::string > (&ifile)->default_value ("number.out"), "input number file");
   
   po::variables_map vm;
@@ -40,13 +40,7 @@ int main(int argc, char * argv[])
     std::cout << desc<< "\n";
     return 0;
   }
-
-  printf ("#############################################################\n");
-  printf ("# col: %d\n", col);
-  printf ("# every: %d\n", every);
-  printf ("# nblock: %d\n", numBlocks);
-  printf ("#############################################################\n");
-
+  
   int countLine = 0;
   char line [MaxLineLength];
   FILE *fp = fopen (ifile.c_str(), "r");
@@ -69,7 +63,15 @@ int main(int argc, char * argv[])
       values.push_back (atof(words[col-1].c_str()));
     }
   }
-
+  
+  printf ("#############################################################\n");
+  printf ("# col:       %d\n", col);
+  printf ("# every:     %d\n", every);
+  printf ("# num line:  %d\n", countLine);
+  printf ("# num date:  %d\n", values.size());
+  printf ("# nblock:    %d\n", numBlocks);
+  printf ("#############################################################\n");
+  
   BlockAverage ba;
   ba.processData (values, numBlocks);
 
