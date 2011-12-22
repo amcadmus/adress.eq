@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
       ("x1", po::value<float > (&x1)->default_value(1.f), "upper bound of the interval")
       ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
       ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
-      ("output,o",  po::value<std::string > (&ofile)->default_value ("number.gro"), "the output file");
+      ("output,o",  po::value<std::string > (&ofile)->default_value ("number.out"), "the output file");
   
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -42,6 +42,13 @@ int main(int argc, char * argv[])
     return 0;
   }
 
+  std::cout << "###################################################" << std::endl;
+  std::cout << "# begin->end: " << begin << " " << end << std::endl;
+  std::cout << "# [x0, x1]: " << x0 << " " << x1 << std::endl;
+  std::cout << "# method: " << method << std::endl;
+  std::cout << "# input: " << ifile << std::endl;
+  std::cout << "###################################################" << std::endl;  
+  
   XDRFILE *fp;
   int natoms, step;
   float time;
@@ -64,7 +71,16 @@ int main(int argc, char * argv[])
   }
 
   fp = xdrfile_open (ifile.c_str(), "r");
-
+  if (fp == NULL){
+    std::cerr << "cannot open file " << ifile << std::endl;
+    exit (1);
+  }
+  FILE *fout = fopen (ofile.c_str(), "w");
+  if (fout == NULL){
+    std::cerr << "cannot open file " << ofile << std::endl;
+    exit (1);
+  }
+  
   while (read_xtc (fp, natoms, &step, &time, box, xx, &prec) == 0){
     if (end != 0.f) {
       if (time < begin - time_prec){
@@ -119,12 +135,13 @@ int main(int argc, char * argv[])
       }
     }
 
-    printf ("%f %d\n", time, count);
+    fprintf (fout, "%f %d\n", time, count);
   }
   
   xdrfile_close (fp);
   free (xx);
+  fclose (fout);
+  
   return 0;
-
 }
 
