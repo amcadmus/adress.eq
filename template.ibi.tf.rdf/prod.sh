@@ -4,6 +4,9 @@ source env.sh
 source parameters.sh
 source functions.sh
 
+echo running on `uname -n` 
+echo with gromacs command `which mdrun`
+
 last_step_num=`printf "%03d" $last_step_num`
 last_step_dir=step.$last_step_num.tf
 last_iter=`printf "%03d" $tf_iterations_max`
