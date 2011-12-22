@@ -139,6 +139,7 @@ int main(int argc, char * argv[])
 
     fprintf (fout, "%f %d\n", time, count);
   }
+  printf ("\n");
   
   xdrfile_close (fp);
   free (xx);
