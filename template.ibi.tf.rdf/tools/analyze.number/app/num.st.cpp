@@ -68,7 +68,7 @@ int main(int argc, char * argv[])
   printf ("# col:       %d\n", col);
   printf ("# every:     %d\n", every);
   printf ("# num line:  %d\n", countLine);
-  printf ("# num date:  %d\n", values.size());
+  printf ("# num date:  %d\n", int(values.size()));
   printf ("# nblock:    %d\n", numBlocks);
   printf ("#############################################################\n");
   
