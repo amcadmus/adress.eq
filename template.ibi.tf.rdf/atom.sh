@@ -3,6 +3,11 @@
 source parameters.sh
 source functions.sh
 
+last_step_num=`printf "%03d" $last_step_num`
+last_step_dir=step.$last_step_num.tf
+last_iter=`printf "%03d" $tf_iterations_max`
+last_iter=step_$last_iter
+
 if test ! -d $last_step_dir; then
     echo "no dir $last_step_dir"
     exit
@@ -32,6 +37,7 @@ cp -a template.atom atom
 cd atom
 rm -f atom.log
 cp ../parameters.sh .
+prod_grompp
 test_and_move ../$last_step_dir/$last_iter/confout.gro ./conf.gro
 natom=`head conf.gro -n 2 | tail -n 1`
 nmol=`echo "$natom / 4" | bc`
@@ -43,3 +49,8 @@ tail -n 1 conf.gro >> tmp.gro
 mv -f tmp.gro conf.gro
 sed "s/SOL .*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
+
+grompp &> atom.log
+mdrun -v &>> atom.log
+
+cd ..
