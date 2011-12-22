@@ -42,6 +42,12 @@ int main(int argc, char * argv[])
     return 0;
   }
 
+  if (x0 > x1){
+    float tmpx = x0;
+    x0 = x1;
+    x1 = tmpx;
+  }
+  
   std::cout << "###################################################" << std::endl;
   std::cout << "# begin->end: " << begin << " " << end << std::endl;
   std::cout << "# [x0, x1]: " << x0 << " " << x1 << std::endl;
