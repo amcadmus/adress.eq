@@ -25,14 +25,14 @@ int main(int argc, char * argv[])
   
   po::options_description desc ("Allow options");
   desc.add_options()
-      ("help,h", "print this message")
-      ("begin,b", po::value<float > (&begin)->default_value(0.f), "start time")
-      ("end,e",   po::value<float > (&end  )->default_value(0.f), "end   time")
-      ("x0", po::value<float > (&x0)->default_value(0.f), "lower bound of the interval")
-      ("x1", po::value<float > (&x1)->default_value(1.f), "upper bound of the interval")
-      ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
-      ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
-      ("output,o",  po::value<std::string > (&ofile)->default_value ("number.out"), "the output file");
+    ("help,h", "print this message")
+    ("begin,b", po::value<float > (&begin)->default_value(0.f), "start time")
+    ("end,e",   po::value<float > (&end  )->default_value(0.f), "end   time")
+    ("x0", po::value<float > (&x0)->default_value(0.f), "lower bound of the interval")
+    ("x1", po::value<float > (&x1)->default_value(1.f), "upper bound of the interval")
+    ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
+    ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
+    ("output,o",  po::value<std::string > (&ofile)->default_value ("number.out"), "the output file");
   
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -114,13 +114,14 @@ int main(int argc, char * argv[])
 	float dx1, dx2;
 	dx1 = xx[i*3+1][0] - xx[i*3+0][0];
 	dx2 = xx[i*3+2][0] - xx[i*3+0][0];
-	if (dx1 > 0.5 * box[0][0]) dx1 -= box[0][0];
-	if (dx1 <-0.5 * box[0][0]) dx1 += box[0][0];
-	if (dx2 > 0.5 * box[0][0]) dx2 -= box[0][0];
-	if (dx2 <-0.5 * box[0][0]) dx2 += box[0][0];	
+	if (dx1 > 0.5 * box[0][0]) {dx1 -= box[0][0]; printf ("hit\n");}
+	if (dx1 <-0.5 * box[0][0]) {dx1 += box[0][0]; printf ("hit\n");}
+	if (dx2 > 0.5 * box[0][0]) {dx2 -= box[0][0]; printf ("hit\n");}
+	if (dx2 <-0.5 * box[0][0]) {dx2 += box[0][0]; printf ("hit\n");}
 	comx = 16. * xx[i*3+0][0] +
-	    1. * (xx[i*3+0][0] + dx1) +
-	    1. * (xx[i*3+0][0] + dx2);
+	  1. * (xx[i*3+0][0] + dx1) +
+	  1. * (xx[i*3+0][0] + dx2);
+	comx /= 18.;
 	if (comx >= x0 && comx < x1){
 	  count ++;
 	}
