@@ -18,6 +18,10 @@ if test ! -d $last_step_dir/$last_iter; then
     echo "no dir $last_step_dir/$last_iter"
     exit
 fi
+if test -d prod; then
+    echo "exists dir prod, move"
+    mv prod prod.`date +%s`
+fi
 
 function test_and_move () {
     fromfile=$1
@@ -31,8 +35,9 @@ function test_and_move () {
     fi
 }
 
-cp template.prod prod
+cp -a template.prod prod
 cd prod
+rm -f prod.log
 cp ../parameters.sh .
 test_and_move ../$last_step_dir/$last_iter/confout.gro ./conf.gro
 test_and_move ../$last_step_dir/$last_iter/index.ndx ./index.ndx
@@ -42,5 +47,6 @@ test_and_move ../$last_step_dir/topol.top ./topol.top
 test_and_move ../$last_step_dir/tablerdf.xvg ./tablerdf.xvg
 test_and_move ../$last_step_dir/tabletf.xvg ./tabletf.xvg
 
-grompp -n index.ndx
+grompp -n index.ndx &>> prod.log
+mdrun -v &>> prod.log
 cd ..
