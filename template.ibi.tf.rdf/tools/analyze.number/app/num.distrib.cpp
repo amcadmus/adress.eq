@@ -89,15 +89,37 @@ int main(int argc, char * argv[])
     exit(1);
   }
   else {
-    nbin = box[0][0] / refh;
+    nbin = int(0.5 * box[0][0] / refh) * 2;
     if (fabs (box[0][0] - refh * nbin) <= ep){
       offset = 0.;
       marginh = 0.;
+      fprintf (fout, "# boxx: %f, nbin: %d \n#", box[0][0], nbin);
+      for (int i = 0; i < nbin; ++i){
+	fprintf (fout, " %f", refh);
+      }
+      fprintf (fout, "\n#");
+      for (int i = 0; i < nbin; ++i){
+	fprintf (fout, " %f", (0.5 + i) * refh);
+      }
+      fprintf (fout, "\n");
     }
     else {
       marginh = 0.5 * (box[0][0] - refh * nbin);
       offset = refh - marginh;
       nbin += 2;
+      fprintf (fout, "# boxx: %f, nbin: %d \n#", box[0][0], nbin);
+      fprintf (fout, " %f", marginh);
+      for (int i = 0; i < nbin-2; ++i){      
+	fprintf (fout, " %f", refh);
+      }
+      fprintf (fout, " %f", marginh);
+      fprintf (fout, "\n#");
+      fprintf (fout, " %f", 0.5 * marginh);
+      for (int i = 0; i < nbin-2; ++i){      
+	fprintf (fout, " %f", marginh + (0.5 + i) * refh);
+      }
+      fprintf (fout, " %f", box[0][0] - 0.5 * marginh);
+      fprintf (fout, "\n");
     }
   }
   
@@ -125,6 +147,7 @@ int main(int argc, char * argv[])
 	else if (xx[i*4][0] >= box[0][0]) xx[i*4][0] -= box[0][0];
 	int posi = (xx[i*4][0] + offset) / refh;
 	if (posi >= nbin) {
+	  std::cout << "out of range" << std::endl;
 	  continue;
 	}
 	else {
@@ -151,6 +174,7 @@ int main(int argc, char * argv[])
 	else if (comx >= box[0][0]) comx -= box[0][0];
 	int posi = (comx + offset) / refh;
 	if (posi >= nbin) {
+	  std::cout << "out of range" << std::endl;
 	  continue;
 	}
 	else {
@@ -165,6 +189,7 @@ int main(int argc, char * argv[])
 	else if (xx[i][0] >= box[0][0]) xx[i][0] -= box[0][0];
 	int posi = (xx[i][0] + offset) / refh;
 	if (posi >= nbin) {
+	  std::cout << "out of range" << std::endl;
 	  continue;
 	}
 	else {
