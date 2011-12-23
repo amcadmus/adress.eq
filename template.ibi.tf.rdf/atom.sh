@@ -3,9 +3,7 @@
 source parameters.sh
 source functions.sh
 
-echo running on `uname -n` 
-echo with gromacs command `which mdrun`
-
+logfile=atom.log
 last_step_num=`printf "%03d" $last_step_num`
 last_step_dir=step.$last_step_num.tf
 last_iter=`printf "%03d" $tf_iterations_max`
@@ -38,7 +36,9 @@ function test_and_move () {
 
 cp -a template.atom atom
 cd atom
-rm -f atom.log
+rm -f $logfile
+echo running on `uname -n` >> $logfile
+echo with gromacs command `which mdrun` >> $logfile
 cp ../parameters.sh .
 prod_grompp
 test_and_move ../$last_step_dir/$last_iter/confout.gro ./conf.gro
@@ -53,7 +53,7 @@ mv -f tmp.gro conf.gro
 sed "s/SOL .*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
 
-grompp &> atom.log
-mdrun -v &>> atom.log
+grompp &>> $logfile
+mdrun -v &>> $logfile
 
 cd ..

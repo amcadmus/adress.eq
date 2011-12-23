@@ -4,23 +4,17 @@ source env.sh
 source parameters.sh
 source functions.sh
 
-logfile=prod.log
+logfile=noibi.log
 last_step_num=`printf "%03d" $last_step_num`
-last_step_dir=step.$last_step_num.tf
-last_iter=`printf "%03d" $tf_iterations_max`
-last_iter=step_$last_iter
+last_step_dir=step.000.tf/tf/step_$last_step_num
 
 if test ! -d $last_step_dir; then
     echo "no dir $last_step_dir"
     exit
 fi
-if test ! -d $last_step_dir/$last_iter; then
-    echo "no dir $last_step_dir/$last_iter"
-    exit
-fi
-if test -d prod; then
-    echo "exists dir prod, move"
-    mv prod prod.`date +%s`
+if test -d noibi; then
+    echo "exists dir noibi, move"
+    mv noibi noibi.`date +%s`
 fi
 
 function test_and_move () {
@@ -35,14 +29,14 @@ function test_and_move () {
     fi
 }
 
-cp -a template.prod prod
-cd prod
+cp -a template.prod noibi
+cd noibi
 rm -f $logfile
-echo running on `uname -n`  >> $logfile
+echo running on `uname -n` >> $logfile
 echo with gromacs command `which mdrun` >> $logfile
 cp ../parameters.sh .
-test_and_move ../$last_step_dir/$last_iter/confout.gro ./conf.gro
-test_and_move ../$last_step_dir/$last_iter/index.ndx ./index.ndx
+test_and_move ../$last_step_dir/confout.gro ./conf.gro
+test_and_move ../$last_step_dir/index.ndx ./index.ndx
 test_and_move ../$last_step_dir/grompp.mdp ./grompp.mdp
 prod_grompp
 test_and_move ../$last_step_dir/topol.top ./topol.top
