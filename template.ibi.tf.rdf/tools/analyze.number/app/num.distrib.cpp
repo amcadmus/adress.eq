@@ -20,19 +20,18 @@ namespace po = boost::program_options;
 
 int main(int argc, char * argv[])
 {
-  float begin, end, x0, x1;
+  float begin, end, refh;
   std::string ifile, ofile, method;
   
   po::options_description desc ("Allow options");
   desc.add_options()
-    ("help,h", "print this message")
-    ("begin,b", po::value<float > (&begin)->default_value(0.f), "start time")
-    ("end,e",   po::value<float > (&end  )->default_value(0.f), "end   time")
-    ("x0", po::value<float > (&x0)->default_value(0.f), "lower bound of the interval")
-    ("x1", po::value<float > (&x1)->default_value(1.f), "upper bound of the interval")
-    ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
-    ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
-    ("output,o",  po::value<std::string > (&ofile)->default_value ("number.out"), "the output file");
+      ("help,h", "print this message")
+      ("begin,b", po::value<float > (&begin)->default_value(0.f), "start time")
+      ("end,e",   po::value<float > (&end  )->default_value(0.f), "end   time")
+      ("refh", po::value<float > (&refh)->default_value(0.25f), "size of the bin")
+      ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
+      ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
+      ("output,o",  po::value<std::string > (&ofile)->default_value ("number.out"), "the output file");
   
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -42,15 +41,9 @@ int main(int argc, char * argv[])
     return 0;
   }
 
-  if (x0 > x1){
-    float tmpx = x0;
-    x0 = x1;
-    x1 = tmpx;
-  }
-  
   std::cout << "###################################################" << std::endl;
   std::cout << "# begin->end: " << begin << " " << end << std::endl;
-  std::cout << "# [x0, x1]: " << x0 << " " << x1 << std::endl;
+  std::cout << "# refh: " << refh << std::endl;
   std::cout << "# method: " << method << std::endl;
   std::cout << "# input: " << ifile << std::endl;
   std::cout << "###################################################" << std::endl;  
@@ -86,6 +79,28 @@ int main(int argc, char * argv[])
     std::cerr << "cannot open file " << ofile << std::endl;
     exit (1);
   }
+
+  int nbin;
+  float offset;
+  float marginh;
+  float ep = 1e-3;
+  if (read_xtc (fp, natoms, &step, &time, box, xx, &prec) != 0){
+    std::cerr << "wrong reading xtc" << std::endl;
+    exit(1);
+  }
+  else {
+    nbin = box[0][0] / refh;
+    if (fabs (box[0][0] - refh * nbin) <= ep){
+      offset = 0.;
+      marginh = 0.;
+    }
+    else {
+      marginh = 0.5 * (box[0][0] - refh * nbin);
+      offset = refh - marginh;
+      nbin += 2;
+    }
+  }
+  
   
   while (read_xtc (fp, natoms, &step, &time, box, xx, &prec) == 0){
     if (end != 0.f) {
@@ -102,14 +117,18 @@ int main(int argc, char * argv[])
     printf ("# load frame at time: %.1f ps\r", time);
     fflush (stdout);
     
-    int count = 0;
+    std::vector<int > count (nbin, 0);
     if (method == std::string ("adress")){
       int nmol = natoms / 4;
       for (int i = 0; i < nmol; ++i){
 	if      (xx[i*4][0] <  0        ) xx[i*4][0] += box[0][0];
 	else if (xx[i*4][0] >= box[0][0]) xx[i*4][0] -= box[0][0];
-	if (xx[i*4][0] >= x0 && xx[i*4][0] < x1){
-	  count ++;
+	int posi = (xx[i*4][0] + offset) / refh;
+	if (posi >= nbin) {
+	  continue;
+	}
+	else {
+	  count[posi] ++;
 	}
       }
     }
@@ -128,8 +147,14 @@ int main(int argc, char * argv[])
 	  1. * (xx[i*3+0][0] + dx1) +
 	  1. * (xx[i*3+0][0] + dx2);
 	comx /= 18.;
-	if (comx >= x0 && comx < x1){
-	  count ++;
+	if      (comx <  0        ) comx += box[0][0];
+	else if (comx >= box[0][0]) comx -= box[0][0];
+	int posi = (comx + offset) / refh;
+	if (posi >= nbin) {
+	  continue;
+	}
+	else {
+	  count[posi] ++;
 	}
       }
     }
@@ -138,13 +163,21 @@ int main(int argc, char * argv[])
       for (int i = 0; i < nmol; ++i){
 	if      (xx[i][0] <  0        ) xx[i][0] += box[0][0];
 	else if (xx[i][0] >= box[0][0]) xx[i][0] -= box[0][0];
-	if (xx[i][0] >= x0 && xx[i][0] < x1){
-	  count ++;
+	int posi = (xx[i][0] + offset) / refh;
+	if (posi >= nbin) {
+	  continue;
+	}
+	else {
+	  count[posi] ++;
 	}
       }
     }
 
-    fprintf (fout, "%f %d\n", time, count);
+    fprintf (fout, "%f ", time);
+    for (int i = 0; i < nbin; ++i){
+      fprintf (fout, "%d ", count[i]);
+    }
+    fprintf (fout, "\n");
   }
   printf ("\n");
   
