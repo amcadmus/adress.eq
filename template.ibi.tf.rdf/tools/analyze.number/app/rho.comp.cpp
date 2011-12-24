@@ -94,8 +94,8 @@ int main(int argc, char * argv[])
   double volume = binsize * boxy * boxz;
   double rho = n_avg / volume;
   double rho_error = n_avg_error / volume;
-  rho *= 18e-3 / 6.02e23;
-  rho_error *= 18e-3 / 6.02e23;
+  rho *= 18e-3 / (6.02e23 * 1e-27);
+  rho_error *= 18e-3 / (6.02e23 * 1e-27);
   double comp = n_var / (n_avg * n_avg) * volume / (1.38 *temperature) * 1e-4;
   double comp_error =
       n_var_error / (n_avg * n_avg) +
