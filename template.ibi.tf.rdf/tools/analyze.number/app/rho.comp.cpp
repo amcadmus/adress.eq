@@ -98,6 +98,7 @@ int main(int argc, char * argv[])
   double comp_error =
       n_var_error / (n_avg * n_avg) +
       2 * n_var * n_avg_error / (n_avg * n_avg * n_avg);
+  comp_error *= volume / (1.38 *temperature) * 1e-4;
   printf ("# rho  rho_error  comp  comp_error\n");
   printf ("%e  %e  %e  %e\n",
 	  rho, rho_error,
