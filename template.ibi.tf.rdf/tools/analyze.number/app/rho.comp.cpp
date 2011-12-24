@@ -18,7 +18,7 @@
 
 namespace po = boost::program_options;
 
-#define MaxLineLength 1024
+#define MaxLineLength 10240
 
 int main(int argc, char * argv[])
 {
@@ -101,10 +101,12 @@ int main(int argc, char * argv[])
       n_var_error / (n_avg * n_avg) +
       2 * n_var * n_avg_error / (n_avg * n_avg * n_avg);
   comp_error *= volume / (1.38 *temperature) * 1e-4;
-  printf ("# rho  rho_error  comp  comp_error\n");
-  printf ("%e  %e  %e  %e\n",
+  printf ("# rho  rho_error  comp  comp_error n_avg (e) n_var (e)\n");
+  printf ("%e  %e  %e  %e   %e %e %e %e\n",
 	  rho, rho_error,
-	  comp, comp_error);
+	  comp, comp_error,
+	  n_avg, n_avg_error,
+	  n_var, n_var_error);
   
   fclose (fp);
   

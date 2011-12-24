@@ -125,7 +125,7 @@ int main(int argc, char * argv[])
     }
   }
   
-  
+  int countread = 0;
   while (read_xtc (fp, natoms, &step, &time, box, xx, &prec) == 0){
     if (end != 0.f) {
       if (time < begin - time_prec){
@@ -138,7 +138,9 @@ int main(int argc, char * argv[])
     else {
       if (time < begin - time_prec) continue;
     }
-    printf ("# load frame at time: %.1f ps\r", time);
+    if (countread++ % 100 == 0){
+      printf ("# load frame at time: %.1f ps\r", time);
+    }
     fflush (stdout);
     
     std::vector<int > count (nbin, 0);
@@ -176,7 +178,9 @@ int main(int argc, char * argv[])
 	else if (comx >= box[0][0]) comx -= box[0][0];
 	int posi = (comx + offset) / refh;
 	if (posi >= nbin) {
-	  std::cout << "out of range" << std::endl;
+	  // std::cout << "out of range" << std::endl;
+	  printf ("# out of range. comx: %f, nbin %d, refh %f, boxx %f\n",
+		  comx, nbin, refh, box[0][0]);
 	  continue;
 	}
 	else {

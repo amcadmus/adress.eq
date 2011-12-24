@@ -18,7 +18,7 @@
 
 namespace po = boost::program_options;
 
-#define MaxLineLength 1024
+#define MaxLineLength 10240
 
 int main(int argc, char * argv[])
 {
