@@ -93,7 +93,8 @@ int main(int argc, char * argv[])
     if (fabs (box[0][0] - refh * nbin) <= ep){
       offset = 0.;
       marginh = 0.;
-      fprintf (fout, "# boxx: %f, nbin: %d \n#", box[0][0], nbin);
+      fprintf (fout, "# box: %f %f %f, nbin: %d \n#",
+	       box[0][0], box[1][1], box[2][2], nbin);
       for (int i = 0; i < nbin; ++i){
 	fprintf (fout, " %f", refh);
       }
@@ -107,7 +108,8 @@ int main(int argc, char * argv[])
       marginh = 0.5 * (box[0][0] - refh * nbin);
       offset = refh - marginh;
       nbin += 2;
-      fprintf (fout, "# boxx: %f, nbin: %d \n#", box[0][0], nbin);
+      fprintf (fout, "# box: %f %f %f, nbin: %d \n#",
+	       box[0][0], box[1][1], box[2][2], nbin);
       fprintf (fout, " %f", marginh);
       for (int i = 0; i < nbin-2; ++i){      
 	fprintf (fout, " %f", refh);
