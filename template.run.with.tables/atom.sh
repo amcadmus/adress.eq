@@ -62,6 +62,7 @@ echo "# prepare grompp.mdp"
 cp tools/atom.template/grompp.mdp .
 sed -e "/^nsteps/s/=.*/= $gmx_nsteps/g" grompp.mdp |\
 sed -e "/^nstenergy/s/=.*/= $gmx_nstenergy/g" |\
+sed -e "/^gen_vel/s/=.*/= no/g" |\
 sed -e "/^nstxtcout/s/=.*/= $gmx_nstxtcout/g" > grompp.mdp.tmp
 mv -f grompp.mdp.tmp grompp.mdp
 
@@ -73,5 +74,10 @@ cp tools/atom.template/system.itp .
 cp tools/atom.template/topol.top .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
+
+# productive run
+echo "# productive run"
+$std_gromacs_install_dir/bin/grompp &>> $mylog
+$std_gromacs_install_dir/bin/mdrun -v &>> $mylog
 
 
