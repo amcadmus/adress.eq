@@ -44,8 +44,8 @@ cd warmup
 mv ../conf.gro .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
-grompp &>> $mylog
-mdrun -v &>> $mylog
+$std_gromacs_install_dir/bin/grompp &>> $mylog
+$std_gromacs_install_dir/bin/mdrun -v &>> $mylog
 rm -fr ../conf.gro
 if test ! -f confout.gro; then
     echo "no file confout.gro, exit!"
@@ -101,8 +101,8 @@ mv -f grompp.mdp.tmp grompp.mdp
 
 # prepare topol.top
 echo "# prepare to tf"
-rm -fr topol.top
-cp tf.template/topol.top .
+rm -fr adress_spce.itp topol.top 
+cp $table_dir/adress_spce.itp $table_dir/topol.top .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
 

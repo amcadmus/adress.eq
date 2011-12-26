@@ -8,3 +8,5 @@ source $votca_install_dir/bin/VOTCARC.bash
 gromacs_install_dir=~/study/thermo.convection/local.inhomo.thermostat.w.rdfCorr
 source $gromacs_install_dir/bin/GMXRC.bash
 
+std_gromacs_install_dir=~/local
+
