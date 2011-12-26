@@ -100,11 +100,14 @@ sed -e "/^adress_reference_coords/s/=.*/= $half_boxx $half_boxy $half_boxz/g" > 
 mv -f grompp.mdp.tmp grompp.mdp
 
 # prepare topol.top
-echo "# prepare to tf"
+echo "# prepare topol.top"
 rm -fr adress_spce.itp topol.top 
 cp $table_dir/adress_spce.itp $table_dir/topol.top .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
 
-
+# productive run
+echo "# productive run"
+grompp -n index.ndx &>> $mylog
+mdrun -v &>> $mylog
 
