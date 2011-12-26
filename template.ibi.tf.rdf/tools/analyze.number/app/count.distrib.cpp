@@ -140,8 +140,8 @@ int main(int argc, char * argv[])
     }
     if (countread++ % 100 == 0){
       printf ("# load frame at time: %.1f ps\r", time);
+      fflush (stdout);
     }
-    fflush (stdout);
     
     std::vector<int > count (nbin, 0);
     if (method == std::string ("adress")){

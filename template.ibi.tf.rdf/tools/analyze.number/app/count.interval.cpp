@@ -17,10 +17,11 @@
 
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
+#include "BlockAverage.h"
 
 int main(int argc, char * argv[])
 {
-  float begin, end, x0, x1;
+  float begin, end, x0, x1, yz0, yz1;
   std::string ifile, ofile, method;
   
   po::options_description desc ("Allow options");
@@ -30,6 +31,8 @@ int main(int argc, char * argv[])
     ("end,e",   po::value<float > (&end  )->default_value(0.f), "end   time")
     ("x0", po::value<float > (&x0)->default_value(0.f), "lower bound of the interval")
     ("x1", po::value<float > (&x1)->default_value(1.f), "upper bound of the interval")
+    ("yz0", po::value<float > (&yz0)->default_value(0.f), "lower bound of the interval")
+    ("yz1", po::value<float > (&yz1)->default_value(1.f), "upper bound of the interval")
     ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
     ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
     ("output,o",  po::value<std::string > (&ofile)->default_value ("number.out"), "the output file");
@@ -47,10 +50,16 @@ int main(int argc, char * argv[])
     x0 = x1;
     x1 = tmpx;
   }
+  if (yz0 > yz1){
+    float tmpyz = yz0;
+    yz0 = yz1;
+    yz1 = tmpyz;
+  }
   
   std::cout << "###################################################" << std::endl;
   std::cout << "# begin->end: " << begin << " " << end << std::endl;
-  std::cout << "# [x0, x1]: " << x0 << " " << x1 << std::endl;
+  std::cout << "# [x0,  x1 ]: " << x0 << " " << x1 << std::endl;
+  std::cout << "# [yz0, yz1]: " << yz0 << " " << yz1 << std::endl;
   std::cout << "# method: " << method << std::endl;
   std::cout << "# input: " << ifile << std::endl;
   std::cout << "###################################################" << std::endl;  
@@ -87,6 +96,8 @@ int main(int argc, char * argv[])
     exit (1);
   }
   
+  int countread = 0;
+  std::vector<double > time_counts;
   while (read_xtc (fp, natoms, &step, &time, box, xx, &prec) == 0){
     if (end != 0.f) {
       if (time < begin - time_prec){
@@ -99,8 +110,10 @@ int main(int argc, char * argv[])
     else {
       if (time < begin - time_prec) continue;
     }
-    printf ("# load frame at time: %.1f ps\r", time);
-    fflush (stdout);
+    if (countread++ % 100 == 0){
+      printf ("# load frame at time: %.1f ps\r", time);
+      fflush (stdout);
+    }
     
     int count = 0;
     if (method == std::string ("adress")){
@@ -116,19 +129,24 @@ int main(int argc, char * argv[])
     else if (method == std::string ("atom")){
       int nmol = natoms / 3;
       for (int i = 0; i < nmol; ++i){
-	float comx;
-	float dx1, dx2;
-	dx1 = xx[i*3+1][0] - xx[i*3+0][0];
-	dx2 = xx[i*3+2][0] - xx[i*3+0][0];
-	if (dx1 > 0.5 * box[0][0]) {dx1 -= box[0][0]; printf ("hit\n");}
-	if (dx1 <-0.5 * box[0][0]) {dx1 += box[0][0]; printf ("hit\n");}
-	if (dx2 > 0.5 * box[0][0]) {dx2 -= box[0][0]; printf ("hit\n");}
-	if (dx2 <-0.5 * box[0][0]) {dx2 += box[0][0]; printf ("hit\n");}
-	comx = 16. * xx[i*3+0][0] +
-	  1. * (xx[i*3+0][0] + dx1) +
-	  1. * (xx[i*3+0][0] + dx2);
-	comx /= 18.;
-	if (comx >= x0 && comx < x1){
+	std::vector<float > com(3, 0.);
+	for (int dd = 0; dd < 3; ++dd){
+	  float dx1, dx2;
+	  dx1 = xx[i*3+1][dd] - xx[i*3+0][dd];
+	  dx2 = xx[i*3+2][dd] - xx[i*3+0][dd];
+	  if (dx1 > 0.5 * box[dd][dd]) {dx1 -= box[dd][dd]; printf ("hit\n");}
+	  if (dx1 <-0.5 * box[dd][dd]) {dx1 += box[dd][dd]; printf ("hit\n");}
+	  if (dx2 > 0.5 * box[dd][dd]) {dx2 -= box[dd][dd]; printf ("hit\n");}
+	  if (dx2 <-0.5 * box[dd][dd]) {dx2 += box[dd][dd]; printf ("hit\n");}
+	  com[dd] = 16. * xx[i*3+0][dd] +
+	    1. * (xx[i*3+0][dd] + dx1) +
+	    1. * (xx[i*3+0][dd] + dx2);
+	  com[dd] /= 18.;
+	}
+	if (com[0] >= x0 && com[0] < x1 &&
+	    com[1] >= yz0 && com[1] < yz1 &&
+	    com[2] >= yz0 && com[2] < yz1
+	    ){
 	  count ++;
 	}
       }
@@ -145,12 +163,24 @@ int main(int argc, char * argv[])
     }
 
     fprintf (fout, "%f %d\n", time, count);
+
+    time_counts.push_back (double(count));
   }
   printf ("\n");
   
   xdrfile_close (fp);
   free (xx);
   fclose (fout);
+
+  int numBlocks (16);
+  BlockAverage ba;
+  ba.processData (time_counts, numBlocks);
+  printf ("# avg  avg_error  var  var_error  var/avg\n");
+  printf ("%e  %e  %e  %e   %e\n",
+  	  ba.getAvg(), ba.getAvgError(),
+  	  ba.getVar(), ba.getVarError(),
+	  ba.getVar() / ba.getAvg());
+
   
   return 0;
 }
