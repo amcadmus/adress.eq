@@ -75,6 +75,10 @@ cp tools/atom.template/topol.top .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
 
+# prepare index file"
+echo "# prepare index file"
+echo "q" | make_ndx -f conf.gro &>> $mylog
+
 # productive run
 echo "# productive run"
 $std_gromacs_install_dir/bin/grompp &>> $mylog
