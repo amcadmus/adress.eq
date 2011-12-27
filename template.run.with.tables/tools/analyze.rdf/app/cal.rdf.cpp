@@ -23,12 +23,15 @@ int main(int argc, char * argv[])
 {
   float begin, end, rup, refh, cellSize;
   std::string ifile, ofile, method;
+  float x0, x1;
   
   po::options_description desc ("Allow options");
   desc.add_options()
     ("help,h", "print this message")
     ("begin,b", po::value<float > (&begin)->default_value(0.f), "start time")
     ("end,e",   po::value<float > (&end  )->default_value(0.f), "end   time")
+    ("x0", po::value<float > (&x0)->default_value(0.f), "lower bound of the interval")
+    ("x1", po::value<float > (&x1)->default_value(1.f), "upper bound of the interval")
     ("rup,u",   po::value<float > (&rup)->default_value(3.f), "max r to make rdf")
     ("refh",  po::value<float > (&refh)->default_value(0.01f), "bin size")
     ("cell-size,c", po::value<float > (&cellSize)->default_value(1.f), "cell list radius")
@@ -46,6 +49,7 @@ int main(int argc, char * argv[])
   
   std::cout << "###################################################" << std::endl;
   std::cout << "# begin->end: " << begin << " " << end << std::endl;
+  std::cout << "# [x0,  x1 ]: " << x0 << " " << x1 << std::endl;
   std::cout << "# rup: " << rup << std::endl;
   std::cout << "# refh: " << refh << std::endl;
   std::cout << "# method: " << method << std::endl;
@@ -83,7 +87,7 @@ int main(int argc, char * argv[])
     return 1;
   }
   
-  int nmolecules;
+  int nmolecules = 0;
   if (method == std::string("adress")){
     nmolecules = natoms / 4;
   }
@@ -93,11 +97,19 @@ int main(int argc, char * argv[])
   else if (method == std::string("cg")){
     nmolecules = natoms;
   }
+  else {
+    std::cerr << "wrong method" << std::endl;
+    return 1;
+  }
 
   VectorType vbox;
   vbox.x = box[0][0];
   vbox.y = box[1][1];
   vbox.z = box[2][2];
+  if (cellSize >= .5 * vbox.x){
+    std::cerr << "the cell size should be less than half of the box size" << std::endl;
+    return 1;
+  }
   
   std::vector<std::vector<ValueType > > coms;
   coms.reserve (nmolecules);
@@ -105,7 +117,7 @@ int main(int argc, char * argv[])
   CellList clist (nmolecules, vbox, cellSize);
 
   Rdf myrdf;
-  myrdf.reinit (rup, refh);
+  myrdf.reinit (rup, refh, x0, x1);
 
   int countread = 0;
   while (read_xtc (fp, natoms, &step, &time, box, xx, &prec) == 0){
@@ -120,7 +132,7 @@ int main(int argc, char * argv[])
     else {
       if (time < begin - time_prec) continue;
     }
-    if (countread++ % 100 == 0){
+    if (countread++ % 1 == 0){
       printf ("# load frame at time: %.1f ps\r", time);
       fflush (stdout);
     }
@@ -129,16 +141,16 @@ int main(int argc, char * argv[])
     if (method == std::string ("adress")){
       int nmol = natoms / 4;
       for (int i = 0; i < nmol; ++i){
-	if      (xx[i*4][0] <  0        ) xx[i*4][0] += box[0][0];
-	else if (xx[i*4][0] >= box[0][0]) xx[i*4][0] -= box[0][0];
-	if      (xx[i*4][1] <  0        ) xx[i*4][1] += box[1][1];
-	else if (xx[i*4][1] >= box[1][1]) xx[i*4][1] -= box[1][1];
-	if      (xx[i*4][2] <  0        ) xx[i*4][2] += box[2][2];
-	else if (xx[i*4][2] >= box[2][2]) xx[i*4][2] -= box[2][2];
+	if      (xx[i*4+3][0] <  0        ) xx[i*4+3][0] += box[0][0];
+	else if (xx[i*4+3][0] >= box[0][0]) xx[i*4+3][0] -= box[0][0];
+	if      (xx[i*4+3][1] <  0        ) xx[i*4+3][1] += box[1][1];
+	else if (xx[i*4+3][1] >= box[1][1]) xx[i*4+3][1] -= box[1][1];
+	if      (xx[i*4+3][2] <  0        ) xx[i*4+3][2] += box[2][2];
+	else if (xx[i*4+3][2] >= box[2][2]) xx[i*4+3][2] -= box[2][2];
 	std::vector<ValueType > tmp(3);
-	tmp[0] = xx[i*4][0];
-	tmp[1] = xx[i*4][1];
-	tmp[2] = xx[i*4][2];
+	tmp[0] = xx[i*4+3][0];
+	tmp[1] = xx[i*4+3][1];
+	tmp[2] = xx[i*4+3][2];
 	coms.push_back(tmp);
       }
     }
@@ -158,6 +170,8 @@ int main(int argc, char * argv[])
 	    1. * (xx[i*3+0][dd] + dx1) +
 	    1. * (xx[i*3+0][dd] + dx2);
 	  com[dd] /= 18.;
+	  if      (com[dd] <  0          ) com[dd] += box[dd][dd];
+	  else if (com[dd] >= box[dd][dd]) com[dd] -= box[dd][dd];
 	}
 	coms.push_back (com);
       }
@@ -198,7 +212,7 @@ int main(int argc, char * argv[])
 
   fprintf (fout, "%f %f\n", 0., myrdf.getValue(0));
   for (unsigned i = 1; i < myrdf.getN(); ++i){
-    fprintf (fout, "%f %f\n", (i-0.5) * refh, myrdf.getValue(i));
+    fprintf (fout, "%f %f\n", (i) * refh, myrdf.getValue(i));
   }
 
   fclose (fout);
