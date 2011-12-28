@@ -119,9 +119,15 @@ int main(int argc, char * argv[])
     if (method == std::string ("adress")){
       int nmol = natoms / 4;
       for (int i = 0; i < nmol; ++i){
-	if      (xx[i*4][0] <  0        ) xx[i*4][0] += box[0][0];
-	else if (xx[i*4][0] >= box[0][0]) xx[i*4][0] -= box[0][0];
-	if (xx[i*4][0] >= x0 && xx[i*4][0] < x1){
+	if      (xx[i*4+3][0] <  0        ) xx[i*4+3][0] += box[0][0];
+	else if (xx[i*4+3][0] >= box[0][0]) xx[i*4+3][0] -= box[0][0];
+	if      (xx[i*4+3][1] <  0        ) xx[i*4+3][1] += box[1][1];
+	else if (xx[i*4+3][1] >= box[1][1]) xx[i*4+3][1] -= box[1][1];
+	if      (xx[i*4+3][2] <  0        ) xx[i*4+3][2] += box[2][2];
+	else if (xx[i*4+3][2] >= box[2][2]) xx[i*4+3][2] -= box[2][2];
+	if (xx[i*4+3][0] >= x0 && xx[i*4+3][0] < x1 &&
+	    xx[i*4+3][1] >= yz0 && xx[i*4+3][1] < yz1 &&
+	    xx[i*4+3][2] >= yz0 && xx[i*4+3][2] < yz1){
 	  count ++;
 	}
       }
@@ -156,7 +162,13 @@ int main(int argc, char * argv[])
       for (int i = 0; i < nmol; ++i){
 	if      (xx[i][0] <  0        ) xx[i][0] += box[0][0];
 	else if (xx[i][0] >= box[0][0]) xx[i][0] -= box[0][0];
-	if (xx[i][0] >= x0 && xx[i][0] < x1){
+	if      (xx[i][1] <  0        ) xx[i][1] += box[1][1];
+	else if (xx[i][1] >= box[1][1]) xx[i][1] -= box[1][1];
+	if      (xx[i][2] <  0        ) xx[i][2] += box[2][2];
+	else if (xx[i][2] >= box[2][2]) xx[i][2] -= box[2][2];
+	if (xx[i][0] >= x0 && xx[i][0] < x1 &&
+	    xx[i][1] >= yz0 && xx[i][1] < yz1 &&
+	    xx[i][2] >= yz0 && xx[i][2] < yz1){
 	  count ++;
 	}
       }
