@@ -148,6 +148,8 @@ int main(int argc, char * argv[])
 	    1. * (xx[i*3+0][dd] + dx1) +
 	    1. * (xx[i*3+0][dd] + dx2);
 	  com[dd] /= 18.;
+	  if      (com[dd] <  0          ) com[dd] += box[dd][dd];
+	  else if (com[dd] >= box[dd][dd]) com[dd] -= box[dd][dd];
 	}
 	if (com[0] >= x0 && com[0] < x1 &&
 	    com[1] >= yz0 && com[1] < yz1 &&
