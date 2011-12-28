@@ -147,9 +147,9 @@ int main(int argc, char * argv[])
     if (method == std::string ("adress")){
       int nmol = natoms / 4;
       for (int i = 0; i < nmol; ++i){
-	if      (xx[i*4][0] <  0        ) xx[i*4][0] += box[0][0];
-	else if (xx[i*4][0] >= box[0][0]) xx[i*4][0] -= box[0][0];
-	int posi = (xx[i*4][0] + offset) / refh;
+	if      (xx[i*4+3][0] <  0        ) xx[i*4+3][0] += box[0][0];
+	else if (xx[i*4+3][0] >= box[0][0]) xx[i*4+3][0] -= box[0][0];
+	int posi = (xx[i*4+3][0] + offset) / refh;
 	if (posi >= nbin) {
 	  std::cout << "out of range" << std::endl;
 	  continue;
