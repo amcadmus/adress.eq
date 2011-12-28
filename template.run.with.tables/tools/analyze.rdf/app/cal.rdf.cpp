@@ -46,6 +46,12 @@ int main(int argc, char * argv[])
     std::cout << desc<< "\n";
     return 0;
   }
+
+  if (x0 > x1) {
+    ValueType tmpx = x0;
+    x0 = x1;
+    x1 = tmpx;
+  }  
   
   std::cout << "###################################################" << std::endl;
   std::cout << "# begin->end: " << begin << " " << end << std::endl;
