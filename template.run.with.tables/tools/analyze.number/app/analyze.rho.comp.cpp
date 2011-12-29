@@ -334,7 +334,7 @@ int main(int argc, char * argv[])
       else binSize = marginh;
     }
     // printf ("# my bin size is %f\n", binSize);
-    double volume = binSize * box[1][1] * box[2][2];
+    double volume = binSize * yzSize * yzSize;
     double temperature = 300.;
     double rho = avg_avg / volume;
     double rho_err = avg_avg_err / volume;
