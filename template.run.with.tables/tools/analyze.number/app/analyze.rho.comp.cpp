@@ -283,7 +283,14 @@ int main(int argc, char * argv[])
   xdrfile_close (fp);
   free (xx);
 
+  // FILE *fout1 = fopen ("density.out", "w");
+  // if (fout1 == NULL){
+  //   std::cerr << "cannot open file " << ofile << std::endl;
+  //   exit (1);
+  // }
+
   BlockAverage ba;
+  printf ("# rho  rho_error  comp  comp_error \n");
   for (unsigned i = 0; i < counts.size(); ++i){
     double avg_avg = 0.;
     double avg_avg_err= 0.;
@@ -316,6 +323,31 @@ int main(int argc, char * argv[])
 	     avg_avg, avg_avg_err,
 	     avg_var, avg_var_err,
 	     avg_var / avg_avg);
+
+    double binSize;
+    if (fabs (box[0][0] - refh * nbin) <= ep){
+      binSize = refh;
+    }
+    else {
+      if (i == 0) binSize = marginh;
+      else if (int(i) < nbin - 1) binSize = refh;
+      else binSize = marginh;
+    }
+    // printf ("# my bin size is %f\n", binSize);
+    double volume = binSize * box[1][1] * box[2][2];
+    double temperature = 300.;
+    double rho = avg_avg / volume;
+    double rho_err = avg_avg_err / volume;
+    rho *= 18e-3 / (6.02e23 * 1e-27);
+    rho_err *= 18e-3 / (6.02e23 * 1e-27);
+    double comp = avg_var / (avg_avg * avg_avg) * volume / (1.38 *temperature) * 1e-4;
+    double comp_err =
+	avg_var_err / (avg_avg * avg_avg) +
+	2 * avg_var * avg_avg_err / (avg_avg * avg_avg * avg_avg);
+    comp_err *= volume / (1.38 *temperature) * 1e-4;
+    printf ("%e  %e  %e  %e \n",
+	    rho, rho_err,
+	    comp, comp_err);
   }
 
   
