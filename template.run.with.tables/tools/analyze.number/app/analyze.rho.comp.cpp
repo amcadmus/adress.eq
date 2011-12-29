@@ -345,7 +345,8 @@ int main(int argc, char * argv[])
 	avg_var_err / (avg_avg * avg_avg) +
 	2 * avg_var * avg_avg_err / (avg_avg * avg_avg * avg_avg);
     comp_err *= volume / (1.38 *temperature) * 1e-4;
-    printf ("%e  %e  %e  %e \n",
+    printf ("%f %e  %e  %e  %e \n",
+	    myx,
 	    rho, rho_err,
 	    comp, comp_err);
   }
