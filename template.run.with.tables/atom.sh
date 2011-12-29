@@ -7,6 +7,9 @@ mylog=`pwd`/atom.log
 makelog=`pwd`/make.log
 rm -f $mylog
 
+echo "# running on `uname -n`"
+echo "# mdrun command is `which mdrun`"
+
 # prepare conf.gro
 echo "# prepare conf.gro"
 ## gen from base (default spc216.gro)
