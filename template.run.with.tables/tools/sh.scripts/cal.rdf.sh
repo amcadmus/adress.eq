@@ -11,6 +11,7 @@ do
     if test $c -eq 0; then
 	c=$(($c+1))
 	lower=$i
+	interval_start=$i
 	continue
     fi
     upper=$i
@@ -29,5 +30,8 @@ do
     ./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 $lower --x1 $upper -o rdf.$print_lower-$print_upper.out
     lower=$upper
 done
+interval_end=$i
 
-./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 0 --x1 0 -o rdf.all.out
+echo "./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 $interval_start --x1 $interval_end -o rdf.all.out"
+./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 $interval_start --x1 $interval_end -o rdf.all.out
+echo 2 2| g_rdf -xvg none -bin .01 -b 100  -n index.ndx -dt 1 -rdf mol_com
