@@ -28,3 +28,5 @@ do
     ./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 $lower --x1 $upper -o rdf.$print_lower-$print_upper.out
     lower=$upper
 done
+
+./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 0 --x1 0 -o rdf.all.out
