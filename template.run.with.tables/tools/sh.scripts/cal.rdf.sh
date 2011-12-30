@@ -1,6 +1,7 @@
 #!/bin/bash
 
 intervals="3.75 4.25 4.80 5.35 5.90 6.45 7 7.5"
+intervals="3.75 4.25 5.16 6.08 7.00 7.50"
 make -C ./tools/analyze.rdf/ -j4 &> /dev/null
 
 c=0
