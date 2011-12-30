@@ -87,6 +87,8 @@ int main(int argc, char * argv[])
     std::cerr << "unexpected box size" << std::endl;
     return 1;
   }
+  if (refh   <= 0.) refh   = box[0][0] / 2.;
+  if (yzSize <= 0.) yzSize = box[1][1];
   int ny = box[1][1] / yzSize;
   yzSize = box[1][1] / double(ny);
   int nz = ny;
