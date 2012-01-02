@@ -31,9 +31,9 @@ do
 done
 interval_end=$i
 
-rm -f rdf.inter.9
+rm -fr rdf.inter.9
 mkdir rdf.inter.9
-mv rdf*out rdf.inter.9
+mv -f rdf*out rdf.inter.9
 
 echo 2 2| g_rdf -xvg none -bin .01 -b 100  -n index.ndx -rdf mol_com
 
@@ -67,9 +67,9 @@ do
 done
 interval_end=$i
 
-rm -f rdf.inter.5
+rm -fr rdf.inter.5
 mkdir rdf.inter.5
-mv rdf*out rdf.inter.5
+mv -f rdf*out rdf.inter.5
 
 echo "./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 $interval_start --x1 $interval_end -o rdf.all.out"
 ./tools/analyze.rdf/cal.rdf -u 1.1 -c 1.15 -m $method -b 100 -e $time --x0 4.25 --x1 7 -o rdf.all.out
