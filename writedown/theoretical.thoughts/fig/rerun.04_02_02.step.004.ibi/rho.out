@@ -1,0 +1,25 @@
+###################################################
+# begin->end: 100 0
+# x bin size: 0.5
+# actual yz bin size: 3.72071
+# method: adress
+# input: traj.xtc
+###################################################
+# load frame at time: 100.0 ps# load frame at time: 140.0 ps# load frame at time: 180.0 ps# load frame at time: 220.0 ps# load frame at time: 260.0 ps# load frame at time: 300.0 ps# load frame at time: 340.0 ps# load frame at time: 380.0 ps# load frame at time: 420.0 ps# load frame at time: 460.0 ps# load frame at time: 500.0 ps# load frame at time: 540.0 ps# load frame at time: 580.0 ps# load frame at time: 620.0 ps# load frame at time: 660.0 ps# load frame at time: 700.0 ps# load frame at time: 740.0 ps# load frame at time: 780.0 ps# load frame at time: 820.0 ps# load frame at time: 860.0 ps# load frame at time: 900.0 ps# load frame at time: 940.0 ps# load frame at time: 980.0 ps
+# rho  rho_error  comp  comp_error 
+0.125000 9.976673e+02  3.064121e+00  1.588885e-09  9.650964e-11 
+0.500000 9.942405e+02  2.484336e+00  1.058699e-09  9.090395e-11 
+1.000000 9.924760e+02  2.003437e+00  1.069018e-09  9.671560e-11 
+1.500000 9.892188e+02  1.873491e+00  1.046637e-09  7.486134e-11 
+2.000000 9.893963e+02  2.254056e+00  1.132208e-09  6.151833e-11 
+2.500000 9.980280e+02  2.843528e+00  1.021896e-09  7.742180e-11 
+3.000000 1.000088e+03  3.421592e+00  1.072610e-09  1.220418e-10 
+3.500000 1.000365e+03  1.931347e+00  1.037284e-09  9.986769e-11 
+4.000000 1.001154e+03  3.673449e+00  1.071441e-09  1.106725e-10 
+4.500000 9.966009e+02  2.829376e+00  1.071677e-09  1.129817e-10 
+5.000000 9.957543e+02  2.511369e+00  1.080675e-09  1.344483e-10 
+5.500000 9.926033e+02  2.748051e+00  1.111317e-09  9.348505e-11 
+6.000000 9.917374e+02  2.142166e+00  1.018364e-09  9.592966e-11 
+6.500000 9.947920e+02  1.604218e+00  1.070308e-09  9.457814e-11 
+7.000000 9.967263e+02  2.556952e+00  1.048781e-09  7.587237e-11 
+7.375000 9.937912e+02  3.028603e+00  1.508695e-09  1.005506e-10 

@@ -1,0 +1,13 @@
+# running on gaia26
+# mdrun command is /home/cocktail/wanghan/study/thermo.convection/local.inhomo.thermostat.w.rdfCorr/bin/mdrun
+# prepare conf.gro
+## gen from base (default spc216.gro)
+## resize to right density step 1
+## resize to right density step 2
+## warm up run
+## add COM site
+# prepare index file
+# prepare all tables
+# prepare grompp.mdp
+# prepare topol.top
+# productive run

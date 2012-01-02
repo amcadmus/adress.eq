@@ -1,4 +1,4 @@
-\documentclass[aps,pre,preprint]{revtex4}
+\documentclass[aps,pre,preprint,unsortedaddress]{revtex4}
 % \documentclass[aps,pre,twocolumn]{revtex4-1}
 % \documentclass[aps,jcp,groupedaddress,twocolumn,unsortedaddress]{revtex4}
 
@@ -22,19 +22,23 @@
 
 \begin{document}
 
-% \title{The Error Estimate of Force Calculation in the Inhomogeneous Molecular Systems}
-% \author{Han Wang}
-% \affiliation{LMAM and School of Mathematical
-%   Sciences, Peking University}
-% \author{Pingwen Zhang}
-% % \email{pzhang@pku.edu.cn}
-% \affiliation{LMAM and School of Mathematical
-%   Sciences, Peking University}
+\title{The theoretical considerations on the grand-canonical molecules dynamics simulation}
+\author{Han Wang}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
+\author{Christof Sch\"utte}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
+\author{Sebastian Fritsch}
+\affiliation{Max Planck Institut f\"ur Polymerforschung, Mainz, Germany}
+\author{Luigi Delle Site}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
 
-% \begin{abstract}
-% \end{abstract}
+\begin{abstract}
+\end{abstract}
 
-% \maketitle
+\maketitle
+
+\section{Theory}
+
 
 \begin{figure}
   \centering
@@ -44,12 +48,12 @@
 \end{figure}
 
 
-We want to prove the trajactory of the explicit region in Adress
+We want to prove the trajectory of the explicit region in Adress
 simulation is an implementation of the $\mu$VT distribution. We take a
-sequency of snapshots of the system along the trajactory.  For sure,
+sequence of snapshots of the system along the trajectory.  For sure,
 the number of molecules in the explicit region varies. We group the
 snapshots by the number of molecules in the explicit region.  The
-stratagy of our provment is firstly to shown the position and
+strategy of our prove is firstly to shown the position and
 velocity distribution in each group, where the number of molecules
 in the explicit region is fixed, is subject to the Boltzmann
 distribution. Secondly, we show the number of snapshots in each group
@@ -57,12 +61,11 @@ is subject to the exponential distribution. Then the combination of
 these two distributions ends up with the grand-canonical distribution.
 
 Notice, the prove always compare the explicit region to an sub-system
-of a big all-atom canonical system. If the explicit region is embeded
-into the whole Adress system in the same maner as the sub-system
-embeded in to the big all-atom canonical system, then the Adress will
+of a big all-atom canonical system. If the explicit region is embedded
+into the whole Adress system in the same manner as the sub-system
+embedded in to the big all-atom canonical system, then the Adress will
 give the correct grand-canonical distribution.
 
-\section{Embeded explicit region}
 
 Consider the dynamics of a system that is subject to the Langevin equation:
 \begin{align}
@@ -90,7 +93,7 @@ where $\mathcal H$ is the Hamiltonian of the system:
 
 For the Adress simulation, let us first consider there are $N_1$
 molecules in the explicit region, $N_2 - N_1$ molecules in the hybrid
-region.  Without lost of generalty, we assume molecules $1, \cdots,
+region.  Without lost of generality, we assume molecules $1, \cdots,
 N_1$ are in the explicit region, molecules $N_1 + 1, \cdots, N_2$ are
 in the hybrid region and $N_2+1, \cdots, N$ are in the coarse-grained
 region. The pair $\{\v r_i, \v v_i\}$ of the explicit representation
@@ -102,7 +105,7 @@ atom the the molecule.
 We hereby consider the explicit region as a sub-system of the whole
 system, which composes the explicit, hybrid and coarse-grained
 regions. We want to prove that the explicit region can be viewed as a
-$\mu$VT sub-system, which is embeded into a huge NVT environment.
+$\mu$VT sub-system, which is embedded into a huge NVT environment.
 For any molecule $i$ in the explicit region, the force exerting on
 it is
 \begin{align}
@@ -137,8 +140,8 @@ Specifically, we have the weighting function:
     \begin{array}{lcl}
       1 &\quad& \chi < d_{\textrm{ex}}\\
       1  && d_{\textrm{ex}} < \chi < d_{\textrm{ex}} + r_c\\
-      \cos^2\big[\frac{\pi}{2(d_{\textrm{hy}} - r_c)} (\chi - d_{\textrm{ex}} - r_c)\big] && d_{\textrm{ex}} + r_c < \chi < d_{\textrm{ex}} + d_{\textrm{hg}} \\
-      0 && d_{\textrm{ex}} + d_{\textrm{hg}}  < \chi.
+      \cos^2\big[\frac{\pi}{2(d_{\textrm{hy}} - r_c)} (\chi - d_{\textrm{ex}} - r_c)\big] && d_{\textrm{ex}} + r_c < \chi < d_{\textrm{ex}} + d_{\textrm{hy}} \\
+      0 && d_{\textrm{ex}} + d_{\textrm{hy}}  < \chi.
     \end{array}
   \right.
 \end{align}
@@ -201,7 +204,7 @@ The phase space distribution of the explicit region:
 \end{align}
 If the phase space distribution $p(\v x_2)$ is the same as the explicit
 Boltzmann distribution, then the explicit region is
-equivalently embeded in to a explicit molecular environment and can be
+equivalently embedded in to a explicit molecular environment and can be
 viewed as a sub-system of a very big explicit molecular
 system.
 
@@ -231,7 +234,7 @@ coarse-grained potential is generated by fitting the explicit RDF,
     applied) will not give perfect RDF in the hybrid region. However,
     the RDF profile is independent with the size of the hybrid region
     see Fig. \ref{fig:tmp2}. This fact gives rise to the idea of
-    applying addtional correction force in the hybrid region to fit
+    applying additional correction force in the hybrid region to fit
     the RDF, a possible form is
     \begin{align}
       \v F_{ij} = w_iw_j\v F^{\textrm{ex}}_{ij} + [1-w_iw_j]\v F^{\textrm{cg}}_{ij} +
@@ -244,12 +247,12 @@ coarse-grained potential is generated by fitting the explicit RDF,
     The correction force $\v F_{ij}^{\textrm{rdf}}$ that is only
     applied in the hybrid region can be obtained by the
     coarse-graining method that fits the RDF, for example, the inverse
-    Boltzmann interation. 
+    Boltzmann interaction. 
   \end{itemize}
 }
   
 
-\section{The distribution of $N$}
+% \section{The distribution of $N$}
 Fix the number in the three regions, both the explicit and the
 coarse-grained regions are subject to the Boltzmann distribution. The
 partition functions reads
@@ -368,9 +371,9 @@ Therefore
 \end{align}
 
 
-\section{RDF corrected Adress simulation}
+\section{Radial distribution corrected Adress simulation}
 
-\subsection{The thermodynamic force iteration and iterative Boltzmann inversion}
+\subsection{The thermodynamic force iteration }
 
 According to Ref.~\cite{fritsch2011grand}, the thermodynamic force is derived
 by the following iteration:
@@ -378,27 +381,29 @@ by the following iteration:
   \v F^{\textrm{th}}_{i+1}(\v x) = \v F^{\textrm{th}}_i(\v x)
   - \frac{M}{\rho_0\kappa_T}\nabla\rho_i(\v x)
 \end{align}
-where $M$ is the mass of the mass of the molecule, $\rho_0$ is the
+where $M$ is the mass of the molecule, $\rho_0$ is the
 target uniform density profile and $\kappa_T$ is the
 isothermo-compressibility. At $i$-th step, assuming the thermodynamic
-force $\v F^{\textrm{th}}_i(\v x)$ is known, a Adress simulation is
-proformed and the density profile $\rho_i(\v x)$ is calculated. Then
+force $\v F^{\textrm{th}}_i(\v x)$ is known, an Adress simulation is
+performed and the density profile $\rho_i(\v x)$ is calculated. Then
 the $i$-th step thermodynamic force is updated by using
 scheme~\eqref{eqn:tfi}.  Ref.~\cite{fritsch2011grand} shows that the
 thermodynamic force converges in a few iterations, and the system
 reaches a uniform density profile that is the same as $\rho_0$.
 
-In our study, a the force $\v F^{\textrm{rdf}}$ is added to the
+\subsection{RDF correction by iterative Boltzmann inversion}
+
+In our study, a force $\v F^{\textrm{rdf}}$ is added to the
 original Adress force interpolation scheme to correct the RDF in
 the hybrid region:
 \begin{align}
   \v F_{ij} = w_iw_j\v F^{\textrm{ex}}_{ij} + [1-w_iw_j]\v F^{\textrm{cg}}_{ij} +
   4 w_iw_j (1 - w_iw_j)\v F_{ij}^{\textrm{rdf}}.
 \end{align}
-The RDF correction $\v F^{\textrm{rdf}}$ is determined by the the
+The RDF correction force $\v F^{\textrm{rdf}}$ is determined by the the
 iterative Boltzmann inversion (IBI)~\cite{mueller2002coarse,
   reith2003deriving}, which is a coarse-graining scheme designed to
-construct a effective protential that reproduce the RDF of the
+construct an effective interaction that reproduce the RDF of the
 atomistic model. In our case, the IBI scheme is 
 \begin{align}\label{eqn:ibi}
   U^{\textrm{rdf}}_{i+1}(r) = U^{\textrm{rdf}}_i(r) +
@@ -406,39 +411,30 @@ atomistic model. In our case, the IBI scheme is
   \frac{g_i(r)}{g_{\textrm{ex}}(r)}
   \bigg]
 \end{align}
-Where $U^{\textrm{rdf}}(r)$ is the additional pairwise potential
-applied to the molecule in the hybrid region, so the force is
+Where $U^{\textrm{rdf}}(r)$ is the pairwise RDF correction potential
+applied to the molecule in the hybrid region. The force is
 calculated by
 \begin{align}
   \v F^{\textrm{rdf}}_{ij} = \v F^{\textrm{rdf}}(r_{ij})
   = -\nabla_{\v r}\,U(r_{ij}).
 \end{align}
-The $g_{\textrm{ex}}(r)$ is the target existic RDF that the hybrid
+The $g_{\textrm{ex}}(r)$ is the target atomistic RDF that the hybrid
 region should reproduce, and $g_i(r)$ is the hybrid RDF of the $i$-th
-iteration..  The initial guess of the potential that is chosen as the
+iteration.  The initial guess of the potential is chosen as the
 potential of mean force
-\begin{align}
+\begin{align}\label{eqn:pmf}
   U^{\textrm{rdf}}_0(r) = -k_BT \ln g_{\textrm{ex}}(r).
 \end{align}
 
 \algsetup{indent=2em}
 \begin{algorithm}
-  \caption{TFI-IBI correction loop}
+  \caption{IBI-TFI correction loop}
   \label{algo:1}
   \begin{algorithmic}[1]
-    \REQUIRE {initil guesses for $\v F^{\textrm{tf}}$ and $\v F^{\textrm{rdf}}$}
+    \REQUIRE {initial guesses for $\v F^{\textrm{tf}}$ and $\v F^{\textrm{rdf}}$}
     \REPEAT
-    \STATE $\v F_1^{\textrm{tf}} \leftarrow \v F^{\textrm{tf}}$
-    \FOR {$i=1$ to $N_{TFI}$}
-    \STATE Adress simulation using $\v F_i^{\textrm{tf}}$ and $\v F^{\textrm{rdf}}$
-    \STATE calculate density $\rho_i(\v x)$
-    \STATE $\v F_{i+1}^{\textrm{tf}} \leftarrow \v F_i^{\textrm{tf}}
-    - \frac{M}{\rho_0\kappa_T}\nabla\rho_i(\v x)$
-    % \STATE update thermodynamic force by \eqref{eqn:tfi}
-    \ENDFOR
-    \STATE $\v F^{\textrm{tf}} \leftarrow \v F_{N_{TFI}}^{\textrm{tf}}$
     \STATE $\v F_1^{\textrm{rdf}} \leftarrow \v F^{\textrm{rdf}}$
-    \FOR {$i=1$ to $N_{IBI}$}
+    \FOR {$i=1$ to $N_{IBI}$}     
     \STATE Adress simulation using $\v F^{\textrm{tf}}$ and $\v F_i^{\textrm{rdf}}$
     \STATE calculate hybrid RDF $g_i(r)$
     \STATE $U^{\textrm{rdf}}_{i+1}(r) \leftarrow U^{\textrm{rdf}}_i(r) +
@@ -449,24 +445,169 @@ potential of mean force
     % \STATE update the RDF correction force by \eqref{eqn:ibi}
     \ENDFOR
     \STATE $\v F^{\textrm{rdf}} \leftarrow \v F_{N_{IBI}}^{\textrm{rdf}}$
+    \STATE $\v F_1^{\textrm{tf}} \leftarrow \v F^{\textrm{tf}}$
+    \FOR {$i=1$ to $N_{TFI}$}    
+    \STATE Adress simulation using $\v F_i^{\textrm{tf}}$ and $\v F^{\textrm{rdf}}$
+    \STATE calculate density $\rho_i(\v x)$
+    \STATE $\v F_{i+1}^{\textrm{tf}} \leftarrow \v F_i^{\textrm{tf}}
+    - \frac{M}{\rho_0\kappa_T}\nabla\rho_i(\v x)$
+    % \STATE update thermodynamic force by \eqref{eqn:tfi}
+    \ENDFOR
+    \STATE $\v F^{\textrm{tf}} \leftarrow \v F_{N_{TFI}}^{\textrm{tf}}$
     \UNTIL {both $\v F^{\textrm{tf}}$ and $\v F^{\textrm{rdf}}$ are converged}
   \end{algorithmic}  
 \end{algorithm}
 
 Applying the IBI will correct the RDF in the hybrid region, however,
-the density profile of the system will be disturbed. To fix this
-problem, a thermodynamic force iteration -- interative Boltzmann
-inversion correction loop (TFI-IBI correction loop) is designed to
-reach the correct density profile and RDF at the same time, see
-Algorithm~\ref{algo:1}. During the 
-
+the density profile of the system will be disturbed,
+see Fig. \ref{fig:tmp3}, for example.
+To fix this problem, an additional thermodynamic force iteration is
+apply to correct the density profile.
+And then a following IBI is again performed to correct the possible perturbation
+of the RDF from the previous TFI.
+Therefore, we propose an iterative
+Boltzmann inversion -- thermodynamic force iteration correction loop
+(IBI-TFI correction loop) to reproduce the correct density
+profile and RDF at the same time, see Algorithm~\ref{algo:1}.  A
+proper initial guess of the thermodynamic force $\v F^{\textrm{tf}}$
+is the converged thermodynamic force \emph{without} any RDF correction, so
+that the loop start with the initial state with uniform density
+distribution.  It is also possible to start the loop with zero initial
+guess $\v F^{\textrm{tf}}$, i.e. start the IBI without thermodynamic
+force applied, however, it may be problematic. Since the density
+profile is the first-order approximation to the Boltzmann
+distribution, and the RDF is the second-order approximation, firstly
+correct the second-order approximation is physically meaningless and
+may lead to a divergent loop. The initial guess of the RDF correction
+force $\v F^{\textrm{rdf}}$ is the potential of mean
+force~\eqref{eqn:pmf}.  The structure of the Algorithm~\ref{algo:1} is
+very simple: in the outermost loop, the IBI and TFI are executed
+consequently, with fixed number of iterations $N_{IBI}$ and $N_{TFI}$,
+respectively. In practice, the TFI converges faster than IBI, so
+$N_{TFI} = 1$ and $N_{IBI} = 5$ is good enough.
 
 \begin{figure}
   \centering
-  \includegraphics{fig/thick.newW.04_02_02.rdfCorr.n5e5.M30.m01.m05/tf.and.int.eps}
-  \caption{The resulting $\v F^{\textrm{tf}}$ of the TFI-IBI loop}
-  \label{fig:tmp1}
+  \includegraphics{fig/rho.eps}
+  \caption{The resulting $\rho(x)$ of the IBI-TFI correction loop.
+    The results of the first iteration is colored by red. Within the
+    first iteration, the density profile after the IBI and before the
+    TFI is denoted by the  red dashed line.  After the TFI, the density
+    profile is denoted by the  red solid line.  The second and third
+    steps are denoted by green and blue solid lines,
+    respectively. Both of them are the density profiles after the
+    whole IBI-TFI iteration. The ideal uniform density profile is
+    denoted by the solid pink line for reference. The bar on the data
+    points denotes the statistical uncertainty (with a confidence
+    interval of 95\%). EX, HY and CG are denoting the atomistic
+    (explicit), hybrid and coarse-graining regions, respectively. }
+  \label{fig:tmp3}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics{fig/rdf.eps}
+  \caption{The resulting $g(r)$ of the IBI-TFI correction loop.  The
+    RDF of after the first, second and the third step iteration are
+    denoted by red, green and blue solid lines, respectively.  The
+    atomistic RDF is presented by pink solid line, which is
+    overlapping with the other lines, and cannot be seen from the
+    plot. The RDF with thermodynamic force correction but without RDF
+    correction is presented by black line for reference. Two subplots
+    are inserted in the figure to show zoom-in of the RDFs at the
+    first peak and the first valley.}
+  \label{fig:tmp4}
+\end{figure}
+
+Using the IBI-TFI correction loop,
+the convergence of the density $\rho(x)$ and RDF $g(r)$ are presented
+in Fig.~\ref{fig:tmp3} and \ref{fig:tmp4}, respectively. After the
+first step of the IBI-TFI iteration, the density profile obviously
+deviates from the perfect uniform density distribution, but it
+converges to uniform distribution after the third step of the
+iteration. In Fig. \ref{fig:tmp4}, we also show the RDF of Adress
+simulation without RDF correction (with thermodynamic force applied),
+and a clear discrepancy with the atomistic RDF is presented,
+that is why the RDF correction is necessary.  By
+the IBI-TFI iteration, the RDF converges to the atomistic RDF very
+fast. Therefore, the proposed IBI-TFI loop (Algorithm \ref{algo:1}) is
+a robust and fast converging method.
+
+\begin{figure}
+  \centering
+  \includegraphics{fig/tf-and-int.eps}
+  \caption{The resulting $\v F^{\textrm{tf}}$ of the IBI-TFI
+    correction loop.  The thermodynamic force $\v F^{\textrm{tf}}$ (in
+    this case, only the $x$ component is non-zero) and its
+    integration (from positive to negative) after the first, second
+    and the third step iteration are denoted by red, green and blue
+    solid lines, respectively. The initial guess of the thermodynamic
+    force, i.e. the thermodynamic force without RDF correction, is
+    plotted for comparison. EX, HY and CG are denoting the atomistic
+    (explicit), hybrid and coarse-graining regions, respectively.}
+  \label{fig:tmp5}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics{fig/force-rdf.eps}
+  \caption{The resulting $U^{\textrm{rdf}}(r)$ of the IBI-TFI
+    correction loop.  The $U^{\textrm{rdf}}(r)$ after the first,
+    second, third and fourth step iteration are denoted by red, green,
+    blue and cyan solid lines, respectively.  }
+  \label{fig:tmp6}
+\end{figure}
+
+In the upper plot of Fig. \ref{fig:tmp5} presents the thermodynamic
+force, and the lower plot is the integration of
+the thermodynamic force from positive to negative direction, which
+presents the grand potential (i.e. $-pV$) difference with the
+coarse-grained representation~\cite{fritsch2011grand}.
+The thermodynamic force converges very
+fast, we cannot see obvious difference between the second
+step and the third step.  In Fig. \ref{fig:tmp5} we also show the
+thermodynamic force without RDF correction for comparison. The force
+without RDF correction is different from those with RDF
+correction. Noticing at around $x=2.7 \textsf{nm}$, the force is
+negative, and the integrated force forms a shallow attractive well,
+which corresponding to an unphysical tendency of aggregation of molecules. The RDF
+correction fixes this problem. From the lower plot of
+Fig. \ref{fig:tmp5}, the grand potential difference between the
+atomistic region and the coarse-grained region is preserved by the
+IBI-TFI loop, which means that the equivalence of the chemical
+potential (?) achieved by the thermodynamic
+force~\cite{fritsch2011grand} is preserved by the RDF correction.
+
+Fig. \ref{fig:tmp6} presents the convergence of the RDF correction
+potential (negative gradient is the force). The potential is almost 0
+when $r > 3.1\textsf{nm}$. This means that the RDF correction is
+basically targeting at the first neighbor shell. After step 3, the RDF
+correction force converges very good at $r > 2.6\textsf{nm}$. Two
+particles have only little possibility to get closer than $2.6\textsf{nm}$,
+see the RDF in Fig. \ref{fig:tmp4}, so the bad convergence at $r <
+2.6\textsf{nm}$ is not a big problem, that is also the reason why the
+RDF converges very good after only two steps of iterations.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.49\textwidth]{fig/rdf-ex-cg.eps}
+  \includegraphics[width=0.49\textwidth]{fig/rdf-425-516.eps}
+  \includegraphics[width=0.49\textwidth]{fig/rdf-516-608.eps}
+  \includegraphics[width=0.49\textwidth]{fig/rdf-608-700.eps}
+  \caption{The resulting $\v F^{\textrm{tf}}$ of the IBI-TFI
+    correction loop.  The thermodynamic force $\v F^{\textrm{tf}}$ (in
+    this case, only the $x$ component is non-zero) and its
+    integration (from positive to negative) after the first, second
+    and the third step iteration are denoted by red, green and blue
+    solid lines, respectively. The initial guess of the thermodynamic
+    force, i.e. the thermodynamic force without RDF correction, is
+    plotted for comparison. EX, HY and CG are denoting the atomistic
+    (explicit), hybrid and coarse-graining regions, respectively.}
+  \label{fig:tmp6}
+\end{figure}
+
+
+\redc{STILL MISSING: simulation protocol. do not forget citing Gromacs and VOTCA}
 
 % \newpage
 

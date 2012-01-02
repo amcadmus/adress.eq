@@ -1,0 +1,25 @@
+###################################################
+# begin->end: 100 0
+# x bin size: 0.5
+# actual yz bin size: 3.72071
+# method: adress
+# input: traj.xtc
+###################################################
+# load frame at time: 100.0 ps# load frame at time: 140.0 ps# load frame at time: 180.0 ps# load frame at time: 220.0 ps# load frame at time: 260.0 ps# load frame at time: 300.0 ps# load frame at time: 340.0 ps# load frame at time: 380.0 ps# load frame at time: 420.0 ps# load frame at time: 460.0 ps# load frame at time: 500.0 ps# load frame at time: 540.0 ps# load frame at time: 580.0 ps# load frame at time: 620.0 ps# load frame at time: 660.0 ps# load frame at time: 700.0 ps# load frame at time: 740.0 ps# load frame at time: 780.0 ps# load frame at time: 820.0 ps# load frame at time: 860.0 ps# load frame at time: 900.0 ps# load frame at time: 940.0 ps# load frame at time: 980.0 ps
+# rho  rho_error  comp  comp_error 
+# 0.125000 9.891051e+02  3.332051e+00  1.666096e-09  1.409503e-10 
+# 0.500000 9.895293e+02  2.122426e+00  1.089512e-09  7.627757e-11 
+# 1.000000 9.902178e+02  1.437273e+00  1.140432e-09  8.015857e-11 
+# 1.500000 1.001212e+03  2.176619e+00  1.045848e-09  4.456948e-11 
+# 2.000000 1.003001e+03  1.857044e+00  1.036942e-09  8.842053e-11 
+# 2.500000 9.983616e+02  3.379143e+00  1.015895e-09  9.543958e-11 
+# 3.000000 9.948769e+02  3.024441e+00  1.053224e-09  1.660328e-10 
+# 3.500000 9.978313e+02  2.505199e+00  1.002617e-09  6.586596e-11 
+4.000000 9.955866e+02  4.110784e+00  1.079200e-09  1.013886e-10 
+4.500000 9.939320e+02  3.738127e+00  1.138555e-09  1.044732e-10 
+5.000000 9.971235e+02  2.677470e+00  1.226525e-09  1.403969e-10 
+5.500000 1.001185e+03  2.997914e+00  1.111763e-09  1.406504e-10 
+6.000000 1.000784e+03  3.007331e+00  1.165098e-09  9.778558e-11 
+6.500000 9.901252e+02  1.970162e+00  1.140891e-09  1.112599e-10 
+7.000000 9.880521e+02  2.234368e+00  1.061802e-09  8.788434e-11 
+7.375000 9.850785e+02  3.079308e+00  1.639347e-09  7.709253e-11 
