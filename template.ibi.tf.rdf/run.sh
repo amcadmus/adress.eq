@@ -3,6 +3,7 @@
 source env.sh
 source parameters.sh
 source functions.sh
+base_dir=`pwd`
 
 echo running on `uname -n`
 echo with gromacs command `which mdrun`
@@ -40,7 +41,10 @@ cp ../$init_lastdir/SOL.pot.new .
 rm -f topol.top
 cp ../$init_lastdir/topol.top .
 sed -e 's/COM/CG/g' topol.top > tmp.top
-mv -f tmp.top topol.top 
+mv -f tmp.top topol.top
+rm -f table_CG_CG.xvg rdf.com.xvg
+cp $base_dir/$cg_pot_file ./table_CG_CG.xvg
+cp $base_dir/$tgt_rdf_file ./rdf.com.xvg
 cd ..
 
 echo "## enter template.tf"
@@ -54,6 +58,8 @@ tf_grompp
 cp ../step.000.tf/tf/dens.SOL.xvg .
 cp ../$init_lastdir/index.ndx .
 cp ../$init_lastdir/topol.top .
+rm -f table_CG_CG.xvg
+cp $base_dir/$cg_pot_file ./table_CG_CG.xvg
 cd ..
 
 old_ibi_iterations_max=$ibi_iterations_max

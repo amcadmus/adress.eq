@@ -8,6 +8,7 @@ function set_param () {
     sed -e "s,base_conf=.*,base_conf=$base_conf,g" $targetfile |
     sed -e "s/n_base_block=.*/n_base_block=\"$n_base_block\"/g" |
     sed -e "s/number_density=.*/number_density=$number_density/g" |
+    sed -e "s,cg_pot_file=.*,cg_pot_file=$base_dir/$cg_pot_file,g" |
     sed -e "s/gmx_nsteps=.*/gmx_nsteps=$tf_gmx_nsteps/g" |
     sed -e "s/gmx_nstenergy=.*/gmx_nstenergy=$tf_gmx_nstenergy/g" |
     sed -e "s/gmx_nstxtcout=.*/gmx_nstxtcout=$tf_gmx_nstxtcout/g" |
@@ -34,6 +35,7 @@ cp env.sh step.000.tf
 
 echo "# running on `uname -n`"
 echo "# with mdrun command located at `which mdrun`"
+base_dir=`pwd`
 cd step.000.tf
 set_param parameters.sh
 ./gen.tf.sh

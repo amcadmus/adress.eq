@@ -3,6 +3,8 @@
 base_conf=tools/gen.conf/spc216.gro
 n_base_block="4 2 2"
 number_density=33.286      # 0.99577 g/cm^3
+cg_pot_file=tools/table_CG_CG.xvg
+tgt_rdf_file=tools/rdf.com.1e-2.xvg
 
 # rdf interation
 rdf_iterations=50
