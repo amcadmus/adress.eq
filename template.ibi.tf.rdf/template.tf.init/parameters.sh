@@ -3,6 +3,7 @@
 base_conf=tools/gen.conf/spc216.gro
 n_base_block="12 2 2"
 number_density=33.286      # 0.99577 g/cm^3
+cg_pot_file=tools/table_CG_CG.xvg
 
 # gen.tf.sh parameters
 gmx_nsteps=500000

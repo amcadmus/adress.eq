@@ -116,11 +116,16 @@ sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$tf_iterations_ma
 mv -f settings.xml.tmp settings.xml
 
 # prepare topol.top
-echo "# prepare to tf"
+echo "# prepare topol.top"
 rm -fr topol.top
 cp tf/topol.top .
 sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
+
+# prepare table of cg
+echo "# prepare table of cg"
+rm -f tf/table_CG_CG.xvg
+cp -L $cg_pot_file tf/table_CG_CG.xvg
 
 # copy all file to tf
 echo "# copy files to tf"
