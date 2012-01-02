@@ -21,20 +21,20 @@ namespace po = boost::program_options;
 
 int main(int argc, char * argv[])
 {
-  float begin, end, rup, refh, cellSize;
+  ValueType begin, end, rup, refh, cellSize;
   std::string ifile, ofile, method;
-  float x0, x1;
+  ValueType x0, x1;
   
   po::options_description desc ("Allow options");
   desc.add_options()
     ("help,h", "print this message")
-    ("begin,b", po::value<float > (&begin)->default_value(0.f), "start time")
-    ("end,e",   po::value<float > (&end  )->default_value(0.f), "end   time")
-    ("x0", po::value<float > (&x0)->default_value(0.f), "lower bound of the interval")
-    ("x1", po::value<float > (&x1)->default_value(1.f), "upper bound of the interval, if x1 == 0, use the whole box")
-    ("rup,u",   po::value<float > (&rup)->default_value(3.f), "max r to make rdf")
-    ("refh",  po::value<float > (&refh)->default_value(0.01f), "bin size")
-    ("cell-size,c", po::value<float > (&cellSize)->default_value(1.f), "cell list radius")
+    ("begin,b", po::value<ValueType > (&begin)->default_value(0.f), "start time")
+    ("end,e",   po::value<ValueType > (&end  )->default_value(0.f), "end   time")
+    ("x0", po::value<ValueType > (&x0)->default_value(0.f), "lower bound of the interval")
+    ("x1", po::value<ValueType > (&x1)->default_value(1.f), "upper bound of the interval, if x1 == 0, use the whole box")
+    ("rup,u",   po::value<ValueType > (&rup)->default_value(3.f), "max r to make rdf")
+    ("refh",  po::value<ValueType > (&refh)->default_value(0.01f), "bin size")
+    ("cell-size,c", po::value<ValueType > (&cellSize)->default_value(1.f), "cell list radius")
     ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
     ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
     ("output,o",  po::value<std::string > (&ofile)->default_value ("rdf.out"), "the output file");
@@ -163,9 +163,9 @@ int main(int argc, char * argv[])
     else if (method == std::string ("atom")){
       int nmol = natoms / 3;
       for (int i = 0; i < nmol; ++i){
-	std::vector<float > com(3, 0.);
+	std::vector<ValueType > com(3, 0.);
 	for (int dd = 0; dd < 3; ++dd){
-	  float dx1, dx2;
+	  ValueType dx1, dx2;
 	  dx1 = xx[i*3+1][dd] - xx[i*3+0][dd];
 	  dx2 = xx[i*3+2][dd] - xx[i*3+0][dd];
 	  if (dx1 > 0.5 * box[dd][dd]) {dx1 -= box[dd][dd]; printf ("hit\n");}
