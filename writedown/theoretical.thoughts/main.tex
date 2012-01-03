@@ -392,7 +392,7 @@ by the following iteration:
 \end{align}
 where $M$ is the mass of the molecule, $\rho_0$ is the
 target uniform density profile and $\kappa_T$ is the
-isothermo-compressibility. At $i$-th step, assuming the thermodynamic
+isothermal compressibility. At $i$-th step, assuming the thermodynamic
 force $\v F^{\textrm{th}}_i(\v x)$ is known, an Adress simulation is
 performed and the density profile $\rho_i(\v x)$ is calculated. Then
 the $i$-th step thermodynamic force is updated by using
@@ -528,6 +528,22 @@ $N_{TFI} = 1$ and $N_{IBI} = 5$ is good enough.
   \label{fig:tmp4}
 \end{figure}
 
+
+\subsection{Numerical results}
+
+The testing system contained 3456 SPC/E \cite{berendsen1987missing}
+water molecules in a $7.50\textsf{nm}\times 3.72\textsf{nm}\times
+3.72\textsf{nm}$ periodic box. The system was split in $x$ direction
+into one explicit region of width $1.00\textsf{nm}$ and one
+coarse-grained region of width $1.00\textsf{nm}$ connected by two
+hybrid region of width $2.75\textsf{nm}$. The simulation was made at
+room temperature of $300\textsf{K}$. The time step was $\Delta t =
+0.002\textsf{ps}$. The cut-off radius used for all interactions was
+$0.90\textsf{nm}$. The electrostatic interaction method used for the
+explicit region was the reaction field method. All simulations were
+performed by MD simulation software Groamcs \redc{citations please!}
+and VOTCA \cite{ruehle2009versatile}.
+
 Using the IBI-TFI correction loop,
 the convergence of the density $\rho(x)$ and RDF $g(r)$ are presented
 in Fig.~\ref{fig:tmp3} and \ref{fig:tmp4}, respectively. After the
@@ -621,9 +637,9 @@ We plot the regional RDF in Fig. \ref{fig:tmp7}. Three methods are
 compared: the Adress with the old \eqref{eqn:old-w} and the new
 weighting function, and the proposed TIF-IBI correction loop
 method. In the explicit and coarse-grained region, the RDF all method
-are consistent with the explicit simulaiton. The hybrid region is
+are consistent with the explicit simulation. The hybrid region is
 divided into three parts: HY I, HY II and HY III, the width of which
-are rougly the cut-off radius. In region HY I, the new weighting
+are roughly the cut-off radius. In region HY I, the new weighting
 function is 1, so the methods using new weighting function give
 correct RDF. In region III, the TFI with new weighting function is not
 correct, but surprisingly, the TFI with old weighting function gives
@@ -637,7 +653,7 @@ III. Fig. \ref{fig:tmp7} presents why the RDF correction is important
 to satisfy the necessary conditions for grand-canonical simulation.
 
 
-\redc{STILL MISSING: simulation protocol. do not forget citing Gromacs and VOTCA}
+% \redc{STILL MISSING: simulation protocol. do not forget citing Gromacs and VOTCA}
 
 % \newpage
 
