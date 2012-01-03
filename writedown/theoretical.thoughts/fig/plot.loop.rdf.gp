@@ -31,7 +31,7 @@ set ytics .2
 
 pl\
 'rdf.com.xvg' u 1:2 w l ls 5 not 'EX' ,\
-'rerun.04_02_02.step.000.tf//rdf.xvg' u 1:2 w l ls 10 not 'only TF',\
+'rerun.04_02_02.step.000.tf//rdf.xvg' u 1:2 w l ls 10 not 'only TFI',\
 'rerun.04_02_02.step.001.tf//rdf.xvg' u 1:2 w l ls 1 not 'step 1',\
 'rerun.04_02_02.step.002.tf//rdf.xvg' u 1:2 w l ls 2 not 'step 2',\
 'rerun.04_02_02.step.003.tf//rdf.xvg' u 1:2 w l ls 3 not 'step 3'

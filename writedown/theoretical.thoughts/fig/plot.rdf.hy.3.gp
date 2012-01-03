@@ -74,7 +74,7 @@ set key bottom right
 set arrow from .37, 2.8 to .31, 2.8 lw 1
 set arrow from .40, 1.3 to .36, 1.1 lw 1
 
-pl\
+pl 1 ls 20 not,\
 'rdf.com.xvg' w l ls 1 t 'EX',\
 'run.04_02_02.old.noibi/rdf.inter.9/rdf.608-700.out' w l ls 2 t 'TFI old w',\
 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.608-700.out' w l ls 3 t 'TFI new w',\

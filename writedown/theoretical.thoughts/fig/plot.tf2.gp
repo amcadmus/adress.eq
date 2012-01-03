@@ -23,7 +23,7 @@ set yrange [-5:20]
 set ytics ("-5" -5, "0" 0, "5" 5, "10" 10, "15" 15)
 
 pl 0 ls 20 not,\
-   'rerun.04_02_02.step.000.tf/tabletf.xvg' u 1:2 w l ls 10 t 'inital guess',\
+   'rerun.04_02_02.step.000.tf/tabletf.xvg' u 1:2 w l ls 10 t 'only TFI',\
    'rerun.04_02_02.step.001.tf/tabletf.xvg' u 1:2 w l ls 1  t 'step 1',\
    'rerun.04_02_02.step.002.tf/tabletf.xvg' u 1:2 w l ls 2  t 'step 2',\
    'rerun.04_02_02.step.003.tf/tabletf.xvg' u 1:2 w l ls 3  t 'step 3',\
