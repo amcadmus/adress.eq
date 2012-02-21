@@ -189,11 +189,13 @@ int main(int argc, char * argv[])
   int numBlocks (16);
   BlockAverage ba;
   ba.processData (time_counts, numBlocks);
-  printf ("# avg  avg_error  var  var_error  var/avg\n");
-  printf ("%e  %e  %e  %e   %e\n",
+  printf ("# avg  avg_error  var  var_error  var/avg var/avg(error)\n");
+  printf ("%e  %e  %e  %e   %e  %e\n",
   	  ba.getAvg(), ba.getAvgError(),
   	  ba.getVar(), ba.getVarError(),
-	  ba.getVar() / ba.getAvg());
+	  ba.getVar() / ba.getAvg(),
+	  ba.getVarError() / ba.getAvg()
+      );
 
   
   return 0;
