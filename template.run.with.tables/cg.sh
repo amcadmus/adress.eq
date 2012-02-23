@@ -3,7 +3,7 @@
 source env.sh
 source parameters.sh
 
-mylog=`pwd`/run.log
+mylog=`pwd`/atom.log
 makelog=`pwd`/make.log
 rm -f $mylog
 
@@ -60,18 +60,15 @@ fi
 cp confout.gro ../conf.gro
 cd ..
 ## add COM site"
-echo "## add COM site"
+echo "## atom to CG"
 make -C tools/gen.conf/ clean &> $makelog
 make -j4 -C tools/gen.conf/ &> $makelog
-tools/gen.conf/stupid.add.com -f conf.gro -o out.gro &>> $mylog
+tools/gen.conf/atom2cg -f conf.gro -o out.gro &>> $mylog
 mv -f out.gro conf.gro
 
 # prepare index file"
 echo "# prepare index file"
-echo "a COM" > command.tmp
-echo "name 3 CG" >> command.tmp
-echo "a HW1 HW2 OW" >> command.tmp
-echo "name 4 EX" >> command.tmp
+echo "a CG" > command.tmp
 echo "q" >> command.tmp
 cat command.tmp  | make_ndx -f conf.gro &>> $mylog
 rm -fr command.tmp
@@ -83,37 +80,27 @@ if test ! -d $table_dir; then
     exit
 fi
 rm -f table*xvg
-cp -L $table_dir/table*xvg .
+cp -L $table_dir/table_CG_CG.xvg .
 
 # prepare grompp.mdp
 echo "# prepare grompp.mdp"
-hy_region_r=`grep hy_region_r $table_dir/parameters.sh | cut -d '=' -f 2`
 rm -fr grompp.mdp
-cp tools/tf.template/grompp.mdp .
-half_boxx=`echo "$boxx/2.0" | bc -l`
-half_boxy=`echo "$boxy/2.0" | bc -l`
-half_boxz=`echo "$boxz/2.0" | bc -l`
-if test `echo "($ex_region_r+$hy_region_r) >= $half_boxx" | octave | grep ans | cut -f 2 -d '='` -eq 1; then
-    echo "$ex_region_r+$hy_region_r" is bigger than half boxx, exit
-    exit
-fi
-sed -e "/^adress_ex_width/s/=.*/= $ex_region_r/g" grompp.mdp |\
-sed -e "/^adress_hy_width/s/=.*/= $hy_region_r/g" |\
-sed -e "/^nsteps/s/=.*/= $gmx_nsteps/g" |\
+cp tools/cg.template/grompp.mdp .
+sed -e "/^nsteps/s/=.*/= $gmx_nsteps/g" grompp.mdp |\
 sed -e "/^nstenergy/s/=.*/= $gmx_nstenergy/g" |\
-sed -e "/^nstxtcout/s/=.*/= $gmx_nstxtcout/g" |\
-sed -e "/^adress_reference_coords/s/=.*/= $half_boxx $half_boxy $half_boxz/g" > grompp.mdp.tmp
+sed -e "/^gen_vel/s/=.*/= no/g" |\
+sed -e "/^nstxtcout/s/=.*/= $gmx_nstxtcout/g" > grompp.mdp.tmp
 mv -f grompp.mdp.tmp grompp.mdp
 
 # prepare topol.top
 echo "# prepare topol.top"
-rm -fr adress_spce.itp topol.top 
-cp $table_dir/adress_spce.itp $table_dir/topol.top .
-sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
+rm -fr topol.top 
+cp tools/cg.template/topol.top .
+sed "s/^SOL.*/SOL $nmol/g" topol.top > tmp.top
 mv -f tmp.top topol.top
 
 # productive run
 echo "# productive run"
-grompp -n index.ndx &>> $mylog
-mdrun -v &>> $mylog
+$std_gromacs_install_dir/bin/grompp &>> $mylog
+$std_gromacs_install_dir/bin/mdrun -v &>> $mylog
 
