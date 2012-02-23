@@ -23,6 +23,7 @@ int main(int argc, char * argv[])
 {
   float begin, end, x0, x1, yz0, yz1;
   std::string ifile, ofile, method;
+  unsigned numBlocks;
   
   po::options_description desc ("Allow options");
   desc.add_options()
@@ -34,6 +35,7 @@ int main(int argc, char * argv[])
     ("yz0", po::value<float > (&yz0)->default_value(0.f), "lower bound of the interval")
     ("yz1", po::value<float > (&yz1)->default_value(1.f), "upper bound of the interval")
     ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
+    ("nblock,n", po::value<unsigned > (&numBlocks)->default_value(16), "number of blocks")
     ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
     ("output,o",  po::value<std::string > (&ofile)->default_value ("number.out"), "the output file");
   
@@ -186,7 +188,6 @@ int main(int argc, char * argv[])
   free (xx);
   fclose (fout);
 
-  int numBlocks (16);
   BlockAverage ba;
   ba.processData (time_counts, numBlocks);
   printf ("# avg  avg_error  var  var_error  var/avg var/avg(error)\n");
