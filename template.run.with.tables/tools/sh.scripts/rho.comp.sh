@@ -1,10 +1,10 @@
 #!/bin/bash
 
 frame_begin=100
-refh=2.50
+refh=.5
 nblock=10
 
-make -C tools/analyze.number/ -j4
+make -C tools/analyze.number/ -j4 &> /dev/null
 
 dir=$1
 method=$2
