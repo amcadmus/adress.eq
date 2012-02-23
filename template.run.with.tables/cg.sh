@@ -3,7 +3,7 @@
 source env.sh
 source parameters.sh
 
-mylog=`pwd`/atom.log
+mylog=`pwd`/cg.log
 makelog=`pwd`/make.log
 rm -f $mylog
 
@@ -101,6 +101,6 @@ mv -f tmp.top topol.top
 
 # productive run
 echo "# productive run"
-$std_gromacs_install_dir/bin/grompp &>> $mylog
+$std_gromacs_install_dir/bin/grompp -n index.ndx &>> $mylog
 $std_gromacs_install_dir/bin/mdrun -v &>> $mylog
 
