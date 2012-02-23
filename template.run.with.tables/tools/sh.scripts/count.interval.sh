@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if $# -ne 1; then
+if [ $# -ne 1 ]; then
     echo "use: "
     echo "count.interval.sh method"
     exit
