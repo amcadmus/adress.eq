@@ -17,7 +17,7 @@ do
     x0=`echo "$i - $hwidth" | bc -l`
     x1=`echo "$i + $hwidth" | bc -l`
     line=`./tools/analyze.number/count.interval -b 1000 --x0 $x0 --x1 $x1 --yz1 $yz1 -m $method | grep -v \#`
-    echo "$i $x0 $x1 $line"
+    echo "$i $line"
 done
 
     
