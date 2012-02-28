@@ -73,7 +73,7 @@ int main(int argc, char * argv[])
     std::cerr << "cannot open file " << ofile << std::endl;
     return 1;
   }
-  for (double myx = 0.; myx < xx[0]+shift; myx += xstep){
+  for (double myx = 0.; myx < xx[0]+shift-1e-6; myx += xstep){
     fprintf (fp, "%f %f %f\n", myx, uu[0], 0.);
   }
   for (unsigned i = 0; i < xx.size(); ++i){
