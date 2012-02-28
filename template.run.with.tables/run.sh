@@ -84,6 +84,12 @@ if test ! -d $table_dir; then
 fi
 rm -f table*xvg
 cp -L $table_dir/table*xvg .
+## shift tf table
+old_ex_region=`grep ex_region_r $table_dir/parameters.sh | cut -d '=' -f 2`
+shift=`echo "$ex_region_r - $old_ex_region" | bc -l`
+echo "## shift the tabletf by $shift"
+./tools/gen.conf/switch.tf -s $shift -e $boxx -i tabletf.xvg
+mv -f out.tf.xvg tabletf.xvg
 
 # prepare grompp.mdp
 echo "# prepare grompp.mdp"
