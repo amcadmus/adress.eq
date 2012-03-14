@@ -29,13 +29,92 @@
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
 \author{Luigi Delle Site}
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
+\author{Other contributors should be added}
 
 \begin{abstract}
 \end{abstract}
 
 \maketitle
 
-\section{Theory}
+\section{Introduction}
+
+Atomistic molecules dynamics (MD) simulations are proved to be very
+useful in studying the microscopic structure and functionality of
+macromolecules, e.g.~\cite{shaw2010atomic}. However, even with the
+constantly growing super-computer power, it is still impossible to
+directly study some large-scale phenominon or long-time dynamics with
+atomistic resolution. A promising way to overcome this obstacle is by
+coarse-graining~\cite{voth2009coarse, peter2008classical,
+  peter2009multiscale}, which reduces number of degrees of freedom
+(DOFs) within a functional group, and at the same time, catches the
+main structural properties (e.g backbone conformation) that are of
+special interest. In some simulations, for example
+Ref.~\cite{lambeth2010communication}, the atomistic details is
+critical on the hydrophobic surface, while the coarse-grained
+resolution is enough for the solvent environment far away. This gives
+rise to the idea of adaptive resolution scheme
+(AdResS)~\cite{praprotnik2005adaptive, praprotnik2006adaptive}, which
+allow molecules change the representation from atomistic to
+coarse-grained and {vice versa} on the fly, see Fig.~\ref{fig:tmp1}..
+The periodic simulation box is devided into three regions: one
+explicit region where molecule are atomistic, one coarse-grained
+region and a hybrid region bridging the two representations together.
+The identity of a molecule depends on its position, and is denoted by
+a weighting function $w(\v r)$: the atomistic identity is denoted by
+$w=1$, while the coarse-grained is $w=0$.  The molecules in the hybrid
+region have both identities at the same time, and gradually change
+their identity when travelling from atomistic to coarse-grained (or
+vise versa).  More strictly, the weighting function smoothly and
+monotonically varies from 1 to 0 (or 0 to 1). This change of identity
+is also treated by the fractional change of the phase space
+dimension~\cite{praprotnik2007adaptive1, praprotnik2007fractional}.
+
+The AdResS method was successfully applied to study the tetrahedral
+model molecules~\cite{praprotnik2006adaptive}, the liquid
+water~\cite{matysiak2008modeling}, the hydrogen bond networks at the
+hydrophobic interfaces~\cite{lambeth2010communication}, bridging
+atomicstic water with continuous fluid dynamics
+simulation~\cite{delgado2009coupling}, and was implemented in the MD
+simulation package ESPResSo~\cite{junghans2010reference,
+  limbach2006espresso}. Recently, the AdResS method was improved to
+provide uniform local chemical potential all over the system, so the
+thermodynamic equilibrium between different representations is
+ensured~\cite{poblete2010coupling}.  Moreover, the AdResS method is
+shown to conduct a grand-canonical simulation of the atomicstic
+region, providing a thermodynamic force that ensures the uniform local
+grand potential all over the system, and with the coarse-grained
+region serveing as a particle reservior~\cite{fritsch2011grand}.
+Although only be of theoretical interest, it is also possible to
+consider the grand-canonical argument in the opposite way: the
+atomicstic region serves as the particle reservior for the
+grand-canonical simulation of coarse-grained molecules.
+Unlike Monte Carlo (MC) simulation that can easily perform
+grand-canonical simulation~\cite{allen1990computer}, the non-trival
+grand-canonical MD simulation is lacking for a long time. The AdResS
+method fill this gap in a very efficient way: the explicit region
+where the physical properties are investigated is of full atomistic
+resolution, while the particle reservior where molecular details are
+not important is of coarse-grained resolution.
+
+Ref.~\cite{fritsch2011grand} demostrate the method by a thermodynamic
+arguement and verify the grand-canonical simulation numerically.  The
+aim of the present paper is to provide a strict theoretical basis for
+the grand-canonical AdResS method by the statistical physics
+arguments, and some necessary but not suffcient conditions.  The paper
+is arranged as follow: in section~\ref{sec:theory}, the
+grand-canonical AdResS simulation method is shortly introduced, and
+then the method is discussed and analyzed in the strict statistical
+physics way. The nesscessary conditions for grand-canonical AdResS
+simulation is summarize in the end of this section. In
+section~\ref{sec:rdf-corr}, a numerical method is developed to fulfill
+all the proposed condition at the same time. The validation of the
+method is proved by the AdResS simulation of liquid water.  This paper
+is summrized and concluded in section~\ref{sec:conclusions}.
+
+
+
+
+\section{Theory}\label{sec:theory}
 
 
 \begin{figure}
@@ -46,7 +125,7 @@
 \end{figure}
 
 
-We want to prove the trajectory of the explicit region in Adress
+We want to prove the trajectory of the explicit region in AdResS
 simulation is an implementation of the $\mu$VT distribution. We take a
 sequence of snapshots of the system along the trajectory.  For sure,
 the number of molecules in the explicit region varies. We group the
@@ -60,8 +139,8 @@ these two distributions ends up with the grand-canonical distribution.
 
 Notice, the prove always compare the explicit region to an sub-system
 of a big all-atom canonical system. If the explicit region is embedded
-into the whole Adress system in the same manner as the sub-system
-embedded in to the big all-atom canonical system, then the Adress will
+into the whole AdResS system in the same manner as the sub-system
+embedded in to the big all-atom canonical system, then the AdResS will
 give the correct grand-canonical distribution.
 
 
@@ -89,7 +168,7 @@ where $\mathcal H$ is the Hamiltonian of the system:
   \sum_{i=1}^N\frac12 m_i\v v_i^2 + U(\v r_1, \cdots, \v r_N)  
 \end{align}
 
-For the Adress simulation, let us first consider there are $N_1$
+For the AdResS simulation, let us first consider there are $N_1$
 molecules in the explicit region, $N_2 - N_1$ molecules in the hybrid
 region.  Without lost of generality, we assume molecules $1, \cdots,
 N_1$ are in the explicit region, molecules $N_1 + 1, \cdots, N_2$ are
@@ -115,7 +194,7 @@ Here it is assumed that the width of the hybrid region is larger than
 the cut-off of the pairwise interaction $\v F_{ij}$, so the molecule
 in the explicit region is not interacting with the molecules in the
 coarse-grained region, as this happens in all applications.
-The Adress force interpolation scheme reads:
+The AdResS force interpolation scheme reads:
 \begin{align}\label{eqn:f-interp}
   \v F_{ij} = w_iw_j\v F^{\textrm{ex}}_{ij} + [1-w_iw_j]\v F^{\textrm{cg}}_{ij},
 \end{align}
@@ -131,7 +210,7 @@ the resolution of the molecule:
     \end{array}
   \right.
 \end{align}
-The original Adress papers proposed the weighting function:
+The original AdResS papers proposed the weighting function:
 \begin{align}\label{eqn:old-w}
   w(\v r) =
   \left\{
@@ -229,7 +308,7 @@ coarse-grained potential is generated by fitting the explicit RDF,
   \centering
   \includegraphics[]{fig/old.rdf/rdfs.eps}
   \caption{The RDF is independent with the size of the hybrid region.
-    In the Adress simulation, the whole region is defined hybrid. They
+    In the AdResS simulation, the whole region is defined hybrid. They
     are compared with the explicit water RDF.}
   \label{fig:tmp2}
 \end{figure}
@@ -239,7 +318,7 @@ coarse-grained potential is generated by fitting the explicit RDF,
   \begin{itemize}
   \item Theoretically show under what kind of condition the RDF is
     correct.
-  \item We find the current Adress scheme (with thermodynamic force
+  \item We find the current AdResS scheme (with thermodynamic force
     applied) will not give perfect RDF in the hybrid region. However,
     the RDF profile is independent with the size of the hybrid region
     see Fig. \ref{fig:tmp2}. This fact gives rise to the idea of
@@ -380,7 +459,8 @@ Therefore
 \end{align}
 
 
-\section{Radial distribution corrected Adress simulation}
+\section{Radial distribution corrected AdResS simulation}
+\label{sec:rdf-corr}
 
 \subsection{The thermodynamic force iteration }
 
@@ -393,7 +473,7 @@ by the following iteration:
 where $M$ is the mass of the molecule, $\rho_0$ is the
 target uniform density profile and $\kappa_T$ is the
 isothermal compressibility. At $i$-th step, assuming the thermodynamic
-force $\v F^{\textrm{th}}_i(\v x)$ is known, an Adress simulation is
+force $\v F^{\textrm{th}}_i(\v x)$ is known, an AdResS simulation is
 performed and the density profile $\rho_i(\v x)$ is calculated. Then
 the $i$-th step thermodynamic force is updated by using
 scheme~\eqref{eqn:tfi}.  Ref.~\cite{fritsch2011grand} shows that the
@@ -403,7 +483,7 @@ reaches a uniform density profile that is the same as $\rho_0$.
 \subsection{RDF correction by iterative Boltzmann inversion}
 
 In our study, a force $\v F^{\textrm{rdf}}$ is added to the
-original Adress force interpolation scheme to correct the RDF in
+original AdResS force interpolation scheme to correct the RDF in
 the hybrid region:
 \begin{align}
   \v F_{ij} = w_iw_j\v F^{\textrm{ex}}_{ij} + [1-w_iw_j]\v F^{\textrm{cg}}_{ij} +
@@ -444,7 +524,7 @@ potential of mean force
     \REPEAT
     \STATE $\v F_1^{\textrm{rdf}} \leftarrow \v F^{\textrm{rdf}}$
     \FOR {$i=1$ to $N_{IBI}$}     
-    \STATE Adress simulation using $\v F^{\textrm{tf}}$ and $\v F_i^{\textrm{rdf}}$
+    \STATE AdResS simulation using $\v F^{\textrm{tf}}$ and $\v F_i^{\textrm{rdf}}$
     \STATE calculate hybrid RDF $g_i(r)$
     \STATE $U^{\textrm{rdf}}_{i+1}(r) \leftarrow U^{\textrm{rdf}}_i(r) +
     k_B T\ln\big[
@@ -456,7 +536,7 @@ potential of mean force
     \STATE $\v F^{\textrm{rdf}} \leftarrow \v F_{N_{IBI}}^{\textrm{rdf}}$
     \STATE $\v F_1^{\textrm{tf}} \leftarrow \v F^{\textrm{tf}}$
     \FOR {$i=1$ to $N_{TFI}$}    
-    \STATE Adress simulation using $\v F_i^{\textrm{tf}}$ and $\v F^{\textrm{rdf}}$
+    \STATE AdResS simulation using $\v F_i^{\textrm{tf}}$ and $\v F^{\textrm{rdf}}$
     \STATE calculate density $\rho_i(\v x)$
     \STATE $\v F_{i+1}^{\textrm{tf}} \leftarrow \v F_i^{\textrm{tf}}
     - \frac{M}{\rho_0\kappa_T}\nabla\rho_i(\v x)$
@@ -497,7 +577,7 @@ $N_{TFI} = 1$ and $N_{IBI} = 5$ is good enough.
 
 \begin{figure}
   \centering
-  \includegraphics{fig/rho.eps}
+  \includegraphics{fig.2/rho.eps}
   \caption{The resulting $\rho(x)$ of the IBI-TFI correction loop.
     The results of the first iteration is colored by red. Within the
     first iteration, the density profile after the IBI and before the
@@ -515,7 +595,7 @@ $N_{TFI} = 1$ and $N_{IBI} = 5$ is good enough.
 
 \begin{figure}
   \centering
-  \includegraphics{fig/rdf.eps}
+  \includegraphics{fig.2/rdf.eps}
   \caption{The resulting $g(r)$ of the IBI-TFI correction loop.  The
     RDF of after the first, second and the third step iteration are
     denoted by red, green and blue solid lines, respectively.  The
@@ -550,7 +630,7 @@ in Fig.~\ref{fig:tmp3} and \ref{fig:tmp4}, respectively. After the
 first step of the IBI-TFI iteration, the density profile obviously
 deviates from the perfect uniform density distribution, but it
 converges to uniform distribution after the third step of the
-iteration. In Fig. \ref{fig:tmp4}, we also show the RDF of Adress
+iteration. In Fig. \ref{fig:tmp4}, we also show the RDF of AdResS
 simulation without RDF correction (with thermodynamic force applied),
 and a clear discrepancy with the atomistic RDF is presented,
 that is why the RDF correction is necessary.  By
@@ -560,7 +640,7 @@ a robust and fast converging method.
 
 \begin{figure}
   \centering
-  \includegraphics{fig/tf-and-int.eps}
+  \includegraphics{fig.2/tf-and-int.eps}
   \caption{The resulting $\v F^{\textrm{tf}}$ of the IBI-TFI
     correction loop.  The thermodynamic force $\v F^{\textrm{tf}}$ (in
     this case, only the $x$ component is non-zero) and its integration
@@ -575,7 +655,7 @@ a robust and fast converging method.
 
 \begin{figure}
   \centering
-  \includegraphics{fig/force-rdf.eps}
+  \includegraphics{fig.2/force-rdf.eps}
   \caption{The resulting $U^{\textrm{rdf}}(r)$ of the IBI-TFI
     correction loop.  The $U^{\textrm{rdf}}(r)$ after the first,
     second, third and fourth step iteration are denoted by red, green,
@@ -613,12 +693,32 @@ see the RDF in Fig. \ref{fig:tmp4}, so the bad convergence at $r <
 2.6\textsf{nm}$ is not a big problem, that is also the reason why the
 RDF converges very good after only two steps of iterations.
 
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.49\textwidth]{fig/rdf-ex-cg.eps}
+%   \includegraphics[width=0.49\textwidth]{fig/rdf-425-516.eps}
+%   \includegraphics[width=0.49\textwidth]{fig/rdf-516-608.eps}
+%   \includegraphics[width=0.49\textwidth]{fig/rdf-608-700.eps}
+%   \caption{The regional RDFs. The red line is the RDF of the atomistic
+%     simulation. The thermodynamic force simulation without RDF
+%     correction using the old weighting function \eqref{eqn:old-w} and
+%     the new weighting function \eqref{eqn:new-w} are denoted by the
+%     green and blue line, respectively. The RDF of the proposed TFI-IBI
+%     method is denoted by the pink line. The hybrid region is equally
+%     divided into three parts: HY I, HY II and HY III, the width of
+%     which are rough the cut-off radius, i.e. 9 \textsf{nm}. Two
+%     subplots are inserted in the plot to show zoom-in of of RDFs at
+%     the first peak and the first valley.  }
+%   \label{fig:tmp7}
+% \end{figure}
+
+
 \begin{figure}
   \centering
-  \includegraphics[width=0.49\textwidth]{fig/rdf-ex-cg.eps}
-  \includegraphics[width=0.49\textwidth]{fig/rdf-425-516.eps}
-  \includegraphics[width=0.49\textwidth]{fig/rdf-516-608.eps}
-  \includegraphics[width=0.49\textwidth]{fig/rdf-608-700.eps}
+  \includegraphics[width=0.49\textwidth]{fig.2/rdf-ex-cg.eps}
+  \includegraphics[width=0.49\textwidth]{fig.2/rdf-425-516.eps}
+  \includegraphics[width=0.49\textwidth]{fig.2/rdf-516-608.eps}
+  \includegraphics[width=0.49\textwidth]{fig.2/rdf-608-700.eps}
   \caption{The regional RDFs. The red line is the RDF of the atomistic
     simulation. The thermodynamic force simulation without RDF
     correction using the old weighting function \eqref{eqn:old-w} and
@@ -634,7 +734,7 @@ RDF converges very good after only two steps of iterations.
 
 
 We plot the regional RDF in Fig. \ref{fig:tmp7}. Three methods are
-compared: the Adress with the old \eqref{eqn:old-w} and the new
+compared: the AdResS with the old \eqref{eqn:old-w} and the new
 weighting function, and the proposed TIF-IBI correction loop
 method. In the explicit and coarse-grained region, the RDF all method
 are consistent with the explicit simulation. The hybrid region is
@@ -652,6 +752,9 @@ results in HY II do not seriously disturb the results in HY I and HY
 III. Fig. \ref{fig:tmp7} presents why the RDF correction is important
 to satisfy the necessary conditions for grand-canonical simulation.
 
+
+\section{Conclusions}
+\label{sec:conclusions}
 
 % \redc{STILL MISSING: simulation protocol. do not forget citing Gromacs and VOTCA}
 
