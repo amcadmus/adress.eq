@@ -1,0 +1,23 @@
+# method is adress
+###################################################
+# begin->end: 100 0
+# refh: 0.5
+# method: adress
+# input: traj.xtc
+###################################################
+# load frame at time: 100.0 ps# load frame at time: 140.0 ps# load frame at time: 180.0 ps# load frame at time: 220.0 ps# load frame at time: 260.0 ps# load frame at time: 300.0 ps# load frame at time: 340.0 ps# load frame at time: 380.0 ps# load frame at time: 420.0 ps# load frame at time: 460.0 ps# load frame at time: 500.0 ps# load frame at time: 540.0 ps# load frame at time: 580.0 ps# load frame at time: 620.0 ps# load frame at time: 660.0 ps# load frame at time: 700.0 ps# load frame at time: 740.0 ps# load frame at time: 780.0 ps# load frame at time: 820.0 ps# load frame at time: 860.0 ps# load frame at time: 900.0 ps# load frame at time: 940.0 ps# load frame at time: 980.0 ps
+4.000000 9.962782e+02 2.920974e+00 1.030402e-09 1.261164e-10 2.306356e+02 6.761972e-01 3.278219e+01 3.820161e+00
+# process bin 10 center: 4.500000, size: 0.500000
+4.500000 9.943487e+02 3.058437e+00 9.798777e-10 8.518482e-11 2.301889e+02 7.080195e-01 3.105412e+01 2.508630e+00
+# process bin 11 center: 5.000000, size: 0.500000
+5.000000 9.959979e+02 3.141442e+00 1.123892e-09 9.570137e-11 2.305707e+02 7.272347e-01 3.573644e+01 2.817591e+00
+# process bin 12 center: 5.500000, size: 0.500000
+5.500000 9.954354e+02 3.258648e+00 1.065458e-09 1.191208e-10 2.304404e+02 7.543676e-01 3.384016e+01 3.561855e+00
+# process bin 13 center: 6.000000, size: 0.500000
+6.000000 9.937382e+02 1.578658e+00 9.712937e-10 4.748177e-11 2.300476e+02 3.654549e-01 3.074429e+01 1.405256e+00
+# process bin 14 center: 6.500000, size: 0.500000
+6.500000 9.973956e+02 2.838107e+00 1.057597e-09 8.807654e-11 2.308942e+02 6.570136e-01 3.372291e+01 2.616521e+00
+# process bin 15 center: 7.000000, size: 0.500000
+7.000000 9.954546e+02 1.826176e+00 1.107514e-09 6.502713e-11 2.304449e+02 4.227546e-01 3.517726e+01 1.936349e+00
+# process bin 16 center: 7.375000, size: 0.250000
+7.375000 9.948537e+02 1.424203e+00 1.607555e-09 9.190134e-11 1.151529e+02 1.648494e-01 2.549907e+01 1.384733e+00

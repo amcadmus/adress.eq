@@ -1,0 +1,25 @@
+# method is adress
+###################################################
+# begin->end: 100 0
+# refh: 0.5
+# method: adress
+# input: traj.xtc
+###################################################
+# load frame at time: 100.0 ps# load frame at time: 140.0 ps# load frame at time: 180.0 ps# load frame at time: 220.0 ps# load frame at time: 260.0 ps# load frame at time: 300.0 ps# load frame at time: 340.0 ps# load frame at time: 380.0 ps# load frame at time: 420.0 ps# load frame at time: 460.0 ps# load frame at time: 500.0 ps# load frame at time: 540.0 ps# load frame at time: 580.0 ps# load frame at time: 620.0 ps# load frame at time: 660.0 ps# load frame at time: 700.0 ps# load frame at time: 740.0 ps# load frame at time: 780.0 ps# load frame at time: 820.0 ps# load frame at time: 860.0 ps# load frame at time: 900.0 ps# load frame at time: 940.0 ps# load frame at time: 980.0 ps
+# process bin 1 center: 0.125000, size: 0.250000
+# process bin 9 center: 4.000000, size: 0.500000
+4.000000 9.841235e+02 2.368403e+00 1.085180e-09 9.929934e-11 2.278218e+02 5.482786e-01 3.368765e+01 2.920442e+00
+# process bin 10 center: 4.500000, size: 0.500000
+4.500000 9.816526e+02 2.401411e+00 1.108818e-09 1.039967e-10 2.272498e+02 5.559198e-01 3.424883e+01 3.044654e+00
+# process bin 11 center: 5.000000, size: 0.500000
+5.000000 9.770680e+02 3.792529e+00 1.166102e-09 1.143321e-10 2.261884e+02 8.779597e-01 3.568257e+01 3.221540e+00
+# process bin 12 center: 5.500000, size: 0.500000
+5.500000 9.949650e+02 2.630813e+00 1.028128e-09 1.017458e-10 2.303316e+02 6.090258e-01 3.262368e+01 3.055986e+00
+# process bin 13 center: 6.000000, size: 0.500000
+6.000000 1.029624e+03 1.403808e+00 9.529649e-10 7.696399e-11 2.383551e+02 3.249776e-01 3.238207e+01 2.526962e+00
+# process bin 14 center: 6.500000, size: 0.500000
+6.500000 1.004132e+03 2.193888e+00 1.076182e-09 8.336919e-11 2.324538e+02 5.078789e-01 3.478065e+01 2.542390e+00
+# process bin 15 center: 7.000000, size: 0.500000
+7.000000 9.923425e+02 2.841777e+00 1.147822e-09 1.209835e-10 2.297244e+02 6.578632e-01 3.622995e+01 3.611230e+00
+# process bin 16 center: 7.375000, size: 0.250000
+7.375000 9.921082e+02 3.902933e+00 1.665579e-09 1.073941e-10 1.148351e+02 4.517590e-01 2.627382e+01 1.487376e+00

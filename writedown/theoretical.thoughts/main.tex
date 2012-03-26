@@ -119,7 +119,8 @@ is summrized and concluded in section~\ref{sec:conclusions}.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.5\textwidth]{fig/system/system.eps}
+  % \includegraphics[width=.5\textwidth]{fig/system/system.eps}
+  \includegraphics[width=.5\textwidth]{fig.3/system/system.eps}
   \caption{An AdResS system}
   \label{fig:tmp1}
 \end{figure}
@@ -577,7 +578,7 @@ $N_{TFI} = 1$ and $N_{IBI} = 5$ is good enough.
 
 \begin{figure}
   \centering
-  \includegraphics{fig.2/rho.eps}
+  \includegraphics{fig.3/rho.eps}
   \caption{The resulting $\rho(x)$ of the IBI-TFI correction loop.
     The results of the first iteration is colored by red. Within the
     first iteration, the density profile after the IBI and before the
@@ -595,7 +596,7 @@ $N_{TFI} = 1$ and $N_{IBI} = 5$ is good enough.
 
 \begin{figure}
   \centering
-  \includegraphics{fig.2/rdf.eps}
+  \includegraphics{fig.3/rdf.eps}
   \caption{The resulting $g(r)$ of the IBI-TFI correction loop.  The
     RDF of after the first, second and the third step iteration are
     denoted by red, green and blue solid lines, respectively.  The
@@ -655,7 +656,7 @@ a robust and fast converging method.
 
 \begin{figure}
   \centering
-  \includegraphics{fig.2/force-rdf.eps}
+  \includegraphics{fig.3/force-rdf.eps}
   \caption{The resulting $U^{\textrm{rdf}}(r)$ of the IBI-TFI
     correction loop.  The $U^{\textrm{rdf}}(r)$ after the first,
     second, third and fourth step iteration are denoted by red, green,
@@ -715,10 +716,24 @@ RDF converges very good after only two steps of iterations.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-ex-cg.eps}
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-425-516.eps}
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-516-608.eps}
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-608-700.eps}
+  \includegraphics[]{fig.3/count.eps}
+  \caption{
+    The molecular number fluctuation.
+    The red line is the fluctuation of the atomistic
+    simulation. The thermodynamic force simulation without RDF
+    correction using the old weighting function \eqref{eqn:old-w} and
+    the new weighting function \eqref{eqn:new-w} are denoted by the
+    green and blue line, respectively. The fluctuation of the proposed TFI-IBI
+    method is denoted by the pink line.  }
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.49\textwidth]{fig.3/rdf-ex-cg.eps}
+  \includegraphics[width=0.49\textwidth]{fig.3/rdf-425-516.eps}
+  \includegraphics[width=0.49\textwidth]{fig.3/rdf-516-608.eps}
+  \includegraphics[width=0.49\textwidth]{fig.3/rdf-608-700.eps}
   \caption{The regional RDFs. The red line is the RDF of the atomistic
     simulation. The thermodynamic force simulation without RDF
     correction using the old weighting function \eqref{eqn:old-w} and
