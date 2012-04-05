@@ -45,8 +45,8 @@ set ytics ("-5" -5,\
 # set ytics 5
 set mytics 5
 
-set label 'EX' at 0.17, 25
-set label 'HY' at 1.775, 25
+set label 'AT' at 0.17, 25
+set label '{/Symbol D}' at 1.775, 25
 set label 'CG' at 3.37, 25
 
 pl 0 ls 20 not,\

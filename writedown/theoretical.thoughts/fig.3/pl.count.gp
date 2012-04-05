@@ -24,11 +24,13 @@ set yrange [.13:.165]
 set format y '%.3f'
 set xrange [0:3.75]
 set xlabel 'x [nm]'
-set ylabel '(<N^2> - <N>)^2/<N>'
+set ylabel '(<N^2> - <N>^2)/<N>'
 set key bottom right
+set mxtics 5
+set mytics 5
 
-set label 'EX' at 0.17, .16
-set label 'HY' at 1.775, .16
+set label 'AT' at 0.17, .16
+set label '{/Symbol D}' at 1.775, .16
 set label 'CG' at 3.37, .16
 
 pl\
@@ -37,6 +39,9 @@ pl\
 './run.04_02_02.old.noibi.long/count.out'	u ($1-3.75):6:($7*2) w e ls 2 not, '' u ($1-3.75):6 w l ls 2 t'TFI old w',\
 './run.04_02_02.noibi.long/count.out'		u ($1-3.75):6:($7*2) w e ls 3 not, '' u ($1-3.75):6 w l ls 3 t'TFI new w',\
 './run.04_02_02.allCorr.m50.long.step15/count.out' u ($1-3.75):6:($7*2) w e ls 4 not, '' u ($1-3.75):6 w l ls 4 t'TFI-IBI new w'
+
+# './run.04_02_02.allCorr.m50.long.step15/count.out' u ($1-3.75):6:($7*2) w e ls 5 not, '' u ($1-3.75):6 w l ls 5 t'TFI-IBI new w',\
+#'./run.04_02_02.allCorr.m50.long.step04/count.out' u ($1-3.75):6:($7*2) w e ls 5 not, '' u ($1-3.75):6 w l ls 5 t'TFI-IBI new w'
 
 #0.150062 lw 3 lc 0 not,\
 # './run.04_02_02.allCorr.step10.long/count.out'	u 1:6:($7*2) w e ls 16 not, '' u 1:6 w l ls 16 t'10',\

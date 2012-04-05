@@ -31,19 +31,27 @@ pl 0 w l ls 10 not,\
 # 'step.010.tf/tablerdf.xvg' u 1:6 w l ls 5 t 'step 10',\
 # 'step.025.tf/tablerdf.xvg' u 1:6 w l ls 6 t 'step 25'
 
-set origin 0.45,0.55
-set size 0.5,0.35
+# set font "Helvetica,12"
+set origin 0.6,0.7
+set size 0.3,0.2
 
 unset xlabel
 unset ylabel
 unset xrange
 unset yrange
+set rmargin 0
+set lmargin 0
+set tmargin 0
+set bmargin 0
+set xtics 1
 #set xlabel "step of interation"
 #set ylabel "P_{EX}V - P_{CG}V [ KJ/mol ]" font "Helvetica,10"
+# set ytics 1 font "Helvetica,12"
+# set xtics 1 font "Helvetica,12"
+set xlabel 'steps of iteration' font "Helvetica,12"
 set ylabel 'W_{/Symbol D}  [ kJ/mol ]' font "Helvetica,12"
-set xrange [-.3:4.3]
+set xrange [.7:4.3]
 set yrange [13:16]
-set xtics 1
 set mxtics 1
 #unset ytics
 set ytics 1
@@ -51,5 +59,5 @@ set mytics 2
 
 pl \
 1.4472600000e+01 lw 3 lt 1 not,\
-'tf.diff.out' u 0:2 w p pt 4 lc 1 not
+'tf.diff.out' u ($0+1):2 w p pt 4 lc 1 not
 unset multiplot

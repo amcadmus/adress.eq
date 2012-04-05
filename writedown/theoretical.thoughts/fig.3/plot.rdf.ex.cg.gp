@@ -101,7 +101,7 @@ set origin 0., 0.75
 set style fill transparent pattern 5
 # set style fill pattern 0
 set key top right
-set label "EX" at .15,-.2
+set label "AT" at .15,-.2
 set label "CG" at 3.4,-.2
 
 pl\

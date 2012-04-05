@@ -11,8 +11,8 @@ set style line 4 lc 5 lw 3 pt 7
 set style line 5 lc 4 lw 3 pt 7
 set style line 6 lc 6 lw 3 pt 7
 
-set label 'EX' at 0.17, 1040
-set label 'HY' at 1.775, 1040
+set label 'AT' at 0.17, 1040
+set label '{/Symbol D}' at 1.775, 1040
 set label 'CG' at 3.37, 1040
 
 set xrange [0:3.75]
