@@ -46,6 +46,7 @@ This implies that the temperature and particle density (at least) are the same i
   \caption{The magnifying glass illustrates the idea of zooming in to the AT scale to understand the molecular origin of the statistical properties of a liquid which at larger scale can be viewed as a collection of spheres, a resolution sufficient to represent the large scale behaviour.}
   \label{zoom}
 \end{figure} 
+
 \section{AdResS: Basic aspects}
 The  AdResS method allows an on-the-fly interchange between the AT and coarse grained description (and vice versa) of the molecules according to their position in space. 
 The two resolutions are coupled across scales by dividing the system into three parts (see also Fig.\ref{adapt}): {\bf (a)}
@@ -86,6 +87,7 @@ The CG potential is derived from a reference full AT simulation and is such that
 The basic idea behind this approach is that the smooth force interpolation minimally disturbs the dynamics in either of the
 participating regions when a molecule changes side.
 It is anyway obvious that the approach is non Hamiltonian, that is, it does not exists a potential from which the force of Eq.\ref{force} can be derived. This has been shown both analytically \cite{presolo} and with a detailed computer experiments \cite{prlcomm}. The question which naturally emerges at this point is how to assure thermodynamic equilibrium if we cannot define a Hamiltonian of the system. This aspect is discussed in the next section.
+
 \section{Thermodynamic Equilibrium}
 The principle used in this case to build a conceptual framework to assure equilibrium is the following:  there must be a process of acquiring (releasing) some sort of thermodynamic information
   associated with acquiring (releasing) DOF's. An explicit example can clarify 
@@ -93,6 +95,7 @@ the idea; let us suppose that a molecule moves from the CG to the AT region.
 The molecule will be leaving a local environment of equilibrium, it will slowly acquire vibrational and rotational DOF's (as it acquires the full AT resolution) and tries to enter in the AT region which is in local instantaneous equilibrium. 
 At this point if the vibrational and rotational DOF's of the molecule are not compatible with those of the AT environment, it is likely that the molecule is sent back because it would perturb the local equilibrium in a massive way. In a similar way, thought less evident, a molecule going from the AT to the CG region should loose vibrational and rotational energy in order to properly accommodate with the CG environment (spheres). In this context the thermodynamic information consists of the free energy per DOF's (let us define it as $\phi(x)$) which the molecule needs to acquire (or remove) in order to equilibrate with the AT (CG) environment once it has changed resolution. In order to allow the process of molecular equilibration related to the transition from one region to another, three options have been explored so far; {\bf (i)} employ a thermostat which acts locally and provides/removes this energy per DOF's. The accuracy of this approach is highly satisfactory  from the numerical point of view (for example, the density in the most critical region, i.e. the transition region, has an accuracy of $5\%$ w.r.t. the target value); however, from the conceptual point of view this approach is not satisfactory  since the amount of energy per DOF's is not distributed according to some, controllable, physical principles, but it is distributed in a stochastic manner. A numerically as well as conceptually well founded approach is that based on the idea of thermodynamic force, that is a force derived on the basis of thermodynamic relations. This idea gave rise to the following procedures;
 {\bf (ii)} define $\phi(x)=\mu_{atom}-{\mu}{(w(x))}$; that is the difference between the chemical potential (effectively a free energy per particle) which characterizes the AT resolution and that corresponding to resolution defined by $w(x)$. In a previous work \cite{simon} it has been shown that this quantity can be calculated and the thermodynamic force, defined as the gradient of $\phi(x)$, applied to the COM of the molecule. The accuracy regarding the particle density is higher than that obtained with approach (i). However, the calculation of $\mu(w(x))$ is rather demanding, and thus (ii), though conceptually better founded, would be computationally not efficient. Finally a new approach, here referred as {\bf (iii)}, has been proposed, based on the idea of the adaptive scheme as an open system MD in an effective Grand Canonical framework \cite{prlgc}. The description of the latter approach is given in the next section; the current work proposes an extension of the computational procedure employed in the (iii).
+
 \section{Effective Grand Canonical Approach}
 The starting point on which this idea is based is the coarse-grained procedure we employ, that is the Iterative Boltzmann Inversion  (IBI). 
 For a detailed description of the IBI see \cite{ibm}, and here report only the necessary aspects which are of interest in the development of the procedure of this paper.
@@ -137,10 +140,12 @@ As a consequence the adaptive coupling, in terms of force acting on the molecule
  It is interesting to note that since $\left({\frac{\partial\mu}{\partial\rho}}\right)_{V,T}=\frac{1}{[\rho]^{2}\kappa}$, we can conclude that this procedure is conceptually equivalent to that labelled (ii) in the previous section, but with the advantage of a much higher computational efficiency.
 The approach outlined in this section has been named ``effective Grand Canonical'' because has the characteristic of a standard Grand Canonical system regarding the coupling to a particle reservoir and because the particle number fluctuations in the AT e CG region are preserved. However is an ``effective'' approach because one does not have a direct access to the chemical potential $\mu$ (key quantity for a formal derivation of the partition function in the Grand Canonical ensemble) and because the particle reservoir is finite. The application to liquid water at ambient conditions \cite{prlgc} and to water-methanol mixtures \cite{debash} has proven that the method gives very accurate numerical results if compared with the (by far more expensive) full AT simulations of reference. This means that regarding the computational as well as conceptual robustness of the method the level reached is highly satisfying, however in this work we attempt to define a path to a further systematic improvement, focusing on the reproduction of properties in the transition region $\Delta$.
 This is reported in the next section.
+
 \section{Second order correction to the coupling force}
 The transition region $\Delta$ has a role of a filter that allows molecules to transit from one region to the other without perturbing the equilibrium of the AT and CG region. While properties in the AT and CG region have a physical meaning, $\Delta$ does not have any physical meaning but represents only a computational convenient tool. In this sense, what is relevant is that quantities  as the $g(r)$, $\kappa$ and the local particle number fluctuations are the same in the AT and CG region (and in turn equal to those of a reference full AT simulation), but it is not necessary that they are same in $\Delta$.
 The only significant requirement in $\Delta$ is that the average particle density is the same as in AT and CG region; in fact depletion or increasing of density in $\Delta$ would create artifacts in the AT and CG region. The proper behaviour of the density in $\Delta$ is assured by the application of 
 ${\v F}^{\textrm{th}}(x)$. However, if there exists a systematic procedure which allows, without massive additional computational costs, also for the $g(r)$, $\kappa$ and the local particle number fluctuations to properly behave in $\Delta$ (that is to be as in the AT and CG region) and assures global thermodynamic equilibrium, then the coupling will be much smoother and would avoid the possibility of any artifacts at the boundaries of the various regions; moreover, by construction, the numerical accuracy should be higher also in the AT and CG region. In the following we show an approach which fulfills the requirements above. To do so, we extend the coupling formula: ${\v F}_{\alpha}=\sum_{\beta}{\v F}_{\alpha\beta}+{\v F}^{\textrm{th}}(x_{\alpha})$, by adding a further force, which assures that the $g(r)$ in $\Delta$ is the same as in the AT and CG region, thus preserves $\kappa$ and the particle number fluctuations without perturbing the thermodynamic equilibrium. We will refer to such an approach as {\it ``second order correction''}; this, because while ${\v F}^{\textrm{th}}(x)$ is based on the correction of the first momentum of the probability distribution of the system in phase space $\rho(x)$, the new additional term is derived as a correction to the second momentum of the distribution, $g(r)$. The technical details of the procedure and the numerical results are shown is the next sections. Finally, we show that the correction to the $g(r)$ represents also a conceptual advancement; in fact it implies that, at least at the level of the COM-COM $g(r)$, the AT region is fully equivalent to a subsystem embedded in a larger full AT bath. That is a natural Grand Canonical ensemble and this it gives more solid formal basis to the approach. 
+
 
 \section{Determination of the force}
 The additional force which should be added up to the thermodynamic force in order to have a $g(r)$ in $\Delta$ as in the AT and CG region must satisfy the following requirements: {\bf (a)} it should act only in $\Delta$; {\bf (b)} it should not perturb the properties of the AT and CG region and the overall equilibrium of the system. In order to fulfil the requirements  above we have developed a scheme whose sequential steps are reported below.\\
@@ -194,6 +199,7 @@ Therefore, the resulting scheme consists of an iterative
 Boltzmann inversion-thermodynamic force iteration correction loop
 (IBI-TFI correction loop) to reproduce the correct density
 profile and $g(r)$ in $\Delta$ at the same time, (see Algorithm~\ref{algo:1}). 
+
 \algsetup{indent=2em}
 \begin{algorithm}
   \caption{IBI-TFI correction loop}
@@ -225,16 +231,15 @@ profile and $g(r)$ in $\Delta$ at the same time, (see Algorithm~\ref{algo:1}).
     \STATE ${\v F}^{\textrm{th}} \leftarrow \v F_{N_{\textrm{TFI}}+1}^{\textrm{th}}$
     \UNTIL {both ${\v F}^{\textrm{th}}$ and $\v F^{\textrm{rdf}}$ are converged}\\
     ${\v F}^{\textrm{th}}_0$ is determined following the procedure of Ref.\cite{prlgc}, the initial guess, $\v F^{\textrm{rdf}}_{0}$ is the potential of mean force. The structure of the Algorithm~\ref{algo:1} is rather simple though efficient: 
-in the outermost loop, the IBI and TFI are executed
-consequently, with fixed number of iterations $N_{\textrm{IBI}}$ and $N_{\textrm{TFI}}$,
-respectively. In practice, the TFI converges faster than IBI, so
-$N_{\textrm{TFI}} = 2$ and $N_{\textrm{IBI}} = 50$ provides results with satisfying accuracy.                                                            
+    in the outermost loop, the IBI and TFI are executed
+    consequently, with fixed number of iterations $N_{\textrm{IBI}}$ and $N_{\textrm{TFI}}$,
+    respectively. In practice, the TFI converges faster than IBI, so
+    $N_{\textrm{TFI}} = 2$ and $N_{\textrm{IBI}} = 50$ provides results with satisfying accuracy.
   \end{algorithmic}
 \end{algorithm}
 In the next section we will show the application of the method to the case of liquid water at 
 ambient condition as in Ref.\cite{prlgc}. We will show that higher accuracy regarding the $g(r)$ and the particle number fluctuation in $\Delta$ 
 can be reached and that basic thermodynamic relations (as the Grand Potential) are not perturbed by the additional correction on the forces.
-
 
 \section{Application to Liquid Water}
 Fig.\ref{adapt-wat}, shows the AdResS set up for a system consisting of liquid water at ambient conditions (as in Ref.\cite{prlgc}) to which we have applied the procedure reported in the previous section (technical details of the simulation can be found in the Appendix). Here we show the numerical results for liquid water and prove that our approach represents a successful refinement of the original method of Ref.\cite{prlgc}. 
@@ -247,7 +252,7 @@ Fig.\ref{adapt-wat}, shows the AdResS set up for a system consisting of liquid w
 Fig.\ref{fig:tmp4} shows the $g(r)$ in the $\Delta$ region after the IBI-TFI iteration loop is applied. The agreement with the reference all atom calculation is highly satisfactory. Moreover, the comparison with the results obtained employing the thermodynamic force only (as in Ref.\cite{prlgc}) shows that the additional force, $\v F^{\textrm{rdf}}$, proposed here allows for a sizeable improvement of the structural consistency across the simulation box. The accuracy reached in this case becomes more evident if one considers the $g(r)$ calculated locally in subregions of $\Delta$ across the box; this is shown in Fig.\ref{fig:tmp7}. In the situation where the disagreement on the $g(r)$ in $\Delta$ between the AdResS of Ref.\cite{prlgc} and the reference all atom simulation is larger, that is the central region of $\Delta$ (of about $9.0\, \textsf{nm}$ extension; bottom-left panel in Fig.\ref{fig:tmp7}), the application of the  IBI-TFI correction loop instead significantly improves the situation. 
 \begin{figure}
   \centering
-  \includegraphics[width=0.69\textwidth]{fig.2/rdf.eps}
+  \includegraphics[width=0.69\textwidth]{rdf.eps}
   \caption{The $g(r)$ in $\Delta$ after the IBI-TFI correction loop is applied.  The
     curves obtained after the first, second and the fourth iteration step are represented in red, green and blue solid lines respectively.  The
     curve obtained from the reference explicit all atom calculation (EX) is represented with a solid pink line. However, it must be noted that this latter 
@@ -260,10 +265,10 @@ is overlapping with the other lines, and cannot be seen from the
 \end{figure} 
 \begin{figure}
   \centering
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-ex-cg.eps}
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-425-516.eps}
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-516-608.eps}
-  \includegraphics[width=0.49\textwidth]{fig.2/rdf-608-700.eps}
+  \includegraphics[width=0.49\textwidth]{rdf-ex-cg.eps}
+  \includegraphics[width=0.49\textwidth]{rdf-425-516.eps}
+  \includegraphics[width=0.49\textwidth]{rdf-516-608.eps}
+  \includegraphics[width=0.49\textwidth]{rdf-608-700.eps}
   \caption{Local $g(r)$'s. The red line is the curve corresponding to the reference explicit AT
     simulation. The curves corresponding to the simulation where only the thermodynamic force is applied, for the case of  
     the old weighting function Eq.\eqref{eqn:old-w} and
@@ -387,7 +392,6 @@ $0.90\textsf{nm}$. The electrostatic interaction method used for the
 explicit region was the reaction field method. All simulations were
 performed by MD simulation software Gromacs \cite{gromacs}
 and VOTCA \cite{ruehle2009versatile}.
-
 
 
 
