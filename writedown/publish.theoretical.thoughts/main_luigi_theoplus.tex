@@ -76,7 +76,7 @@ where $\alpha$ and $\beta$ labels two molecules, ${\v F}_{\alpha\beta}^{AT}$ is 
   \right.
 \end{align}
 where $d_{\textrm{AT}}$ and $d_{{\Delta}}$ are the size of the
-explicit and hybrid region, respectively and $x$ is the $x$-coordinate of the COM of a molecule measured along the $x$-axis as defined in Fig.\ref{adapt}.
+atomistic and hybrid region, respectively and $x$ is the $x$-coordinate of the COM of a molecule measured along the $x$-axis as defined in Fig.\ref{adapt}.
 The CG potential is derived from a reference full AT simulation and is such that it reproduces structural or thermodynamic properties of the reference full AT system; later we will discuss the coarse-graining procedure in more detail. The way the force of Eq.\ref{force} acts between the molecules is illustrated in Fig.\ref{inter}. 
 \begin{figure}
   \centering
@@ -255,7 +255,7 @@ Fig.\ref{fig:tmp4} shows the $g(r)$ in the $\Delta$ region after the IBI-TFI ite
   \includegraphics[width=0.69\textwidth]{rdf.eps}
   \caption{The $g(r)$ in $\Delta$ after the IBI-TFI correction loop is applied.  The
     curves obtained after the first, second and the fourth iteration step are represented in red, green and blue solid lines respectively.  The
-    curve obtained from the reference explicit all atom calculation (EX) is represented with a solid pink line. However, it must be noted that this latter 
+    curve obtained from the reference atomistic calculation (AT) is represented with a solid pink line. However, it must be noted that this latter 
 is overlapping with the other lines, and cannot be seen from the
     plot. The curve obtained by applying simply the thermodynamic force correction (only TF),  thus without
     correction on the $g(r)$, is in black. The two insets
@@ -269,7 +269,7 @@ is overlapping with the other lines, and cannot be seen from the
   \includegraphics[width=0.49\textwidth]{rdf-425-516.eps}
   \includegraphics[width=0.49\textwidth]{rdf-516-608.eps}
   \includegraphics[width=0.49\textwidth]{rdf-608-700.eps}
-  \caption{Local $g(r)$'s. The red line is the curve corresponding to the reference explicit AT
+  \caption{Local $g(r)$'s. The red line is the curve corresponding to the reference AT
     simulation. The curves corresponding to the simulation where only the thermodynamic force is applied, for the case of  
     the old weighting function Eq.\eqref{eqn:old-w} and
     the new weighting function Eq.\eqref{eqn:new-w} are denoted by the
@@ -283,7 +283,7 @@ The top-left panel corresponds to the AT and CG case; the top-right to the subre
 closer to the AT region; the bottom-left panel corresponds to the  subregion HY II of $\Delta$, where the level of {\it hybridicity} is the highest, and thus the most delicate case; the bottom-right panel corresponds to the  subregion HY III of $\Delta$, that is closer to the CG region. The insets show the details at the first peak and the first valley.}
   \label{fig:tmp7}
 \end{figure}
-Next we must show that the IBI-TFI correction loop does not perturb the uniform density profile across the box. Fig.\ref{rho}, shows that at the very first step of the procedure, when $\v F^{\textrm{rdf}}(\v r_{\alpha\beta})$ is applied and ${\v F}^{\textrm{th}}$ is not updated, the density is perturbed. However, despite this initial perturbation, already at the first step of the IBI-TFI iteration loop the density converges towards a uniform profile and that only four steps are required to have a highly satisfied agreement with the results of the explicit all atom reference simulation.
+Next we must show that the IBI-TFI correction loop does not perturb the uniform density profile across the box. Fig.\ref{rho}, shows that at the very first step of the procedure, when $\v F^{\textrm{rdf}}(\v r_{\alpha\beta})$ is applied and ${\v F}^{\textrm{th}}$ is not updated, the density is perturbed. However, despite this initial perturbation, already at the first step of the IBI-TFI iteration loop the density converges towards a uniform profile and that only four steps are required to have a highly satisfied agreement with the results of the   atomistic reference simulation.
 \begin{figure}
   \centering
   \includegraphics[width=0.59\textwidth]{rho.eps}
@@ -383,13 +383,13 @@ This work was partially supported by the Deutsche Forschungsgemeinschaft (DFG) w
 The testing system contained 3456 SPC/E \cite{berendsen1987missing}
 water molecules in a $7.50\textsf{nm}\times 3.72\textsf{nm}\times
 3.72\textsf{nm}$ periodic box. The system was divided along the $x$ direction
-into one explicit region of width $1.00\textsf{nm}$ and one
+into one atomistic region of width $1.00\textsf{nm}$ and one
 coarse-grained region of width $1.00\textsf{nm}$ connected by two
 hybrid region of width $2.75\textsf{nm}$. The simulation was made at
 room temperature of $300\textsf{K}$. The time step was $\Delta t =
 0.002\textsf{ps}$. The cut-off radius $r_{c}$ used for all interactions was
 $0.90\textsf{nm}$. The electrostatic interaction method used for the
-explicit region was the reaction field method. All simulations were
+atomistic region was the reaction field method. All simulations were
 performed by MD simulation software Gromacs \cite{gromacs}
 and VOTCA \cite{ruehle2009versatile}.
 
