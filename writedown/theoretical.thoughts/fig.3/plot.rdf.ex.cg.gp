@@ -32,7 +32,7 @@ set xtics .02
 set ytics .2
 
 pl\
-'rdf.com.xvg' w l ls 1 not 'EX',\
+'rdf.com.xvg' w l ls 1 not 'AT',\
 'run.04_02_02.old.noibi/rdf.inter.9/rdf.375-425.out' w l ls 2 not 'TFI old w',\
 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.375-425.out' w l ls 3 not 'TFI new w',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.375-425.out' w l ls 4 not 'TFI-IBI new w'
@@ -75,7 +75,7 @@ set arrow from .37, 2.8 to .31, 2.8 lw 1
 set arrow from .40, 1.3 to .36, 1.1 lw 1
 
 pl 1 ls 20 not,\
-'rdf.com.xvg' w l ls 1 t 'EX',\
+'rdf.com.xvg' w l ls 1 t 'AT',\
 'run.04_02_02.old.noibi/rdf.inter.9/rdf.375-425.out' w l ls 2 t 'TFI old w',\
 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.375-425.out' w l ls 3 t 'TFI new w',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.375-425.out' w l ls 4 t 'TFI-IBI new w',\
@@ -106,7 +106,7 @@ set label "CG" at 3.4,-.2
 
 pl\
 'print.w/grid.out' w l ls 20 not,\
-'print.w/EX.CG.out' w filledcurve lc 0 not,\
+'print.w/AT.CG.out' w filledcurve lc 0 not,\
 'print.w/old.w.out' w l ls 2 t'old w',\
 'print.w/new.w.out' w l ls 3 t'new w'
 
@@ -115,27 +115,27 @@ unset multiplot
 
 # set out 'rdf.375-425.eps'
 # pl\
-# 'rdf.com.xvg' w l ls 1 t 'EX',\
+# 'rdf.com.xvg' w l ls 1 t 'AT',\
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.375-425.out' w l ls 2 t 'TFI',\
 # 'run.04_02_02.allCorr/rdf.inter.9/rdf.375-425.out' w l ls 3 t 'TFI-IBI' \
 
 # set out 'rdf.605-695.eps'
 # pl\
-# 'rdf.com.xvg' w l ls 1 t 'EX',\
+# 'rdf.com.xvg' w l ls 1 t 'AT',\
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.605-695.out' w l ls 2 t 'TFI',\
 # 'run.04_02_02.allCorr/rdf.inter.9/rdf.605-695.out' w l ls 3 t 'TFI-IBI' \
 
 # set out 'rdf.695-750.eps'
 # pl\
-# 'rdf.com.xvg' w l ls 1 t 'EX',\
+# 'rdf.com.xvg' w l ls 1 t 'AT',\
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.695-750.out' w l ls 2 t 'TFI',\
 # 'run.04_02_02.allCorr/rdf.inter.9/rdf.695-750.out' w l ls 3 t 'TFI-IBI' \
 
 
 # set out 'rdf.tfi.all.eps'
 # pl\
-# 'rdf.com.xvg' w l ls 1 t 'EX',\
-# 'run.04_02_02.allCorr/rdf.inter.9/rdf.375-425.out' w l ls 2 t 'EX',\
+# 'rdf.com.xvg' w l ls 1 t 'AT',\
+# 'run.04_02_02.allCorr/rdf.inter.9/rdf.375-425.out' w l ls 2 t 'AT',\
 # 'run.04_02_02.allCorr/rdf.inter.9/rdf.425-515.out' w l ls 3 t 'HY I',\
 # 'run.04_02_02.allCorr/rdf.inter.9/rdf.515-605.out' w l ls 4 t 'HY II',\
 # 'run.04_02_02.allCorr/rdf.inter.9/rdf.605-695.out' w l ls 5 t 'HY III',\
@@ -143,8 +143,8 @@ unset multiplot
 
 # set out 'rdf.old.all.eps'
 # pl\
-# 'rdf.com.xvg' w l ls 1 t 'EX',\
-# 'run.04_02_02.old.noibi/rdf.inter.9/rdf.375-425.out' w l ls 2 t 'EX',\
+# 'rdf.com.xvg' w l ls 1 t 'AT',\
+# 'run.04_02_02.old.noibi/rdf.inter.9/rdf.375-425.out' w l ls 2 t 'AT',\
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.425-515.out' w l ls 3 t 'HY I',\
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.515-605.out' w l ls 4 t 'HY II',\
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.605-695.out' w l ls 5 t 'HY III',\

@@ -35,7 +35,7 @@ set label 'CG' at 3.37, .16
 
 pl\
 'grid4.dat' w l ls 20 not,\
-'./run.04_02_02.atom.long/count.out'		u ($1-3.75):6:($7*2) w e ls 1 not, '' u ($1-3.75):6 w l ls 1 t'EX',\
+'./run.04_02_02.atom.long/count.out'		u ($1-3.75):6:($7*2) w e ls 1 not, '' u ($1-3.75):6 w l ls 1 t'AT',\
 './run.04_02_02.old.noibi.long/count.out'	u ($1-3.75):6:($7*2) w e ls 2 not, '' u ($1-3.75):6 w l ls 2 t'TFI old w',\
 './run.04_02_02.noibi.long/count.out'		u ($1-3.75):6:($7*2) w e ls 3 not, '' u ($1-3.75):6 w l ls 3 t'TFI new w',\
 './run.04_02_02.allCorr.m50.long.step15/count.out' u ($1-3.75):6:($7*2) w e ls 4 not, '' u ($1-3.75):6 w l ls 4 t'TFI-IBI new w'

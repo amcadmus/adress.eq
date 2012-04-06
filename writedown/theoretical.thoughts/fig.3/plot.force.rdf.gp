@@ -45,7 +45,7 @@ set tmargin 0
 set bmargin 0
 set xtics 1
 #set xlabel "step of interation"
-#set ylabel "P_{EX}V - P_{CG}V [ KJ/mol ]" font "Helvetica,10"
+#set ylabel "P_{AT}V - P_{CG}V [ KJ/mol ]" font "Helvetica,10"
 # set ytics 1 font "Helvetica,12"
 # set xtics 1 font "Helvetica,12"
 set xlabel 'steps of iteration' font "Helvetica,12"
