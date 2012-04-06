@@ -78,6 +78,11 @@ For the distribution of the system we have:
 \begin{equation}
 \rho_{N}({\bf r},{\bf p},t)=S^{\dagger}_{N}(t)\rho_{N}({\bf r},{\bf p},0)
 \end{equation}
+% \bluec{ Noted by Han: This may be problematic, because I am not sure
+%   if the probabilty density of an OPEN subsystem can be evolved by the
+%   Liouville operator for a subsystem with FIXED number of particles
+%   $N$.  Actually this equation assumes the number of particle in the
+%   system is a constant, which may not be the case under perturbation.}
 An observable $\hat{O}$ of the system evolves as:
 \begin{equation}
 \hat{O}_{N}(t)=\hat{O}({\bf r}(t),{\bf p}(t),N)=S_{N}(t)\hat{O}(0)
@@ -103,12 +108,100 @@ Now its average over the realizations $N$ follows as:
 \left<\left<\hat{J}(t|N)\right>\right>_{N}=\sum_{N}p(N)\hat{J}_{N}(t)=\sum_{N}\int d{\bf r}d{\bf p}\hat{J}_{N}(t)\rho_{N}({\bf r},{\bf p}, t=0)
 \end{equation}
 where it must be noticed that $\rho_{N}({\bf r},{\bf p}, t=0)$ is the $\rho_{equil}({\bf r},{\bf p})$.
+\bluec{Noted by Han:
+  It is unclear for me that maybe $p(N)$ is also a function of time
+  under perturbation. How to deal with it?}
 This obvious extension is physically correct.
 Let us see how to implement it. We have taken an initial condition with a given number of particles. Then, starting from this initial condition we allowed the system to freely evolve (with no constraints on $N$) and let the system go to the Grand Canonical equilibrium. Then we picked from time to time at regular intervals of time, initial conditions for the perturbed dynamics each with its $N$ kept fixed. After certain time we will have picked up a statistically significant realizations with different possible $N$ from the distribution $P(N)$.\\
 The difference between the Grand Canonical approach and the Canonical approach is that:\\
 (a)We need long non equilibrium trajectories to be sure that we sample enough segments with given $N$ along the non equilibrium trajectories\\
 (b)A number of initial conditions with different $N$ large enough to be meaningful, that is, a dense branching along the Grand Canonical equilibrium trajectory.\\
 In any case the advantage of this approach compared to an all atom simulation is the drastic reduction of computational cost of each simulation. 
+
+
+\section{An alternative consideration}
+If we assume that the Observable we are interested can be expend by:
+\begin{align}
+  \hat O(\v r, \v p) =
+  \sum_i\hat O^{(1)}(\v r_i, \v p_i) +
+  \sum_{i\neq j}\hat O^{(2)}(\v r_i, \v p_i; \v r_j, \v p_j),
+\end{align}
+namely, we can explicitly writen down the single and pairwise
+component of the observable (this is the case for most of the
+properties, such as energy, pressure, density, RDF, etc.). We further
+assume $\hat O^{(1)}$ and $\hat O^{(2)}$ are smooth up to the infinite
+order (this may not be the case, but it is possible to polish these
+observables and consider the limit of the parameter in the end. So the
+smoothness of the observables is not essential in this argument).
+
+Now assume that the grand-canonical system as a subsystem of an
+``infinitely'' large canonical system. We denote the domain of the
+subsystem by $\Omega$. $\v r_1, \cdots, \v r_N, \v p_1, \cdots, \v
+p_N$ are all degrees of freedoms in the large canonical system.  The
+motion of particle is govened by a perturbed Liouville equation.  The
+observable of the interested sub grand canonical can be written as a
+function of the degrees of freedoms of the large canonical system,
+revised by some proper screening function that shields the unconcerned
+degrees of freedoms outside of the subsystem:
+\begin{align}
+  \hat O_{\textrm{sub-gc}}(\v r, \v p) =
+  \sum_i
+  \chi_\Omega(\v r_i)\,\hat O^{(1)}(\v r_i, \v p_i) +
+  \sum_{i\neq j}
+  \frac12 \,[\,
+  \chi_\Omega(\v r_i) + \chi_\Omega(\v r_j)
+  \,]\,
+  \hat O^{(2)}(\v r_i, \v p_i; \v r_j, \v p_j),  
+\end{align}
+where $\chi_\Omega$ is defined by
+\begin{align}
+  \chi_\Omega(\v r)=
+  \left\{
+    \begin{array}{lcl}
+      1 &\qquad\qquad& \v r \in \Omega; \\
+      0 && \textrm{otherwise}.
+    \end{array}
+  \right.
+\end{align}
+Again, though the screening funciton $\chi_\Omega$ is not smooth, it
+can be polished by some infinitly smooth function and consider the
+limit of the polishing parameter in the end.  Following the argument
+for the nonequilibrium canonical system:
+% , we have the similar argument
+% for the grand canonical subsystem:
+\begin{align}\nonumber
+  O_{\textrm{sub-gc}}(t)
+  & = \langle \hat O_{\textrm{sub-gc}}(\v r, \v p)\rangle_t\\\nonumber
+  & =
+  \int
+  \hat O_{\textrm{sub-gc}}(\v r, \v p) \rho(\v r, \v p, t)\,
+  \d d\v r\d d\v p\\\nonumber
+  & =
+  \int
+  \hat O_{\textrm{sub-gc}}(\v r, \v p) S(t)\rho(\v r, \v p)\,
+  \d d\v r\d d\v p\\\nonumber
+  & =
+  \int
+  S^{\dagger}(t)\hat O_{\textrm{sub-gc}}(\v r, \v p) \rho(\v r, \v p)\,
+  \d d\v r\d d\v p\\
+  & =
+  \int
+  \hat O_{\textrm{sub-gc}}(\v r(t), \v p(t)) \rho(\v r, \v p)\,
+  \d d\v r\d d\v p
+\end{align}
+The $\rho$ is the standard canonical density distribution, which
+includes all information of the grand canonical subsystem (especially
+$p(N)$). The point is that we are able to study the observable of the
+grand canonical subsystem (as a function of time), by the
+non-equilibrium time evolution of the large canonical system, whose
+governing function is well defined (do not need to consider the
+exchange of particles, which is considered by $\rho(\v r, \v p, t)$
+automatically).
+
+
+
+
+
 \bibliography{ref}{}
 \bibliographystyle{unsrt}
 
