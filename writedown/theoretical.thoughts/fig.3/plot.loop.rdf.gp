@@ -30,7 +30,7 @@ set xtics .02
 set ytics .2
 
 pl\
-'rdf.com.xvg' u 1:2 w l ls 5 not 'AT' ,\
+'rdf.com.xvg' u 1:2 w l ls 5 not 'EX' ,\
 'rerun.04_02_02.step.000.tf//rdf.xvg' u 1:2 w l ls 10 not 'only TFI',\
 'rerun.04_02_02.step.001.tf//rdf.xvg' u 1:2 w l ls 1 not 'step 1',\
 'rerun.04_02_02.step.002.tf//rdf.xvg' u 1:2 w l ls 2 not 'step 2',\
@@ -67,7 +67,7 @@ set arrow from .37, 2.8 to .31, 2.8 lw 1
 set arrow from .40, 1.3 to .36, 1.1 lw 1
 
 pl  1 ls 20 not,\
-'rdf.com.xvg' u 1:2 w l ls 5 t 'AT' ,\
+'rdf.com.xvg' u 1:2 w l ls 5 t 'EX' ,\
 'rerun.04_02_02.step.000.tf//rdf.xvg' u 1:2 w l ls 10 t 'only TF',\
 'rerun.04_02_02.step.001.tf//rdf.xvg' u 1:2 w l ls 1 t 'step 1',\
 'rerun.04_02_02.step.002.tf//rdf.xvg' u 1:2 w l ls 2 t 'step 2',\

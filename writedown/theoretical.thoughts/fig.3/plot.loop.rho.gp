@@ -23,7 +23,7 @@ set xlabel 'x [nm]'
 set ylabel '{/Symbol r}(x) [ kg/m^3 ]'
 set key bottom right
 
-pl  995.77 t'AT' ls 5,\
+pl  995.77 t'EX' ls 5,\
 'grid3.dat' w l ls 20 not,\
 'rerun.04_02_02.step.001.ibi/rho.out' u ($1-3.7500):2:3 w e ls 1 not 'step 1', '' u ($1-3.7500):2 w l ls 11 t 'step 1, after IBI before TFI',\
 'rerun.04_02_02.step.001.tf/rho.out' u ($1-3.7500):2:3 w e ls 1 not 'step 1', '' u ($1-3.7500):2 w l ls 1 t 'step 1',\

@@ -32,7 +32,7 @@ set xtics .02
 set ytics .2
 
 pl\
-'rdf.com.xvg' w l ls 1 not 'AT',\
+'rdf.com.xvg' w l ls 1 not 'EX',\
 'run.04_02_02.old.noibi/rdf.inter.9/rdf.516-608.out' w l ls 2 not 'TFI old w',\
 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.516-608.out' w l ls 3 not 'TFI new w',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.516-608.out' w l ls 4 not 'TFI-IBI new w'
@@ -75,7 +75,7 @@ set arrow from .37, 2.8 to .31, 2.8 lw 1
 set arrow from .40, 1.3 to .36, 1.1 lw 1
 
 pl 1 ls 20 not,\
-'rdf.com.xvg' w l ls 1 t 'AT',\
+'rdf.com.xvg' w l ls 1 t 'EX',\
 'run.04_02_02.old.noibi/rdf.inter.9/rdf.516-608.out' w l ls 2 t 'TFI old w',\
 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.516-608.out' w l ls 3 t 'TFI new w',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.516-608.out' w l ls 4 t 'TFI-IBI new w',\
