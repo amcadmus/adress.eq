@@ -61,12 +61,11 @@ where the partition function $\mathcal Q_1$ is defined by
   \dd d\vect x\,
   e^{\beta\mu_{\AT} N_1 - \beta \mathcal H_{N_1}^{\AT}(\vect x_1)}
 \end{align}
-To make things simplier, the considerations will be made in two steps
-by the following splitting:
+Let us consider:
 \begin{align}
   p(\vect x_1, N_1) = p(\vect x_1 | N_1)\,p(N_1)
 \end{align}
-For a real grand-canonical ensemble, $p(\vect x_1 | N_1)$ and $p(N_1)$
+rigorously speaking, for a truly grand-canonical ensemble, $p(\vect x_1 | N_1)$ and $p(N_1)$
 should be
 \begin{align}\label{eqn:p-1}
   p(\vect x_1 | N_1) &= \frac{1}{Q_{N_1}} e^{-\beta \mathcal H_{N_1}^{AT}(\vect x_1)} \\\label{eqn:p-2}
@@ -79,30 +78,29 @@ with $N_1$ atomistic molecules:
   \int\dd d\vect x\,
   e^{ - \beta \mathcal H_{N_1}^{\AT}(\vect x_1)}
 \end{align}
-Remeber, we always compare the distributions of the AdResS simulation
-with a full atomistic reference system, which is imaginarily devided
-in to AT, $\HY$ and CG regions with the same size as the AdResS
-simulation. So what we first do is to fix the number in the atomistic
+It must be kept in mind that we always compare the distributions of the AdResS simulation
+with a those of a full atomistic reference system, which is ideally divided
+in subregions corresponding to the AT, $\HY$ and CG regions of the AdResS
+simulation. The first step in our procedure is to fix the number of molecules in the atomistic
 region and consider the conditional probabilty $p(\vect x_1 |
-N_1)$. If AdResS subjects to the grand-canonical ensemble, this
+N_1)$. If the AdResS set up, leads to the Grand Canonical ensemble, this
 probabilty should be the same as the corresponding one of a full
-atomistic reference system, namely Eqn.~\eqref{eqn:p-1}.  Then, if the
+atomistic reference system, namely Eqn.~\eqref{eqn:p-1} (natual Grand Canonical).  Then, if the
 probablity of finding $N_1$ molecules in the atomistic region is also
 the same as the full atomistic reference system, namely
-Eqn.~\eqref{eqn:p-2}, we can savely say the atomistic region of AdResS
-samples the grand-canonical ensemble.
+Eqn.~\eqref{eqn:p-2}, we can savely state that the atomistic region of AdResS
+samples configurations in a Grand Canonical fashion.
 
 
 \subsection{Probability $p(\vect x_1 | N_1)$}
-To prove, the probability $p(\vect x_1 | N_1)$ is splitted by two
-parts:
+To prove the statement above, the probability $p(\vect x_1 | N_1)$ is divided into two parts:
 \begin{align}
   p(\vect x_1 | N_1) = \sum_{N_2}\int
   p(\vect x_1 | N_1; \vect x_2, N_2) \,
   p(\vect x_2, N_2 | N_1)
-  \,\d d\vect x_2
+  \,\dd \vect x_2
 \end{align}
-$p(\vect x_1 | N_1; \vect x_2, N_2)$ is the probability of fixing the
+$p(\vect x_1 | N_1; \vect x_2, N_2)$ is the probability obtained by fixing the
 coordinates and number of particles in the region $\HY$ and considering
 the distribution of the DOFs in the AT region. As we have shown before,
 if we modify the weighting function by
@@ -130,24 +128,22 @@ with an atomistic Hamiltonian:
   \sum_{i,j=1}^{N_1}\frac12 U^{{\AT}}(\vect r_i - \vect r_j)  +
   \sum_{i=1}^{N_1}\sum_{j=N_1+1}^{N_2} U^{{\AT}}(\vect r_i - \vect r_j)   
 \end{align}
-which is exactly the same as the full atomistic reference system.  Now
-the problem is that if the probability in the $\HY$ region, $p(\vect
-x_2, N_2 | N_1)$ is the same as the atomistic reference
+which is exactly the same as the full atomistic reference system.  At this point, the key question is that whether the probability in the $\HY$ region, $p(\vect
+x_2, N_2 | N_1)$ is the same as that of the full atomistic reference
 system. Generally, this seems not be the case, but it is possible to
-raise some necessary conditions for the system. The simplest ones are
-the marginaly distribution functions, namely
+derive necessary conditions to this aim. The simplest ones invole
+the marginal distribution functions, namely
 \begin{align}
   \rho_{\HY}(\vect r) &= \rho_{\AT}(\vect r)\\
   g_{\HY}( r) &= g_{\AT}(r)
 \end{align}
-The first order marginal distribution is the density profile
+The first order marginal distribution is the particle (or molecular) density 
 $\rho_{\HY}(\vect r)$, while the second order marginal distribution is
-the radial distribution function (RDF), saying $g_{\HY}(r)$. As necessary
-conditions, they should be the same as those of the fully atomistic
-reference system.
+the radial distribution function (RDF), $g_{\HY}(r)$. The necessary
+conditions are that these two distribution should be the same as those of the fully atomistic reference system.
 
 
-\subsection{Discussion on the thermal dynamic force}
+\subsection{Discussion about the thermodynamic force}
 \begin{figure}
   \centering
   \begin{minipage}[t]{0.49\linewidth}
@@ -159,32 +155,29 @@ reference system.
   \caption{Schematic plot of the AdResS system in thermodynamic equilibrium}
   \label{fig:tmp1}
 \end{figure}
-
-To invesitigate, two assumptions are made:
+Here, two assumptions are made:
 \begin{enumerate}
-\item $N_2\ {\ll}\ N_1 \ll N_3$: the second inequity corresponds to
+\item $N_2\ {\ll}\ N_1 \ll N_3$: the second inequality corresponds to
   the thermodynamic limit of the grand-canonical ensemble. The first
-  one actually assumes the $\HY$ region is infinitely thin so that it
-  can be viewed as a film that allows free passing of molecules from
-  the AT region to the CG region and vise versa.
-\item An additive Hamiltonian:
+  one actually assumes that the $\HY$ region is infinitely thin so that it
+  can be viewed as an infinitesimal membrane that allows free exchange of molecules from
+  the AT region to the CG region and vice versa.
+\item We now define a supplementary Hamiltonian:
   \begin{equation}
     \mathcal H(\vect x_1, N_1; \vect x_3, N_3) =
     \mathcal H_{N_1}^{\AT}(\vect x_1) + \mathcal H_{N_3}^{\CG}(\vect x_3); 
   \end{equation}
-  This is true, to the thermodynamic limit, if the system is
+  The condition above is true, in the thermodynamic limit, if the system is
   short-range correlated.
 \end{enumerate}
-At this point, we would like to include the influence of the thermal
-dynamic force. Conceptionally, we assume there is an infinitely thin
+The equilibrium in the AT and CG region is assured by the membrane $HY$ via the thermodynamic force. Conceptually, we assume there is an infinitely thin
 ``filter'' (see Fig.~\ref{fig:tmp1}) located at the interface between
-the AT and CG regions. When a molecule travel from the CG region to
-the AT region, the filter does work $\omega_0$ to the system.
-Therefore, the Hamiltonian of the system has an addtional term
-$N_1\omega_0$, which denotes the work done by the thermal dynamic
-force.  Fixing the number in the three regions, and following the
-arguments in the last section, both the AT and the CG regions are
-subject to the Boltzmann distribution. The partition function of the
+the AT and CG regions. When a molecule travels from the CG region to
+the AT region, the filter does some work $\omega_0$ on the system.
+Therefore, we add an empirical term in the Hamiltonian of the system
+$N_1\omega_0$, which denotes the work done by the thermodynamic force.  having Fixed the number of molecules in the three regions, and by following the
+arguments of the last section, both the AT and the CG regions are
+subject to the Boltzmann distribution. Thus, the partition function of the
 system reads
 \begin{align}\nonumber
   q(N,V,T)
@@ -208,7 +201,7 @@ system reads
   Q_{\AT}(N_1, V_1, T)\,
   Q_{\CG}(N_3, V_3, T) 
 \end{align}
-Considering the mutation of particles, the number of possibilities of
+Considering the permutations of particles, the number of possibilities of
 $N_1$ molecules being in the atomistic region and $N_3$ molecules being
 in the coarse-grained region is  $\frac{N!}{N_1!N_3!}$.
 Therefore, the partition function of the whole system reads
@@ -223,7 +216,7 @@ Therefore, the partition function of the whole system reads
   Q_{\AT}(N_1, V_1, T)\,
   Q_{\CG}(N_3, V_3, T) 
 \end{align}
-with natural constrains:
+with natural constraints:
 \begin{align}
   N &= N_1 + N_3\\
   V &= V_1 + V_3
@@ -257,37 +250,34 @@ or equivalently
 \end{align}
 Where $A$ denotes the Helmhotz free energy.  $\bar N_1$ is the maximum
 parameter of $e^{-\beta N_1\omega_0} Q_{\AT}(N_1, V_1, T) \,Q_{\CG}(N - N_1,
-V_3, T)$. We will see later this maximum corresponds to the maximum
-value of probability $p(N_1)$, which is also the equilibrium molecular
-number in the AT region under thermal dynamic limit.  Since $\bar
-N_1$ is the maximum, derivative on the right hand side of
+V_3, T)$. We will see later that this maximum corresponds to the maximum
+value of probability $p(N_1)$; this is also the equilibrium molecular
+number in the AT region in the thermodynamic limit.  Since $\bar
+N_1$ is the maximum, by differentiation on the right hand side of
 Eqn.~\eqref{eqn:a-energy-1}, we have the relation:
 \begin{align}
   \omega_0 = \mu_{\CG}(N - \bar N_1, V_3, T)  - \mu_{\AT}(\bar N_1, V_1, T)
 \end{align}
-That means the chemical potential difference between the AT and CG
-regions is taken care by the thermal dynamic force.  To ensure an
+That means that the difference in the chemical potential between the AT and CG
+regions is taken care by the thermodynamic force.  To ensure an
 equilibrium that is the same as the full atomistic reference system,
-the work done by the thermal dynamic force should be the same as the
+the work done by the thermodynamic force should be the same as the
 chemical potential difference between the atomistic and coarse-grained
-resolutions (\textbf{notice the phrase ``the difference between the AT
-  and CG \textit{regions}'' and ``the difference between atomistic and
-  coarse-grained \textit{resolutions}'', they are different
-  concepts}), namely
+resolutions, namely
 \begin{align}\label{eqn:w-mu-diff}
   \omega_0 = \mu_{\CG}(\rho_0V_3, V_3, T) - \mu_{AT}(\rho_0 V_1, V_1, T)
 \end{align}
-$\rho_0$ is the density where the atomistic and coarse-grained
+$\rho_0$ is the density at which the atomistic and coarse-grained
 resolutions should match,
 namely $\bar N_1 = \rho_0V_1$ should apply.  This is a necessary
-condition for the right equilibrium of the AT and CG regions.\\
+condition for the correct equilibrium of the AT and CG regions.\\
 
 \noindent
-Now change the language of Helmhotz free
-energy to the grand potential.
-Under the thermal dynamic limit, they are the same.
+Now we translate from the language of Helmhotz free
+energy into that of the grand potential.
+Under the thermodynamic limit, they are the same.
 Assuming the system reaches an
-equilibrium of flat density profile of $\rho_0$, 
+equilibrium of flat density profile of $\rho_0$ all over the AdResS simulation box, 
 Eqn.~\eqref{eqn:a-energy-1} becomes:
 \begin{align}\label{eqn:g-energy-1}
   G(\mu, V, T) \approx
@@ -298,18 +288,18 @@ where
 \begin{align}
   G(\mu, V, T) = A(N, V, T) - \mu_{\AT} \bar N_1 - \mu_{\CG}(N - \bar N_1)
 \end{align}
-Because of the equilibrium, derivative of r.h.s. of
+Because of the equilibrium situation, dthe erivative of r.h.s. of
 Eqn.~\eqref{eqn:g-energy-1} with respect to atomistic volume $V_1$
 should vanishes (the same argument as the Helmhotz free energy):
 \begin{align}
   \rho_0\omega_0 = -p_{\AT}+p_{\CG} \quad\Longrightarrow\quad
   p_{\AT} + \rho_0\omega_0 = p_{\CG}
 \end{align}
-which is exactly the definition of the thermal dynamic force.
+which is exactly the definition of the thermodynamic force.
 
 
 \subsection{The number probability $p(N_1)$}
-Now consider the marginal distribution $p(N_1)$
+Now let us consider the marginal distribution $p(N_1)$
 \begin{align}\nonumber
   p(N_1)
   % &=
@@ -393,7 +383,7 @@ $p_{\AT}(N_1)$, we have the term denoted by $T_1$
   \big]
   \big\}
 \end{align}
-Since the atomistic region is much smaller than the whole system, it
+Since we work under the hypothesis taht the atomistic region is much smaller than the whole system, it
 is reasonable to assume $n_1 \ll N$ nad $N_1\ll N$. We have the following
 expansions:
 \begin{align}
@@ -408,7 +398,7 @@ expansions:
   - \mu_{\CG}\,N_1
   + \frac12 \kappa_{\CG}\,N_1^2 + \textrm{h.o.t.}
 \end{align}
-Remeber  the conditions:
+One should keep in mind the conditions:
 \begin{align}\label{eqn:mu-eq}
   \mu_{\CG} &= \mu_{\AT} + \omega_0\\\label{eqn:kappa-eq}
   \kappa_{\CG} &= \kappa_{\AT}
@@ -456,7 +446,7 @@ $p(N_1)$, we have the term denoted by $T_2$
   \big]
   \big\}
 \end{align}
-Do similar expansions and notice the conditions Eqn.~\eqref{eqn:mu-eq}
+with similar expansions and by noticing the conditions Eqn.~\eqref{eqn:mu-eq}
 and \eqref{eqn:kappa-eq}, we have:
 \begin{align}\nonumber
   T_2
@@ -476,7 +466,7 @@ and \eqref{eqn:kappa-eq}, we have:
   \big]
   \big\}
 \end{align}
-Therefore, term $T_1$ and $T_2$ are consistent to the second leading
+Therefore, term $T_1$ and $T_2$ are consistent with  the second leading
 order, which means $p(N_1)$ is a good approximation of $p_{\AT}(N_1)$
 to the second leading order.
 
