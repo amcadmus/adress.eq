@@ -64,7 +64,7 @@ where the partition function $\mathcal Q_1$ is defined by
 The marginal probability of finding $N_1$ molecules in the
 AT region is:
 \begin{align}\label{eqn:p-2}
-  p(N_1) = \int\dd d\,\vect x_1 p(\vect x_1, N_1)
+  p(N_1) = \int\dd d\vect x_1\, p(\vect x_1, N_1)
   =
   \frac{1}{\mathcal Q_1}e^{\beta\mu_{AT} N_1}Q_{N_1}
 \end{align}
@@ -98,7 +98,7 @@ Eqn.~\eqref{eqn:p-2}, we can safely state that the atomistic region of AdResS
 samples configurations in a Grand Canonical fashion.
 
 
-\subsection{Probability $p(\vect x_1 | N_1)$}
+\subsection{The probability $p(\vect x_1 | N_1)$}
 To prove the statement above, the probability $p(\vect x_1 | N_1)$ is divided into two parts:
 \begin{align}\label{eqn:divide-cond-p}
   p(\vect x_1 | N_1) = \sum_{N_2}\int
@@ -202,19 +202,19 @@ the AT and CG regions. When a molecule travels from the CG region to
 the AT region, the filter does some work $\omega_0$ on the system.
 Therefore, we add an empirical term in the Hamiltonian of the system
 $N_1\omega_0$, which denotes the work done by the thermodynamic force.
-\recheck{
-  Actually, here, it is better to argue in this way:
-  $w_0$ can be the work of any force, not necessarily thermodynamics force,
-  because here we do not put any special condition on $w_0$.
-  It is simply ``the work done by the filter'' and can be any value.
-  It is important to notice
-  an arbitrary $w_0$ can also ensure an equilibrium between
-  the AT and CG region, but this equilibrium is generally
-  wrong, i.e. $\rho_{\AT}\neq \rho_{\CG} \neq \rho_0$.
-  But anyway we can prove the under this equilibrium (which may be
-  wrong), the chemical potential difference between the AT and
-  CG regions is the work $w_0$.
-}
+% \recheck{
+%   Actually, here, it is better to argue in this way:
+%   $w_0$ can be the work of any force, not necessarily thermodynamics force,
+%   because here we do not put any special condition on $w_0$.
+%   It is simply ``the work done by the filter'' and can be any value.
+%   It is important to notice
+%   an arbitrary $w_0$ can also ensure an equilibrium between
+%   the AT and CG region, but this equilibrium is generally
+%   wrong, i.e. $\rho_{\AT}\neq \rho_{\CG} \neq \rho_0$.
+%   But anyway we can prove the under this equilibrium (which may be
+%   wrong), the chemical potential difference between the AT and
+%   CG regions is the work $w_0$.
+% }
 Having fixed the number of molecules in the three regions, and by following the
 arguments of the last section, both the AT and the CG regions are
 subject to the Boltzmann distribution.
@@ -256,7 +256,7 @@ Therefore, the partition function of the whole system reads
   Q_{\AT}(N_1, V_1, T)\,
   Q_{\CG}(N_3, V_3, T) 
 \end{align}
-with natural constraints:
+with natural relations:
 \begin{align}
   N &= N_1 + N_3\\
   V &= V_1 + V_3
@@ -301,16 +301,17 @@ is much larger than $\ln N$ under thermodynamic limit. This
 validates condition~\eqref{eqn:condition}.
 We will see later that this maximum corresponds to the maximum
 value of probability $p(N_1)$; this is also the equilibrium molecular
-number in the AT region in the thermodynamic limit.  Since $\bar
-N_1$ is the maximum, by differentiation on the right hand side of
+number in the AT region under the thermodynamic limit.  Since $\bar
+N_1$ is the maximum, by differentiating on the right hand side of
 Eqn.~\eqref{eqn:a-energy-1}, we have the relation:
 \begin{align}
   \omega_0 = \mu_{\CG}(N - \bar N_1, V_3, T)  - \mu_{\AT}(\bar N_1, V_1, T)
 \end{align}
 That means that the difference in the chemical potential between the AT and CG
-regions is taken care by the thermodynamic force.  To ensure an
+regions is taken care by the thermodynamic force.
+If the thermodynamic force ensures an
 equilibrium that is the same as the full atomistic reference system,
-the work done by the thermodynamic force should be the same as the
+the work should be the same as the
 chemical potential difference between the atomistic and coarse-grained
 resolutions, namely
 \begin{align}\label{eqn:w-mu-diff}
@@ -318,19 +319,20 @@ resolutions, namely
 \end{align}
 $\rho_0$ is the density at which the atomistic and coarse-grained
 resolutions should match,
-namely $\bar N_1 = \rho_0V_1$ should apply.
-\recheck{As we mentioned before, the work done by the filter
-  can be arbitrary, and may lead to a wrong equilibrium.
-  To ensure a right equilibrium, the necessary condition for
-  ``the work done by the filter'' is that it is the same
-  as the chemical potential difference between the
-  atomistic and coarse-grained resolutions. (Notice, the
-  conception is different from ``the chemical potential difference between
-  the AT and CG regions''. We should keep in mind this
-  difference to understand the argument correctly.
-}
-This is a necessary
-condition for the correct equilibrium of the AT and CG regions.\\
+namely $\bar N_1 = \rho_0V_1$ and $N - \bar N_1 = \rho_0(V - V_1)$ should apply.
+% \recheck{As we mentioned before, the work done by the filter
+%   can be arbitrary, and may lead to a wrong equilibrium.
+%   To ensure a right equilibrium, the necessary condition for
+%   ``the work done by the filter'' is that it is the same
+%   as the chemical potential difference between the
+%   atomistic and coarse-grained resolutions. (Notice, the
+%   conception is different from ``the chemical potential difference between
+%   the AT and CG regions''. We should keep in mind this
+%   difference to understand the argument correctly.
+% }
+Eqn.~\eqref{eqn:w-mu-diff} is a necessary
+condition for the thermodynamic force that ensures
+the correct equilibrium of the AT and CG regions.\\
 
 \noindent
 Now we translate from the language of Helmhotz free
@@ -356,12 +358,23 @@ should vanishes (the same argument as the Helmhotz free energy):
   p_{\AT} + \rho_0\omega_0 = p_{\CG}
 \end{align}
 which is exactly the definition of the thermodynamic force.
-\recheck{
-  This is an other necessary condition that ``the work
-  done by the filter'' ensures a right equilibrium.
-  Surprisingly, this necessary condition is exactly fitted
-  by the definition of the ``thermodynamic force''.
-}
+This is another necessary condition for the
+thermodynamic force, which is actually satisfied by the definition of it,
+namely:
+\begin{equation}
+  p_{AT}+
+  \frac{\rho_{0}}{M_\alpha}
+  \int_{\Delta} {\vect F}^\text{th}(x)\,\dd dx
+  =
+  p_{CG}
+\label{thf}
+\end{equation}
+% \recheck{
+%   This is an other necessary condition that ``the work
+%   done by the filter'' ensures a right equilibrium.
+%   Surprisingly, this necessary condition is exactly fitted
+%   by the definition of the ``thermodynamic force''.
+% }
 
 \subsection{The number probability $p(N_1)$}
 Now let us consider the marginal distribution $p(N_1)$
