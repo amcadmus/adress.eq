@@ -24,24 +24,127 @@
 \newcommand{\EX}{{\textrm{EX}}}
 \newcommand{\CG}{{\textrm{CG}}}
 \newcommand{\HY}{{\Delta}}
+\newcommand{\rdf}{{\textrm{rdf}}}
 
 
 
 \begin{document}
 
-\title{The theoretical considerations on the AdResS}
+\title{The reliability of AdResS as a way of
+sampling the Grand-Canonical ensemble}
 \author{Han Wang}
-% \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 \author{Carsten Hartmann}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 \author{Christof Sch\"utte}
-% \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 \author{Luigi Delle Site}
-% \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Berlin, Germany}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 
 \begin{abstract}
 \end{abstract}
 
 \maketitle
+
+\section{Introduction}
+% The Adaptive Resolution Simulation (AdResS) scheme~\cite{jcp,pre} is a
+% method that increase the resolution in some spacial regions in the
+% system, while keep the rest at lower resolution.
+The Adaptive Resolution Simulation (AdResS) scheme~\cite{jcp,pre} is a
+method that concurrently simulates a molecular system by different
+resolutions in different spacial regions.  The word ``resolution''
+means how much detail is included in a molecular model: the higher the
+resolution, the model is more precise, and the more computational
+effort is demanded, correspondingly.  The advantage is obvious: it
+keeps track of both of the local fine-grained processes in the
+high-resolution regions and the on-going large scale properties with a
+much lower computational expense comparing to the system that, as a
+whole, is described by the high-resolution model. The key feature of
+AdResS is that it allows an on-the-fly changing of resolution when a
+molecule travels from a high-resolution region to a low-resolution
+region and vice versa. Moreover, recent research~\cite{prlgc, rdfcorr}
+numerically demonstrates that different resolutions reach a
+thermodynamic equilibrium as if the whole system is equilibriated
+under the high-resolution description. Therefore, the a region with a
+certain resolution exchanges molecules with the rest of the system in
+a Grand-Canonical fashion. This work, from the theoretical point of
+view, studies the conditions, under which the AdResS is an effective
+Grand-Canonical simulation, and tries to shed light on the accuracy of
+the sampling.
+
+\section{A brief description of the AdResS scheme}
+
+In this work, the higher resolution refers to the atomistic
+description (AT) of a molecule, while the lower resolution refers to
+the its coarse-grained (CG) modeling.  We assume the dynamics of the
+system is subjected to the Langevin equation, which the thermostat
+usually used in the AdResS simulations:
+\begin{align}
+  \dd d\vect r_i &= \vect v_i\dd dt\\
+  m_i\dd d\vect v_i &= [-m_i\xi_i\vect v_i + \vect F_i]\,\dd dt + \sqrt{2\sigma_i}\,\dd d\vect W_t
+\end{align}
+where $\dd d\vect W_t$ is the standard Wiener process. We denote the
+phase space variable $\vect x = \{\vect r_i, \vect v_i\}$. $\vect r_i,
+\vect v_i$ are the degrees of freedoms (DOFs) of the system.  If the
+system is conservative, namely $\vect F_i = -\nabla_{\vect r_i}U$,
+then it is shown the equilibrium density distribution is $p(\vect
+x)\propto e^{-\beta\mathcal H(\vect x)}$. In the AdResS scheme,
+different resolutions in the system are described by a weighting
+function of position $w(\vect r)$. Usually the higher resolutions is
+denoted by $w = 1$, while the lower resolution is denoted by $w = 0$.
+Between the higher and lower resolutions, a hybrid region allows a 
+molecule has both the resolutions. The weighting function changes smoothly
+from 0 to 1. A possible weighting function is:
+\begin{align}\label{eqn:new-w}
+  w(\vect r) =
+  \left\{
+    \begin{array}{lcl}
+      1 &\quad& \chi < 0\\
+      1  && 0 < \chi < r_c\\
+      \cos^2\big[\frac{\pi}{2(d_{\HY} - r_c)} (\chi - d_{\textrm{ex}} - r_c)\big] && r_c < \chi < d_{\HY} \\
+      0 &&  d_{\HY}  < \chi.
+    \end{array}
+  \right.
+\end{align}
+Where $\chi$ is the distance to the boundary of the higher resolution
+region. $\chi < 0$ means the molecule is in the higher resolution
+region.  $d_{\HY}$ is the thickness of the hybrid region. $r_c$ is the
+cut-off radius.  The intermolecuar force is modeled by the following
+interpolation formula:
+\begin{align}
+  \vect F_{\alpha\beta} =
+  w_\alpha w_\beta\vect F^{\AT}_{\alpha\beta} +
+  [1-w_\alpha w_\beta]\vect F^{\CG}_{\alpha\beta} +
+  w_\alpha w_\beta (1-w_\alpha w_\beta)\vect F_{\alpha\beta}^{\rdf}.
+\label{grf}
+\end{align}
+Where $ \vect F^{\AT}_{\alpha\beta}$, $ \vect F^{\CG}_{\alpha\beta}$
+are the intermolecuar interaction of the atomistic and coarse-grained
+resolutions, respectively.  $\vect F_{\alpha\beta}^{\rdf}$ is the RDF
+correction force, and is determined by a TFI-IBI
+loop~\cite{rdfcorr}. On top of this interpolation formula, a
+thermodynamic force ${\vect F}^{\textrm{th}}$ is applied to ensure the
+right equilibrium between the resolutions:
+\begin{equation}
+  {\vect F}_{\alpha}=
+  \sum_{\beta}{\vect F}_{\alpha\beta}+
+  {\vect F}^{\textrm{th}}(\vect r_\alpha).
+\label{mody}
+\end{equation}
+which is defined by
+\begin{equation}
+  p_{\AT}+
+  \frac{\rho_{0}}{M_\alpha}
+  \int_{\Delta} {\vect F}^\text{th}(\vect r)\,\dd d\vect r
+  =p_{\CG}
+  \label{thf}
+\end{equation}
+In practice, the thermodynamic force is determined by a iterative
+scheme.  For details we refer readers to Ref.~\cite{prlgc}. Notice the
+AdResS system is not Hamiltonian~\cite{presolo,prlcomm}, however, by
+freezing the DOFs in the hybrid region, the atomistic and
+coarse-grained regions are Hamiltonian. This gives rise to the basic
+idea of the present study.
 
 \section{Theoretical considerations}
 \subsection{The outline of the basic idea}
@@ -49,7 +152,7 @@ Here we denote the degrees of freedoms and number of particles in the
 atomistic region (AT), hybrid region ($\HY$) and the coarse-grained
 region (CG) by $(\vect x_1, N_1)$, $(\vect x_2, N_2)$ and $(\vect x_3,
 N_3)$, respectively. Therefore, the target is to prove the atomistic
-region is subject to the grand-canonical ensemble: 
+region is subject to the Grand-Canonical ensemble: 
 \begin{align}
   p(\vect x_1, N_1) = \frac{1}{\mathcal Q_1}
   e^{\beta\mu_{\AT} N_1 - \beta \mathcal H_{N_1}^{\AT}(\vect x_1)} 
@@ -79,7 +182,7 @@ Let us consider:
 \begin{align}
   p(\vect x_1, N_1) = p(\vect x_1 | N_1)\,p(N_1)
 \end{align}
-Rigorously speaking, for a truly grand-canonical ensemble,
+Rigorously speaking, for a truly Grand-Canonical ensemble,
 the conditional probability $p(\vect x_1 | N_1)$ 
 should be
 \begin{align}\label{eqn:p-1}
@@ -89,9 +192,9 @@ with a those of a full atomistic reference system, which is ideally divided
 in subregions corresponding to the AT, $\HY$ and CG regions of the AdResS
 simulation. The first step in our procedure is to fix the number of molecules in the atomistic
 region and consider the conditional probability $p(\vect x_1 |
-N_1)$. If the AdResS set up, leads to the Grand Canonical ensemble, this
+N_1)$. If the AdResS set up, leads to the Grand-Canonical ensemble, this
 probability should be the same as the corresponding one of a full
-atomistic reference system, namely Eqn.~\eqref{eqn:p-1} (natual Grand Canonical).  Then, if the
+atomistic reference system, namely Eqn.~\eqref{eqn:p-1} (natual Grand-Canonical).  Then, if the
 probability of finding $N_1$ molecules in the atomistic region is also
 the same as the full atomistic reference system, namely
 Eqn.~\eqref{eqn:p-2}, we can safely state that the atomistic region of AdResS
@@ -109,18 +212,7 @@ To prove the statement above, the probability $p(\vect x_1 | N_1)$ is divided in
 $p(\vect x_1 | N_1; \vect x_2, N_2)$ is the probability obtained by fixing the
 coordinates and number of particles in the region $\HY$ and considering
 the distribution of the DOFs in the AT region. As we have shown before,
-if we modify the weighting function by
-\begin{align}\label{eqn:new-w}
-  w(\vect r) =
-  \left\{
-    \begin{array}{lcl}
-      1 &\quad& \chi < d_{\textrm{ex}}\\
-      1  && d_{\textrm{ex}} < \chi < d_{\textrm{ex}} + r_c\\
-      \cos^2\big[\frac{\pi}{2(d_{\textrm{hy}} - r_c)} (\chi - d_{\textrm{ex}} - r_c)\big] && d_{\textrm{ex}} + r_c < \chi < d_{\textrm{ex}} + d_{\textrm{hy}} \\
-      0 && d_{\textrm{ex}} + d_{\textrm{hy}}  < \chi.
-    \end{array}
-  \right.
-\end{align}
+if we modify the weighting function by Eqn.~\eqref{eqn:new-w}
 We can prove:
 \begin{align}
   p(\vect x_1 | N_1; \vect x_2, N_2)
@@ -184,7 +276,7 @@ conditions are that these two distribution should be the same as those of the fu
 Here, two assumptions are made:
 \begin{enumerate}\itemsep -1pt
 \item $N_2\ {\ll}\ N_1 \ll N_3$: the second inequality corresponds to
-  the thermodynamic limit of the grand-canonical ensemble. The first
+  the thermodynamic limit of the Grand-Canonical ensemble. The first
   one actually assumes that the $\HY$ region is infinitely thin so that it
   can be viewed as an infinitesimal membrane that allows free exchange of molecules from
   the AT region to the CG region and vice versa.
@@ -360,15 +452,15 @@ should vanishes (the same argument as the Helmhotz free energy):
 which is exactly the definition of the thermodynamic force.
 This is another necessary condition for the
 thermodynamic force, which is actually satisfied by the definition of it,
-namely:
-\begin{equation}
-  p_{\AT}+
-  \frac{\rho_{0}}{M_\alpha}
-  \int_{\Delta} {\vect F}^\text{th}(x)\,\dd dx
-  =
-  p_{\CG}
-\label{thf}
-\end{equation}
+namely Eqn.~\eqref{thf}.
+% \begin{equation}
+%   p_{\AT}+
+%   \frac{\rho_{0}}{M_\alpha}
+%   \int_{\Delta} {\vect F}^\text{th}(x)\,\dd dx
+%   =
+%   p_{\CG}
+% \label{thf}
+% \end{equation}
 % \recheck{
 %   This is an other necessary condition that ``the work
 %   done by the filter'' ensures a right equilibrium.
