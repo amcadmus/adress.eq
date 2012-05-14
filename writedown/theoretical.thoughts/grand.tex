@@ -338,12 +338,12 @@ $N_1$ molecules being in the atomistic region and $N_3$ molecules being
 in the coarse-grained region is  $\frac{N!}{N_1!N_3!}$.
 Therefore, the partition function of the whole system reads
 \begin{align}\nonumber
-  Q(N,V,T) &= \sum_{N_1}
+  Q(N,V,T) &= \sum_{N_1=1}^N
   \frac{N!}{N_1!N_3!} \frac{N_1!N_3!}{N!}
   e^{-\beta N_1\omega_0}
   Q_{\AT}(N_1, V_1, T)\,
   Q_{\CG}(N_3, V_3, T) \\
-  &= \sum_{N_1}
+  &= \sum_{N_1=1}^N
   e^{-\beta N_1\omega_0}
   Q_{\AT}(N_1, V_1, T)\,
   Q_{\CG}(N_3, V_3, T) 
@@ -353,19 +353,55 @@ with natural relations:
   N &= N_1 + N_3\\
   V &= V_1 + V_3
 \end{align}
-It can be proved that (see for example
-Ref.~\cite{tuckeman2010statistical}) if
-\begin{align}\label{eqn:condition}
-  -\beta \bar N_1\omega_0 +
-  \ln Q_{\AT}(\bar N_1, V_1, T) + \ln Q_{\CG}(N - \bar N_1, V_3, T) \gg \ln N 
-\end{align}
-where
+% The following approach can be found in, for example,
+% Ref.~\cite{tuckeman2010statistical}.
+First, for convenience, we denote that
 \begin{align}
-  \bar N_1 = \underset{N_1}{\textrm{argmax}}\:
+  \tilde q_{N_1} = 
   e^{-\beta N_1\omega_0}
-  Q_{\AT}(N_1, V_1, T) \,Q_{\CG}(N - N_1, V_3, T)
+  Q_{\AT}(N_1, V_1, T)\,
+  Q_{\CG}(N - N_1, V_3, T),
 \end{align}
-then
+and $\bar N_1$ is the value of where $\tilde q_{N_1}$ reaches
+maximum, namely $\tilde q_{\bar N_1} = \max \tilde q_{N_1}$.
+Since $\tilde q_{N_1}$ are positive definite, a basic
+observation is that
+\begin{align}
+  \tilde q_{\bar N_1}
+  \leq
+  \sum_{N_1=1}^N \tilde q_{N_1}
+  \leq
+  N \tilde q_{\bar N_1}. 
+\end{align}
+Due to the monotonicity of the logrithm, we have
+\begin{align}
+  \ln\tilde q_{\bar N_1}
+  \leq
+  \ln\sum_{N_1=1}^N \tilde q_{N_1}
+  \leq
+  \ln (N \tilde q_{\bar N_1})
+  =
+  \ln N + \ln\tilde q_{\bar N_1}.
+\end{align}
+If $\ln N \ll \ln \tilde q_{\bar N_1}$ (the vailidity will be discussed
+later), then 
+\begin{align}
+  \ln\sum_{N_1=1}^N \tilde q_{N_1}
+  \approx
+  \ln\tilde q_{\bar N_1},
+\end{align}
+which is
+% It can be proved that (see ) if
+% \begin{align}\label{eqn:condition}
+%   -\beta \bar N_1\omega_0 +
+%   \ln Q_{\AT}(\bar N_1, V_1, T) + \ln Q_{\CG}(N - \bar N_1, V_3, T) \gg \ln N 
+% \end{align}
+% where
+% \begin{align}
+%   \bar N_1 = \underset{N_1}{\textrm{argmax}}\:
+%   e^{-\beta N_1\omega_0}
+%   Q_{\AT}(N_1, V_1, T) \,Q_{\CG}(N - N_1, V_3, T)
+% \end{align}
 \begin{align}
   \ln Q(N, V, T)
   \approx
@@ -379,11 +415,16 @@ or equivalently
   \bar N_1\omega_0 +
   A_{\AT}(\bar N_1, V_1, T) + A_{\CG}(N - \bar N_1, V_3, T)
 \end{align}
-Where $A$ denotes the Helmhotz free energy.  $\bar N_1$ is the maximum
-parameter of $e^{-\beta N_1\omega_0} Q_{\AT}(N_1, V_1, T) \,Q_{\CG}(N - N_1,
-V_3, T)$.
-The crucial question is if the condition~\eqref{eqn:condition}
-is satisfied. Generally this is true: $Q_{\CG}(N - \bar N_1, V_3, T)$
+Where $A$ denotes the Helmhotz free energy. 
+The crucial question is if the condition $\ln N \ll \ln \tilde q_{\bar N_1}$
+holds, or equivalently
+\begin{align}\label{eqn:condition}
+  \ln N 
+  \ll
+  -\beta \bar N_1\omega_0 +
+  \ln Q_{\AT}(\bar N_1, V_1, T) + \ln Q_{\CG}(N - \bar N_1, V_3, T)
+\end{align}
+Generally this is true: $Q_{\CG}(N - \bar N_1, V_3, T)$
 is proportional to the free energy $A_{\CG}(N - \bar N_1, V_3, T)$,
 which is an extensive thermodynamic variable, so
 $A_{\CG}(N - \bar N_1, V_3, T)$ is proportional to $N-\bar N_1$.
@@ -391,9 +432,11 @@ Due to the thermodynamic limit $N \gg \bar N_1$,
 $A_{\CG}(N - \bar N_1, V_3, T)$ is actually proportional $N$, which
 is much larger than $\ln N$ under thermodynamic limit. This
 validates condition~\eqref{eqn:condition}.
-We will see later that this maximum corresponds to the maximum
-value of probability $p(N_1)$; this is also the equilibrium molecular
-number in the AT region under the thermodynamic limit.  Since $\bar
+We will see later (from Eqn.~\eqref{eqn:pn1})
+that the maximum $\bar N_1$ corresponds to the maximum
+value of probability $p(N_1)$; this is also the average molecule
+number in the AT region that be of statistical importance
+under the thermodynamic limit.  Since $\bar
 N_1$ is the maximum, by differentiating on the right hand side of
 Eqn.~\eqref{eqn:a-energy-1}, we have the relation:
 \begin{align}
@@ -502,7 +545,7 @@ Now let us consider the marginal distribution $p(N_1)$
   \int
   \dd d\vect x_3
   e^{-\beta \mathcal H_{N_3}^{\CG}(\vect x_3)}
-  \bigg]  \\\nonumber
+  \bigg]  \\\label{eqn:pn1}
   &=
   \frac
   {
@@ -565,7 +608,7 @@ Calculating $T_1$:
   Q_{\AT}(n_1,V_1,T)\,
   Q_{\AT}(N_1,V_1,T)\,
   Q_{\AT}(N-n_1,V_3,T)\,
-  Q_{\CG}(N-N_1,V_3,T) \\\nonumber
+  Q_{\CG}(N-N_1,V_3,T) \\\label{eqn:t1-1}
   &=
   \sum_{n_1}
   \exp
@@ -580,21 +623,93 @@ Calculating $T_1$:
   \big\}
 \end{align}
 Since we work under the hypothesis that the atomistic region is much smaller than the whole system, it
-is reasonable to assume $n_1 \ll N$ nad $N_1\ll N$. We have the following
-expansions:
-\begin{align}
+is reasonable to assume $n_1 \ll N$ and $N_1\ll N$.
+Notice the free energy is extensive.
+Due to the Euler's theorem~\cite{tuckeman2010statistical},
+we have
+\begin{align}\label{eqn:Aat-0}
   A_{\AT}(N-n_1,V_3,T)
-  &=
-  A_{\AT}(N,V_3,T)
-  - \mu_{\AT}\,n_1
-  + \frac12 \kappa_{\AT}\,n_1^2 + \textrm{h.o.t.} \\
+  &= V_3 A_{\AT}(\frac{N-n_1}{V_3},1,T)
+  = V_3 A_{\AT}(\rho_0 + \frac{\hat N_1 - n_1}{V_3},1,T)\\\label{eqn:Acg-0}
   A_{\CG}(N-N_1,V_3,T)
-  &=
-  A_{\CG}(N,V_3,T)
-  - \mu_{\CG}\,N_1
-  + \frac12 \kappa_{\CG}\,N_1^2 + \textrm{h.o.t.}
+  &= V_3 A_{\CG}(\frac{N-N_1}{V_3},1,T)
+  = V_3 A_{\CG}(\rho_0 + \frac{\hat N_1 - N_1}{V_3},1,T),
 \end{align}
-One should keep in mind the conditions:
+where $\hat N_1$ is the number of molecules in the atomistic region
+if the density there is the right density $\rho_0$, namely
+$\hat N_1 = \rho_0V_1 = N - \rho_0 V_3$.
+Notice, under the thermodynamic limit, $\hat N_1$ is consistent with
+$\bar N_1$.
+$A_{\AT}(\rho_0 + (\hat N_1 - n_1)/{V_3},1,T)$ and
+$A_{\CG}(\rho_0 + (\hat N_1 - N_1)/{V_3},1,T)$ are
+the free energies in the \emph{unit} volume, with
+the density perturbed from $\rho_0$ by  $(\hat N_1 - n_1)/{V_3}$
+and $(\hat N_1 - N_1)/{V_3}$, respectively.
+Actually, these perturbations originate from the fluctuating
+number of molecules in the atomistic region: when the number
+deviates from $\hat N_1$, some molecules enter the coarse-grained
+region, and the density is perturbed.
+Under the thermodynamic
+limit, $\hat N_1$ is comparable to $n_1$ and $N_1$, and all of them are
+much smaller than $N$. $V_3$ is comparable to $V$.
+Since $\rho_0 = N/V$ always holds, the perturbations
+$(\hat N_1 - n_1)/{V_3}$
+and $(\hat N_1 - N_1)/{V_3}$ are small.
+Therefore, we have the following
+Taylor expansions of the free energies \eqref{eqn:Aat-0} and \eqref{eqn:Acg-0}
+about $\rho_0$:
+\begin{align}
+  A_{\AT}(\rho_0 + \frac{\hat N_1 - n_1}{V_3},1,T)
+  &= A_{\AT}(\rho_0,1,T)
+  +\mu_{\AT}
+  \Big(
+  \frac{\hat N_1 - n_1}{V_3}
+  \Big)
+  +
+  \frac1{2\rho_0^2\,\kappa_{\AT}}
+  \Big(
+  \frac{\hat N_1 - n_1}{V_3}
+  \Big)^2
+  + \textrm{h.o.t.} \\
+  A_{\CG}(\rho_0 + \frac{\hat N_1 - N_1}{V_3},1,T)
+  &= A_{\CG}(\rho_0,1,T)
+  +\mu_{\CG}
+  \Big(
+  \frac{\hat N_1 - N_1}{V_3}
+  \Big)
+  +
+  \frac1{2\rho_0^2\,\kappa_{\CG}}
+  \Big(
+  \frac{\hat N_1 - N_1}{V_3}
+  \Big)^2
+  + \textrm{h.o.t.} 
+  % A_{\AT}(N-n_1,V_3,T)
+  % &=
+  % A_{\AT}(N,V_3,T)
+  % - \mu_{\AT}\,n_1
+  % + \frac12 \kappa_{\AT}\,n_1^2 + \textrm{h.o.t.} \\
+  % A_{\CG}(N-N_1,V_3,T)
+  % &=
+  % A_{\CG}(N,V_3,T)
+  % - \mu_{\CG}\,N_1
+  % + \frac12 \kappa_{\CG}\,N_1^2 + \textrm{h.o.t.}
+\end{align}
+% The free energy
+% $A_{\AT}(N-n_1,V_3,T)$ and $A_{\CG}(N-N_1,V_3,T)$
+% are expanded with respect to $A_{\AT}(N,V_3,T)$ and $A_{\CG}(N,V_3,T)$,
+% respectively. They are the free energies of 
+% systems with number of particles $N$ in the volume $V_3$. Due to the
+% thermodynamic limit $N\approx N-n_1$ and $N\approx N-N_1$, these
+% free energies are not small, and the expansions are physically meanful.
+The ``h.o.t.'' standands for higher order terms (greater than 2)
+of the density perturbation.
+They can be safely neglected in apparence of
+the first three terms of the expansion, so
+we do not explicitly write them down.
+% Notice that in Eqn.~\eqref{eqn:t1-1}, the negative value
+% of the free energy are exponented, so the h.o.t  actually
+% converge faster than the 1st and 2nd order terms.
+By using the conditions:
 \begin{align}\label{eqn:mu-eq}
   \mu_{\CG} &= \mu_{\AT} + \omega_0\\\label{eqn:kappa-eq}
   \kappa_{\CG} &= \kappa_{\AT}
@@ -605,18 +720,27 @@ We have $T_1$
   = \,&
   \sum_{n_1}
   \exp
-  \big\{-\beta
-  \big[
+  \Big\{-\beta
+  \Big[
   A_{\AT}(n_1,V_1,T) +
   A_{\AT}(N_1,V_1,T) +
-  A_{\AT}(N,V_3,T) +
-  A_{\CG}(N,V_3,T) \\
-  \,&-
-  \mu_{\AT}\,(N_1 + n_1) +
-  \frac12 \kappa_{\AT}(N_1^2 + n_1^2) +
-   \textrm{h.o.t.}
-  \big]
-  \big\}
+  A_{\AT}(\rho_0V_3,V_3,T) +
+  A_{\CG}(\rho_0V_3,V_3,T) \\
+  \,&+(\mu_\AT + \mu_\CG)\hat N_1
+  -\mu_{\AT}\,(N_1 + n_1) +
+  \frac{V_3}{2\rho_0\, \kappa_{\AT}}
+  \Big[
+  \Big(
+  \frac{\hat N_1 - n_1}{V_3}
+  \Big)^2
+  +
+  \Big(
+  \frac{\hat N_1 - N_1}{V_3}
+  \Big)^2
+  \Big]
+  +\textrm{h.o.t.}
+  \Big]
+  \Big\}
 \end{align}
 % Similarly, multiplying the numerator of $p_{\AT}(N_1)$ by the denominator of
 % $p(N_1)$, we have the term denoted by $T_2$
@@ -650,22 +774,56 @@ and \eqref{eqn:kappa-eq}, we have:
   = \,&
   \sum_{n_1}
   \exp
-  \big\{-\beta
-  \big[
+  \Big\{-\beta
+  \Big[
   A_{\AT}(n_1,V_1,T) +
   A_{\AT}(N_1,V_1,T) +
-  A_{\AT}(N,V_3,T) +
-  A_{\CG}(N,V_3,T) \\
-  \,&-
-  \mu_{\AT}\,(N_1 + n_1) +
-  \frac12 \kappa_{\AT}(N_1^2 + n_1^2) +
-   \textrm{h.o.t.}
-  \big]
-  \big\}
+  A_{\AT}(\rho_0V_3,V_3,T) +
+  A_{\CG}(\rho_0V_3,V_3,T) \\
+  \,&+(\mu_\AT + \mu_\CG)\hat N_1
+  -\mu_{\AT}\,(N_1 + n_1) +
+  \frac{V_3}{2\rho_0\, \kappa_{\AT}}
+  \Big[
+  \Big(
+  \frac{\hat N_1 - n_1}{V_3}
+  \Big)^2
+  +
+  \Big(
+  \frac{\hat N_1 - N_1}{V_3}
+  \Big)^2
+  \Big]
+  +\textrm{h.o.t.}
+  \Big]
+  \Big\}
 \end{align}
-Therefore, term $T_1$ and $T_2$ are consistent with  the second leading
-order, which means $p(N_1)$ is a good approximation of $p_{\AT}(N_1)$
-to the second leading order.
+% \begin{align}\nonumber
+%   T_2
+%   = \,&
+%   \sum_{n_1}
+%   \exp
+%   \big\{-\beta
+%   \big[
+%   A_{\AT}(n_1,V_1,T) +
+%   A_{\AT}(N_1,V_1,T) +
+%   A_{\AT}(N,V_3,T) +
+%   A_{\CG}(N,V_3,T) \\
+%   \,&-
+%   \mu_{\AT}\,(N_1 + n_1) +
+%   \frac12 \kappa_{\AT}(N_1^2 + n_1^2) +
+%    \textrm{h.o.t.}
+%   \big]
+%   \big\}
+% \end{align}
+Therefore, term $T_1$ and $T_2$ are consistent to the second leading
+order with respect to the density perturbations
+$(\hat N_1 - n_1)/{V_3}$
+and $(\hat N_1 - N_1)/{V_3}$.
+Since the difference between the probabilities
+$p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
+and $T_2$, we conclude that $p(N_1)$ is a good approximation to
+$p_{\AT}(N_1)$ to the second leading order.
+% This conclusion,
+% compbined with the discussion on 
 
 
 
