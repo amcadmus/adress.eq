@@ -30,8 +30,7 @@
 
 \begin{document}
 
-\title{The reliability of AdResS as a way of
-sampling the Grand Canonical ensemble}
+\title{The reliability of AdResS in sampling a Grand Canonical distribution}
 \author{Han Wang}
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 \author{Carsten Hartmann}
@@ -39,6 +38,7 @@ sampling the Grand Canonical ensemble}
 \author{Christof Sch\"utte}
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 \author{Luigi Delle Site}
+\email{luigi.dellesite@fu-berlin.de}
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 
 \begin{abstract}
@@ -47,19 +47,14 @@ sampling the Grand Canonical ensemble}
 \maketitle
 
 \section{Introduction}
-% The Adaptive Resolution Simulation (AdResS) scheme~\cite{jcp,pre} is a
-% method that increase the resolution in some spacial regions in the
-% system, while keep the rest at lower resolution.
 The Adaptive Resolution Simulation (AdResS) scheme~\cite{jcp,pre} is a
-method that concurrently simulates a molecular system by different
-resolutions in different spacial regions.  The word ``resolution''
-means how much detail is included in a molecular model: the higher the
-resolution, the model is more precise, and the more computational
-effort is demanded, correspondingly.  The advantage is obvious: it
-keeps track of both of the local fine-grained processes in the
-high-resolution regions and the on-going large scale properties with a
-much lower computational expense comparing to the system that, as a
-whole, is described by the high-resolution model. The key feature of
+method that in a concurrent fashion simulates a molecular system treated with different
+resolutions in different regions of space.  The word ``resolution''
+here refers to the amount of details included in a molecular model: usually, the higher the
+resolution, the more precise the model is , and the higher the corresponding computational cost.  The advantage is obvious, it
+keeps track of both: the local fine-grained processes in the
+high-resolution regions and the large scale behavior, requiring a less demanding computational effort compared to the system that, as a
+whole, would be described by the high-resolution model. The key feature of
 AdResS is that it allows an on-the-fly changing of resolution when a
 molecule travels from a high-resolution region to a low-resolution
 region and vice versa. Moreover, recent research~\cite{prlgc, rdfcorr}
@@ -76,25 +71,25 @@ the sampling.
 
 In this work, the higher resolution refers to the atomistic
 description (AT) of a molecule, while the lower resolution refers to
-the its coarse-grained (CG) modeling.  We assume the dynamics of the
-system is subjected to the Langevin equation, which the thermostat
+the its corresponding coarse-grained (CG) modeling.  We assume that the dynamics of the
+system is subjected to the Langevin equation, which is the thermostat
 usually used in the AdResS simulations:
 \begin{align}
   \dd d\vect r_i &= \vect v_i\dd dt\\
   m_i\dd d\vect v_i &= (-m_i\xi_i\vect v_i + \vect F_i)\,\dd dt + \sqrt{2\sigma_i}\;\dd d\vect W_t
 \end{align}
 where $\dd d\vect W_t$ is the standard Wiener process. We denote the
-phase space variable $\vect x = \{\vect r_i, \vect v_i\}$. $\vect r_i,
+phase space variable $\vect x = \{\vect r_i, \vect v_i\}$; $\vect r_i,
 \vect v_i$ are the degrees of freedoms (DOFs) of the system.  If the
 system is conservative, namely $\vect F_i = -\nabla_{\vect r_i}U$,
-then it is shown the equilibrium density distribution is $p(\vect
+then one obtains the equilibrium density distribution $p(\vect
 x)\propto e^{-\beta\mathcal H(\vect x)}$. In the AdResS scheme,
 different resolutions in the system are described by a weighting
 function of position $w(\vect r)$. Usually the higher resolutions is
 denoted by $w = 1$, while the lower resolution is denoted by $w = 0$.
 Between the higher and lower resolutions, a hybrid region allows a 
-molecule has both the resolutions. The weighting function changes smoothly
-from 0 to 1. A possible weighting function is:
+molecule to have both (interpolated) resolutions. The weighting function changes smoothly
+from 0 to 1 and one possible weighting function is:
 \begin{align}\label{eqn:new-w}
   w(\vect r) =
   \left\{
@@ -107,10 +102,10 @@ from 0 to 1. A possible weighting function is:
   \right.
 \end{align}
 Where $\chi$ is the distance to the boundary of the higher resolution
-region. $\chi < 0$ means the molecule is in the higher resolution
-region.  $d_{\HY}$ is the thickness of the hybrid region. $r_c$ is the
-cut-off radius.  The intermolecuar force is modeled by the following
-interpolation formula:
+region, $\chi < 0$ means that the molecule is in the higher resolution
+region, $d_{\HY}$ is the thickness of the hybrid region, $r_c$ is the
+cut-off radius.  The intermolecular force is modeled by the following
+interpolation formula \cite{rdfcorr}:
 \begin{align}
   \vect F_{\alpha\beta} =
   w_\alpha w_\beta\vect F^{\AT}_{\alpha\beta} +
@@ -119,12 +114,8 @@ interpolation formula:
 \label{grf}
 \end{align}
 Where $ \vect F^{\AT}_{\alpha\beta}$, $ \vect F^{\CG}_{\alpha\beta}$
-are the intermolecuar interaction of the atomistic and coarse-grained
-resolutions, respectively.  $\vect F_{\alpha\beta}^{\rdf}$ is the RDF
-correction force, and is determined by a TFI-IBI
-loop~\cite{rdfcorr}. On top of this interpolation formula, a
-thermodynamic force ${\vect F}^{\textrm{th}}$ is applied to ensure the
-right equilibrium between the resolutions:
+are the intermolecular interaction of the atomistic and coarse-grained
+resolutions, respectively.  $\vect F_{\alpha\beta}^{\rdf}$ is a force that corrects the center of mass-center of mass radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further, one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system:
 \begin{equation}
   {\vect F}_{\alpha}=
   \sum_{\beta}{\vect F}_{\alpha\beta}+
@@ -139,11 +130,10 @@ which is defined by
   =p_{\CG}
   \label{thf}
 \end{equation}
-In practice, the thermodynamic force is determined by a iterative
-scheme.  For details we refer readers to Ref.~\cite{prlgc}. Notice the
-AdResS system is not Hamiltonian~\cite{presolo,prlcomm}, however, by
+where $p_{\AT}$ is the pressure of the atomistic resolution, $p_{\CG}$ that of the coarse-grained resolution, $\rho_{0}$ is the equilibrium density, corresponding to that of a full atomistic simulation, and $M_{\alpha}$ is the mass of a molecule labeled with the index $\alpha$. For specific details, see Ref.~\cite{prlgc}. It must be noticed that the 
+AdResS scheme is not Hamiltonian~\cite{presolo,prlcomm}. However, under the hypothesis of instantaneously
 freezing the DOFs in the hybrid region, the atomistic and
-coarse-grained regions are Hamiltonian. This gives rise to the basic
+coarse-grained regions can be considered Hamiltonian; this line of thought give rise to the basic
 idea of the present study.
 
 \section{Theoretical considerations}
@@ -151,7 +141,7 @@ idea of the present study.
 Here we denote the degrees of freedoms and number of particles in the
 atomistic region (AT), hybrid region ($\HY$) and the coarse-grained
 region (CG) by $(\vect x_1, N_1)$, $(\vect x_2, N_2)$ and $(\vect x_3,
-N_3)$, respectively. Therefore, the target is to prove the atomistic
+N_3)$, respectively. Therefore, the target is to prove that the atomistic
 region is subject to the Grand Canonical ensemble: 
 \begin{align}
   p(\vect x_1, N_1) = \frac{1}{\mathcal Q_1}
@@ -188,17 +178,17 @@ should be
 \begin{align}\label{eqn:p-1}
   p(\vect x_1 | N_1) &= \frac{1}{Q_{N_1}} e^{-\beta \mathcal H_{N_1}^{AT}(\vect x_1)} \end{align}
 It must be kept in mind that we always compare the distributions of the AdResS simulation
-with a those of a full atomistic reference system, which is ideally divided
+with those of a full atomistic reference system, which is ideally divided
 in subregions corresponding to the AT, $\HY$ and CG regions of the AdResS
-simulation. The first step in our procedure is to fix the number of molecules in the atomistic
+set up. The first step in our procedure is to fix the number of molecules in the atomistic
 region and consider the conditional probability $p(\vect x_1 |
 N_1)$. If the AdResS set up, leads to the Grand Canonical ensemble, this
 probability should be the same as the corresponding one of a full
-atomistic reference system, namely Eqn.~\eqref{eqn:p-1} (natual Grand Canonical).  Then, if the
+atomistic reference system, namely Eqn.~\eqref{eqn:p-1}.  Then, if the
 probability of finding $N_1$ molecules in the atomistic region is also
 the same as the full atomistic reference system, namely
 Eqn.~\eqref{eqn:p-2}, we can safely state that the atomistic region of AdResS
-samples configurations in a Grand Canonical fashion.
+samples configurations in a Grand Canonical fashion. In fact, it must be noticed that a subsystem of full atomistic system is a natural Grand Canonical ensemble in the thermodynamic limit. 
 
 
 \subsection{The probability $p(\vect x_1 | N_1)$}
@@ -229,28 +219,28 @@ with an atomistic Hamiltonian:
 which is exactly the same as the full atomistic reference system.
 Here are some remarks on this argument:
 \begin{enumerate}\itemsep -1pt
-\item All interactions in the system are short-range cut-offed (the
+\item All interactions in the system are short-range with given cut-offs (the
   electrostatic interaction is treated by the reaction field method),
-  so that the AT region does NOT interacting with the CG region.
+  so that the AT region does NOT interact in a direct way with the CG region.
 \item The number of molecules and their coordinates are assumed to be
   fixed in the $\HY$ region.  Under this assumption, we firstly study
   the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$ of
   the AT region embedded in the fixed $\HY$ environment, and then count
-  all possible realizations of the $\HY$ region, which is subject to
+  all possible realizations of configurations in the $\HY$ region, which is subject to
   the distribution $p(\vect x_2, N_2 | N_1)$.
   Eqn.~\eqref{eqn:divide-cond-p} validates this two-stage approach of
   investigating $p(\vect x_1 | N_1)$.
-\item Due to the point 2, the correlation between the molecules
-  in $\HY$ and CG regions are not important in our argument, because
-  the DOFs in the $\HY$ region are fixed anyway.
+\item Due to the point 2, correlations between the molecules
+  in $\HY$ and CG regions are not relevant in our argument, in fact
+  the DOFs in the $\HY$ region are anyway considered instantaneously fixed while sampling configurations in the AT and CG regions.
 \end{enumerate}
 
 \noindent
-At this point, the key question is that whether the probability in the $\HY$ region, $p(\vect
-x_2, N_2 | N_1)$ is the same as that of the full atomistic reference
-system. Generally, this seems not be the case, but it is possible to
-derive necessary conditions to this aim. The simplest ones involve
-the marginal distribution functions, namely
+At this point, the key question is whether the probability in the $\HY$ region, $p(\vect
+x_2, N_2 | N_1)$ is the same as that of the equivalent region in a full atomistic reference
+system. In general this seems not be the case, but it is possible to
+derive necessary conditions to enforce such an equivalence; the simplest ones involve
+the marginal distribution functions, namely:
 \begin{align}
   \rho_{\HY}(\vect r) &= \rho_{\AT}(\vect r)\\
   g_{\HY}( r) &= g_{\AT}(r)
@@ -261,7 +251,9 @@ the radial distribution function (RDF), $g_{\HY}(r)$. The necessary
 conditions are that these two distribution should be the same as those of the fully atomistic reference system.
 
 
-\subsection{Discussion about the thermodynamic force}
+\subsection{Statistical Mechanics meaning of the thermodynamic force within the Grand canonical framework}
+One of the key point of the AdResS method is the introduction of the thermodynamic force, ${\bf F}_{th}$, to assure thermodynamic equilibrium to the system.
+Thermodynamical considerations/intuitions, led to formula \ref{thf}. In this section we derive the physical and statistical meaning of such a force.
 \begin{figure}
   \centering
   \begin{minipage}[t]{0.49\linewidth}
@@ -270,7 +262,7 @@ conditions are that these two distribution should be the same as those of the fu
   % \begin{minipage}[t]{0.49\linewidth}
   % \includegraphics[width=0.6\textwidth]{fig.grand/partition-1.eps}    
   % \end{minipage}
-  \caption{Schematic plot of the AdResS system in thermodynamic equilibrium}
+  \caption{Schematic plot of the AdResS system in thermodynamic equilibrium. The thickness of the filter corresponds to $d_{\Delta}$.}
   \label{fig:tmp1}
 \end{figure}
 Here, two assumptions are made:
@@ -364,7 +356,7 @@ First, for convenience, we denote that
 \end{align}
 and $\bar N_1$ is the value of where $\tilde q_{N_1}$ reaches
 maximum, namely $\tilde q_{\bar N_1} = \max \tilde q_{N_1}$.
-Since $\tilde q_{N_1}$ are positive definite, a basic
+Since $\tilde q_{N_1}$ is positive definite, a basic
 observation is that
 \begin{align}
   \tilde q_{\bar N_1}
@@ -373,7 +365,7 @@ observation is that
   \leq
   N \tilde q_{\bar N_1}. 
 \end{align}
-Due to the monotonicity of the logrithm, we have
+Due to the monotonicity of the logarithm, we have
 \begin{align}
   \ln\tilde q_{\bar N_1}
   \leq
@@ -383,7 +375,7 @@ Due to the monotonicity of the logrithm, we have
   =
   \ln N + \ln\tilde q_{\bar N_1}.
 \end{align}
-If $\ln N \ll \ln \tilde q_{\bar N_1}$ (the vailidity will be discussed
+If $\ln N \ll \ln \tilde q_{\bar N_1}$ (the validity will be discussed
 later), then 
 \begin{align}
   \ln\sum_{N_1=1}^N \tilde q_{N_1}
@@ -415,7 +407,7 @@ or equivalently
   \bar N_1\omega_0 +
   A_{\AT}(\bar N_1, V_1, T) + A_{\CG}(N - \bar N_1, V_3, T)
 \end{align}
-Where $A$ denotes the Helmhotz free energy. 
+Where $A$ denotes the Helmholtz free energy. 
 The crucial question is if the condition $\ln N \ll \ln \tilde q_{\bar N_1}$
 holds, or equivalently
 \begin{align}\label{eqn:condition}
@@ -424,7 +416,7 @@ holds, or equivalently
   -\beta \bar N_1\omega_0 +
   \ln Q_{\AT}(\bar N_1, V_1, T) + \ln Q_{\CG}(N - \bar N_1, V_3, T)
 \end{align}
-Generally this is true: $Q_{\CG}(N - \bar N_1, V_3, T)$
+Generally this is true: $\log Q_{\CG}(N - \bar N_1, V_3, T)$
 is proportional to the free energy $A_{\CG}(N - \bar N_1, V_3, T)$,
 which is an extensive thermodynamic variable, so
 $A_{\CG}(N - \bar N_1, V_3, T)$ is proportional to $N-\bar N_1$.
@@ -470,7 +462,7 @@ condition for the thermodynamic force that ensures
 the correct equilibrium of the AT and CG regions.\\
 
 \noindent
-Now we translate from the language of Helmhotz free
+Now we translate from the language of Helmholtz free
 energy into that of the grand potential.
 Under the thermodynamic limit, they are the same.
 Assuming the system reaches an
@@ -487,7 +479,7 @@ where
 \end{align}
 Because of the equilibrium situation, the derivative of r.h.s. of
 Eqn.~\eqref{eqn:g-energy-1} with respect to atomistic volume $V_1$
-should vanishes (the same argument as the Helmhotz free energy):
+should vanishes (the same argument as the Helmholtz free energy):
 \begin{align}
   \rho_0\omega_0 = -p_{\AT}+p_{\CG} \quad\Longrightarrow\quad
   p_{\AT} + \rho_0\omega_0 = p_{\CG}
@@ -496,23 +488,12 @@ which is exactly the definition of the thermodynamic force.
 This is another necessary condition for the
 thermodynamic force, which is actually satisfied by the definition of it,
 namely Eqn.~\eqref{thf}.
-% \begin{equation}
-%   p_{\AT}+
-%   \frac{\rho_{0}}{M_\alpha}
-%   \int_{\Delta} {\vect F}^\text{th}(x)\,\dd dx
-%   =
-%   p_{\CG}
-% \label{thf}
-% \end{equation}
-% \recheck{
-%   This is an other necessary condition that ``the work
-%   done by the filter'' ensures a right equilibrium.
-%   Surprisingly, this necessary condition is exactly fitted
-%   by the definition of the ``thermodynamic force''.
-% }
+The argument in this section is based on the fact that $\bar N_{1}$, rather than $N_{1}$ can be considered as representative of the configuration realizations in the AT region. This implies that the particle fluctuations, $\Delta N_{1}$,
+are negligible (compared to $\bar N_{1}$) in the AT region. This hypothesis is valid if the AT region is large enough so that $\bar N_{1}$ is large. This point seems to be true in all numerical experiments done so far (see e.g. Ref.\cite{debash}).
 
 \subsection{The number probability $p(N_1)$}
-Now let us consider the marginal distribution $p(N_1)$
+In this section, finally, we define at which level of approximation $p(N_{1})$, in AdResS is the same as in a full atomistic simulation.
+Let us consider the marginal distribution $p(N_1)$
 \begin{align}\nonumber
   p(N_1)
   % &=
@@ -636,9 +617,9 @@ we have
   = V_3 A_{\CG}(\rho_0 + \frac{\hat N_1 - N_1}{V_3},1,T),
 \end{align}
 where $\hat N_1$ is the number of molecules in the atomistic region
-if the density there is the right density $\rho_0$, namely
+if the density there is the correct density $\rho_0$, namely
 $\hat N_1 = \rho_0V_1 = N - \rho_0 V_3$.
-Notice, under the thermodynamic limit, $\hat N_1$ is consistent with
+Notice, under the thermodynamic limit, $\hat N_1$ is equivalent to
 $\bar N_1$.
 $A_{\AT}(\rho_0 + (\hat N_1 - n_1)/{V_3},1,T)$ and
 $A_{\CG}(\rho_0 + (\hat N_1 - N_1)/{V_3},1,T)$ are
@@ -701,11 +682,8 @@ about $\rho_0$:
 % systems with number of particles $N$ in the volume $V_3$. Due to the
 % thermodynamic limit $N\approx N-n_1$ and $N\approx N-N_1$, these
 % free energies are not small, and the expansions are physically meanful.
-The ``h.o.t.'' standands for higher order terms (greater than 2)
-of the density perturbation.
-They can be safely neglected in apparence of
-the first three terms of the expansion, so
-we do not explicitly write them down.
+The ``h.o.t.'' stands for higher order terms (greater than 2)
+of the density perturbation, which we neglect since they have been found numerically not relevant.
 % Notice that in Eqn.~\eqref{eqn:t1-1}, the negative value
 % of the free energy are exponented, so the h.o.t  actually
 % converge faster than the 1st and 2nd order terms.
@@ -814,17 +792,16 @@ and \eqref{eqn:kappa-eq}, we have:
 %   \big]
 %   \big\}
 % \end{align}
-Therefore, term $T_1$ and $T_2$ are consistent to the second leading
+Therefore, term $T_1$ and $T_2$ are equivalent (at least) to the second leading
 order with respect to the density perturbations
 $(\hat N_1 - n_1)/{V_3}$
 and $(\hat N_1 - N_1)/{V_3}$.
 Since the difference between the probabilities
 $p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
 and $T_2$, we conclude that $p(N_1)$ is a good approximation to
-$p_{\AT}(N_1)$ to the second leading order.
-% This conclusion,
-% compbined with the discussion on 
-
+$p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, seem numerically not relevant and anyway, at this stage, not easy to treat at formal level.
+\section{Conclusions}
+We have shown a detailed theoretical analysis about the validity and meaning of the AdResS method within the framework of a Grand Canonical ensemble. We have interpreted the thermodynamic force as a tool to balance the difference in chemical potential due to the different resolutions in space and have shown that $p(N_{1})$, the probability distribution in the atomistic region of AdResS is equivalent to that in the same region in a full atomistic simulation, up to a second order expansion. These results provide a solid theoretical basis to explain the numerical reliability of the AdResS method and its interpretation as an effective Grand Canonical set up.
 
 
 \section*{References}
