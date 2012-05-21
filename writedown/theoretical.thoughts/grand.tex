@@ -42,6 +42,17 @@
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 
 \begin{abstract}
+  In this work, we carry out detailed theoretical analysis of the
+  reliability of AdResS scheme in sampling the Grand Canonical
+  ensemble. We have demonstrated the correct density and radial distribution
+  function in the hybrid region are two necessary conditions of
+  treating the atomistic and coarse-grained regions as sub-systems
+  correctly embedded into the whole system.  We have also shown that the
+  work done by the thermodynamic force compensates for the chemical
+  potential difference between the different resolutions. Therefore,
+  up to the second order accuracy, the atomistic region changes
+  molecules with the coarse-grained region in a Grand Canonical
+  fashion.
 \end{abstract}
 
 \maketitle
@@ -58,7 +69,7 @@ whole, would be described by the high-resolution model. The key feature of
 AdResS is that it allows an on-the-fly changing of resolution when a
 molecule travels from a high-resolution region to a low-resolution
 region and vice versa. Moreover, recent research~\cite{prlgc, rdfcorr}
-numerically demonstrates that different resolutions reach a
+numerically demonstrate that different resolutions reach a
 thermodynamic equilibrium as if the whole system is equilibriated
 under the high-resolution description. Therefore, the a region with a
 certain resolution exchanges molecules with the rest of the system in
@@ -78,18 +89,21 @@ usually used in the AdResS simulations:
   \dd d\vect r_i &= \vect v_i\dd dt\\
   m_i\dd d\vect v_i &= (-m_i\xi_i\vect v_i + \vect F_i)\,\dd dt + \sqrt{2\sigma_i}\;\dd d\vect W_t
 \end{align}
-where $\dd d\vect W_t$ is the standard Wiener process. We denote the
+where $\xi_i$ are friction coefficients,
+$m_i$ are the mass of atoms, $\sigma_i = k_BTm_i\xi_i$ with $T$ being
+the temperature, and
+$\dd d\vect W_t$ is the standard Wiener process. We denote the
 phase space variable $\vect x = \{\vect r_i, \vect v_i\}$; $\vect r_i,
 \vect v_i$ are the degrees of freedoms (DOFs) of the system.  If the
 system is conservative, namely $\vect F_i = -\nabla_{\vect r_i}U$,
 then one obtains the equilibrium density distribution $p(\vect
-x)\propto e^{-\beta\mathcal H(\vect x)}$. In the AdResS scheme,
+x)\propto e^{-\beta\mathcal H(\vect x)}$, where $\beta = 1/k_BT$ is the inverse temperature. In the AdResS scheme,
 different resolutions in the system are described by a weighting
 function of position $w(\vect r)$. Usually the higher resolutions is
 denoted by $w = 1$, while the lower resolution is denoted by $w = 0$.
 Between the higher and lower resolutions, a hybrid region allows a 
 molecule to have both (interpolated) resolutions. The weighting function changes smoothly
-from 0 to 1 and one possible weighting function is:
+from 0 to 1, and one possible weighting function is:
 \begin{align}\label{eqn:new-w}
   w(\vect r) =
   \left\{
@@ -125,15 +139,17 @@ resolutions, respectively.  $\vect F_{\alpha\beta}^{\rdf}$ is a force that corre
 which is defined by
 \begin{equation}
   p_{\AT}+
-  \frac{\rho_{0}}{M_\alpha}
+  \rho_0
   \int_{\Delta} {\vect F}^\text{th}(\vect r)\,\dd d\vect r
   =p_{\CG}
   \label{thf}
 \end{equation}
-where $p_{\AT}$ is the pressure of the atomistic resolution, $p_{\CG}$ that of the coarse-grained resolution, $\rho_{0}$ is the equilibrium density, corresponding to that of a full atomistic simulation, and $M_{\alpha}$ is the mass of a molecule labeled with the index $\alpha$. For specific details, see Ref.~\cite{prlgc}. It must be noticed that the 
+where $p_{\AT}$ is the pressure of the atomistic resolution, $p_{\CG}$ that of the coarse-grained resolution, $\rho_{0}$ is the equilibrium number density, corresponding to that of a full atomistic simulation.
+% and $M_{\alpha}$ is the mass of a molecule labeled with the index $\alpha$.
+For specific details, see Ref.~\cite{prlgc}. It must be noticed that the 
 AdResS scheme is not Hamiltonian~\cite{presolo,prlcomm}. However, under the hypothesis of instantaneously
 freezing the DOFs in the hybrid region, the atomistic and
-coarse-grained regions can be considered Hamiltonian; this line of thought give rise to the basic
+coarse-grained regions can be considered Hamiltonian; this line of thought gives rise to the basic
 idea of the present study.
 
 \section{Theoretical considerations}
@@ -151,7 +167,7 @@ where the partition function $\mathcal Q_1$ is defined by
 \begin{align}
   \mathcal Q_1 =
   \sum_{N_1}\int
-  \dd d\vect x\,
+  \dd d\vect x_1\,
   e^{\beta\mu_{\AT} N_1 - \beta \mathcal H_{N_1}^{\AT}(\vect x_1)}
 \end{align}
 The marginal probability of finding $N_1$ molecules in the
@@ -248,12 +264,13 @@ the marginal distribution functions, namely:
 The first order marginal distribution is the particle (or molecular) density 
 $\rho_{\HY}(\vect r)$, while the second order marginal distribution is
 the radial distribution function (RDF), $g_{\HY}(r)$. The necessary
-conditions are that these two distribution should be the same as those of the fully atomistic reference system.
+conditions of the correct distribution $p(\vect x_1|N_1)$
+are that these two distribution should be the same as those of the fully atomistic reference system.
 
 
-\subsection{Statistical Mechanics meaning of the thermodynamic force within the Grand canonical framework}
-One of the key point of the AdResS method is the introduction of the thermodynamic force, ${\bf F}_{th}$, to assure thermodynamic equilibrium to the system.
-Thermodynamical considerations/intuitions, led to formula \ref{thf}. In this section we derive the physical and statistical meaning of such a force.
+\subsection{Statistical mechanics meaning of the thermodynamic force within the Grand Canonical framework}
+One of the key point of the AdResS method is the introduction of the thermodynamic force, ${\vect F}^{{\textrm{th}}}$, to assure thermodynamic equilibrium to the system.
+Thermodynamical considerations/intuitions, led to formula \eqref{thf}. In this section we derive the physical and statistical meaning of such a force.
 \begin{figure}
   \centering
   \begin{minipage}[t]{0.49\linewidth}
@@ -302,7 +319,7 @@ $N_1\omega_0$, which denotes the work done by the thermodynamic force.
 Having fixed the number of molecules in the three regions, and by following the
 arguments of the last section, both the AT and the CG regions are
 subject to the Boltzmann distribution.
-Thus, the fixed-number partition function of the system reads
+Thus, the fixed-number partition function ($N_1$ in the AT region and $N_3$ in the CG region) of the system reads
 \begin{align}\nonumber
   q(N,V,T)
   &= \frac1{N!}\int
@@ -416,7 +433,7 @@ holds, or equivalently
   -\beta \bar N_1\omega_0 +
   \ln Q_{\AT}(\bar N_1, V_1, T) + \ln Q_{\CG}(N - \bar N_1, V_3, T)
 \end{align}
-Generally this is true: $\log Q_{\CG}(N - \bar N_1, V_3, T)$
+Generally this is true: $\ln Q_{\CG}(N - \bar N_1, V_3, T)$
 is proportional to the free energy $A_{\CG}(N - \bar N_1, V_3, T)$,
 which is an extensive thermodynamic variable, so
 $A_{\CG}(N - \bar N_1, V_3, T)$ is proportional to $N-\bar N_1$.
@@ -444,7 +461,7 @@ resolutions, namely
 \begin{align}\label{eqn:w-mu-diff}
   \omega_0 = \mu_{\CG}(\rho_0V_3, V_3, T) - \mu_{AT}(\rho_0 V_1, V_1, T)
 \end{align}
-$\rho_0$ is the density at which the atomistic and coarse-grained
+$\rho_0$ is the number density at which the atomistic and coarse-grained
 resolutions should match,
 namely $\bar N_1 = \rho_0V_1$ and $N - \bar N_1 = \rho_0(V - V_1)$ should apply.
 % \recheck{As we mentioned before, the work done by the filter
@@ -543,7 +560,8 @@ where $n_1$ is the summation variable that goes from 0 to $N$,
 however, when $n_1$ is not much smaller than $N$ (i.e. out of the range of the
 thermodynamic limit), the statistic is only of marginal importance,
 and can be neglected safely.
-The atomistic marginal distribution, which the AdResS simulation should
+The marginal number distribution of the full atomistic simulation,
+which the AdResS simulation should
 reproduce is
 \begin{align}
   p_{\AT}(N_1)
@@ -628,7 +646,7 @@ the density perturbed from $\rho_0$ by  $(\hat N_1 - n_1)/{V_3}$
 and $(\hat N_1 - N_1)/{V_3}$, respectively.
 Actually, these perturbations originate from the fluctuating
 number of molecules in the atomistic region: when the number
-deviates from $\hat N_1$, some molecules enter the coarse-grained
+deviates from $\hat N_1$, those molecules enter the coarse-grained
 region, and the density is perturbed.
 Under the thermodynamic
 limit, $\hat N_1$ is comparable to $n_1$ and $N_1$, and all of them are
