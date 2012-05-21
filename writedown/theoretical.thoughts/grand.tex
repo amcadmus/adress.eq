@@ -81,7 +81,7 @@ system is subjected to the Langevin equation, which the thermostat
 usually used in the AdResS simulations:
 \begin{align}
   \dd d\vect r_i &= \vect v_i\dd dt\\
-  m_i\dd d\vect v_i &= [-m_i\xi_i\vect v_i + \vect F_i]\,\dd dt + \sqrt{2\sigma_i}\,\dd d\vect W_t
+  m_i\dd d\vect v_i &= (-m_i\xi_i\vect v_i + \vect F_i)\,\dd dt + \sqrt{2\sigma_i}\;\dd d\vect W_t
 \end{align}
 where $\dd d\vect W_t$ is the standard Wiener process. We denote the
 phase space variable $\vect x = \{\vect r_i, \vect v_i\}$. $\vect r_i,
@@ -114,7 +114,7 @@ interpolation formula:
 \begin{align}
   \vect F_{\alpha\beta} =
   w_\alpha w_\beta\vect F^{\AT}_{\alpha\beta} +
-  [1-w_\alpha w_\beta]\vect F^{\CG}_{\alpha\beta} +
+  (1-w_\alpha w_\beta)\vect F^{\CG}_{\alpha\beta} +
   w_\alpha w_\beta (1-w_\alpha w_\beta)\vect F_{\alpha\beta}^{\rdf}.
 \label{grf}
 \end{align}
