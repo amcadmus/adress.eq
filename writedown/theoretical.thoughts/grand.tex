@@ -62,16 +62,16 @@ The Adaptive Resolution Simulation (AdResS) scheme~\cite{jcp,pre} is a
 method that in a concurrent fashion simulates a molecular system treated with different
 resolutions in different regions of space.  The word ``resolution''
 here refers to the amount of details included in a molecular model: usually, the higher the
-resolution, the more precise the model is , and the higher the corresponding computational cost.  The advantage is obvious, it
+resolution is, the more precise is the model, and the higher the corresponding computational cost.  The advantage is obvious, it
 keeps track of both: the local fine-grained processes in the
 high-resolution regions and the large scale behavior, requiring a less demanding computational effort compared to the system that, as a
 whole, would be described by the high-resolution model. The key feature of
-AdResS is that it allows an on-the-fly changing of resolution when a
+AdResS is that it allows an on-the-fly change of resolution when a
 molecule travels from a high-resolution region to a low-resolution
 region and vice versa. Moreover, recent research~\cite{prlgc, rdfcorr}
-numerically demonstrate that different resolutions reach a
+has numerically demonstrated that different regions (with resolutions) reach a
 thermodynamic equilibrium as if the whole system is equilibriated
-under the high-resolution description. Therefore, the a region with a
+under the high-resolution description. Therefore, a region with a
 certain resolution exchanges molecules with the rest of the system in
 a Grand Canonical fashion. This work, from the theoretical point of
 view, studies the conditions, under which the AdResS is an effective
@@ -82,8 +82,8 @@ the sampling.
 
 In this work, the higher resolution refers to the atomistic
 description (AT) of a molecule, while the lower resolution refers to
-the its corresponding coarse-grained (CG) modeling.  We assume that the dynamics of the
-system is subjected to the Langevin equation, which is the thermostat
+its corresponding coarse-grained (CG) model.  We assume that the dynamics of the
+system is subject to the Langevin equation, which is the thermostat
 usually used in the AdResS simulations:
 \begin{align}
   \dd d\vect r_i &= \vect v_i\dd dt\\
@@ -256,7 +256,7 @@ At this point, the key question is whether the probability in the $\HY$ region, 
 x_2, N_2 | N_1)$ is the same as that of the equivalent region in a full atomistic reference
 system. In general this seems not be the case, but it is possible to
 derive necessary conditions to enforce such an equivalence; the simplest ones involve
-the marginal distribution functions, namely:
+the marginal distribution functions, namely \cite{rdfcorr}:
 \begin{align}
   \rho_{\HY}(\vect r) &= \rho_{\AT}(\vect r)\\
   g_{\HY}( r) &= g_{\AT}(r)
@@ -265,7 +265,7 @@ The first order marginal distribution is the particle (or molecular) density
 $\rho_{\HY}(\vect r)$, while the second order marginal distribution is
 the radial distribution function (RDF), $g_{\HY}(r)$. The necessary
 conditions of the correct distribution $p(\vect x_1|N_1)$
-are that these two distribution should be the same as those of the fully atomistic reference system.
+are that these two distribution should be the same as those of the fully atomistic reference system. This assures that at least at the second order the equivalence invoked above for $p(N_{1})$ holds.
 
 
 \subsection{Statistical mechanics meaning of the thermodynamic force within the Grand Canonical framework}
@@ -371,8 +371,8 @@ First, for convenience, we denote that
   Q_{\AT}(N_1, V_1, T)\,
   Q_{\CG}(N - N_1, V_3, T),
 \end{align}
-and $\bar N_1$ is the value of where $\tilde q_{N_1}$ reaches
-maximum, namely $\tilde q_{\bar N_1} = \max \tilde q_{N_1}$.
+and $\bar N_1$ is the value at which $\tilde q_{N_1}$ reaches
+its maximum, namely $\tilde q_{\bar N_1} = \max \tilde q_{N_1}$.
 Since $\tilde q_{N_1}$ is positive definite, a basic
 observation is that
 \begin{align}
@@ -444,7 +444,7 @@ validates condition~\eqref{eqn:condition}.
 We will see later (from Eqn.~\eqref{eqn:pn1})
 that the maximum $\bar N_1$ corresponds to the maximum
 value of probability $p(N_1)$; this is also the average molecule
-number in the AT region that be of statistical importance
+number in the AT region that is of statistical importance
 under the thermodynamic limit.  Since $\bar
 N_1$ is the maximum, by differentiating on the right hand side of
 Eqn.~\eqref{eqn:a-energy-1}, we have the relation:
@@ -453,9 +453,9 @@ Eqn.~\eqref{eqn:a-energy-1}, we have the relation:
 \end{align}
 That means that the difference in the chemical potential between the AT and CG
 regions is taken care by the thermodynamic force.
-If the thermodynamic force ensures an
+In fact, if the thermodynamic force ensures an
 equilibrium that is the same as the full atomistic reference system,
-the work should be the same as the
+the work produced should be the same as the
 chemical potential difference between the atomistic and coarse-grained
 resolutions, namely
 \begin{align}\label{eqn:w-mu-diff}
@@ -575,7 +575,7 @@ reproduce is
     Q_{\AT}(n_1,V_1,T) Q_{\AT}(N-n_1,V_3,T)
   }  
 \end{align}
-We want to calculate the difference between $p(N_1)$ and $p_{\AT}(N_1)$.
+We want to calculate the difference between $p(N_1)$ and $p_{\AT}(N_1)$; that is the diffference between the particle probability in the atomistic region of AdResS ($p(N_{1})$), and the particle probability in a full atomistic simulation in the region equivalent to the AT region of AdResS.
 By multiplying the numerator of $p(N_1)$ by the denominator of
 $p_{\AT}(N_1)$ (denoted by $T_1$),
 and multiplying the numerator of $p_{\AT}(N_1)$
@@ -641,7 +641,7 @@ Notice, under the thermodynamic limit, $\hat N_1$ is equivalent to
 $\bar N_1$.
 $A_{\AT}(\rho_0 + (\hat N_1 - n_1)/{V_3},1,T)$ and
 $A_{\CG}(\rho_0 + (\hat N_1 - N_1)/{V_3},1,T)$ are
-the free energies in the \emph{unit} volume, with
+the free energies per \emph{unit} volume, with
 the density perturbed from $\rho_0$ by  $(\hat N_1 - n_1)/{V_3}$
 and $(\hat N_1 - N_1)/{V_3}$, respectively.
 Actually, these perturbations originate from the fluctuating
