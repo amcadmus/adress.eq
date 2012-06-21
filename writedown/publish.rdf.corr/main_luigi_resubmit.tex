@@ -151,7 +151,7 @@ This is reported in the next section.
 \section{Second order correction to the coupling force}
 The transition region $\Delta$ has a role of a filter that allows molecules to transit from one region to the other without perturbing the equilibrium of the AT and CG region. While properties in the AT and CG region have a physical meaning, $\Delta$ does not have any physical meaning but represents only a computational convenient tool. In this sense, what is relevant is that quantities  as the $g(r)$, $\kappa$ and the local particle number fluctuations are the same in the AT and CG region (and in turn equal to those of a reference full AT simulation), but it is not necessary that they are same in $\Delta$.
 The only significant requirement in $\Delta$ is that the average particle density is the same as in AT and CG region; in fact depletion or increasing of density in $\Delta$ would create artifacts in the AT and CG region. The proper behaviour of the density in $\Delta$ is assured by the application of 
-${\v F}^{\textrm{th}}(x)$. However, if there exists a systematic procedure which allows, without massive additional computational costs, also for the $g(r)$, $\kappa$ and the local particle number fluctuations to properly behave in $\Delta$ (that is to be as in the AT and CG region) and assures global thermodynamic equilibrium, then the coupling will be much smoother and would avoid the possibility of any artifacts at the boundaries of the various regions; moreover, by construction, the numerical accuracy should be higher also in the AT and CG region. In the following we show an approach which fulfills the requirements above. To do so, we extend the coupling formula: ${\v F}_{\alpha}=\sum_{\beta}{\v F}_{\alpha\beta}+{\v F}^{\textrm{th}}(x_{\alpha})$, by adding a further force, which assures that the $g(r)$ in $\Delta$ is the same as in the AT and CG region, thus preserves $\kappa$ and the particle number fluctuations without perturbing the thermodynamic equilibrium. We will refer to such an approach as {\it ``second order correction''}; this, because while ${\v F}^{\textrm{th}}(x)$ is based on the correction of the first moment of the probability distribution of the system in phase space $\rho(x)$, the new additional term is derived as a correction to the second moment of the distribution, $g(r)$. The technical details of the procedure and the numerical results are shown is the next sections. Finally, we show that the correction to the $g(r)$ represents also a conceptual advancement; in fact it implies that, at least at the level of the COM-COM $g(r)$ \redc{(for the conditional probability)}, the AT region is fully equivalent to a subsystem embedded in a larger full AT bath.\redc{This  represents a natural step towards the idea of Grand Canonical and it gives more solid formal basis to the approach along this direction.  To rigorously show that a subsystem in AdResS samples a Grand Canonical distribution, one should show that the joint distribution $P(x,N)$ (that is the probability of finding certain spatial configurations, $x$ for a given number of particles $N$) is the same as in a subsystem of a full atomistic simulation; this is subject of future work}. 
+${\v F}^{\textrm{th}}(x)$. However, if there exists a systematic procedure which allows, without massive additional computational costs, also for the $g(r)$, $\kappa$ and the local particle number fluctuations to properly behave in $\Delta$ (that is to be as in the AT and CG region) and assures global thermodynamic equilibrium, then the coupling will be much smoother and would avoid the possibility of any artifacts at the boundaries of the various regions; moreover, by construction, the numerical accuracy should be higher also in the AT and CG region. In the following we show an approach which fulfills the requirements above. To do so, we extend the coupling formula: ${\v F}_{\alpha}=\sum_{\beta}{\v F}_{\alpha\beta}+{\v F}^{\textrm{th}}(x_{\alpha})$, by adding a further force, which assures that the $g(r)$ in $\Delta$ is the same as in the AT and CG region, thus preserves $\kappa$ and the particle number fluctuations without perturbing the thermodynamic equilibrium. We will refer to such an approach as {\it ``second order correction''}; this, because while ${\v F}^{\textrm{th}}(x)$ is based on the correction of the first moment of the probability distribution of the system in phase space $\rho(x)$, the new additional term is derived as a correction to the second moment of the distribution, $g(r)$. The technical details of the procedure and the numerical results are shown is the next sections. Finally, we show that the correction to the $g(r)$ represents also a conceptual advancement; in fact it implies that, at least at the level of the COM-COM $g(r)$ \redc{(for the conditional probability)}, the AT region is fully equivalent to a subsystem embedded in a larger full AT bath. \redc{This  represents a natural step towards the idea of Grand Canonical and it gives more solid formal basis to the approach along this direction.  To rigorously show that a subsystem in AdResS samples a Grand Canonical distribution, one should show that the joint distribution $p(\v x,N)$ (that is the probability of finding a certain configuration $\v x$ for a given number of particles $N$) is the same as in a subsystem of a full atomistic simulation; this is the subject of the future work}. 
 
 
 \section{Determination of the force}
@@ -351,7 +351,7 @@ where $\mathcal H$ is the Hamiltonian of the system:
 \begin{align}
   \mathcal H(\v r_1, \cdots, \v r_N, \v v_1, \cdots, \v v_N)
   =
-  \sum_{i=1}^N\frac12 m_i\v v_i^2 + U(\v r_1, \cdots, \v r_N)  
+  \sum_{i=1}^N\frac12 m_i\v v_i^2 + U(\v r_1, \cdots, \v r_N).
 \end{align}
 Let us first consider the case where we have $N_1$
 molecules in the atomistic region, $N_2 - N_1$ molecules in the hybrid
@@ -368,38 +368,38 @@ system, which is composed by the AT, $\Delta$ and CG
 regions. We must always take in mind that our reference system is the full AT case.
 Thus the properties of the AT subsystem in AdResS must be the same of the equivalent subsystem in a full AT case.
  If we (hypothetically) fix the coordinates of the molecules in $\Delta$, according to the definition of $w(x)$ in Eq.\ref{eqn:new-w}, the Hamiltonian in the AT region can be written as
-\begin{align}
+\begin{align}\label{eqn:at-h}
   \mathcal H^{\textrm{AT}}(\v x_1; \v x_2) =
   \sum_{j=1}^{N_1}\frac12 m_i\v v_i^2 + 
   \sum_{i,j=1}^{N_1}\frac12 U^{\textrm{AT}}(\v r_i - \v r_j) + 
   \sum_{i=1}^{N_1}\sum_{j=N_1+1}^{N_2} U^{\textrm{AT}}(\v r_i - \v r_j) 
 \end{align}
-\redc{It must be noticed that the writing of the formula above is possible because the long-range electrostatic interaction is treated by the reaction
+Here we denote the phase space variables: $\v x_1 = (\v r_1, \cdots, \v
+r_{N_1}, \v v_1, \cdots, \v v_{N_1})$,  $\v x_2 = (\v r_{N_1+1},
+\cdots, \v r_{N_2}, \v v_{N_1+1}, \cdots, \v v_{N_2})$ and
+$\v x_3 = (\v r_{N_2+1},
+\cdots, \v r_{N}, \v v_{N_2+1}, \cdots, \v v_{N})$. $\v x_{3}$ denotes the coordinates and velocities of the COM of the molecules in the CG region and for the moment do not enter in our derivation.
+\redc{It must be noticed that the writing of the formula~\eqref{eqn:at-h} above is possible because the long-range electrostatic interaction is treated by the reaction
 field method, therefore, there is indeed no long-range interaction in
 the system. This means that molecules in the AT region are interacting only with those in the hybrid
-region, with the cut-off radius is $r_c$. Secondly, by the new
+region, with the cut-off radius $r_c$. Secondly, by the new
 definition of $w(x)$, i.e. eq 12, the molecules in the AT
 region interact with the molecules in the hybrid in an 
 \emph{atomistic} fashion, because every hybrid molecule falling within the cut-off of
 an atomistic molecule acutally has a weighting function of $w=1$,
 which means their nature is atomistic though we treat them as hybrid.}
-We denote the phase space variables: $\v x_1 = (\v r_1, \cdots, \v
-r_{N_1}, \v v_1, \cdots, \v v_{N_1})$,  $\v x_2 = (\v r_{N_1+1},
-\cdots, \v r_{N_2}, \v v_{N_1+1}, \cdots, \v v_{N_2})$ and
-$\v x_3 = (\v r_{N_2+1},
-\cdots, \v r_{N_3}, \v v_{N_2+1}, \cdots, \v v_{N_3})$. $\v x_{3}$ denotes the coordinates and velocities of the COM of the molecules in the CG region and for the moment do not enter in our derivation.
 Here we can consider $\v x_1$ to be the variable and $\v x_2$ a certain (fixed) external molecular environment. 
 According to the Langevin dynamics, we have the conditional probability distribution:
 \begin{align}
   p (\v x_1 \vert \v x_2)  \propto
   e^{-\beta \mathcal H^{\textrm{AT}}(\v x_1; \v x_2)}
 \end{align}
-\redc{Here under the hypothesis of fixed number of particles (however the argument applies for any combination of $N_{1},N_{2}$) we want to derive a minimal consistency criterion for the conditional probability; that is under which conditions this probability is the same as that of the equivalent region in a full atomistic system of reference. We will show that matching the $g(r)$ also in the $\Delta$ region assures at basic level such a consistency, and thus it shows the importance of the criterion based on the $g(r)$ which we have developed in this paper.}
+\redc{Here under the hypothesis of fixed number of particles (however the argument applies for any combination of $N_{1},N_{2}$), we want to derive a minimal consistency criterion for the conditional probability; that is under which conditions this probability is the same as that of the equivalent region in a full atomistic system of reference. We will show that matching the $g(r)$ also in the $\Delta$ region assures at basic level such a consistency, and thus it shows the importance of the criterion based on the $g(r)$ which we have developed in this paper.}
 Accordingly, the phase space distribution of the AT region writes:
 \begin{align}
   p(\v x_1) = \int p(\v x_1\vert\v x_2)\cdot p (\v x_2) \,\d d\v x_2
 \end{align}
-If the distribution $p(\v x_2)$ is equivalent to that of the corresponding region in a full AT reference system, then one can consider the AT region in AdresS to be the equivalent of a subsystem embedded  a very large AT
+If the distribution $p(\v x_2)$ is equivalent to that of the corresponding region in a full AT reference system, then one can consider the AT region in AdresS to be the equivalent of a subsystem embedded in  a very large AT
 system.
 The crucial question is if $p(\v x_2)$ is equivalent to that of a full AT system. 
 Most likely this is not the case, at least for the interpolation scheme plus the thermodynamic force. In fact if one consider $p(\v x_2)$ expanded in terms of its momenta, by performing simulations using the coupling scheme of Eq.\ref{mody}, the first order of $p(\v x_2)$ is correct (i.e. the particle density) but already at the second order, that is the COM-COM RDF, the hybrid region deviates from the other two regions. However, as we have shown in the previous sections, one can add a further corrective force in the hybrid region
