@@ -1,27 +1,56 @@
 \documentclass[a4paper]{article}
 
-\begin{document}
+\renewcommand{\v}[1]{\textbf{\textit{#1}}}
+\renewcommand{\d}[1]{\textsf{#1}}
 
+\begin{document}
+\noindent
+Dear Prof. Schlegel,\\
+
+Thank you very much for the reports. We would like to thank also the referees for the positive reports and for the suggestions which we have implemented in our revised version of the manuscript, as it is reported below in detail.\\
+
+In the revised paper, all the additions are marked in red, to help the referees to located them immediately in the text.\\
+
+\noindent
+{\bf Referee 1:}\\
+
+\textit{
 1. I encourage the authors to provide a better context for their
 present work by addressing the literature on mixed resolution
 models. In particular, I believe that Klein and coworkers (JCTC 2007),
 Nielsen et al (PRL 2010), Heyden and Truhlar (JCTC 2008), and Voth and
 coworkers (JPCB 2006 and JCTC 2009) – just to name a few - have all
 reported various mixed resolution CG-atomistic models.
+}
 
+We added the sentence: {\bf Methods similar to AdResS or dealing with mixed atomistic-coarse grained resolution have also been presented in literature in the last few years, for a general overview see Refs[4-9]}
+\\
+
+\textit{
 2. I encourage the authors to more carefully proofread their
 manuscript, which contains a number of typos. For instance, in the Fig
 3 caption ``GC'' should presumably be ``CG'' on page 10, ``momentum'' should
 presumably be ``moment'' on page 13 and caption 7 “9 nm” should be
 ``0.9nm'', ...
+}
 
+Corresponding revisions are made. 
+\\
+
+\textit{
 3. It would be helpful if, when developing the theory, the authors
 described the boundary conditions of the AdResS simulation. Is the
 volume fixed? Are periodic boundary conditions employed? Is there a
 global thermostat or different thermostats for each region? Many of
 these details are in the appendix, but they would be helpful in the
 context of introducing and describing the method.
+}
 
+We added the sentence: {\bf Notice that throughout the paper we assume a fixed volume and the application of periodic boundary conditions. Therefore $w(x)$ is also fixed and periodic.}\\
+Regarding the thermostat we added the sentence: {\bf In practice, the energy drift of the system is taken care by a Langevin thermostat with globally uniform parameters}
+\\
+
+\textit{
 4. The authors emphasize the importance for the CG model to reproduce
 the atomistic compressibility, since this describes fluctuations in
 density. The authors appear to assume that accurately reproducing the
@@ -30,74 +59,201 @@ compressibility is also accurately reproduced. It is true, in
 principle, that if the CG model perfectly reproduces the atomistic
 rdf, $g(r)$, for all $r$, then the CG model also reproduces the atomistic
 compressibility. However, the compressibility equation is defined by
-the integral of $g(r)$ – 1, which may prove to be sensitive to very
+the integral of $g(r)-1$, which may prove to be sensitive to very
 small errors in the rdf. In particular, van der Vegt and coworkers
 (e.g., JCTC 2012) have demonstrated that the Kirkwood Buff integrals,
-which are also defined by integrals of $g(r)$ – 1, are remarkably
+which are also defined by integrals of $g(r)-1$, are remarkably
 sensitive to very small errors in the rdf, particularly at large $r$
 which may not be so accurately determined by iterative Boltzmann
 inversion. Consequently, I wonder how accurately the CG model actually
 reproduces the atomistic compressibility. I would encourage the
 authors to address this point. Figure 10 appears to suggest that the
 compressibility is quite accurately reproduced.
+}
 
+We used the same IBI process as the one shown in Wang et.al. EPJE
+2009 (and we refered to it in the paper).  It has been shown that the derived CG model reproduces the
+compressibility up to a very high accuracy. Please see Table 3 of that
+paper.
+Notice in that paper, the compressibility is measured by the
+finite  difference of the pressure rather than integrating $g(r)-1$,
+because, as pointed out by the referee, the integral is very sensitive
+to the small error of $g(r)$ at large $r$.
+
+When we are talking about the compressibility in the region $\Delta$,
+it becomes very subtle. Even though we showed the number fluctuation
+is correctly reproduced, we cannot definitely tell the compressibility
+is correctly reproduced. Because they are related by equation only
+under the thermodynamic limit.  For the small system studied by the
+present paper, the size is far from the thermodynamic limit, so no
+definitive conclusion can be address on the compressibility.
+We think that the referee made a good point, one must be clear on this aspect and thus we have added a sentence in the section about the application to liquid water: {\bf It must be noticed that the accurate reproduction of the particle number fluctuation also suggests that the compressibility in the $\Delta$ region is accurately reproduced. However, there is a subtle difference between these two concepts: they are related to each other via an equation, only in the thermodynamic limit, which is not the case of the small finite system of $\Delta$. This implies that we could perhaps argue that the compressibility in $\Delta$ may not go particularly wrong, however we cannot make any precise statement regarding its accuracy.}
+% Discussions are added at the 4-th line from bottom of page 17.
+\\
+
+\textit{
 5. It seems that the thermodynamic force is parameterized using an
 iterative approach requiring multiple CG simulations. This point
 should be more clear in the paper.
+}
 
+Probably the referee means multiple AdResS simulations. To make it more clear we have added the following sentence: {\bf Therefore, for every iteration, an AdResS simulation is required to calculate the density profile}
+\\
+
+\textit{
 6. The thermodynamic force $F^{th}(x)$ defined in eq 4 should be
 presumably applied to the mass of material at a position x. How is
 this force transferred to individual particles?
+}
 
+The thermodynamic force of molecule $\alpha$ is measured at the COM of
+the molecule.  And then the molecular force ${F}_{\alpha}$ (including
+the contribution of the thermodynamic force, see eq 7) is 
+mapped onto each atom (if necessary) by the weight of the atomic mass
+over the molecular mass, namely, $F_{\alpha_i} =
+\frac{M_{\alpha_i}}{M_\alpha}F_{\alpha}$, where $M_{\alpha}$ and
+$M_{\alpha_i}$ are the mass of molecule $\alpha$ and the mass of the
+$i$-th atom on it (see also caption of Fig.3).
+
+This is made clear by the addition of the following sentence: {\bf 
+  where $x_\alpha$ is the COM position of molecule $\alpha$.
+  The molecular force ${\v F}_{\alpha}$ 
+  is further mapped onto each atom (if necessary) by the weight
+of the atomic mass over the molecular mass, namely,
+$\v F_{\alpha_i} = \frac{M_{\alpha_i}}{M_\alpha}\v F_{\alpha}$, where
+$M_{\alpha_i}$ is the mass of $i$-th atom on molecule $\alpha$.}
+\\
+
+\textit{
 7. The authors parameterize the rdf-force to reproduce $g(r)$ as a
 function of $x$ in the hybrid region. How is $g(r)$ and the resulting rdf
 force treated as a function of $r$ for fixed $x$? Is $r$ the distance
 between particles at a given fixed x, etc?
+}
 
+The force correcting for the $g(r)$ in $\Delta$ is a pairwise force acting between molecules in $\Delta$ . This is analogous of the derivation of the $CG$ model. 
+The spatial dependency is
+added then by the prefactor $ w_\alpha w_\beta (1-w_\alpha w_\beta)
+= w(x_\alpha) w(x_\beta) [1-w(x_\alpha) w(x_\beta)]$, see eq 8.
+The effectiveness of this approach is demonstrated in the section VII.
+However we see the concerns of the referee and added the comment that: {\bf It must be noticed that the RDF correction force $\v F^{\textrm{rdf}}$
+  only depends on the
+  relative position of two molecules, i.e. $\v r_{\alpha\beta}$.  Even though
+  the $g(r)$ in $\Delta$ is actually a function of position $x$; here it is assumed that the RDF correction does NOT have this dependency.
+  In the IBI scheme~(9)
+  the RDF of the hybrid region at $k$-the step $g_k(r)$ is 
+  averaged over the hybrid region, so that no spatial
+  dependency exists in this iteration formula.
+  The spatial dependency is added latter by the  prefactor
+  $ w_\alpha w_\beta (1-w_\alpha w_\beta) = w(x_\alpha) w(x_\beta) [1-w(x_\alpha) w(x_\beta)]$.
+  The effectiveness of such an approach will be demonstrated in the next section.}
+\\
+
+\textit{
 8. The authors introduce a new weighting function $w(x)$ for the hybrid
 region in eq 12. Is this applied to all AdResS forces?
+}
 
+Yes. We made it clear by adding the sentence: {\bf If not stated otherwise, the new weighting function~(12)
+  is applied to all AdResS forces.}
+\\
+
+\textit{
 9. For concreteness, it would be helpful for the reader, if the
-authors would explicitly define the various distances, $d_{\textrm{AT}}$, $d_{\Delta}$
+authors would explicitly define the various distances, $d_{{AT}}$, $d_{\Delta}$
 used in their water simulations, when these distances are introduced
 in the theory. Without definitions, it appears that eq 12 actually
 shrinks the hybrid region.
+}
 
+The extension of the transition region $\Delta$ is increased compared to the previous definition of $w(x)$ by an amount $r_{c}$, where the resolution is still atomistic, but those molecules are considered as part of the system of the hybrid region and not of the atomistic region. This allow an even smoother transition in changing resolution.
+Numbers are provided and this point is clarified with the following sentence:
+{\bf $d_{AT}$ and $x$ are the same as in  Eq.(2), $d_{{\Delta}}$ is also the same as in Eq.(2), that is the {\it old} extension of the $\Delta$ region, while $r_c$ is the cut-off
+radius; in this work $d_{{\Delta}} \geq 2r_c$; as a consequence the {\it new} size of the $\Delta$ region is now $d_{{\Delta}}+r_c$}.\\
+And {\bf the amount of the additional extension of the $\Delta$ region is $r_{c}$}.
+\\
+
+\textit{
 10.  In Fig 5, the authors suggest that the present case with a large
-hybrid region is a “worst case scenario.” While it would seem that
-this is perhaps a “worst case scenario” from the sense of
-computational efficiency, it would seem to be a “best case scenario”
+hybrid region is a {\it ``worst case scenario''}. While it would seem that
+this is perhaps a {\it ``worst case scenario''} from the sense of
+computational efficiency, it would seem to be a ``best case scenario''
 from the perspective of allowing a smooth gradual transition that
 allows for good reintroduction of atomic detail. I would encourage the
 authors to clarify/comment on this point.
+}
 
+We have specified what we mean for {\it ``worst case scenario''}, that is the $\Delta$ region of a size comparable to the AT and CG. This means larger perturbation to the AT and CG region, thus when the $\Delta$ region remains the same and the AT and CG become very large, then we have a situation of {\it ``best case scenario''} because the $\Delta$ region is large as before and so the transition is smooth, but now the AT and CG are very large and thus likely to not be perturbed by the $\Delta$ region as it was before with much smaller AT and CG region.
+\\
 
+\textit{
 11. The authors suggest that section VIII provides a rigorous proof
 that the AdResS algorithm ensures that the sampling in the atomistic
 region is equivalent (to second order) to the sampling for a subsystem
 embedded in a larger system. However, I have several concerns about
 their argument that I would encourage them to consider:
+}
 
+\textit{
 a. It is not obvious to me that eq 17 is justified and it appears to
 me that Eq 17 is paramount to their conclusion, i.e., that the
 atomistic subsystem samples a canonical distribution. Even if the
 molecules in the hybrid region are fixed in place, it is not
 immediately obvious that their effects can be modeled with atomistic
 conservative pair potentials.
+}
 
+\textit{
 b. It is also not obvious to me that the effects of the CG region
 (region 3) can be neglected in the proof. In particular, it seems to
 me that long-ranged electrostatic interactions from molecules in
 region 3 could influence the distribution in the atomistic region.
+}
 
-c. Finally, even if the concerns 1 and 2 above can be easily
-addressed, eqs 17-19 demonstrate that, for a fixed number of molecules
-in the atomistic region, those molecules sample a canonical
-distribution. However, this result does not ensure that the atomistic
-subsystem samples the correct grand canonical distribution, which
-would also require reproducing the correct joint distribution for the
-configuration and number of particles, i.e., the joint distribution
-$P(x,N)$.
+Probably it is better to answer 17.a and 17.b together.  First, we
+stress that the electrostatic interaction is treated by the reaction
+field method, therefore, there is indeed no long-range interaction in
+the system. Therefore, the AT region is only interacting with hybrid
+region, and the cut-off radius is $r_c$. Secondly, by the new
+definition of $w(x)$, i.e. eq 12, the molecules in the atomistic
+region interact with the molecules in the hybrid in a 
+\emph{atomistic} way, because every hybrid molecule falling in the cut-off of
+an atomistic molecule actually has a weighting function of $w=1$,
+which means their nature is atomistic though we treat them as hybrid.
+Among all possible configuration of the system, we consider
+the subsets in which the system has the same hybrid configuration,
+namely the hybrid molecules are fixed in place. Within
+these subsets, we then
+consider the probability of finding a certain atomistic configuration,
+which
+is argued to be given by eq 18 with 17.
+Notice that when we write down eq 18, we implicitly assume
+the numbers of molecules in the atomistic and hybrid regions
+are also fixed, i.e. to $N_1$ and $N_2$, respectively.
+These are additional conditions to write the probability.
+We want to stress again that the Boltzmann distribution eq 18
+can only be derived when assuming the hybrid configuration
+is fixed. In the mathematical language, we can only argue
+that the conditional probability $p(x_1|x_2)$ is a Boltzmann distribution,
+rather than the joint probability $p(x_1, N)$. This joint probability is a by far more complicated object and we are currently working on that and found preliminary satisfying results. 
+However we see the point of the referee and so we specify more in detail the basic consistency we want to show by treating $p(x)$. We also agree with the referee that we should remove the link of $p(x)$ with the Grand Canonical, since indeed is the joint probability that we should have for such a link.\\
+To make all this clear we added in the text the following: {\bf It must be noticed that the writing of the formula above is possible because the long-range electrostatic interaction is treated by the reaction
+field method, therefore, there is indeed no long-range interaction in
+the system. This means that molecules in the AT region are interacting only with those in the hybrid
+region, with the cut-off radius is $r_c$. Secondly, by the new
+definition of $w(x)$, i.e. eq 12, the molecules in the AT
+region interact with the molecules in the hybrid in an 
+\emph{atomistic} fashion, because every hybrid molecule falling within the cut-off of
+an atomistic molecule actually has a weighting function of $w=1$,
+which means their nature is atomistic though we treat them as hybrid.}\\
+
+In order to clarify why we consider this argument related to the conditional probability $p(x_{1}|x_{2})$ we added the following sentence: {\bf Here under the hypothesis of fixed number of particles (however the argument applies for any combination of $N_{1},N_{2}$) we want to derive a minimal consistency criterion for the conditional probability; that is under which conditions this probability is the same as that of the equivalent region in a full atomistic system of reference. We will show that matching the $g(r)$ also in the $\Delta$ region assures at basic level such a consistency, and thus it shows the importance of the criterion based on the $g(r)$ which we have developed in this paper.}\\
+Finally we remove the link between $p(x)$ and the Grand Canonical and clarify that: {\bf This would mean that the idea of the AT region as a subsystem of a very large AT system, at least at the basic level corresponding to the hypothesis done here, is correct up to the second order in terms of distribution.} 
+\\
+Note that we have modified also a sentence in section {\bf V}, regarding this theoretical aspect we are considering. We have modified a sentence in the following terms: {\bf Finally, we show that the correction to the $g(r)$ represents also a conceptual advancement; in fact it implies that, at least at the level of the COM-COM $g(r)$ (for the conditional probability), the AT region is fully equivalent to a subsystem embedded in a larger full AT bath. This  represents a natural step towards the idea of Grand Canonical and it gives more solid formal basis to the approach along this direction. To rigorously show that a subsystem in AdResS samples a Grand Canonical distribution, one should show that the joint distribution $P(x,N)$ (that is the probability of finding certain spatial configurations, $x$ for a given number of particles $N$) is the same as in a subsystem of a full atomistic simulation; this is subject of future work}.\\
+
+{\bf Referee 2:}\\
+We thank the referee for the very positive report. We took care that the grammatical errors are corrected.
 
 
 
