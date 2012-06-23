@@ -147,7 +147,7 @@ As a consequence the adaptive coupling, in terms of force acting on the molecule
 of the atomic mass over the molecular mass, namely,
 $\v F_{\alpha_i} = \frac{M_{\alpha_i}}{M_\alpha}\v F_{\alpha}$, where
 $M_{\alpha_i}$ is the mass of $i$-th atom on molecule $\alpha$.}
- It is interesting to note that since $\left({\frac{\partial\mu}{\partial\rho}}\right)_{V,T}=\frac{1}{[\rho]^{2}\kappa}$, we can conclude that this procedure is conceptually equivalent to that labelled (ii) in the previous section, but with the advantage of a much higher computational efficiency.
+ It is interesting to note that since $\left({\frac{\partial\mu}{\partial\rho}}\right)_{V,T}=\frac{1}{[\rho]^{2}\kappa}$, we can conclude that this procedure is conceptually equivalent to that labeled (ii) in the previous section, but with the advantage of a much higher computational efficiency.
 The approach outlined in this section has been named ``effective Grand Canonical'' because has the characteristic of a standard Grand Canonical system regarding the coupling to a particle reservoir and because the particle number fluctuations in the AT e CG region are preserved. However is an ``effective'' approach because one does not have a direct access to the chemical potential $\mu$ (key quantity for a formal derivation of the partition function in the Grand Canonical ensemble) and because the particle reservoir is finite. The application to liquid water at ambient conditions \cite{prlgc} and to water-methanol mixtures \cite{debash} has proven that the method gives very accurate numerical results if compared with the (by far more expensive) full AT simulations of reference. This means that regarding the computational as well as conceptual robustness of the method the level reached is highly satisfying. However in this work we attempt to define a path to a further systematic improvement, focusing on the reproduction of properties in the transition region $\Delta$.
 This is reported in the next section.
 
@@ -218,7 +218,7 @@ this work $d_{{\Delta}} \geq 2r_c$. \redc{In the water simulation
   \textsf{nm}$, $d_{\Delta} = 2.75\, \textsf{nm}$ and $r_c = 0.9\
   \textsf{nm}$.}
 This new definition of $w(x)$, essentially consists
-in considering an extension (of size $r_c$) of the hybird region to
+in considering an extension (of size $r_c$) of the hybrid region to
 part of the AT region.
 \redc{
 In other words, the resolution of the molecules in the range
@@ -227,7 +227,7 @@ $d_{\textrm{AT}} < x < d_{\textrm{AT}} + r_c$ are still atomistic
 the hybrid region $\Delta$ and not of the atomistic region.
 This assures that $\v
 F^{\textrm{rdf}}(\v r_{\alpha\beta})$ acts only between molecules
-in the hybrid region, so that it does not perturb the interations
+in the hybrid region, so that it does not perturb the interactions
 in the atomistic region.}
 % \redc{In other words, although the molecules
 %   in range $d_{\textrm{AT}} < x < d_{\textrm{AT}} + r_c$ are assigned
@@ -303,7 +303,7 @@ Fig.\ref{adapt-wat}, shows the AdResS set up for a system consisting of liquid w
   \caption{Schematic representation of the adaptive simulation box for water where the new proposed $w(x)$ is plotted. Essentially, the $\Delta$ region include a part with full AT resolution. This makes sure that $\v F^{\textrm{rdf}}(\v r_{\alpha\beta})$ acts only between molecules which are interacting via hybrid resolution. The new form of $w(x)$ does not have any further consequence on the system. The $\Delta$ region considered here is, for technical reasons, larger than the AT and CG region; in fact, a $\Delta$ region, larger than the AT and CG region, for the adaptive process is a {\it ``worst case scenario''}; \redc{ this must be intended in the sense that if the approach proposed here, works well with a small AT and CG region (for which a relatively larger $\Delta$ region is a strong perturbation), then it will work well the case where such two regions AT and CG are much larger than $\Delta$.}}
   \label{adapt-wat}
 \end{figure}
-Fig.\ref{fig:tmp4} shows the $g(r)$ in the $\Delta$ region after the IBI-TFI iteration loop is applied. The agreement with the reference all atom calculation is highly satisfactory. Moreover, the comparison with the results obtained employing the thermodynamic force only (as in Ref.\cite{prlgc}) shows that the additional force, $\v F^{\textrm{rdf}}$, proposed here allows for a sizeable improvement of the structural consistency across the simulation box. The accuracy reached in this case becomes more evident if one considers the $g(r)$ calculated locally in subregions of $\Delta$ across the box; this is shown in Fig.\ref{fig:tmp7}. In the situation where the disagreement on the $g(r)$ in $\Delta$ between the AdResS of Ref.\cite{prlgc} and the reference all atom simulation is larger, that is the central region of $\Delta$ (of about $9.0\, \textsf{nm}$ extension; bottom-left panel in Fig.\ref{fig:tmp7}), the application of the  IBI-TFI correction loop instead significantly improves the situation. 
+Fig.\ref{fig:tmp4} shows the $g(r)$ in the $\Delta$ region after the IBI-TFI iteration loop is applied. The agreement with the reference all atom calculation is highly satisfactory. Moreover, the comparison with the results obtained employing the thermodynamic force only (as in Ref.\cite{prlgc}) shows that the additional force, $\v F^{\textrm{rdf}}$, proposed here allows for a sizable improvement of the structural consistency across the simulation box. The accuracy reached in this case becomes more evident if one considers the $g(r)$ calculated locally in subregions of $\Delta$ across the box; this is shown in Fig.\ref{fig:tmp7}. In the situation where the disagreement on the $g(r)$ in $\Delta$ between the AdResS of Ref.\cite{prlgc} and the reference all atom simulation is larger, that is the central region of $\Delta$ (of about $9.0\, \textsf{nm}$ extension; bottom-left panel in Fig.\ref{fig:tmp7}), the application of the  IBI-TFI correction loop instead significantly improves the situation. 
 \begin{figure}
   \centering
   \includegraphics[width=0.69\textwidth]{rdf.eps}
@@ -344,7 +344,7 @@ Next we must show that the IBI-TFI correction loop does not perturb the uniform 
   \caption{Particle density across the simulation box. The reference data from the all atom simulation (EX) are reported in pink. The red broken line corresponds to the situation after the correction on the $g(r)$ is applied, but the thermodynamic force is not yet updated. The solid red, green and blue lines represents steps 1, 2 and 4 of the IBI-TFI loop. The agreement with the reference data is highly satisfactory.}
   \label{rho}
 \end{figure}
-The fast convergence of the iteration loop is also shown in terms of the convergence of the potential correcting the RDF in Fig.\ref{gpot}. More important, the inset shows the convergence of work done by ${\v F}^{\textrm{th}}$: $\int_{\Delta}{\v F}^{\textrm{th}}dx$, as a function of the number of iteration steps. This is an important information because it tells us that the presence in the iterative loop of $\v F^{\textrm{rdf}}(\v r_{\alpha\beta})$ does not perturb the role of the resulting ${\v F}^{\textrm{th}}$ in fulfilling the thermodynamic relation of Eq.\ref{thf} and thus in providing the thermodynamic equilibrium. The difference now, is that also the {\it structural} transition occurs in a much smoother way. A sizeable effect of this smoother transition is shown in Fig.\ref{fluct} where the molecular particle number fluctuation is plotted as a function of the position in $\Delta$.
+The fast convergence of the iteration loop is also shown in terms of the convergence of the potential correcting the RDF in Fig.\ref{gpot}. More important, the inset shows the convergence of work done by ${\v F}^{\textrm{th}}$: $\int_{\Delta}{\v F}^{\textrm{th}}dx$, as a function of the number of iteration steps. This is an important information because it tells us that the presence in the iterative loop of $\v F^{\textrm{rdf}}(\v r_{\alpha\beta})$ does not perturb the role of the resulting ${\v F}^{\textrm{th}}$ in fulfilling the thermodynamic relation of Eq.\ref{thf} and thus in providing the thermodynamic equilibrium. The difference now, is that also the {\it structural} transition occurs in a much smoother way. A sizable effect of this smoother transition is shown in Fig.\ref{fluct} where the molecular particle number fluctuation is plotted as a function of the position in $\Delta$.
 \begin{figure}
   \centering
   \includegraphics[width=0.59\textwidth]{force-rdf.eps}
@@ -418,7 +418,7 @@ region, with the cut-off radius $r_c$. Secondly, by the new
 definition of $w(x)$, i.e. eq 12, the molecules in the AT
 region interact with the molecules in the hybrid in an 
 \emph{atomistic} fashion, because every hybrid molecule falling within the cut-off of
-an atomistic molecule acutally has a weighting function of $w=1$,
+an atomistic molecule actually has a weighting function of $w=1$,
 which means their nature is atomistic though we treat them as hybrid.}
 Here we can consider $\v x_1$ to be the variable and $\v x_2$ a certain (fixed) external molecular environment. 
 According to the Langevin dynamics, we have the conditional probability distribution:
@@ -431,7 +431,7 @@ Accordingly, the phase space distribution of the AT region writes:
 \begin{align}
   p(\v x_1) = \int p(\v x_1\vert\v x_2)\cdot p (\v x_2) \,\d d\v x_2
 \end{align}
-If the distribution $p(\v x_2)$ is equivalent to that of the corresponding region in a full AT reference system, then one can consider the AT region in AdresS to be the equivalent of a subsystem embedded in  a very large AT
+If the distribution $p(\v x_2)$ is equivalent to that of the corresponding region in a full AT reference system, then one can consider the AT region in AdResS to be the equivalent of a subsystem embedded in  a very large AT
 system.
 The crucial question is if $p(\v x_2)$ is equivalent to that of a full AT system. 
 Most likely this is not the case, at least for the interpolation scheme plus the thermodynamic force. In fact if one consider $p(\v x_2)$ expanded in terms of its momenta, by performing simulations using the coupling scheme of Eq.\ref{mody}, the first order of $p(\v x_2)$ is correct (i.e. the particle density) but already at the second order, that is the COM-COM RDF, the hybrid region deviates from the other two regions. However, as we have shown in the previous sections, one can add a further corrective force in the hybrid region
