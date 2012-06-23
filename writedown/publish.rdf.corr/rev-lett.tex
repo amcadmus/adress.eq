@@ -23,7 +23,7 @@ coworkers (JPCB 2006 and JCTC 2009) – just to name a few - have all
 reported various mixed resolution CG-atomistic models.
 }
 
-We added the sentence: {\bf Methods similar to AdResS or dealing with mixed atomistic-coarse grained resolution have also been presented in literature in the last few years, for a general overview see Refs.4-9.}
+We added the sentence (see page 2, 6th line from bottom): {\bf Methods similar to AdResS or dealing with mixed atomistic-coarse grained resolution have also been presented in literature in the last few years, for a general overview see Refs.4-9.}
 \\
 
 \textit{
@@ -46,8 +46,8 @@ these details are in the appendix, but they would be helpful in the
 context of introducing and describing the method.
 }
 
-We added the sentence: {\bf Notice that throughout the paper we assume a fixed volume and the application of periodic boundary conditions. Therefore $w(x)$ is also fixed and periodic.}\\
-Regarding the thermostat we added the sentence: {\bf In practice, the energy drift of the system is taken care by a Langevin thermostat with globally uniform parameters}
+We added the sentence (see page 4, 3rd line under eq 2): {\bf Notice that throughout the paper we assume a fixed volume and the application of periodic boundary conditions. Therefore $w(x)$ is also fixed and periodic.}\\
+Regarding the thermostat we added the sentence (see page 5, 5th line from bottom): {\bf In practice, the energy drift of the system is taken care by a Langevin thermostat with globally uniform parameters}
 \\
 
 \textit{
@@ -87,7 +87,7 @@ is correctly reproduced. Because they are related by equation only
 under the thermodynamic limit.  For the small system studied by the
 present paper, the size is far from the thermodynamic limit, so no
 definitive conclusion can be address on the compressibility.
-We think that the referee made a good point, one must be clear on this aspect and thus we have added a sentence in the section about the application to liquid water: {\bf It must be noticed that the accurate reproduction of the particle number fluctuation also suggests that the compressibility in the $\Delta$ region is accurately reproduced. However, there is a subtle difference between these two concepts: they are related to each other via an equation, only in the thermodynamic limit, which is not the case of the small finite system of $\Delta$. This implies that we could perhaps argue that the compressibility in $\Delta$ may not go particularly wrong, however we cannot make any precise statement regarding its accuracy.}
+We think that the referee made a good point, one must be clear on this aspect and thus we have added a sentence in the section about the application to liquid water (see page 18, 1st line under Fig. 9): {\bf It must be noticed that the accurate reproduction of the particle number fluctuation also suggests that the compressibility in the $\Delta$ region is accurately reproduced. However, there is a subtle difference between these two concepts: they are related to each other via an equation, only in the thermodynamic limit, which is not the case of the small finite system of $\Delta$. This implies that we could perhaps argue that the compressibility in $\Delta$ may not go particularly wrong, however we cannot make any precise statement regarding its accuracy.}
 % Discussions are added at the 4-th line from bottom of page 17.
 \\
 
@@ -97,7 +97,7 @@ iterative approach requiring multiple CG simulations. This point
 should be more clear in the paper.
 }
 
-Probably the referee means multiple AdResS simulations. To make it more clear we have added the following sentence: {\bf Therefore, for every iteration, an AdResS simulation is required to calculate the density profile}
+Probably the referee means multiple AdResS simulations. To make it more clear we have added the following sentence (see page 9, 2nd line under eq 6): {\bf Therefore, for every iteration, an AdResS simulation is required to calculate the density profile}
 \\
 
 \textit{
@@ -115,7 +115,7 @@ over the molecular mass, namely, $F_{\alpha_i} =
 $M_{\alpha_i}$ are the mass of molecule $\alpha$ and the mass of the
 $i$-th atom on it (see also caption of Fig.3).
 
-This is made clear by the addition of the following sentence: {\bf 
+This is made clear by the addition of the following sentence (see page 9, 1st line under eq 7): {\bf 
   where $x_\alpha$ is the COM position of molecule $\alpha$.
   The molecular force ${\v F}_{\alpha}$ 
   is further mapped onto each atom (if necessary) by the weight
@@ -136,7 +136,7 @@ The spatial dependency is
 added then by the prefactor $ w_\alpha w_\beta (1-w_\alpha w_\beta)
 = w(x_\alpha) w(x_\beta) [1-w(x_\alpha) w(x_\beta)]$, see eq 8.
 The effectiveness of this approach is demonstrated in the section VII.
-However we see the concerns of the referee and added the comment that: {\bf It must be noticed that the RDF correction force $\v F^{\textrm{rdf}}$
+However we see the concerns of the referee and added the comment that (see page 11, last line): {\bf It must be noticed that the RDF correction force $\v F^{\textrm{rdf}}$
   only depends on the
   relative position of two molecules, i.e. $\v r_{\alpha\beta}$.  Even though
   the $g(r)$ in $\Delta$ is actually a function of position $x$; here it is assumed that the RDF correction does NOT have this dependency.
@@ -216,7 +216,11 @@ me that long-ranged electrostatic interactions from molecules in
 region 3 could influence the distribution in the atomistic region.
 }
 
-Probably it is better to answer 17.a and 17.b together.  First, we
+\textit{
+  c.	Finally, even if the concerns 1 and 2 above can be easily addressed, eqs 17-19 demonstrate that, for a fixed number of molecules in the atomistic region, those molecules sample a canonical distribution. However, this result does not ensure that the atomistic subsystem samples the correct grand canonical distribution, which would also require reproducing the correct joint distribution for the configuration and number of particles, i.e., the joint distribution $P(x,N)$. }
+
+\vskip .3cm
+First, we
 stress that the electrostatic interaction is treated by the reaction
 field method, therefore, there is indeed no long-range interaction in
 the system. Therefore, the AT region is only interacting with hybrid
@@ -243,7 +247,7 @@ is fixed. In the mathematical language, we can only argue
 that the conditional probability $p(x_1|x_2)$ is a Boltzmann distribution,
 rather than the joint probability $p(x_1, N)$. This joint probability is a by far more complicated object and we are currently working on that and found preliminary satisfying results. 
 However we see the point of the referee and so we specify more in detail the basic consistency we want to show by treating $p(x_1)$. We also agree with the referee that we should remove the link of $p(x_1)$ with the Grand Canonical, since indeed is the joint probability that we should have for such a link.\\
-To make all this clear we added in the text the following: {\bf It must be noticed that the writing of the formula above is possible because the long-range electrostatic interaction is treated by the reaction
+To make all this clear we added in the text the following (page 20, 4th line under eq 17): {\bf It must be noticed that the writing of the formula above is possible because the long-range electrostatic interaction is treated by the reaction
 field method, therefore, there is indeed no long-range interaction in
 the system. This means that molecules in the AT region are interacting only with those in the hybrid
 region, with the cut-off radius $r_c$. Secondly, by the new
@@ -253,10 +257,10 @@ region interact with the molecules in the hybrid in an
 an atomistic molecule actually has a weighting function of $w=1$,
 which means their nature is atomistic though we treat them as hybrid.}\\
 
-In order to clarify why we consider this argument related to the conditional probability $p(x_{1}|x_{2})$ we added the following sentence: {\bf Here under the hypothesis of fixed number of particles (however the argument applies for any combination of $N_{1},N_{2}$) we want to derive a minimal consistency criterion for the conditional probability; that is under which conditions this probability is the same as that of the equivalent region in a full atomistic system of reference. We will show that matching the $g(r)$ also in the $\Delta$ region assures at basic level such a consistency, and thus it shows the importance of the criterion based on the $g(r)$ which we have developed in this paper.}\\
-Finally we remove the link between $p(x)$ and the Grand Canonical and clarify that: {\bf This would mean that the idea of the AT region as a subsystem of a very large AT system, at least at the basic level corresponding to the hypothesis done here, is correct up to the second order in terms of distribution.} 
+In order to clarify why we consider this argument related to the conditional probability $p(x_{1}|x_{2})$ we added the following sentence (page 20, 1st line under eq 18): {\bf Here under the hypothesis of fixed number of particles (however the argument applies for any combination of $N_{1},N_{2}$) we want to derive a minimal consistency criterion for the conditional probability; that is under which conditions this probability is the same as that of the equivalent region in a full atomistic system of reference. We will show that matching the $g(r)$ also in the $\Delta$ region assures at basic level such a consistency, and thus it shows the importance of the criterion based on the $g(r)$ which we have developed in this paper.}\\
+Finally we remove the link between $p(x)$ and the Grand Canonical and clarify that (page 21, 8th line): {\bf This would mean that the idea of the AT region as a subsystem of a very large AT system, at least at the basic level corresponding to the hypothesis done here, is correct up to the second order in terms of distribution.} 
 \\
-Note that we have modified also a sentence in section {\bf V}, regarding this theoretical aspect we are considering. We have modified a sentence in the following terms: {\bf Finally, we show that the correction to the $g(r)$ represents also a conceptual advancement; in fact it implies that, at least at the level of the COM-COM $g(r)$ (for the conditional probability), the AT region is fully equivalent to a subsystem embedded in a larger full AT bath. This  represents a natural step towards the idea of Grand Canonical and it gives more solid formal basis to the approach along this direction. To rigorously show that a subsystem in AdResS samples a Grand Canonical distribution, one should show that the joint distribution $P(x,N)$ (that is the probability of finding a certain spatial configuration $x$ for a given number of particles $N$) is the same as in a subsystem of a full atomistic simulation; this is the subject of the future work}.\\
+Note that we have modified also a sentence in section {\bf V}, regarding this theoretical aspect we are considering. We have modified a sentence in the following terms (page 10, last line): {\bf Finally, we show that the correction to the $g(r)$ represents also a conceptual advancement; in fact it implies that, at least at the level of the COM-COM $g(r)$ (for the conditional probability), the AT region is fully equivalent to a subsystem embedded in a larger full AT bath. This  represents a natural step towards the idea of Grand Canonical and it gives more solid formal basis to the approach along this direction. To rigorously show that a subsystem in AdResS samples a Grand Canonical distribution, one should show that the joint distribution $P(x,N)$ (that is the probability of finding a certain spatial configuration $x$ for a given number of particles $N$) is the same as in a subsystem of a full atomistic simulation; this is the subject of the future work}.\\
 
 \vskip 1cm
 \noindent
