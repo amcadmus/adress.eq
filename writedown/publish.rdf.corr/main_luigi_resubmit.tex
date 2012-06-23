@@ -1,4 +1,5 @@
-\documentclass[aps,pre,preprint]{revtex4}
+\documentclass[acs,preprint]{achemso}
+% \documentclass[acs,jctc,preprint]{revtex4}
 % \documentclass[aps,pre,twocolumn]{revtex4-1}
 % \documentclass[aps,jcp,groupedaddress,twocolumn,unsortedaddress]{revtex4}
 
@@ -74,8 +75,10 @@ where $\alpha$ and $\beta$ label two molecules, ${\v F}_{\alpha\beta}^{AT}$ is t
     \end{array}
   \right.
 \end{align}
-where $d_{\textrm{AT}}=0.5 nm$ and $d_{{\Delta}}=2.75 nm$ are the size of the
-atomistic and hybrid region, respectively and $x$ is the $x$-coordinate of the COM of a molecule measured along the $x$-axis as defined in Fig.\ref{adapt}. \redc{Notice that throughout the paper we assume a fixed volume and the application of periodic boundary conditions. Therefore $w(x)$ is also fixed and periodic.}
+where $d_{\textrm{AT}}$ and $d_{{\Delta}}$ are the size of the
+atomistic and hybrid region, respectively, and $x$ is the $x$-coordinate of the COM of a molecule measured along the $x$-axis as defined in Fig.\ref{adapt}.
+\redc{(In the water simulation presented in Sec.~\ref{sec:water}, $d_{\textrm{AT}} = 0.5\, \textsf{nm}$ and $d_{\Delta} = 2.75\, \textsf{nm}$).}
+\redc{Notice that throughout the paper we assume a fixed volume and the application of periodic boundary conditions. Therefore $w(x)$ is also fixed and periodic.}
 The CG potential is derived from a reference full AT simulation and is such that it reproduces structural or thermodynamic properties of the reference full AT system; later we will discuss the coarse-graining procedure in more detail. The way the force of Eq.\ref{force} acts between the molecules is illustrated in Fig.\ref{inter}. 
 \begin{figure}
   \centering
@@ -201,16 +204,45 @@ The prefactor $ w_\alpha w_\beta (1-w_\alpha w_\beta)$ is chosen such that the f
     \begin{array}{lcl}
       1 &\quad& x < d_{\textrm{AT}}\\
       1  && d_{\textrm{AT}} < x < d_{\textrm{AT}} + r_c\\
-      \cos^2\big[\frac{\pi}{2(d_{{\Delta}} - r_c)} (x - d_{\textrm{AT}} - r_c)\big] && d_{\textrm{AT}} + r_c < x < d_{\textrm{AT}} +  r_c + d_{{\Delta}} \\
+      \cos^2\big[\frac{\pi}{2(d_{{\Delta}} - r_c)} (x - d_{\textrm{AT}} - r_c)\big] && d_{\textrm{AT}} + r_c < x < d_{\textrm{AT}} + d_{{\Delta}} \\
       0 && d_{\textrm{AT}} + d_{{\Delta}}  < x.
     \end{array}
   \right.
 \end{align}
-\redc{$d_{\textrm{AT}}$ and $x$ are the same as in  Eq.\ref{eqn:old-w}, $d_{{\Delta}}$ is also the same as in Eq.\ref{eqn:old-w}, that is the {\it old} extension of the $\Delta$ region, while $r_c$ is the cut-off
-  radius; in this work $d_{{\Delta}} \geq 2r_c$; as a consequence the {\it new} size of the $\Delta$ region is now $d_{{\Delta}}+r_c$}.  This definition of $w(x)$, essentially consists in considering an extension of the transition region to part of the AT region (according to the cut off radius $r_c$ which is about $0.90\textsf{nm}$; \redc{the amount of the additional extension of the $\Delta$ region is $r_{c}$}). This assures that $\v F^{\textrm{rdf}}(\v r_{\alpha\beta})$ acts only between molecules which are interacting via hybrid resolution.
-\recheck{If not stated otherwise, the new weighting function~\eqref{eqn:new-w}
-  is applied to all AdResS forces.}
+The definitions of $d_{\textrm{AT}}$, $d_{{\Delta}}$ and $x$ are the
+same as in Eq.~\eqref{eqn:old-w}, while $r_c$ is the cut-off radius
+(which is the same for the Lennard-Jones interaction and the
+electrostatic interaction treated by the reaction field method); in
+this work $d_{{\Delta}} \geq 2r_c$. \redc{In the water simulation
+  presented in Sec.~\ref{sec:water}, $d_{\textrm{AT}} = 0.5\,
+  \textsf{nm}$, $d_{\Delta} = 2.75\, \textsf{nm}$ and $r_c = 0.9\
+  \textsf{nm}$.}
+This new definition of $w(x)$, essentially consists
+in considering an extension (of size $r_c$) of the hybird region to
+part of the AT region.
+\redc{
+In other words, the resolution of the molecules in the range
+$d_{\textrm{AT}} < x < d_{\textrm{AT}} + r_c$ are still atomistic
+($w=1$), but those molecules are considered as part of the system of
+the hybrid region $\Delta$ and not of the atomistic region.
+This assures that $\v
+F^{\textrm{rdf}}(\v r_{\alpha\beta})$ acts only between molecules
+in the hybrid region, so that it does not perturb the interations
+in the atomistic region.}
+% \redc{In other words, although the molecules
+%   in range $d_{\textrm{AT}} < x < d_{\textrm{AT}} + r_c$ are assigned
+%   by $w=1$, they are conceptionally treated as hybrid molecules with
+%   both resolutions: an atomistic resolution and a vanishing
+%   coarse-grained resolution.}
+\recheck{If not stated
+  otherwise, the new weighting function~\eqref{eqn:new-w} is applied
+  to all AdResS forces.}
 \\
+% \redc{$d_{\textrm{AT}}$ and $x$ are the same as in  Eq.\ref{eqn:old-w}, $d_{{\Delta}}$ is also the same as in Eq.\ref{eqn:old-w}, that is the {\it old} extension of the $\Delta$ region, while $r_c$ is the cut-off
+%   radius; in this work $d_{{\Delta}} \geq 2r_c$; as a consequence the {\it new} size of the $\Delta$ region is now $d_{{\Delta}}+r_c$}.  This definition of $w(x)$, essentially consists in considering an extension of the transition region to part of the AT region (according to the cut off radius $r_c$ which is about $0.90\textsf{nm}$; \redc{the amount of the additional extension of the $\Delta$ region is $r_{c}$}). This assures that $\v F^{\textrm{rdf}}(\v r_{\alpha\beta})$ acts only between molecules which are interacting via hybrid resolution.
+% \recheck{If not stated otherwise, the new weighting function~\eqref{eqn:new-w}
+%   is applied to all AdResS forces.}
+% \\
 % from the conceptual point of view the new $w(x)$ does not have any further implication.\\
 {\bf (3)}  Applying the force obtained by the IBI will correct the $g(r)$ in the hybrid region, however,
 the density profile of the system will be disturbed.
@@ -263,7 +295,7 @@ In the next section we will show the application of the method to the case of li
 ambient condition as in Ref.\cite{prlgc}. We will show that higher accuracy regarding the $g(r)$ and the particle number fluctuation in $\Delta$ 
 can be reached and that basic thermodynamic relations (as the Grand Potential) are not perturbed by the additional correction on the forces.
 
-\section{Application to Liquid Water}
+\section{Application to Liquid Water}\label{sec:water}
 Fig.\ref{adapt-wat}, shows the AdResS set up for a system consisting of liquid water at ambient conditions (as in Ref.\cite{prlgc}) to which we have applied the procedure reported in the previous section (technical details of the simulation can be found in the Appendix). Here we show the numerical results for liquid water and prove that our approach represents a successful refinement of the original method of Ref.\cite{prlgc}. 
 \begin{figure}
   \centering
@@ -429,7 +461,139 @@ and VOTCA \cite{ruehle2009versatile}.
 
 
 
-\bibliography{ref}{}
-\bibliographystyle{unsrt}
+% \bibliography{ref}{}
+% \bibliographystyle{unsrt}
+% \bibliographystyle{my}
+
+\begin{thebibliography}{10}
+
+\bibitem{annurev}
+Praprotnik, M.; Delle~Site, L.; Kremer, K.
+\newblock Multiscale simulation of soft matter: From scale bridging to adaptive
+  resolution.
+\newblock {\em Annu. Rev. Phys. Chem.}, \textbf{2008}, \textit{59}, 545--571.
+
+\bibitem{jcp}
+Praprotnik, M.; Delle~Site, L.; Kremer, K.
+\newblock Adaptive resolution molecular-dynamics simulation: Changing the
+  degrees of freedom on the fly.
+\newblock {\em J. Chem. Phys.}, \textbf{2005}, \textit{123}, 224106.
+
+\bibitem{pre}
+Praprotnik, M.; Delle~Site, L.; Kremer, K.
+\newblock Adaptive resolution scheme for efficient hybrid atomistic-mesoscale
+  molecular dynamics simulations of dense liquids.
+\newblock {\em Phys. Rev. E}, \textbf{2006}, \textit{73}, 066701.
+
+\bibitem{klein}
+Ensing, B.; Nielsen, S. O.; Moore, P. B.; Klein, M. L.; Parrinello, M.
+\newblock Energy conservation in adaptive hybrid atomistic/coarse-grain
+  molecular dynamics.
+\newblock {\em J. Chem. Theory Comput.}, \textbf{2007}, \textit{3}, 1100.
+
+\bibitem{heyden}
+Heyden, A.; Truhlar, D. G.
+\newblock Conservative algorithm for an adaptive change of resolution in mixed
+  atomistic/coarse-grained multiscale simulations.
+\newblock {\em J. Chem. Theory Comput.}, \textbf{2008}, \textit{4}, 217.
+
+\bibitem{voth1}
+Shi, Q.; Izvekov, S.; Voth, G. A.
+\newblock Mixed atomistic and corase-grained molecular dynamics: simulation of
+  a membrane-bound ion channel.
+\newblock {\em J. Phys. Chem. B}, \textbf{2006}, \textit{110}, 15045.
+
+\bibitem{voth2}
+Izvekov, S.; Voth, G. A.
+\newblock Mixed resolution modeling of interactions in condensed phase systems.
+\newblock {\em J. Chem. Theory Comput.}, \textbf{2009}, \textit{5}, 3232.
+
+\bibitem{ensingprl}
+Nielsen, S. O.; Moore, P. B.; Ensing, B.
+\newblock Adaptive multiscale molecular dynamics of macromolecular fluids.
+\newblock {\em Phys. Rev. Lett.}, \textbf{2010}, \textit{105}, 237802.
+
+\bibitem{prlcomm}
+Praprotnik, M.; Poblete, S.; Delle~Site, L.; Kremer, K.
+\newblock Comment on “adaptive multiscale molecular dynamics of
+  macromolecular fluids”.
+\newblock {\em Phys. Rev. Lett.}, \textbf{2011}, \textit{107}, 99801.
+
+\bibitem{presolo}
+Delle~Site, L.
+\newblock Some fundamental problems for an energy-conserving
+  adaptive-resolution molecular dynamics scheme.
+\newblock {\em Phys. Rev. E}, \textbf{2007}, \textit{76}, 047701.
+
+\bibitem{simon}
+Poblete, S.; Praprotnik, M.; Kremer, K.; Delle~Site, L.
+\newblock Coupling different levels of resolution in molecular simulations.
+\newblock {\em J. Chem. Phys.}, \textbf{2010}, \textit{132}, 114101.
+
+\bibitem{prlgc}
+Fritsch, S.; Poblete, S.; Junghans, C.; Ciccotti, G.; Delle~Site, L.; Kremer, K.
+\newblock Adaptive resolution molecular dynamics simulation through coupling to
+  an internal particle reservoir.
+\newblock {\em Phys. Rev. Lett.}, \textbf{2012}, \textit{108}, 170602.
+
+\bibitem{ibm}
+Reith, D.; P{\"u}tz, M.; M{\"u}ller-Plathe, F.
+\newblock Deriving effective mesoscale potentials from atomistic simulations.
+\newblock {\em J. Comput. Chem.}, \textbf{2003}, \textit{24}, 1624--1636.
+
+\bibitem{han}
+Wang, H.; Junghans, C.; Kremer, K.
+\newblock Comparative atomistic and coarse-grained study of water: What do we
+  lose by coarse-graining?
+\newblock {\em Eur. Phys. J. E: Soft Matter Biol. Phys.}, \textbf{2009}, \textit{28}, 221--229.
+
+\bibitem{debash}
+Mukherji, D.; van~der Vegt, N. F. A.; Kremer, K.; Delle~Site, L.
+\newblock Kirkwood-buff analysis of liquid mixtures in an open boundary
+  simulation.
+\newblock {\em J. Chem. Theory Comput.}, \textbf{2012},  \textit{8}, 375--379.
+
+\bibitem{jstatphyskurt}
+Praprotnik, M.; Poblete, S.; Kremer, K.
+\newblock Statistical physics problems in adaptive resolution computer
+  simulations of complex fluids.
+\newblock {\em J. Stat. Phys.}, \textbf{2011}, \textit{145}, 946--966.
+
+\bibitem{adolfo1}
+Poma, A. B.; Delle~Site, L.
+\newblock Classical to path-integral adaptive resolution in molecular
+  simulation: towards a smooth quantum-classical coupling.
+\newblock {\em Phys. Rev. Lett.}, \textbf{2010}, \textit{104}, 250201.
+
+\bibitem{adolfo2}
+Poma, A. B.; Delle~Site, L.
+\newblock Adaptive resolution simulation of liquid para-hydrogen: testing the
+  robustness of the quantum-classical adaptive coupling.
+\newblock {\em Phys. Chem. Chem. Phys.}, \textbf{2011}, \textit{13}, 10510--10519.
+
+\bibitem{raffaello}
+Potestio, R.; Delle~Site, L.
+\newblock {Quantum locality and equilibrium properties in low-temperature
+  parahydrogen: A multiscale simulation study}.
+\newblock {\em J. Chem. Phys.}, \textbf{2012}, \textit{136}, 54101.
+
+\bibitem{berendsen1987missing}
+Berendsen, H. J. C.; Grigera, J. R.; Straatsma, T. P.
+\newblock The missing term in effective pair potentials.
+\newblock {\em J. Phys. Chem.}, \textbf{1987}, \textit{91}, 6269--6271.
+
+\bibitem{gromacs}
+Hess, B.; Kutzner, C.; van~der Spoel, D.; Lindahl, E.
+\newblock Gromacs 4: Algorithms for highly efficient, load-balanced, and
+  scalable molecular simulation.
+\newblock {\em J. Chem. Theory Comput.}, \textbf{2008}, \textit{4}, 435--447.
+
+\bibitem{ruehle2009versatile}
+R\"uhle, V.; Junghans, C.; Lukyanov, A.; Kremer, K.; Andrienko, D.
+\newblock Versatile object-oriented toolkit for coarse-graining applications.
+\newblock {\em J. Chem. Theory Comput.}, \textbf{2009}, \textit{5}, 3211--3223.
+
+\end{thebibliography}
+
 
 \end{document}
