@@ -130,7 +130,7 @@ interpolation formula \cite{rdfcorr}:
 \end{align}
 Where $ \vect F^{\AT}_{\alpha\beta}$, $ \vect F^{\CG}_{\alpha\beta}$
 are the intermolecular interaction of the atomistic and coarse-grained
-resolutions, respectively.  $\vect F_{\alpha\beta}^{\rdf}$ is a force that corrects the center of mass-center of mass radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further, one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system:
+resolutions, respectively.  $\vect F_{\alpha\beta}^{\rdf}$ is a force that corrects the center of mass - center of mass radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system:
 \begin{equation}
   {\vect F}_{\alpha}=
   \sum_{\beta}{\vect F}_{\alpha\beta}+
@@ -220,9 +220,12 @@ To prove the statement above, the probability $p(\vect x_1 | N_1)$ is divided in
 \end{align}
 $p(\vect x_1 | N_1; \vect x_2, N_2)$ is the probability obtained by fixing the
 coordinates and number of particles in the region $\HY$ and considering
-the distribution of the DOFs in the AT region. As we have shown before,
-if we modify the weighting function by Eqn.~\eqref{eqn:new-w}
-We can prove:
+the distribution of the DOFs in the AT region.
+%As we have shown before,
+\recheck{
+  If we modify the weighting function by Eqn.~\eqref{eqn:new-w},
+and assume the AT and $\HY$ regions are short-range correlated,
+the probability can be approximated by:}
 \begin{align}
   p(\vect x_1 | N_1; \vect x_2, N_2)
   \propto &\,
@@ -273,11 +276,11 @@ are that these two distribution should be the same as those of the fully atomist
 These are the minimal necessary conditions involving the basic DOF's that is the molecular center of mass coordinates. However RDF's involving other DOF's (atom-atom RDF's)
 would improve the the approximation of $p(\vect
 x_2, N_2 | N_1)$ and bring it closer to that of the reference full atomistic simulation.
-However, we have already shown numerically that, even at basic level of center of mass coordinates, the conditions above produce highly satisfactory results regarding the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$  \cite{rdfcorr}; here we will show that this is formally sufficient in order to have $p(N_{1})$ to be the same in AdResS and in the reference full atomistic simulation. Before showing the equivalence for  $p(N_{1})$, we must discuss a key point of the AdResS method, that is the introduction of the thermodynamic force. This force, in fact, is the crucial ingredients for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme where molecules are exchanged between the At and CG region in conditions of equilibrium; thus also the equality of $p(N_{1})$ in AdResS and in the reference full atomistic simulation. 
+However, we have already shown numerically that, even at basic level of center of mass coordinates, the conditions above produce highly satisfactory results regarding the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$  \cite{rdfcorr}; here we will show that this is formally sufficient in order to have $p(N_{1})$ to be the same in AdResS and in the reference full atomistic simulation. Before showing the equivalence for  $p(N_{1})$, we must discuss a key point of the AdResS method, that is the introduction of the thermodynamic force. This force, in fact, is the crucial ingredients for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme where molecules are exchanged between the AT and CG region in conditions of equilibrium; thus also the equality of $p(N_{1})$ in AdResS and in the reference full atomistic simulation. 
 
 
 \subsection{Thermodynamic force: from empirical intuition to strict formalization within the Grand Canonical framework}
-Intuitive, thermodynamic considerations/intuitions, led to formula \eqref{thf}. In this section we show that, despite the argument used in Eq.\ref{thf} from Refs.\cite{prlgc,rdfcorr} has a strong empirical component, one can formally justify this force
+\recheck{Intuitive thermodynamic considerations} led to formula \eqref{thf}. In this section we show that, despite the argument used in Eq.\ref{thf} from Refs.\cite{prlgc,rdfcorr} has a strong empirical component, one can formally justify this force
 as a tool to balance the chemical potential of the various resolutions and, as a consequence,  a key aspect in interpreting AdResS as an effective Grand Canonical set up. 
 \begin{figure}
   \centering
