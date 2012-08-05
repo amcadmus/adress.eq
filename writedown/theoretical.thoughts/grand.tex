@@ -279,6 +279,88 @@ x_2, N_2 | N_1)$ and bring it closer to that of the reference full atomistic sim
 However, we have already shown numerically that, even at basic level of center of mass coordinates, the conditions above produce highly satisfactory results regarding the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$  \cite{rdfcorr}; here we will show that this is formally sufficient in order to have $p(N_{1})$ to be the same in AdResS and in the reference full atomistic simulation. Before showing the equivalence for  $p(N_{1})$, we must discuss a key point of the AdResS method, that is the introduction of the thermodynamic force. This force, in fact, is the crucial ingredients for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme where molecules are exchanged between the AT and CG region in conditions of equilibrium; thus also the equality of $p(N_{1})$ in AdResS and in the reference full atomistic simulation. 
 
 
+% \subsection{New considerations}
+
+% For simplicity, here we consider the Brownian dynamics:
+% \begin{align}
+%   \dd d \vect X_t = \vect b(\vect X_t)\, \dd d t + \sigma \dd d\vect W_t
+% \end{align}
+% Where $\vect X_t$ is the trajectory
+% of the system, i.e.
+% $\vect X_t = \{\vect r_1(t), \vect r_2(t), \cdots, \vect r_N(t)\}$.
+% $\vect b(\vect X_t)$ is the force exerting on the system, namely
+% $\vect b(\vect X_t) = \{\vect F_1(\vect X_t), \vect F_2(\vect X_t), \cdots,
+% \vect F_N(\vect X_t)\}$. $\dd d\vect W_t$ is the standard Wiener process.
+% The corresponding Fokker-Planck equation is
+% \begin{align}\label{eqn:brownian-fp}
+%   \partial_t p(\vect x)
+%   - \frac{\sigma^2}{2}\,\nabla^2_{\vect x}\, p(\vect x) 
+%   + \nabla_{\vect x}\cdot [\vect b(\vect x) \,p(\vect x)] = 0
+% \end{align}
+% where $p(\vect x)$ is the phase space distribution. Here we assume both
+% the density and the RDF of the AdResS system are the same as those
+% of the reference atomistic system. We consider the Fokker-Planck equation
+% for the marginal distributions. The first two marginal distributions,
+% $p^{(1)}(\vect r_1)$ and $p^{(2)}(\vect r_1, \vect r_2)$, are correct
+% by the construction of AdResS method, 
+% in the sense that they are the same as the atomistic reference.
+% Without lose of gnerality,
+% integrating the l.h.s. of Eqn. \eqref{eqn:brownian-fp} 
+% with respect to variable $\vect r_4, \vect r_5, \cdots, \vect r_N$,
+% noticing the periodic boundary condition,
+% we have
+% \begin{align}\label{eqn:brownian-fp-1}
+%   \partial_t p^{(3)}(\vect r_1, \vect r_2, \vect r_3)
+%   -
+%   \frac{\sigma^2}{2} \,\tilde{\nabla}^2_{\vect x}\,
+%   p^{(3)}(\vect r_1, \vect r_2, \vect r_3)
+%   +
+%   \sum_{\alpha=1}^3\,\partial_\alpha\int \dd d\vect r_4\cdots\dd d\vect r_N\,
+%   \vect b_\alpha(\vect x) \, p(\vect x) = 0
+% \end{align}
+% where $\vect b_\alpha(\vect x)$
+% is the $\alpha$-th component of $\vect b(\vect x)$.
+% Here, it should be noted that the interaction in the system is
+% pairwise, therefore $\vect b_\alpha$ has the form:
+% \begin{align}
+%   \vect b_\alpha = \sum_{\beta\neq\alpha}\vect F(\vect r_\alpha - \vect r_\beta)
+% \end{align}
+% Calculating the 3rd term of the l.h.s. of Eqn. \eqref{eqn:brownian-fp-1},
+% we only consider $\alpha = 1$:
+% \begin{align*}
+%   \partial_1
+%   \int& \dd d\vect r_4\cdots\dd d\vect r_N\,
+%   \vect b_1(\vect x) \, p(\vect x) \\
+%   &=
+%   \partial_1
+%   \int \dd d\vect r_4\cdots\dd d\vect r_N\,
+%   \Big[
+%   \vect F(\vect r_1 - \vect r_2) +
+%   \vect F(\vect r_1 - \vect r_3) +
+%   \sum_{\beta = 4}^N\vect F(\vect r_1 - \vect r_\beta)
+%   \Big]
+%   p(\vect r_1, \vect r_2, \vect r_3, \vect r_4, \cdots, \vect r_N)\\
+%   & =
+%   \partial_1
+%   \bigg\{
+%   \Big[
+%   \vect F(\vect r_1 - \vect r_2) +
+%   \vect F(\vect r_1 - \vect r_3)
+%   \Big]\,
+%   p (\vect r_1, \vect r_2, \vect r_3)
+%   \bigg\}
+%   +
+%   \partial_1
+%   \sum_{\beta = 4}^N
+%   \int \dd d\vect r_\beta\,
+%   \vect F(\vect r_1 - \vect r_\beta)\,
+%   p (\vect r_1, \vect r_2, \vect r_3, \vect r_\beta)
+% \end{align*}
+
+
+
+
+
 \subsection{Thermodynamic force: from empirical intuition to strict formalization within the Grand Canonical framework}
 \recheck{Intuitive thermodynamic considerations} led to formula \eqref{thf}. In this section we show that, despite the argument used in Eq.\ref{thf} from Refs.\cite{prlgc,rdfcorr} has a strong empirical component, one can formally justify this force
 as a tool to balance the chemical potential of the various resolutions and, as a consequence,  a key aspect in interpreting AdResS as an effective Grand Canonical set up. 
