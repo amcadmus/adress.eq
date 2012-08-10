@@ -123,7 +123,7 @@ int main(int argc, char * argv[])
   CellList clist (nmolecules, vbox, cellSize);
 
   Rdf3 myrdf;
-  myrdf.reinit (rup, refh, x0, x1, rup, rup);
+  myrdf.reinit (rup, refh, x0, x1, rup*1, rup*1);
 
   int countread = 0;
   while (read_xtc (fp, natoms, &step, &time, box, xx, &prec) == 0){

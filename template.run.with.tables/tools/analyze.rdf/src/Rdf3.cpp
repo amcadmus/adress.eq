@@ -60,7 +60,7 @@ deposit (const std::vector<std::vector<ValueType> > & coord,
   printf ("\n");
   
   for (unsigned iCellIndex = 0; iCellIndex < unsigned(nCell.x * nCell.y * nCell.z); ++iCellIndex){
-    myNatom += clist.getList()[iCellIndex].size();
+    // myNatom += clist.getList()[iCellIndex].size();
     printf ("## calculating cell %d in %d       \r",
 	    iCellIndex, unsigned(nCell.x * nCell.y * nCell.z));
     fflush (stdout);
@@ -72,6 +72,7 @@ deposit (const std::vector<std::vector<ValueType> > & coord,
 	VectorType icoord;
 	icoord.x = coord[clist.getList()[iCellIndex][ii]][0];
 	if (x1 != 0. && (!(icoord.x >= x0 && icoord.x < x1))) continue;
+	if (iNeighborCellIndex == 0) myNatom += 1.;
 	icoord.y = coord[clist.getList()[iCellIndex][ii]][1];
 	icoord.z = coord[clist.getList()[iCellIndex][ii]][2];
 	bool sameCell (iCellIndex == jCellIndex);
@@ -178,7 +179,7 @@ calculate()
     // double r01 = i * binSize;
     hist[i] /= 4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho;
     // hist[i] /= 4. * M_PI * r0 * r1 * (r1 - r0) * rho;
-    dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho));
+    dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho * double(natom)));
   }
 
   // for (unsigned ii = 0; ii < dists.size(); ++ii){

@@ -121,7 +121,8 @@ average ()
       double r1 = jj * hv;
       double r2 = r1 + hv;
       double volume = M_PI * (r2*r2 - r1*r1) * hx;
-      values[ii][jj] /= volume * double(nframe);
+      // values[ii][jj] /= volume * double(nframe);
+      values[ii][jj] /= volume;
     }
   }  
 }
@@ -139,7 +140,8 @@ average (const double & scale)
       double r1 = jj * hv;
       double r2 = r1 + hv;
       double volume = M_PI * (r2*r2 - r1*r1) * hx;
-      values[ii][jj] /= volume * double(nframe);
+      // values[ii][jj] /= volume * double(nframe);
+      values[ii][jj] /= volume;
       values[ii][jj] *= scale;
     }
   }  
