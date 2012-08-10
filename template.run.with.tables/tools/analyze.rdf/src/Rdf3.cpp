@@ -137,7 +137,7 @@ deposit (const std::vector<std::vector<ValueType> > & coord,
 			     diff.y * diff2.y + 
 			     diff.z * diff2.z ) / dr;
 		if (h1 <= h1low || h1 >= h1up) continue;
-		double dr22 = sqrt (diff2.x * diff2.x + diff2.y * diff2.y + diff2.z * diff2.z);
+		double dr22 = (diff2.x * diff2.x + diff2.y * diff2.y + diff2.z * diff2.z);
 		double h2 = sqrt(dr22 - h1 * h1);
 		if (h2 >= h2extend) continue;
 		dists[index].deposit (h1, h2);
@@ -179,7 +179,7 @@ calculate()
     // double r01 = i * binSize;
     hist[i] /= 4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho;
     // hist[i] /= 4. * M_PI * r0 * r1 * (r1 - r0) * rho;
-    dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho * double(natom)));
+    dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho * double(natom) * hist[i]));
   }
 
   // for (unsigned ii = 0; ii < dists.size(); ++ii){
