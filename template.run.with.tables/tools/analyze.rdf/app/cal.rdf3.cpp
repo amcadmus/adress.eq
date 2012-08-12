@@ -22,22 +22,24 @@ namespace po = boost::program_options;
 int main(int argc, char * argv[])
 {
   ValueType begin, end, rup, refh, cellSize;
-  std::string ifile, ofile, method;
+  std::string ifile, ofile, method, rdf3file;
   ValueType x0, x1;
   
   po::options_description desc ("Allow options");
   desc.add_options()
-    ("help,h", "print this message")
-    ("begin,b", po::value<ValueType > (&begin)->default_value(0.f), "start time")
-    ("end,e",   po::value<ValueType > (&end  )->default_value(0.f), "end   time")
-    ("x0", po::value<ValueType > (&x0)->default_value(0.f), "lower bound of the interval")
-    ("x1", po::value<ValueType > (&x1)->default_value(1.f), "upper bound of the interval, if x1 == 0, use the whole box")
-    ("rup,u",   po::value<ValueType > (&rup)->default_value(1.0f), "max r to make rdf")
-    ("refh",  po::value<ValueType > (&refh)->default_value(0.1f), "bin size")
-    ("cell-size,c", po::value<ValueType > (&cellSize)->default_value(1.f), "cell list radius")
-    ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
-    ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
-    ("output,o",  po::value<std::string > (&ofile)->default_value ("rdf.out"), "the output file");
+      ("help,h", "print this message")
+      ("begin,b", po::value<ValueType > (&begin)->default_value(0.f), "start time")
+      ("end,e",   po::value<ValueType > (&end  )->default_value(0.f), "end   time")
+      ("x0", po::value<ValueType > (&x0)->default_value(0.f), "lower bound of the interval")
+      ("x1", po::value<ValueType > (&x1)->default_value(1.f), "upper bound of the interval, if x1 == 0, use the whole box")
+      ("rup,u",   po::value<ValueType > (&rup)->default_value(1.0f), "max r to make rdf")
+      ("refh",  po::value<ValueType > (&refh)->default_value(0.1f), "bin size")
+      ("cell-size,c", po::value<ValueType > (&cellSize)->default_value(1.f), "cell list radius")
+      ("method,m",  po::value<std::string > (&method)->default_value ("adress"), "type of simulation to analyze")
+      ("input,f",   po::value<std::string > (&ifile)->default_value ("traj.xtc"), "the input .xtc file")
+      ("output,o",  po::value<std::string > (&ofile)->default_value ("rdf.out"), "the output file")
+      ("rdf3out",   po::value<std::string > (&rdf3file)->default_value ("rdf3"), "the output file of rdf3");
+  
   
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -60,6 +62,8 @@ int main(int argc, char * argv[])
   std::cout << "# refh: " << refh << std::endl;
   std::cout << "# method: " << method << std::endl;
   std::cout << "# input: " << ifile << std::endl;
+  std::cout << "# output: " << ofile << std::endl;
+  std::cout << "# rdf3out: " << rdf3file << std::endl;
   std::cout << "###################################################" << std::endl;  
   
   XDRFILE *fp;
@@ -173,8 +177,8 @@ int main(int argc, char * argv[])
 	  if (dx2 > 0.5 * box[dd][dd]) {dx2 -= box[dd][dd]; printf ("hit\n");}
 	  if (dx2 <-0.5 * box[dd][dd]) {dx2 += box[dd][dd]; printf ("hit\n");}
 	  com[dd] = 16. * xx[i*3+0][dd] +
-	    1. * (xx[i*3+0][dd] + dx1) +
-	    1. * (xx[i*3+0][dd] + dx2);
+	      1. * (xx[i*3+0][dd] + dx1) +
+	      1. * (xx[i*3+0][dd] + dx2);
 	  com[dd] /= 18.;
 	  if      (com[dd] <  0          ) com[dd] += box[dd][dd];
 	  else if (com[dd] >= box[dd][dd]) com[dd] -= box[dd][dd];
@@ -209,7 +213,7 @@ int main(int argc, char * argv[])
 
 
   myrdf.calculate();
-  myrdf.print ("rdf3");
+  myrdf.print (rdf3file.c_str());
   
   FILE *fout = fopen (ofile.c_str(), "w");
   if (fout == NULL){
