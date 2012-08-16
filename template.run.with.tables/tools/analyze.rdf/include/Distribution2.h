@@ -1,5 +1,5 @@
-#ifndef __Distribution_h_NONEQMSM_wanghan__
-#define __Distribution_h_NONEQMSM_wanghan__
+#ifndef __Distribution2_h_NONEQMSM_wanghan__
+#define __Distribution2_h_NONEQMSM_wanghan__
 
 #include "Defines.h"
 #include <vector>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Distribution_Cylinder
+class Distribution2_Cylinder
 {
 public:
   double x0, x1, v0, v1;
@@ -22,8 +22,8 @@ public:
   vector<double > gridv;
   double nframe;
 public:
-  Distribution_Cylinder () {};
-  Distribution_Cylinder (const double & x0,
+  Distribution2_Cylinder () {};
+  Distribution2_Cylinder (const double & x0,
 			 const double & x1,
 			 const unsigned & nx,
 			 const double & v0,
@@ -48,9 +48,9 @@ public:
   void print_xv (FILE * fp) const;
   void print_along_x (const string & filename, const double x) const;
   void print_along_x (FILE * fp, const double x) const;
-  void substract (const Distribution_Cylinder & d);
+  void substract (const Distribution2_Cylinder & d);
   void add (const double & scalor,
-	    const Distribution_Cylinder & d);
+	    const Distribution2_Cylinder & d);
   double getNframe () const {return nframe;}
 // public:
 //   void save (FILE * fp) const;

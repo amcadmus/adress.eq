@@ -1,8 +1,8 @@
-#include "Rdf3.h"
+#include "Corr3.h"
 #include <iostream>
 #include <stdio.h>
 
-void Rdf3::
+void Corr3::
 reinit (const ValueType rup_,
 	const ValueType refh_,
 	const ValueType x0_,
@@ -42,7 +42,7 @@ reinit (const ValueType rup_,
 
 
 
-void Rdf3::
+void Corr3::
 deposit (const std::vector<std::vector<ValueType> > & coord,
 	 const VectorType & box,
 	 const CellList & clist)
@@ -162,26 +162,76 @@ deposit (const std::vector<std::vector<ValueType> > & coord,
 
 
 
-void Rdf3::
+void Corr3::
 calculate()
 {
   rho /= double(nframe);
   for (int i = 0; i < nbins; ++i){
-    hist[i] /= double(natom);
+    // hist[i] /= double(natom);
   }
   {
     double r = 0.5 * binSize;
-    hist[0] /= 4. / 3. * M_PI * r * r * r * rho;
+    hist[0] /= 4. / 3. * M_PI * r * r * r * rho * rho;
   }
   for (int i = 1; i < nbins; ++i){
     double r0 = (i-0.5) * binSize;
     double r1 = (i+0.5) * binSize;
     // double r01 = i * binSize;
-    hist[i] /= 4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho;
+    hist[i] /= 4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho;
     // hist[i] /= 4. * M_PI * r0 * r1 * (r1 - r0) * rho;
-    dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho * double(natom) * hist[i]));
+    // dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho * double(natom) * hist[i]));
+    dists[i].average (1./(rho * rho * rho));
   }
 
+  for (int ii = 1; ii < nbins; ++ii){
+    double r0 = (ii-0.5) * binSize;
+    double r1 = (ii+0.5) * binSize;
+    double r01 = 0.5 * (r0+r1);
+    for (unsigned jj = 0; jj < dists[ii].nx; ++jj){
+      double h0 = (jj+0.5) * binSize;
+      h0 = dists[ii].gridx[jj];
+      for (unsigned kk = 0; kk < dists[ii].nv; ++kk){
+	double h10 = (kk+0) * binSize;
+	double h11 = (kk+1) * binSize;
+	h10 = dists[ii].gridv[kk] - 0.5 * binSize;
+	h11 = dists[ii].gridv[kk] + 0.5 * binSize;
+	double h1 = 0.5 * (h10 + h11);
+	double disti = sqrt (h0*h0 + h1*h1);
+	double distj = sqrt ((r01 - h0) * (r01 - h0) + h1 * h1);
+	int idxi = (disti + 0.5 * binSize) / binSize;
+	int idxj = (distj + 0.5 * binSize) / binSize;
+	double valuei, valuej;
+	if (idxi >= nbins){
+	  valuei = 1;
+	}
+	else {
+	  valuei = hist[idxi];
+	}
+	if (idxj >= nbins){
+	  valuej = 1;
+	}
+	else {
+	  valuej = hist[idxj];
+	}
+	// dists[ii].values[jj][kk] +=
+	//     - hist[ii] * 4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * M_PI * (h11*h11 - h10*h10) * binSize
+	//     - (hist[idxi] + hist[idxj] - 2) * M_PI * (h11*h11 - h10*h10) * binSize;
+	dists[ii].values[jj][kk] +=
+	    - (hist[ii] + valuei + valuej - 2) * 4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * M_PI * (h11*h11 - h10*h10) * binSize;
+      }
+    }
+    for (unsigned jj = 0; jj < dists[ii].nx; ++jj){
+      for (unsigned kk = 0; kk < dists[ii].nv; ++kk){
+	double h10 = (kk+0) * binSize;
+	double h11 = (kk+1) * binSize;
+	h10 = dists[ii].gridv[kk] - 0.5 * binSize;
+	h11 = dists[ii].gridv[kk] + 0.5 * binSize;
+	dists[ii].values[jj][kk] /= (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0)) *
+	    (double(natom) / rho) *
+	    M_PI * (h11*h11 - h10*h10) * binSize;
+      }
+    }
+  }
   // for (unsigned ii = 0; ii < dists.size(); ++ii){
   //   dists[ii].average();
   // }
@@ -189,7 +239,7 @@ calculate()
 
 
 void
-Rdf3::print (const string & fileBaseName)
+Corr3::print (const string & fileBaseName)
 {
   char name[2048];
   for (int ii = 0; ii < nbins; ++ii){

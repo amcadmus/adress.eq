@@ -1,8 +1,8 @@
-#include "Distribution.h"
+#include "Distribution2.h"
 #include <cmath>
 
-Distribution_Cylinder::
-Distribution_Cylinder (const double & x0_,
+Distribution2_Cylinder::
+Distribution2_Cylinder (const double & x0_,
 		 const double & x1_,
 		 const unsigned & nx_,
 		 const double & v0_,
@@ -13,7 +13,7 @@ Distribution_Cylinder (const double & x0_,
 }
 
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 reinit (const double & x0_,
 	const double & x1_,
 	const unsigned & nx_,
@@ -58,7 +58,7 @@ reinit (const double & x0_,
 }
 
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 clear ()
 {
   nframe = 0.;
@@ -70,14 +70,14 @@ clear ()
   }
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 deposit (const double & xx,
 	 const double & vv)
 {
   deposit (xx, vv, 1.);
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 deposit (const double & xx,
 	 const double & vv,
 	 const double & scale)
@@ -108,7 +108,7 @@ deposit (const double & xx,
   }
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 average ()
 {
   if (nframe == 0.) return;
@@ -127,7 +127,7 @@ average ()
   }  
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 average (const double & scale)
 {
   // if (nframe == 0.) return;
@@ -137,11 +137,11 @@ average (const double & scale)
       // 	fprintf (stderr,"average: %.16e %.16e     %.16e\n" , backup_values[ii][jj], values[ii][jj], nframe);
       // }
       values[ii][jj] += backup_values[ii][jj];
-      double r1 = jj * hv;
-      double r2 = r1 + hv;
-      double volume = M_PI * (r2*r2 - r1*r1) * hx;
-      // values[ii][jj] /= volume * double(nframe);
-      values[ii][jj] /= volume;
+      // double r1 = jj * hv;
+      // double r2 = r1 + hv;
+      // double volume = M_PI * (r2*r2 - r1*r1) * hx;
+      // // values[ii][jj] /= volume * double(nframe);
+      // values[ii][jj] /= volume;
       values[ii][jj] *= scale;
     }
   }  
@@ -151,7 +151,7 @@ average (const double & scale)
 #include <iostream>
 #include <fstream>
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 print_xv (const string & filename) const
 {
   FILE * fp = fopen (filename.c_str(), "w");
@@ -163,7 +163,7 @@ print_xv (const string & filename) const
   fclose(fp);
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 print_x (const string & filename) const
 {
   FILE * fp = fopen (filename.c_str(), "w");
@@ -176,7 +176,7 @@ print_x (const string & filename) const
 }
 
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 print_xv (FILE * fp) const
 {
   for (unsigned ii = 0; ii < nx; ++ii){
@@ -187,7 +187,7 @@ print_xv (FILE * fp) const
   }
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 print_x (FILE * fp) const
 {
   for (unsigned ii = 0; ii < nx; ++ii){
@@ -199,7 +199,7 @@ print_x (FILE * fp) const
   }
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 print_along_x (const string & filename, const double x) const
 {
   FILE * fp = fopen (filename.c_str(), "w");
@@ -211,7 +211,7 @@ print_along_x (const string & filename, const double x) const
   fclose(fp);  
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 print_along_x (FILE * fp, const double x) const
 {
   for (unsigned ii = 0; ii < nx; ++ii){
@@ -224,8 +224,8 @@ print_along_x (FILE * fp, const double x) const
   }    
 }
 
-void Distribution_Cylinder::
-substract (const Distribution_Cylinder & d)
+void Distribution2_Cylinder::
+substract (const Distribution2_Cylinder & d)
 {
   if (d.nx != nx || d.nv != nv){
     std::cerr << "unmatch distributions, do nothing" << std::endl;
@@ -239,9 +239,9 @@ substract (const Distribution_Cylinder & d)
   }
 }
 
-void Distribution_Cylinder::
+void Distribution2_Cylinder::
 add (const double & scalor,
-     const Distribution_Cylinder & d)
+     const Distribution2_Cylinder & d)
 {
   if (d.nx != nx || d.nv != nv){
     std::cerr << "unmatch distributions, do nothing" << std::endl;
@@ -254,107 +254,4 @@ add (const double & scalor,
     }
   }
 }
-
-
-// void Distribution_Cylinder::
-// save (FILE * fp) const
-// {
-//   size_t rv;
-//   rv = fwrite (&x0, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error writing corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fwrite (&x1, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error writing corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fwrite (&v0, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error writing corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fwrite (&v1, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error writing corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fwrite (&nx, sizeof(unsigned), 1, fp);
-//   if (rv != 1){
-//     cerr << "error writing corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fwrite (&nv, sizeof(unsigned), 1, fp);
-//   if (rv != 1){
-//     cerr << "error writing corr file " << endl;
-//     exit(1);
-//   }
-
-//   double * buff = (double *) malloc (sizeof(double) * nx * nv);
-//   for (unsigned ii = 0; ii < nx; ++ii) {
-//     for (unsigned jj = 0; jj < nv; ++jj) {
-//       buff[ii*nv +jj] = values[ii][jj];
-//     }
-//   }
-//   rv = fwrite (buff, sizeof(double), nx*nv, fp);
-//   if (rv != nx*nv){
-//     cerr << "error writing corr file " << endl;
-//     exit(1);
-//   }
-
-//   free (buff);
-// }
-
-
-// void Distribution_Cylinder::
-// load (FILE * fp)
-// {
-//   size_t rv;
-//   rv = fread (&x0, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error reading corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fread (&x1, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error reading corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fread (&v0, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error reading corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fread (&v1, sizeof(double), 1, fp);
-//   if (rv != 1){
-//     cerr << "error reading corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fread (&nx, sizeof(unsigned), 1, fp);
-//   if (rv != 1){
-//     cerr << "error reading corr file " << endl;
-//     exit(1);
-//   }
-//   rv = fread (&nv, sizeof(unsigned), 1, fp);
-//   if (rv != 1){
-//     cerr << "error reading corr file " << endl;
-//     exit(1);
-//   }
-//   reinit (x0, x1, nx, v0, v1, nv);
-
-//   double * buff = (double *) malloc (sizeof(double) * nx * nv);
-//   rv = fread (buff, sizeof(double), nx*nv, fp);
-//   if (rv != nx*nv){
-//     cerr << "error reading corr file " << endl;
-//     exit(1);
-//   }
-//   for (unsigned ii = 0; ii < nx; ++ii) {
-//     for (unsigned jj = 0; jj < nv; ++jj) {
-//       values[ii][jj] = buff[ii*nv +jj];
-//     }
-//   }
-//   free (buff);
-// }
-
 
