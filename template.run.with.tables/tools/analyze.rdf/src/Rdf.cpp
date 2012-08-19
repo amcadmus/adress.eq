@@ -264,12 +264,13 @@ deposit (const std::vector<std::vector<ValueType> > & coord1,
 
   // printf ("\n");
   nframe ++;
-  if (x1 == x0){
-    rho += myNatom2 / (box.x * box.y * box.z);
-  }
-  else {
-    rho += myNatom2 / ((x1 - x0) * box.y * box.z);
-  }
+  // if (x1 == x0){
+  //   rho += myNatom2 / (box.x * box.y * box.z);
+  // }
+  // else {
+  //   rho += myNatom2 / ((x1 - x0) * box.y * box.z);
+  // }
+  rho += myNatom2 / (box.x * box.y * box.z);
   natom += myNatom1;
 }
 
