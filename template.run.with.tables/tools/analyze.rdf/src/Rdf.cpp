@@ -27,6 +27,94 @@ reinit (const ValueType rup_,
   natom = 0.;
 }
 
+// void Rdf::
+// deposit (const std::vector<std::vector<ValueType> > & coord,
+// 	 const VectorType & box,
+// 	 const CellList & clist)
+// {
+//   int xiter = rup / clist.getCellSize().x;
+//   if (xiter * clist.getCellSize().x < rup) xiter ++;
+//   int yiter = rup / clist.getCellSize().y;
+//   if (yiter * clist.getCellSize().y < rup) yiter ++;
+//   int ziter = rup / clist.getCellSize().z;
+//   if (ziter * clist.getCellSize().z < rup) ziter ++;
+
+//   IntVectorType nCell = clist.getNumCell();
+//   ValueType myNatom = 0.;
+  
+//   for (int ix = 0; ix < nCell.x; ++ix){
+//     for (int iy = 0; iy < nCell.y; ++iy){
+//       for (int iz = 0; iz < nCell.z; ++iz){
+// 	unsigned iid = clist.index3to1 (ix, iy, iz);
+// 	for (unsigned ii = 0; ii < clist.getList()[iid].size(); ++ii){
+// 	  VectorType icoord;
+// 	  icoord.x = coord[clist.getList()[iid][ii]][0];
+// 	  if (x1 != 0. && (!(icoord.x >= x0 && icoord.x < x1))) continue;
+// 	  icoord.y = coord[clist.getList()[iid][ii]][1];
+// 	  icoord.z = coord[clist.getList()[iid][ii]][2];
+// 	  myNatom += 1.;
+// 	  for (int dx = -xiter; dx <= xiter; ++dx){
+// 	    int jx = ix + dx;
+// 	    if (jx < 0) jx += nCell.x;
+// 	    else if (jx >= nCell.x) jx -= nCell.x;
+// 	    for (int dy = -yiter; dy <= yiter; ++dy){
+// 	      int jy = iy + dy;
+// 	      if (jy < 0) jy += nCell.y;
+// 	      else if (jy >= nCell.y) jy -= nCell.y;
+// 	      for (int dz = -ziter; dz <= ziter; ++dz){
+// 		int jz = iz + dz;
+// 		if (jz < 0) jz += nCell.z;
+// 		else if (jz >= nCell.z) jz -= nCell.z;
+// 		unsigned jid = clist.index3to1 (jx, jy, jz);
+// 		bool sameCell (0 == dx && 0 == dy && 0 == dz);
+// 		for (unsigned jj = 0; jj < clist.getList()[jid].size(); ++jj){
+// 		  if (sameCell && ii == jj) continue;
+// 		  VectorType jcoord;
+// 		  jcoord.x = coord[clist.getList()[jid][jj]][0];
+// 		  jcoord.y = coord[clist.getList()[jid][jj]][1];
+// 		  jcoord.z = coord[clist.getList()[jid][jj]][2];
+// 		  VectorType diff;
+// 		  diff.x = icoord.x - jcoord.x;
+// 		  diff.y = icoord.y - jcoord.y;
+// 		  diff.z = icoord.z - jcoord.z;
+// 		  if      (diff.x < -.5 * box.x) diff.x += box.x;
+// 		  else if (diff.x >= .5 * box.x) diff.x -= box.x;
+// 		  if      (diff.y < -.5 * box.y) diff.y += box.y;
+// 		  else if (diff.y >= .5 * box.y) diff.y -= box.y;
+// 		  if      (diff.z < -.5 * box.z) diff.z += box.z;
+// 		  else if (diff.z >= .5 * box.z) diff.z -= box.z;
+// 		  ValueType dr = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
+// 		  dr = sqrt (dr);
+// 		  unsigned index = (dr + offset) / binSize;
+// 		  if (dr < rup){
+// 		    if (index >= unsigned(nbins)){
+// 		      // printf ("# dr: %f, index: %d, rup: %f, nbins: %d\n",
+// 		      // 	      dr, index, rup, nbins);
+// 		      index = nbins - 1;
+// 		    }
+// 		    hist[index] += 1.;
+// 		  }
+// 		}
+// 	      }	    
+// 	    }
+// 	  }
+// 	}
+//       }
+//     }
+//   }
+
+//   nframe ++;
+//   if (x1 == x0){
+//     rho += myNatom / (box.x * box.y * box.z);
+//   }
+//   else {
+//     rho += myNatom / ((x1 - x0) * box.y * box.z);
+//   }
+//   natom += myNatom;
+// }
+
+
+
 void Rdf::
 deposit (const std::vector<std::vector<ValueType> > & coord,
 	 const VectorType & box,
@@ -42,67 +130,56 @@ deposit (const std::vector<std::vector<ValueType> > & coord,
   IntVectorType nCell = clist.getNumCell();
   ValueType myNatom = 0.;
   
-  for (int ix = 0; ix < nCell.x; ++ix){
-    for (int iy = 0; iy < nCell.y; ++iy){
-      for (int iz = 0; iz < nCell.z; ++iz){
-	unsigned iid = clist.index3to1 (ix, iy, iz);
-	for (unsigned ii = 0; ii < clist.getList()[iid].size(); ++ii){
-	  VectorType icoord;
-	  icoord.x = coord[clist.getList()[iid][ii]][0];
-	  if (x1 != 0. && (!(icoord.x >= x0 && icoord.x < x1))) continue;
-	  icoord.y = coord[clist.getList()[iid][ii]][1];
-	  icoord.z = coord[clist.getList()[iid][ii]][2];
-	  myNatom += 1.;
-	  for (int dx = -xiter; dx <= xiter; ++dx){
-	    int jx = ix + dx;
-	    if (jx < 0) jx += nCell.x;
-	    else if (jx >= nCell.x) jx -= nCell.x;
-	    for (int dy = -yiter; dy <= yiter; ++dy){
-	      int jy = iy + dy;
-	      if (jy < 0) jy += nCell.y;
-	      else if (jy >= nCell.y) jy -= nCell.y;
-	      for (int dz = -ziter; dz <= ziter; ++dz){
-		int jz = iz + dz;
-		if (jz < 0) jz += nCell.z;
-		else if (jz >= nCell.z) jz -= nCell.z;
-		unsigned jid = clist.index3to1 (jx, jy, jz);
-		bool sameCell (0 == dx && 0 == dy && 0 == dz);
-		for (unsigned jj = 0; jj < clist.getList()[jid].size(); ++jj){
-		  if (sameCell && ii == jj) continue;
-		  VectorType jcoord;
-		  jcoord.x = coord[clist.getList()[jid][jj]][0];
-		  jcoord.y = coord[clist.getList()[jid][jj]][1];
-		  jcoord.z = coord[clist.getList()[jid][jj]][2];
-		  VectorType diff;
-		  diff.x = icoord.x - jcoord.x;
-		  diff.y = icoord.y - jcoord.y;
-		  diff.z = icoord.z - jcoord.z;
-		  if      (diff.x < -.5 * box.x) diff.x += box.x;
-		  else if (diff.x >= .5 * box.x) diff.x -= box.x;
-		  if      (diff.y < -.5 * box.y) diff.y += box.y;
-		  else if (diff.y >= .5 * box.y) diff.y -= box.y;
-		  if      (diff.z < -.5 * box.z) diff.z += box.z;
-		  else if (diff.z >= .5 * box.z) diff.z -= box.z;
-		  ValueType dr = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
-		  dr = sqrt (dr);
-		  unsigned index = (dr + offset) / binSize;
-		  if (dr < rup){
-		    if (index >= unsigned(nbins)){
-		      // printf ("# dr: %f, index: %d, rup: %f, nbins: %d\n",
-		      // 	      dr, index, rup, nbins);
-		      index = nbins - 1;
-		    }
-		    hist[index] += 1.;
-		  }
-		}
-	      }	    
+  for (unsigned iCellIndex = 0;
+       iCellIndex < unsigned(nCell.x * nCell.y * nCell.z);
+       ++iCellIndex){
+    std::vector<unsigned > neighborCellIndex =
+	clist.neighboringCellIndex (iCellIndex, IntVectorType (xiter, yiter, ziter));
+    for (unsigned iNeighborCellIndex = 0;
+	 iNeighborCellIndex < neighborCellIndex.size();
+	 ++iNeighborCellIndex){
+      unsigned jCellIndex = neighborCellIndex[iNeighborCellIndex];
+      for (unsigned ii = 0; ii < clist.getList()[iCellIndex].size(); ++ii){
+	VectorType icoord;
+	icoord.x = coord[clist.getList()[iCellIndex][ii]][0];
+	if (x1 != 0. && (!(icoord.x >= x0 && icoord.x < x1))) continue;
+	if (iNeighborCellIndex == 0) myNatom += 1.;
+	icoord.y = coord[clist.getList()[iCellIndex][ii]][1];
+	icoord.z = coord[clist.getList()[iCellIndex][ii]][2];
+	bool sameCell (iCellIndex == jCellIndex);
+	for (unsigned jj = 0; jj < clist.getList()[jCellIndex].size(); ++jj){
+	  if (sameCell && ii == jj) continue;	    
+	  VectorType jcoord;
+	  jcoord.x = coord[clist.getList()[jCellIndex][jj]][0];
+	  jcoord.y = coord[clist.getList()[jCellIndex][jj]][1];
+	  jcoord.z = coord[clist.getList()[jCellIndex][jj]][2];
+	  VectorType diff;
+	  diff.x = - icoord.x + jcoord.x;
+	  diff.y = - icoord.y + jcoord.y;
+	  diff.z = - icoord.z + jcoord.z;
+	  if      (diff.x < -.5 * box.x) diff.x += box.x;
+	  else if (diff.x >= .5 * box.x) diff.x -= box.x;
+	  if      (diff.y < -.5 * box.y) diff.y += box.y;
+	  else if (diff.y >= .5 * box.y) diff.y -= box.y;
+	  if      (diff.z < -.5 * box.z) diff.z += box.z;
+	  else if (diff.z >= .5 * box.z) diff.z -= box.z;
+	  ValueType dr = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
+	  dr = sqrt (dr);
+	  unsigned index = (dr + offset) / binSize;
+	  if (dr < rup){
+	    if (index >= unsigned(nbins)){
+	      // printf ("# dr: %f, index: %d, rup: %f, nbins: %d\n",
+	      // 	      dr, index, rup, nbins);
+	      index = nbins - 1;
 	    }
+	    hist[index] += 1.;	    
 	  }
 	}
       }
     }
   }
 
+  // printf ("\n");
   nframe ++;
   if (x1 == x0){
     rho += myNatom / (box.x * box.y * box.z);
@@ -112,6 +189,8 @@ deposit (const std::vector<std::vector<ValueType> > & coord,
   }
   natom += myNatom;
 }
+
+
 
 void Rdf::
 calculate()
