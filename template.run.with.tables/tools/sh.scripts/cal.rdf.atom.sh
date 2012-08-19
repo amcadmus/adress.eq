@@ -35,8 +35,7 @@ do
 done
 interval_end=$i
 
-rm -fr rdf.inter.9
-mkdir rdf.inter.9
+test ! -d rdf.inter.9 && mkdir rdf.inter.9
 mv -f rdf*out rdf.inter.9
 
 intervals="3.75 4.25 4.80 5.35 5.90 6.45 7 7.5"
@@ -72,8 +71,6 @@ do
 done
 interval_end=$i
 
-rm -fr rdf.inter.5
-mkdir rdf.inter.5
+test ! -d rdf.inter.5 && mkdir rdf.inter.5
 mv -f rdf*out rdf.inter.5
-
 
