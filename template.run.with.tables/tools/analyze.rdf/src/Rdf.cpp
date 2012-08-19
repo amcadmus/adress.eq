@@ -193,6 +193,89 @@ deposit (const std::vector<std::vector<ValueType> > & coord,
 
 
 void Rdf::
+deposit (const std::vector<std::vector<ValueType> > & coord1,
+	 const std::vector<std::vector<ValueType> > & coord2,
+	 const VectorType & box,
+	 const CellList & clist1,
+	 const CellList & clist2)
+{
+  int xiter = rup / clist2.getCellSize().x;
+  if (xiter * clist2.getCellSize().x < rup) xiter ++;
+  int yiter = rup / clist2.getCellSize().y;
+  if (yiter * clist2.getCellSize().y < rup) yiter ++;
+  int ziter = rup / clist2.getCellSize().z;
+  if (ziter * clist2.getCellSize().z < rup) ziter ++;
+
+  IntVectorType nCell = clist1.getNumCell();
+  ValueType myNatom1 = 0.;
+  ValueType myNatom2 = 0.;
+  for (unsigned ii = 0; ii < clist2.getTotalNumCell(); ++ii){
+    myNatom2 += clist2.getList()[ii].size();
+  }
+  
+  for (unsigned iCellIndex = 0;
+       iCellIndex < unsigned(nCell.x * nCell.y * nCell.z);
+       ++iCellIndex){
+    std::vector<unsigned > neighborCellIndex =
+	clist2.neighboringCellIndex (iCellIndex, IntVectorType (xiter, yiter, ziter));
+    for (unsigned iNeighborCellIndex = 0;
+	 iNeighborCellIndex < neighborCellIndex.size();
+	 ++iNeighborCellIndex){
+      unsigned jCellIndex = neighborCellIndex[iNeighborCellIndex];
+      for (unsigned ii = 0; ii < clist1.getList()[iCellIndex].size(); ++ii){
+	VectorType icoord;
+	icoord.x = coord1[clist1.getList()[iCellIndex][ii]][0];
+	if (x1 != 0. && (!(icoord.x >= x0 && icoord.x < x1))) continue;
+	if (iNeighborCellIndex == 0) myNatom1 += 1.;
+	icoord.y = coord1[clist1.getList()[iCellIndex][ii]][1];
+	icoord.z = coord1[clist1.getList()[iCellIndex][ii]][2];
+	bool sameCell (iCellIndex == jCellIndex);
+	for (unsigned jj = 0; jj < clist2.getList()[jCellIndex].size(); ++jj){
+	  if (sameCell && ii == jj) continue;	    
+	  VectorType jcoord;
+	  jcoord.x = coord2[clist2.getList()[jCellIndex][jj]][0];
+	  jcoord.y = coord2[clist2.getList()[jCellIndex][jj]][1];
+	  jcoord.z = coord2[clist2.getList()[jCellIndex][jj]][2];
+	  VectorType diff;
+	  diff.x = - icoord.x + jcoord.x;
+	  diff.y = - icoord.y + jcoord.y;
+	  diff.z = - icoord.z + jcoord.z;
+	  if      (diff.x < -.5 * box.x) diff.x += box.x;
+	  else if (diff.x >= .5 * box.x) diff.x -= box.x;
+	  if      (diff.y < -.5 * box.y) diff.y += box.y;
+	  else if (diff.y >= .5 * box.y) diff.y -= box.y;
+	  if      (diff.z < -.5 * box.z) diff.z += box.z;
+	  else if (diff.z >= .5 * box.z) diff.z -= box.z;
+	  ValueType dr = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
+	  dr = sqrt (dr);
+	  unsigned index = (dr + offset) / binSize;
+	  if (dr < rup){
+	    if (index >= unsigned(nbins)){
+	      // printf ("# dr: %f, index: %d, rup: %f, nbins: %d\n",
+	      // 	      dr, index, rup, nbins);
+	      index = nbins - 1;
+	    }
+	    hist[index] += 1.;	    
+	  }
+	}
+      }
+    }
+  }
+
+  // printf ("\n");
+  nframe ++;
+  if (x1 == x0){
+    rho += myNatom2 / (box.x * box.y * box.z);
+  }
+  else {
+    rho += myNatom2 / ((x1 - x0) * box.y * box.z);
+  }
+  natom += myNatom1;
+}
+
+
+
+void Rdf::
 calculate()
 {
   rho /= double(nframe);

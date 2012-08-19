@@ -25,6 +25,11 @@ public:
   void deposit (const std::vector<std::vector<ValueType> > & coord,
 		const VectorType & box,
 		const CellList & clist);
+  void deposit (const std::vector<std::vector<ValueType> > & coord1,
+		const std::vector<std::vector<ValueType> > & coord2,
+		const VectorType & box,
+		const CellList & clist1,
+		const CellList & clist2);
   void calculate ();
 }
     ;
