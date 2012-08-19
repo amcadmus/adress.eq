@@ -229,9 +229,9 @@ deposit (const std::vector<std::vector<ValueType> > & coord1,
 	if (iNeighborCellIndex == 0) myNatom1 += 1.;
 	icoord.y = coord1[clist1.getList()[iCellIndex][ii]][1];
 	icoord.z = coord1[clist1.getList()[iCellIndex][ii]][2];
-	bool sameCell (iCellIndex == jCellIndex);
+	// bool sameCell (iCellIndex == jCellIndex);
 	for (unsigned jj = 0; jj < clist2.getList()[jCellIndex].size(); ++jj){
-	  if (sameCell && ii == jj) continue;	    
+	  // if (sameCell && ii == jj) continue;	    
 	  VectorType jcoord;
 	  jcoord.x = coord2[clist2.getList()[jCellIndex][jj]][0];
 	  jcoord.y = coord2[clist2.getList()[jCellIndex][jj]][1];
