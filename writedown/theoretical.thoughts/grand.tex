@@ -30,7 +30,7 @@
 
 \begin{document}
 
-\title{The reliability of AdResS in performing  Molecular Dynamics in a Grand Canonical fashion}
+\title{\recheck{The reliability of the Adaptive Resolution technique in performing  Grand Canonical-like Molecular Dynamics Simulations}}
 \author{Han Wang}
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 \author{Carsten Hartmann}
@@ -50,9 +50,9 @@
   of a full atomistic system.  Moreover, we show that the
   work done by a thermodynamic force, that is a force derived on the basis of empirical thermodynamic considerations, is formally equivalent to level the chemical
   potential difference between the different resolutions. From these results follows the main conclusion that,
-  up to an accuracy of the second order with respect to the probability distribution of the system, the atomistic region exchanges
+  up to \recheck{at least} an accuracy of the second order with respect to the probability distribution of the system, the atomistic region exchanges
   molecules with the coarse-grained region in a Grand Canonical
-  fashion.
+  fashion.  \recheck{We have also carried on numerical tests for the relevant case of liquid water at ambient conditions and show that the hypothesis done in our theoretical treatment are justified from the numerical point of view. Moreover, we show that in the atomistic region of AdResS even the three body correlation function of molecular centers of mass is the same as that of the equivalent region in a full atomistic simulation, thus strengthening the idea of AdResS as Grand Canonical-like framework}
 \end{abstract}
 
 \maketitle
@@ -232,7 +232,7 @@ the probability can be approximated by:}
   e^{-\beta\mathcal H_{N_1}^{\AT}(\vect x_1; \vect x_2, N_2)}
 \end{align}
 with an atomistic Hamiltonian:
-\begin{align}
+\begin{align}\label{eqn:p-1-2}
   \mathcal H_{N_1}^{{\AT}}(\vect x_1; \vect x_2, N_2) = &\,
   \sum_{j=1}^{N_1}\frac12 m_i\vect v_i^2 + 
   \sum_{i,j=1}^{N_1}\frac12 U^{{\AT}}(\vect r_i - \vect r_j)  +
@@ -244,6 +244,7 @@ Here are some remarks on this argument:
 \item All interactions in the system are short-range with given cut-offs (the
   electrostatic interaction is treated by the reaction field method),
   so that the AT region does NOT interact in a direct way with the CG region.
+\recheck{Moreover, at least for the case of liquid water at ambient conditions, we will show with numerical tests that the hypothesis of short-range correlation is justified.}
 \item The number of molecules and their coordinates are assumed to be
   fixed in the $\HY$ region.  Under this assumption, we firstly study
   the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$ of
@@ -277,90 +278,6 @@ These are the minimal necessary conditions involving the basic DOF's that is the
 would improve the the approximation of $p(\vect
 x_2, N_2 | N_1)$ and bring it closer to that of the reference full atomistic simulation.
 However, we have already shown numerically that, even at basic level of center of mass coordinates, the conditions above produce highly satisfactory results regarding the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$  \cite{rdfcorr}; here we will show that this is formally sufficient in order to have $p(N_{1})$ to be the same in AdResS and in the reference full atomistic simulation. Before showing the equivalence for  $p(N_{1})$, we must discuss a key point of the AdResS method, that is the introduction of the thermodynamic force. This force, in fact, is the crucial ingredients for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme where molecules are exchanged between the AT and CG region in conditions of equilibrium; thus also the equality of $p(N_{1})$ in AdResS and in the reference full atomistic simulation. 
-
-
-
-% \subsection{New considerations}
-
-% For simplicity, here we consider the Brownian dynamics:
-% \begin{align}
-%   \dd d \vect X_t = \vect b(\vect X_t)\, \dd d t + \sigma \dd d\vect W_t
-% \end{align}
-% Where $\vect X_t$ is the trajectory
-% of the system, i.e.
-% $\vect X_t = \{\vect r_1(t), \vect r_2(t), \cdots, \vect r_N(t)\}$.
-% $\vect b(\vect X_t)$ is the force exerting on the system, namely
-% $\vect b(\vect X_t) = \{\vect F_1(\vect X_t), \vect F_2(\vect X_t), \cdots,
-% \vect F_N(\vect X_t)\}$. $\dd d\vect W_t$ is the standard Wiener process.
-% The corresponding Fokker-Planck equation is
-% \begin{align}\label{eqn:brownian-fp}
-%   \partial_t p(\vect x)
-%   - \frac{\sigma^2}{2}\,\nabla^2_{\vect x}\, p(\vect x) 
-%   + \nabla_{\vect x}\cdot [\vect b(\vect x) \,p(\vect x)] = 0
-% \end{align}
-% where $p(\vect x)$ is the phase space distribution. Here we assume both
-% the density and the RDF of the AdResS system are the same as those
-% of the reference atomistic system. We consider the Fokker-Planck equation
-% for the marginal distributions. The first two marginal distributions,
-% $p^{(1)}(\vect r_1)$ and $p^{(2)}(\vect r_1, \vect r_2)$, are correct
-% by the construction of AdResS method, 
-% in the sense that they are the same as the atomistic reference.
-% Without lose of gnerality,
-% integrating the l.h.s. of Eqn. \eqref{eqn:brownian-fp} 
-% with respect to variable $\vect r_4, \vect r_5, \cdots, \vect r_N$,
-% noticing the periodic boundary condition,
-% we have
-% \begin{align}\label{eqn:brownian-fp-1}
-%   \partial_t p^{(3)}(\vect r_1, \vect r_2, \vect r_3)
-%   -
-%   \frac{\sigma^2}{2} \,\tilde{\nabla}^2_{\vect x}\,
-%   p^{(3)}(\vect r_1, \vect r_2, \vect r_3)
-%   +
-%   \sum_{\alpha=1}^3\,\partial_\alpha\int \dd d\vect r_4\cdots\dd d\vect r_N\,
-%   \vect b_\alpha(\vect x) \, p(\vect x) = 0
-% \end{align}
-% where $\vect b_\alpha(\vect x)$
-% is the $\alpha$-th component of $\vect b(\vect x)$.
-% Here, it should be noted that the interaction in the system is
-% pairwise, therefore $\vect b_\alpha$ has the form:
-% \begin{align}
-%   \vect b_\alpha = \sum_{\beta\neq\alpha}\vect F(\vect r_\alpha - \vect r_\beta)
-% \end{align}
-% Calculating the 3rd term of the l.h.s. of Eqn. \eqref{eqn:brownian-fp-1},
-% we only consider $\alpha = 1$:
-% \begin{align*}
-%   \partial_1
-%   \int& \dd d\vect r_4\cdots\dd d\vect r_N\,
-%   \vect b_1(\vect x) \, p(\vect x) \\
-%   &=
-%   \partial_1
-%   \int \dd d\vect r_4\cdots\dd d\vect r_N\,
-%   \Big[
-%   \vect F(\vect r_1 - \vect r_2) +
-%   \vect F(\vect r_1 - \vect r_3) +
-%   \sum_{\beta = 4}^N\vect F(\vect r_1 - \vect r_\beta)
-%   \Big]
-%   p(\vect r_1, \vect r_2, \vect r_3, \vect r_4, \cdots, \vect r_N)\\
-%   & =
-%   \partial_1
-%   \bigg\{
-%   \Big[
-%   \vect F(\vect r_1 - \vect r_2) +
-%   \vect F(\vect r_1 - \vect r_3)
-%   \Big]\,
-%   p (\vect r_1, \vect r_2, \vect r_3)
-%   \bigg\}
-%   +
-%   \partial_1
-%   \sum_{\beta = 4}^N
-%   \int \dd d\vect r_\beta\,
-%   \vect F(\vect r_1 - \vect r_\beta)\,
-%   p (\vect r_1, \vect r_2, \vect r_3, \vect r_\beta)
-% \end{align*}
-
-
-
-
 
 \subsection{Thermodynamic force: from empirical intuition to strict formalization within the Grand Canonical framework}
 \recheck{Intuitive thermodynamic considerations} led to formula \eqref{thf}. In this section we show that, despite the argument used in Eq.\ref{thf} from Refs.\cite{prlgc,rdfcorr} has a strong empirical component, one can formally justify this force
@@ -832,7 +749,6 @@ $p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, 
 
 
 \section{A numerical test}
-
 \begin{figure}
   \centering
   \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-375-425.eps}
@@ -852,7 +768,7 @@ $p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, 
     From left to right, the panels correspond to the AT region, 
     the HY I subregion of $\Delta$,
     the HY II subregion of $\Delta$,
-    and the HY III subregion of $\Delta$, respectively.}
+    and the HY III subregion of $\Delta$, respectively. \recheck{It can be seen that beyond 0.5 \textsf{nm} the functions go to one, that is particle beyond this distance are uncorrelated; this is fully consistent with our hypothesis of Eq.\ref{eqn:p-1-2}.}}
   \label{fig:tmp2a}
 \end{figure}
 
@@ -869,74 +785,55 @@ $p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, 
     0.27\,\textsf{nm},\ 0.33\,\textsf{nm},\  
     0.80\,\textsf{nm}$.  The $x$ axis is the variable $h_1$, while $y$
     axis is the variable $h_2$ (please refer to the Appendix for the
-    definition of these variables).  The maganitude that indicated by
-    different colors presents the maganitude of $g^{(3)}$.
+    definition of these variables).  The magnitude that indicated by
+    different colors presents the magnitude of $g^{(3)}$.
   }
   \label{fig:tmp2b}
 \end{figure}
 
-
-Up to now, it is still not sufficient to argue the probability
-$p(\vect x_1 , N_1)$ is correct, namely is subject to the grand canonical
-distribution 
-Eqn.~\eqref{eqn:p}.
-We are very careful about any statement on $p(\vect x_1, N_1)$ 
-due to the following three reasons: 1,
-The Boltzmann formulus of the distribution $p(\vect x_1|N_1; \vect x_2, N_2)$
-is only an approximation. 2, Conditions \eqref{eqn:p-1-cond1} and \eqref{eqn:p-1-cond2}
-are only necessary, and are generally not sufficient to guarentee
-the right distribution $p(\vect x_2, N_2 | N_1)$ in the hybird region $\HY$. 3,
-The number distribution $p(N_1)$ is only correct up to the second order.
-Since the number distribution $p(N_1)$ has already
-been numerically tested in Ref.~\cite{prlgc, rdfcorr},
-in this section, we want to numerically test to what extent the configurational
-distribution is correct. 
-Notice that it is impossible to depict the high-dimensional configurational distribution,
-so, instead, we study its marginal distribution upto the third order.
-Here equivalently, we plot the H-O and H-H RDFs (see Fig.~\ref{fig:tmp2a}), and the 3-body COM
+\recheck{The arguments we have used so far are not sufficient to infer that the probability $p(\vect x_1 , N_1)$, as presented in the theoretical anlysis, corresponds to that of a grand canonical distribution  Eqn.~\eqref{eqn:p}.
+One must be very careful about any statement on $p(\vect x_1, N_1)$ 
+due to the following three reasons:\\ 
+1, The Boltzmann form of the distribution $p(\vect x_1|N_1; \vect x_2, N_2)$
+is in this case only an approximation.\\
+2, Conditions \eqref{eqn:p-1-cond1} and \eqref{eqn:p-1-cond2}
+are only necessary, and are in general not sufficient to guarantee
+the correct distribution $p(\vect x_2, N_2 | N_1)$ in the hybrid region $\HY$.\\ 3, The particle number distribution $p(N_1)$ is correct only up to the second order.\\
+However, the number distribution $p(N_1)$ has already
+been proved to be correct in Ref.~\cite{prlgc, rdfcorr} for the relevant case of liquid water and thus in this section, we want to test, with a numerical simulation, to what extent the configurational} {\bf WHAT EXACTLY MEANS CONFIGURATIONAL?   PLEASE SPECIFY}
+\recheck{distribution is correct. 
+Obviously it is a prohibitive task for any complex molecular system to determine the high-dimensional configurational distribution,
+so, instead, we study its marginal distribution up to the third order.
+Here we report the H-O and H-H RDFs (see Fig.~\ref{fig:tmp2a}), and the 3-body COM
 RDF $g^{(3)}(\vect r_1, \vect r_2, \vect r_2)$ (see Fig.~\ref{fig:tmp2b}). For simulation
-protocols and the definition of 3-body RDF, please see the Appendix.
-The density profile and the COM RDF are not presented here,
-we refer the readers to Ref.~\cite{rdfcorr}. 
-It can be seen from Fig.~\ref{fig:tmp2a} that
-the AdResS H-O and H-H RDFs are identical with
+protocols and the definition of 3-body RDF, see the Appendix.
+The first order marginal distribution, that is the molecular density profile and the second order marginal distribution, that is the COM RDF are not presented here, we address the readers to Ref.~\cite{rdfcorr}. 
+Here we focus on the more delicate RDFs which involve the atomistic accuracy, and on the third order COM three-body distribution. From Fig.~\ref{fig:tmp2a} one can see that
+the AdResS H-O and H-H RDFs are identical to those of 
 the full atomistic reference system in the AT region.
-More importantly, these RDFs correct
-in the hybrid sub-region HY I that next to the AT region. Please notice that
-the TFI-IBI iteration~\cite{rdfcorr} we used is designed only
-to fit the COM RDF in the hybrid region, 
-so there is actually \emph{no} guarentee that the orientational order of water, indicated
-by H-O and H-H RDFs, are also correct. We are fortune to see the orientational
-order are also preserved  in sub-region HY I, which means the AT region
-is imbeded in an environment where not only the COM but also the orientational
-pair structures are the same as the atomistic resolution.
+Interestingly, despite the corrective force of the RFD is applied only to the COM RDF, also in the region HY I (that is close to the atomistic region) the H-O and H-H RDFs are the same as in the full atomistic case.
+This implies that the AT region
+is embedded in an environment where not only the COM but also finer structural
+properties are the same as for the atomistic resolution.
 In the HY II and III regions, the AdResS obviously deviate from the
-full atomistic reference, because the atomistic nature of nature
-is fading as a molecule travels from HY I to HY III, so we can imagine
-that the orientational order is also fading. In HY III, the H-O and H-H
-RDFs are acutually structureless.
-Furthermore,
-we test the 3-body COM RDF in Fig.~\ref{fig:tmp2b} (for how the 3-body COM RDF
-is defined and presented we refer the readers to Appdix~\ref{app:tmp1}).
-It can be seen that the 3-body corrlation is correctly reproduced
-by the AdResS with TFI-IBI iterative correction in the
-AT and HY I  regions.
-That means the
-the AT region is actually imbeded in a environment that up to the
-3-body COM correlation is the same as the full atomistic reference
-system.
-In the HY II and HY III regions, the 3-body correlation deviate from the
-full atomistic refrerence, when the first two molecules are near (the first
-two columns). This means only reproducing the 2-body COM RDF \emph{does not}
-indicate the correct reproduction of the 3-body COM RDF.
-Also from Fig.~\ref{fig:tmp2a} and \ref{fig:tmp2b},
-both the orientational pair correlation and the 3-body COM correlation
-are short-ranged, therefore, we can safely say the AT region is only short-range
-correlated with the rest of the system. 
+full atomistic reference, because the atomistic nature 
+is decreasing as a molecule travels from HY I to HY III, so it must be expected 
+that the orientational order is also fading away. In HY III, the H-O and H-H
+RDFs are actually structureless.
+Furthermore, we test the 3-body COM RDF in Fig.~\ref{fig:tmp2b} (for the definition of the three-body COM RDF see Appendix~\ref{app:tmp1}).
+Interestingly, the three -body correlation is correctly reproduced
+by the AdResS in the AT and HY I  regions. This is a further strong argument in favor of the fact that in AdResS the AT region is embedded in a environment that, at least up to the three -body COM correlation is the same as the full atomistic reference system.
+In the HY II and HY III regions, the three-body correlation deviates from the
+full atomistic reference, when the first two molecules are near (the first
+two columns). This means that reproducing only two-body COM RDF \emph{does not}
+lead to the correct reproduction of the three-body COM RDF.
+Another important information of Fig.~\ref{fig:tmp2a} and \ref{fig:tmp2b},
+is that the hypothesis of short-range influence of a region over another employed in Eq.\ref{eqn:p-1-2} is numerically justified and thus we can state that for the case of liquid water at ambient conditions the AT region is only short-range
+correlated with the rest of the system.} 
 
 
 \section{Conclusions}
-We have shown a detailed theoretical analysis about the validity and meaning of the AdResS method within the framework of a Grand Canonical ensemble. Using strict formal arguments, we have interpreted the thermodynamic force, originally derived in an empirical way, as a tool to balance the difference in chemical potential due to the different resolutions in space. Finally, we have shown that $p(N_{1})$, the probability distribution in the atomistic region of AdResS is equivalent to that in the same region in a full atomistic simulation, up to a second order expansion in the particle number density. In conclusion, these results provide a solid theoretical basis to explain the numerical reliability of the AdResS as an effective Grand Canonical set up and provide basis for further formal and numerical development of the adaptive idea in terms of matching probability distributions.
+We have shown a detailed theoretical analysis about the validity, \recheck{the limitations} and meaning of the AdResS method within the framework of a Grand Canonical ensemble. Using strict formal arguments, we have interpreted the thermodynamic force, originally derived in an empirical way, as a tool to balance the difference in chemical potential due to the different resolutions in space. Finally, we have shown that, \recheck{under given hypothesis}, $p(N_{1})$, the probability distribution in the atomistic region of AdResS is equivalent to that in the same region in a full atomistic simulation, up to a second order expansion in the particle number density. \recheck{We have further strengthen our hypothesis and conclusions by carrying out a numerical experiment for the case of liquid water at ambient conditions where we could even go beyond the second order}. In conclusion, these results provide a solid theoretical basis to explain the numerical reliability of the AdResS as an effective Grand Canonical set up and provide basis for further formal and numerical development of the adaptive idea in terms of matching probability distributions.
 
 
 \section*{Acknowledgement}
@@ -992,7 +889,7 @@ distribution, we first fix the distance between molecule 1 and 2 (Mol
 respect to the position of the third molecule (Mol 3 in
 Fig.~\ref{fig:tmp3}).  The position of Mol 3 can be described by
 the variables $h_1$ and $h_2$ in Fig.~\ref{fig:tmp3}, which are
-the pojection of Mol~3's position on the to the
+the projection of Mol~3's position on the to the
 axis defined by Mol 1 and 2, see Fig.~\ref{fig:tmp3}.
 
 
