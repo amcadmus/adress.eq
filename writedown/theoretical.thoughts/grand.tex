@@ -161,7 +161,7 @@ atomistic region (AT), hybrid region ($\HY$) and the coarse-grained
 region (CG) by $(\vect x_1, N_1)$, $(\vect x_2, N_2)$ and $(\vect x_3,
 N_3)$, respectively. Therefore, the target is to prove that the atomistic
 region is subject to the Grand Canonical statistics: 
-\begin{align}
+\begin{align}\label{eqn:p}
   p(\vect x_1, N_1) = \frac{1}{\mathcal Q_1}
   e^{\beta\mu_{\AT} N_1 - \beta \mathcal H_{N_1}^{\AT}(\vect x_1)} 
 \end{align}
@@ -226,7 +226,7 @@ the distribution of the DOFs in the AT region.
   If we modify the weighting function by Eqn.~\eqref{eqn:new-w},
 and assume the AT and $\HY$ regions are short-range correlated,
 the probability can be approximated by:}
-\begin{align}
+\begin{align}\label{eqn:p-1-1}
   p(\vect x_1 | N_1; \vect x_2, N_2)
   \propto &\,
   e^{-\beta\mathcal H_{N_1}^{\AT}(\vect x_1; \vect x_2, N_2)}
@@ -264,8 +264,8 @@ x_2, N_2 | N_1)$ is the same as that of the equivalent region in a full atomisti
 system. In general this seems not be the case, but it is possible to
 derive necessary conditions to enforce such an equivalence; the simplest ones involve
 the marginal distribution functions, namely \cite{rdfcorr}:
-\begin{align}
-  \rho_{\HY}(\vect r) &= \rho_{\AT}(\vect r)\\
+\begin{align}\label{eqn:p-1-cond1}
+  \rho_{\HY}(\vect r) &= \rho_{\AT}(\vect r)\\\label{eqn:p-1-cond2}
   g_{\HY}( r) &= g_{\AT}(r)
 \end{align}
 The first order marginal distribution is the particle (or molecular) density 
@@ -277,6 +277,7 @@ These are the minimal necessary conditions involving the basic DOF's that is the
 would improve the the approximation of $p(\vect
 x_2, N_2 | N_1)$ and bring it closer to that of the reference full atomistic simulation.
 However, we have already shown numerically that, even at basic level of center of mass coordinates, the conditions above produce highly satisfactory results regarding the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$  \cite{rdfcorr}; here we will show that this is formally sufficient in order to have $p(N_{1})$ to be the same in AdResS and in the reference full atomistic simulation. Before showing the equivalence for  $p(N_{1})$, we must discuss a key point of the AdResS method, that is the introduction of the thermodynamic force. This force, in fact, is the crucial ingredients for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme where molecules are exchanged between the AT and CG region in conditions of equilibrium; thus also the equality of $p(N_{1})$ in AdResS and in the reference full atomistic simulation. 
+
 
 
 % \subsection{New considerations}
@@ -828,6 +829,112 @@ Since the difference between the probabilities
 $p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
 and $T_2$, we conclude that $p(N_1)$ is a good approximation to
 $p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, seem numerically not relevant and anyway, at this stage, not easy to treat at formal level.
+
+
+\section{A numerical test}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-375-425.eps}
+  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-425-516.eps}
+  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-516-608.eps}
+  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-608-700.eps}
+  \caption{Local H-H and O-H $g(r)$'s.
+    The red line is the curve corresponding to the reference explicit (all atom)
+    simulation (AT).
+    The curve obtained by employing the AdResS 
+    method is represented in green.
+    The hybrid region is equally
+    divided into three parts: HY I, HY II and HY III, the widths of
+    which are roughly equal to the cut-off radius, i.e. 9 \textsf{nm}.    
+    The top part of each panel shows the region where the $g(r)$ is calculated,
+    and the value of weighting function $w(x)$ there.
+    From left to right, the panels correspond to the AT region, 
+    the HY I subregion of $\Delta$,
+    the HY II subregion of $\Delta$,
+    and the HY III subregion of $\Delta$, respectively.}
+  \label{fig:tmp2a}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig.grand/fig-rdf3.more.eps}
+  \caption{The 3-body correlation function.  The 1st row:
+    atomistic.
+    The 2nd to 5th row:
+    AdResS with TIF-IBI correction in the AT, HY I, HY II, and HY III
+    regions, respectively.
+    Different columns give different distant between
+    the first two molecules: from left to right $r_{12} =
+    0.27\,\textsf{nm},\ 0.33\,\textsf{nm},\  
+    0.80\,\textsf{nm}$.  The $x$ axis is the variable $h_1$, while $y$
+    axis is the variable $h_2$ (please refer to the Appendix for the
+    definition of these variables).  The maganitude that indicated by
+    different colors presents the maganitude of $g^{(3)}$.
+  }
+  \label{fig:tmp2b}
+\end{figure}
+
+
+Up to now, it is still not sufficient to argue the probability
+$p(\vect x_1 , N_1)$ is correct, namely is subject to the grand canonical
+distribution 
+Eqn.~\eqref{eqn:p}.
+We are very careful about any statement on $p(\vect x_1, N_1)$ 
+due to the following three reasons: 1,
+The Boltzmann formulus of the distribution $p(\vect x_1|N_1; \vect x_2, N_2)$
+is only an approximation. 2, Conditions \eqref{eqn:p-1-cond1} and \eqref{eqn:p-1-cond2}
+are only necessary, and are generally not sufficient to guarentee
+the right distribution $p(\vect x_2, N_2 | N_1)$ in the hybird region $\HY$. 3,
+The number distribution $p(N_1)$ is only correct up to the second order.
+Since the number distribution $p(N_1)$ has already
+been numerically tested in Ref.~\cite{prlgc, rdfcorr},
+in this section, we want to numerically test to what extent the configurational
+distribution is correct. 
+Notice that it is impossible to depict the high-dimensional configurational distribution,
+so, instead, we study its marginal distribution upto the third order.
+Here equivalently, we plot the H-O and H-H RDFs (see Fig.~\ref{fig:tmp2a}), and the 3-body COM
+RDF $g^{(3)}(\vect r_1, \vect r_2, \vect r_2)$ (see Fig.~\ref{fig:tmp2b}). For simulation
+protocols and the definition of 3-body RDF, please see the Appendix.
+The density profile and the COM RDF are not presented here,
+we refer the readers to Ref.~\cite{rdfcorr}. 
+It can be seen from Fig.~\ref{fig:tmp2a} that
+the AdResS H-O and H-H RDFs are identical with
+the full atomistic reference system in the AT region.
+More importantly, these RDFs correct
+in the hybrid sub-region HY I that next to the AT region. Please notice that
+the TFI-IBI iteration~\cite{rdfcorr} we used is designed only
+to fit the COM RDF in the hybrid region, 
+so there is actually \emph{no} guarentee that the orientational order of water, indicated
+by H-O and H-H RDFs, are also correct. We are fortune to see the orientational
+order are also preserved  in sub-region HY I, which means the AT region
+is imbeded in an environment where not only the COM but also the orientational
+pair structures are the same as the atomistic resolution.
+In the HY II and III regions, the AdResS obviously deviate from the
+full atomistic reference, because the atomistic nature of nature
+is fading as a molecule travels from HY I to HY III, so we can imagine
+that the orientational order is also fading. In HY III, the H-O and H-H
+RDFs are acutually structureless.
+Furthermore,
+we test the 3-body COM RDF in Fig.~\ref{fig:tmp2b} (for how the 3-body COM RDF
+is defined and presented we refer the readers to Appdix~\ref{app:tmp1}).
+It can be seen that the 3-body corrlation is correctly reproduced
+by the AdResS with TFI-IBI iterative correction in the
+AT and HY I  regions.
+That means the
+the AT region is actually imbeded in a environment that up to the
+3-body COM correlation is the same as the full atomistic reference
+system.
+In the HY II and HY III regions, the 3-body correlation deviate from the
+full atomistic refrerence, when the first two molecules are near (the first
+two columns). This means only reproducing the 2-body COM RDF \emph{does not}
+indicate the correct reproduction of the 3-body COM RDF.
+Also from Fig.~\ref{fig:tmp2a} and \ref{fig:tmp2b},
+both the orientational pair correlation and the 3-body COM correlation
+are short-ranged, therefore, we can safely say the AT region is only short-range
+correlated with the rest of the system. 
+
+
 \section{Conclusions}
 We have shown a detailed theoretical analysis about the validity and meaning of the AdResS method within the framework of a Grand Canonical ensemble. Using strict formal arguments, we have interpreted the thermodynamic force, originally derived in an empirical way, as a tool to balance the difference in chemical potential due to the different resolutions in space. Finally, we have shown that $p(N_{1})$, the probability distribution in the atomistic region of AdResS is equivalent to that in the same region in a full atomistic simulation, up to a second order expansion in the particle number density. In conclusion, these results provide a solid theoretical basis to explain the numerical reliability of the AdResS as an effective Grand Canonical set up and provide basis for further formal and numerical development of the adaptive idea in terms of matching probability distributions.
 
@@ -835,11 +942,58 @@ We have shown a detailed theoretical analysis about the validity and meaning of 
 \section*{Acknowledgement}
 This work was partially supported by the Deutsche Forschungsgemeinschaft (DFG) with the Heisenberg grant provided to L.D.S (grant code DE 1140/5-1) and by ITN Nanopoly provided to H.W and C.S.
 It was also supported in part by the National Science Foundation under Grant No. NSF PHY11-25915.
-  
+
+
+
 \section*{References}
 \bibliography{ref}{}
 \bibliographystyle{unsrt}
 
+
+\appendix
+\section{Simulation protocols}
+The testing system contained 3456 SPC/E \cite{berendsen1987missing}
+water molecules in a $7.50\textsf{nm}\times 3.72\textsf{nm}\times
+3.72\textsf{nm}$ periodic box. The system was divided along the $x$ direction
+into one atomistic region of width $1.00\textsf{nm}$ and one
+coarse-grained region of width $1.00\textsf{nm}$ connected by two
+hybrid region of width $2.75\textsf{nm}$.
+The hybrid region was equally divided into three sub-regions (with width $\sim 0.9\textsf{nm}$)
+to calculate the local RDFs.
+These sub-regions are called HY I, HY II and HY III, from the AT side to the CG resolution side.
+The simulation was made at
+room temperature of $300\textsf{K}$. The time step was $\Delta t =
+0.002\textsf{ps}$. The cut-off radius $r_{c}$ used for all interactions was
+$0.90\textsf{nm}$. The electrostatic interaction method used for the
+atomistic region was the reaction field method. All simulations were
+performed by MD simulation software Gromacs \cite{gromacs}
+and VOTCA \cite{ruehle2009versatile}.
+
+\section{The details of the 3-body radial distribution function}
+\label{app:tmp1}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{fig.grand/3mol.eps}
+  \caption{The schematic plot of the 3-body RDF.}\label{fig:tmp3}
+\end{figure}
+
+
+
+The 3-body RDF is defined by
+\begin{align}
+  g^{(3)}(\vect r_1, \vect r_2, \vect r_3) =
+  \frac{1}{\rho^3}N(N-1)(N-2) \,p^{(3)}(\vect r_1, \vect r_2, \vect r_3) 
+\end{align}
+where $p^{(3)}(\vect r_1, \vect r_2, \vect r_3) $ is the 3-body
+probability distribution function. To plot this high-dimensional
+distribution, we first fix the distance between molecule 1 and 2 (Mol
+1 and 2 in Fig.~\ref{fig:tmp3}), then plot the RDF $g^{(3)}$ with
+respect to the position of the third molecule (Mol 3 in
+Fig.~\ref{fig:tmp3}).  The position of Mol 3 can be described by
+the variables $h_1$ and $h_2$ in Fig.~\ref{fig:tmp3}, which are
+the pojection of Mol~3's position on the to the
+axis defined by Mol 1 and 2, see Fig.~\ref{fig:tmp3}.
 
 
 

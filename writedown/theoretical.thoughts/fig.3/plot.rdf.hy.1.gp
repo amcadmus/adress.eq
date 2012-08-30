@@ -37,6 +37,8 @@ pl\
 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.425-516.out' w l ls 3 not 'TFI new w',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.425-516.out' w l ls 4 not 'TFI-IBI new w'
 
+# 'run.04_02_02.allCorr//rdf.471-516.out' w l ls 5 not 'TFI-IBI new w'
+
 set size .4,0.22500
 set origin .4,.3
 set xrange [.28:.42]
@@ -80,6 +82,8 @@ pl 1 ls 20 not,\
 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.425-516.out' w l ls 3 t 'TFI new w',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.425-516.out' w l ls 4 t 'TFI-IBI new w',\
 'plot.rdf.box.1' w l ls 10 not
+
+# 'run.04_02_02.allCorr//rdf.471-516.out' w l ls 5 t 'TFI-IBI new w',\
 
 unset arrow
 

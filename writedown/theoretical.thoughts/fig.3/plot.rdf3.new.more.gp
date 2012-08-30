@@ -1,4 +1,4 @@
-set term post eps enh color solid size 22cm,20cm font 20
+set term post eps enh color solid size 22cm,18cm font 20
 set out 'fig-rdf3.more.eps'
 
 #set border 4095 front linetype -1 linewidth 1.000
@@ -18,7 +18,7 @@ set pm3d implicit at b
 set palette rgbformulae 22,13,-31
 #set size ratio 0.5
 
-set yrange [0:0.8]
+set yrange [0:1.0]
 set ytics .2
 set mytics 2
 set xrange [-1.1:1.7]
@@ -30,33 +30,38 @@ set cbtics .1
 set format cb "%.1f"
 
 #set size 1.4,1.0
-set origin -0.00, 0.00
+set origin -0.00, -0.01
 
 set multiplot 
 
 # set ratio 1
-set size 0.350,0.37
+set size 0.350,0.24
 
-set origin -0.0,0.8
+set origin -0.0,0.76
 unset xlabel
 set title 'r_{12} = 0.27 nm'
+# set ylabel 'AT'
 spl 'run.04_02_02.atom/rdf3.inter.9//rdf3.375-425.00.270.out' u 1:2:($3) every 2 not
 
-set origin -0.0, 0.6
+set origin -0.0, 0.57
 unset title
+# set ylabel 'AdResS AT'
 spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.375-425.00.270.out' u 1:2:($3) every 2 not
 
-set origin -0.0, 0.4
+set origin -0.0, 0.38
 unset title
+# set ylabel 'HY I'
 spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.425-516.00.270.out' u 1:2:($3) every 2 not
 
-set origin -0.0, 0.2
+set origin -0.0, 0.19
 unset title
+# set ylabel 'HY II'
 spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.516-608.00.270.out' u 1:2:($3) every 2 not
 
 set origin -0.0, 0.0
 unset title
 set xlabel "h_1 [nm]" 
+# set ylabel 'HY III'
 spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.608-700.00.270.out' u 1:2:($3) every 2 not
 
 
@@ -67,12 +72,12 @@ spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.608-700.00.270.out' u 1:2:($3) ever
 
 unset ylabel
 
-set origin 0.33, 0.6
+set origin 0.33, 0.76
 unset xlabel
 set title 'r_{12} = 0.33 nm'
 spl 'run.04_02_02.atom/rdf3.inter.9//rdf3.375-425.00.330.out' u 1:2:($3) every 2 not
 
-set origin 0.66, 0.6
+set origin 0.66, 0.76
 set title 'r_{12} = 0.80 nm'
 spl 'run.04_02_02.atom/rdf3.inter.9//rdf3.375-425.00.800.out' u 1:2:($3) every 2 not
 
@@ -83,19 +88,34 @@ spl 'run.04_02_02.atom/rdf3.inter.9//rdf3.375-425.00.800.out' u 1:2:($3) every 2
 
 unset title
 
-set origin 0.33, 0.3
+set origin 0.33, 0.57
 spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.375-425.00.330.out' u 1:2:($3) every 2 not
 
-set origin 0.66, 0.3
+set origin 0.66, 0.57
 spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.375-425.00.800.out' u 1:2:($3) every 2 not
+
+
+set origin 0.33, 0.38
+spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.425-516.00.330.out' u 1:2:($3) every 2 not
+
+set origin 0.66, 0.38
+spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.425-516.00.800.out' u 1:2:($3) every 2 not
+
+
+set origin 0.33, 0.19
+spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.516-608.00.330.out' u 1:2:($3) every 2 not
+
+set origin 0.66, 0.19
+spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.516-608.00.800.out' u 1:2:($3) every 2 not
 
 
 set xlabel "h_1 [nm]"
 set origin 0.33, 0.0
-spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.425-516.00.330.out' u 1:2:($3) every 2 not
+spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.608-700.00.330.out' u 1:2:($3) every 2 not
 
 set origin 0.66, 0.0
-spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.425-516.00.800.out' u 1:2:($3) every 2 not
+spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.608-700.00.800.out' u 1:2:($3) every 2 not
+
 
 # set origin 0.75, 0.3
 # spl 'run.04_02_02.allCorr/rdf3.inter.9//rdf3.375-425.00.800.out' u 1:2:($3) every 2 not

@@ -1,17 +1,17 @@
-set term post eps enh  font 16 size 8.5cm,8.5cm
+set term post eps enh font 22 size 8.5cm,8.5cm
 
-set style line 10 lc 0 lw 3 pt 7
-set style line 20 lt 0 lc 0 lw 3 pt 7
-set style line 1 lc 1 lw 3 pt 7 lt 1
-set style line 2 lc 2 lw 3 pt 7 lt 1
-set style line 3 lc 3 lw 3 pt 7 lt 1
-set style line 4 lc 4 lw 3 pt 7 lt 1
-set style line 11 lc 1 lw 3 pt 7 lt 3
-set style line 21 lc 2 lw 3 pt 7 lt 3
-set style line 31 lc 3 lw 3 pt 7 lt 3
-set style line 41 lc 4 lw 3 pt 7 lt 3
-set style line 5 lc 5 lw 3 pt 7
-set style line 6 lc 6 lw 3 pt 7
+set style line 10 lc 0 lw 4 pt 7
+set style line 20 lt 0 lc 0 lw 4 pt 7
+set style line 1 lc 1 lw 4 pt 7 lt 1
+set style line 2 lc 2 lw 4 pt 7 lt 1
+set style line 3 lc 3 lw 4 pt 7 lt 1
+set style line 4 lc 4 lw 4 pt 7 lt 1
+set style line 11 lc 1 lw 4 pt 7 lt 3
+set style line 21 lc 2 lw 4 pt 7 lt 3
+set style line 31 lc 3 lw 4 pt 7 lt 3
+set style line 41 lc 4 lw 4 pt 7 lt 3
+set style line 5 lc 5 lw 4 pt 7
+set style line 6 lc 6 lw 4 pt 7
 
 set out 'rdf-hhoh-375-425.eps'
 
@@ -67,9 +67,9 @@ set ytics .5
 set mytics 5
 set xtics nomirror
 set xlabel 'r [nm]'
-set ylabel 'g(r)'
+# set ylabel 'g(r)'
 set tmargin 0
-set lmargin 8.
+set lmargin 4.
 set rmargin 2.
 #unset ytics ("3.5" 3.5)
 #set key "0.5,2"
@@ -86,8 +86,8 @@ pl 1 ls 20 not,\
 #'plot.rdf.box.1' w l ls 10 not
 
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.hh.375-425.out' w l ls 2 t 'TFI old w',\
-# 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.hh.375-425.out' w l ls 3 t 'TFI new w',\
 # 'run.04_02_02.old.noibi/rdf.inter.9/rdf.oh.375-425.out' w l ls 21 t 'TFI old w',\
+# 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.hh.375-425.out' w l ls 3 t 'TFI new w',\
 # 'rerun.04_02_02.step.000.tf/rdf.inter.9/rdf.oh.375-425.out' w l ls 31 t 'TFI new w',\
 
 
@@ -97,13 +97,12 @@ set bmargin 0
 set xrange [0:3.75]
 set xtics .5
 set mxtics 5
-set ytics 1
-set mytics 0
 unset xlabel
 # set xlabel "x"
 # set format x ""
 set ytics 1
-set ylabel "w(x)"
+set mytics 2
+# set ylabel "w(x)"
 set yrange [-.5:1.2]
 set size 1., 0.20
 set origin 0., 0.75
