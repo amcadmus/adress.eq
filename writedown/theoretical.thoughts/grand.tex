@@ -48,11 +48,11 @@
   functions in the hybrid region, where molecules change resolution, are two necessary conditions for
   considering the atomistic and coarse-grained regions in AdResS equivalent to subsystems
   of a full atomistic system.  Moreover, we show that the
-  work done by a thermodynamic force, that is a force derived on the basis of empirical thermodynamic considerations, is formally equivalent to level the chemical
+  work done by a thermodynamic force, that is a force derived on the basis of empirical thermodynamic considerations, \recheck{under reasonable approximations (always routinely occurring in simulation studies)} is formally equivalent to level the chemical
   potential difference between the different resolutions. From these results follows the main conclusion that,
   up to at least an accuracy of the second order with respect to the probability distribution of the system, the atomistic region exchanges
   molecules with the coarse-grained region in a Grand Canonical
-  fashion.  We have also carried on numerical tests for the relevant case of liquid water at ambient conditions and show that the hypothesis done in our theoretical treatment are justified from the numerical point of view. Moreover, we show that in the atomistic region of AdResS even the three body correlation function of molecular centers of mass is the same as that of the equivalent region in a full atomistic simulation, thus strengthening the idea of AdResS as Grand Canonical-like framework.
+  fashion.  We have also carried on numerical tests for the relevant case of liquid water at ambient conditions and show that the hypothesis done in our theoretical treatment are justified from the numerical point of view. Moreover, we show that in the atomistic region of AdResS even the three body correlation function of molecular centers of mass is the same as that of the equivalent region in a full atomistic simulation, thus strengthening the idea of AdResS as Grand Canonical-like framework. \recheck{Finally, a further numerical test is carried on: the coarse-grained molecules are substituted by a liquid of spheres interacting via the WCA potential which have no reference to the atomistic resolution. We show that also in this case in the atomistic region, due to the work of the filter of the transition region,  an accuracy up to the third order in the probability distribution is achieved. This is a further very strong numerical evidence, for the relevant case of liquid water, of the fact that indeed one can consider the AdResS set up as an effective Grand Canonical tool where the atomistic resolution is coupled to a source of energy and particles.}
 \end{abstract}
 
 \maketitle
@@ -119,7 +119,7 @@ from 0 to 1, and one possible weighting function is:
 Where $\chi$ is the distance to the boundary of the higher resolution
 region, $\chi < 0$ means that the molecule is in the higher resolution
 region, $d_{\HY}$ is the thickness of the hybrid region, $r_c$ is the
-cut-off radius.  The intermolecular force is modeled by the following
+cut-off radius of the atomistic interactions.  The intermolecular force is modeled by the following
 interpolation formula \cite{rdfcorr}:
 \begin{align}
   \vect F_{\alpha\beta} =
@@ -270,12 +270,12 @@ the marginal distribution functions, namely \cite{rdfcorr}:
 \end{align}
 The first order marginal distribution is the particle (or molecular) density 
 $\rho_{\HY}(\vect r)$, while the second order marginal distribution is
-the radial distribution function (RDF), $g_{\HY}(r)$. The necessary
+the radial distribution function (RDF), $g_{\HY}(r)$. 
+The necessary
 conditions of the correct distribution $p(\vect x_1|N_1)$
-are that these two distribution should be the same as those of the fully atomistic reference system. 
-These are the minimal necessary conditions involving the basic DOF's that is the molecular center of mass coordinates. However RDF's involving other DOF's (atom-atom RDF's)
-would improve the the approximation of $p(\vect
-x_2, N_2 | N_1)$ and bring it closer to that of the reference full atomistic simulation.
+are that these two distributions should be the same as those of the fully atomistic reference system. 
+These are the minimal necessary conditions involving the basic DOF's that is the molecular center of mass coordinates. 
+\recheck{The conditions of Eq.\ref{eqn:p-1-cond1} and Eq.\ref{eqn:p-1-cond2} would assure that at least at the first and second order $p(\vect x_2, N_2 | N_1)$ in the AdResS is the same as that of a full atomistic simulation. One needs to go at least at the second order, so that at the interface between the atomistic and transition region, the radial distribution functions of the atomistic part are not affected by artifact due to the deviation of the RDF's of the hybrid region from the correct atomistic reference.}
 However, we have already shown numerically that, even at basic level of center of mass coordinates, the conditions above produce highly satisfactory results regarding the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$  \cite{rdfcorr}; here we will show that this is formally sufficient in order to have $p(N_{1})$ to be the same in AdResS and in the reference full atomistic simulation. Before showing the equivalence for  $p(N_{1})$, we must discuss a key point of the AdResS method, that is the introduction of the thermodynamic force. This force, in fact, is the crucial ingredients for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme where molecules are exchanged between the AT and CG region in conditions of equilibrium; thus also the equality of $p(N_{1})$ in AdResS and in the reference full atomistic simulation. 
 
 \subsection{Thermodynamic force: from empirical intuition to strict formalization within the Grand Canonical framework}
@@ -747,7 +747,7 @@ and $T_2$, we conclude that $p(N_1)$ is a good approximation to
 $p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, seem numerically not relevant and anyway, at this stage, not easy to treat at formal level.
 
 
-\section{A numerical test}
+\section{A numerical test: Liquid Water}
 \begin{figure}
   \centering
   \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-375-425.eps}
@@ -790,7 +790,8 @@ $p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, 
   \label{fig:tmp2b}
 \end{figure}
 
-The arguments we have used so far are not sufficient to infer that the probability $p(\vect x_1 , N_1)$, as presented in the theoretical anlysis, corresponds to that of a grand canonical distribution  Eqn.~\eqref{eqn:p}.
+The arguments we have used so far are not sufficient to infer that the probability $p(\vect x_1 , N_1)$,
+as presented in the theoretical anlysis, corresponds to that of a grand canonical distribution  Eqn.~\eqref{eqn:p}.
 One must be very careful about any statement on $p(\vect x_1, N_1)$ 
 due to the following three reasons:
 \begin{enumerate}
@@ -832,9 +833,30 @@ Another important information of Fig.~\ref{fig:tmp2a} and \ref{fig:tmp2b},
 is that the hypothesis of short-range influence of a region over another employed in \recheck{Eq.\ref{eqn:p-1-1}} is numerically justified and thus we can state that for the case of liquid water at ambient conditions the AT region is only short-range
 correlated with the rest of the system.
 
+\section{WCA potential instead of atomistic-based coarse-grained potential: Coupling the atomistic region to a generic source of energy and particles}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig.grand/fig-rho-wca.eps}
+  \includegraphics[width=0.4\textwidth]{fig.grand/fig-count-wca.eps}
+  \caption{Density profile and fluctuation (simulation not finished) of WCA AdResS.}
+  \label{fig:wca-den}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig.grand/fig-rdf-wca-ex.eps}
+  \includegraphics[width=0.4\textwidth]{fig.grand/fig-rdf-hhoh-wca-ex.eps}
+  \caption{
+  }
+  \label{fig:wca-rdf}
+\end{figure}
+
 
 \section{Conclusions}
-We have shown a detailed theoretical analysis about the validity, the limitations and meaning of the AdResS method within the framework of a Grand Canonical ensemble. Using strict formal arguments, we have interpreted the thermodynamic force, originally derived in an empirical way, as a tool to balance the difference in chemical potential due to the different resolutions in space. Finally, we have shown that, under given hypothesis, $p(N_{1})$, the probability distribution in the atomistic region of AdResS is equivalent to that in the same region in a full atomistic simulation, up to a second order expansion in the particle number density. We have further strengthen our hypothesis and conclusions by carrying out a numerical experiment for the case of liquid water at ambient conditions where we could even go beyond \recheck{the COM RDF}. In conclusion, these results provide a solid theoretical basis to explain the numerical reliability of the AdResS as an effective Grand Canonical set up and provide basis for further formal and numerical development of the adaptive idea in terms of matching probability distributions.
+We have shown a detailed theoretical analysis about the validity, the limitations and meaning of the AdResS method within the framework of a Grand Canonical ensemble. Using strict formal arguments, we have interpreted the thermodynamic force, originally derived in an empirical way, as a tool to balance the difference in chemical potential due to the different resolutions in space. Finally, we have shown that, under given hypothesis, $p(N_{1})$, the probability distribution in the atomistic region of AdResS is equivalent to that in the same region in a full atomistic simulation, \recheck{up to the accuracy of a second order expansion}. We have further strengthen our hypothesis and conclusions by carrying on a numerical experiment for the case of liquid water at ambient conditions where we could even go beyond \recheck{the COM RDF}. 
+\recheck{A further numerical experiment was made where the atomistic-based coarse-grained model was substituted by a generic liquid of spheres interacting via WCA potential. Results show that the accuracy in the atomistic region is the same as that of AdResS based on a coarse-grained model derived from the full atomistic reference system; this strengthen the idea of AdResS as a tool for coupling the atomistic region to a generic source of energy and particles in a Grand Canonical manner.}
+In conclusion, these results provide a solid theoretical basis to explain the numerical reliability of the AdResS as an effective Grand Canonical set up and provide basis for further formal and numerical development of the adaptive idea in terms of matching probability distributions.
 
 
 \section*{Acknowledgement}
@@ -866,6 +888,25 @@ $0.90\textsf{nm}$. The electrostatic interaction method used for the
 atomistic region was the reaction field method. All simulations were
 performed by MD simulation software Gromacs \cite{gromacs}
 and VOTCA \cite{ruehle2009versatile}.
+\bluec{
+In the WCA AdResS, the ``coarse-grained water'' potential is given by
+\begin{align}
+  U(r) = 4\varepsilon
+  \big[
+  \big(\frac\sigma r\big)^{12}
+  -
+  \big(\frac\sigma r\big)^{6}
+  + \varepsilon
+  \big]
+  \qquad  r\leq \sigma^{1/6}
+\end{align}
+The parameters used in this study are $\varepsilon = 0.65$~\textsf{kJ/mol}
+and $\sigma = 0.30$~\textsf{nm}. These parameters are chosen such that
+the hard core of WCA is roughly the same as the structure-based coarse-grained
+water model.
+Other parameters used in the simulation are the
+same as the standard AdResS.
+}
 
 \section{The details of the 3-body radial distribution function}
 \label{app:tmp1}
