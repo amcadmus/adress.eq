@@ -204,7 +204,7 @@ the conditional probability $p(\vect x_1 | N_1)$
 should be
 \begin{align}\label{eqn:p-1}
   p(\vect x_1 | N_1) &= \frac{1}{Q_{N_1}} e^{-\beta \mathcal H_{N_1}^{AT}(\vect x_1)} \end{align}
-The key point of our argumentation is the following; we want to compare
+The key point of our argumentation is the following: we want to compare
 the distributions (in the various regions) of the AdResS simulation
 with the corresponding ones of a full atomistic reference system, which is ideally divided
 in subregions corresponding to the AT, $\HY$ and CG regions of the AdResS
@@ -285,7 +285,11 @@ conditions of the correct distribution $p(\vect x_1|N_1)$
 are that these two distributions should be the same as those of the fully atomistic reference system. 
 These are the minimal necessary conditions involving the basic DOF's that is the molecular center of mass coordinates. 
 The conditions of Eq.\ref{eqn:p-1-cond1} and Eq.\ref{eqn:p-1-cond2} would assure that at least at the first and second order $p(\vect x_2, N_2 | N_1)$ in the AdResS is the same as that of a full atomistic simulation. One needs to go at least at the second order, so that at the interface between the atomistic and transition region, the radial distribution functions of the atomistic part are not affected by artifact due to the deviation of the RDF's of the hybrid region from the correct atomistic reference. Higher accuracy can be then systematically reached by enforcing the equivalence of higher moments of the distribution in the transition region.
+\bluec{We have already shown numerically that, by the thermodynamic force and the RDF correction, the conditions Eq.\ref{eqn:p-1-cond1} and Eq.\ref{eqn:p-1-cond2} can be satisfied at the basic level of center of mass coordinates~\cite{rdfcorr}.}
+\bluec{
+  (NOTICE: I want to remove the following blue centenses:
 However, we have already shown numerically that, even at basic level of center of mass coordinates, the conditions above produce highly satisfactory results regarding the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$  \cite{rdfcorr}; this is formally and numerically sufficient in order to have $p(N_{1})$ to be the same in AdResS and in the reference full atomistic simulation. The explicit calculations to show the equivalence for $p(N_{1})$, are reported in the Appendix, however a key ingredient of this equivalence is the introduction of the thermodynamic force. This force, in fact, is the crucial tool for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme where molecules are exchanged between the AT and CG region in conditions of equilibrium. 
+)}
 
 \subsection{Thermodynamic force: from empirical intuition to strict formalization within the Grand Canonical framework}
 Intuitive thermodynamic considerations led to formula \eqref{thf}. In this section we show that, despite the argument used in Eq.\ref{thf} from Refs.\cite{prlgc,rdfcorr} has a strong empirical component, one can formally justify this force
@@ -491,6 +495,30 @@ The argument in this section is based on the fact that $\bar N_{1}$, rather than
 are negligible (compared to $\bar N_{1}$) in the AT region. This hypothesis is valid if the AT region is large enough so that $\bar N_{1}$ is large. This point seems to be true in all numerical experiments done so far (see e.g. Ref.\cite{debash}). In this way, we have shown the formal derivation of the thermodynamic force as a tool to balance the chemical potential between the two regions. For a Grand Canonical-like set up, the balance of chemical potential between open regions is a necessary condition to have the exchange of molecules in thermodynamic equilibrium and as a consequence we have formally justified why Eq.\ref{thf} is a necessary condition for AdResS to be considered an effective Grand Canonical set up.
 
 
+\subsection{The number probability $p(N_1)$}
+\label{sec:pn1}
+\bluec{
+In this section, we define at which level of approximation $p(N_{1})$,
+in AdResS is the same as in a full atomistic simulation. This must be
+done in order to justify the reliability of AdResS as a Grand
+Canonical set up in terms of probability distribution. In fact if
+$p(N_{1})$ in AdResS is very different from the corresponding one of a
+full atomistic simulation, then clearly the AdResS method cannot be
+considered to provide realistic results since the artifacts due to the
+different $p(N_{1})$ would give a not realistic description of the
+system.
+We prove that to reach the 1st order accuracy of  $p(N_{1})$,
+the system should have matched chemical potentail, i.e.
+\begin{align}\label{eqn:mu-eq}
+  \mu_{\CG} &= \mu_{\AT} + \omega_0
+\end{align}
+For the 2nd order of accuracy, one needs the mathched compressibility:
+\begin{align}\label{eqn:kappa-eq}
+  \kappa_{\CG} &= \kappa_{\AT}
+\end{align}
+For details of the prove please see Appendix~\ref{app:2}.
+}
+
 \section{A numerical test: Liquid Water}
 \begin{figure}
   \centering
@@ -517,7 +545,7 @@ are negligible (compared to $\bar N_{1}$) in the AT region. This hypothesis is v
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{fig.grand/fig-rdf3.more.eps}
+  \includegraphics[width=0.9\textwidth]{fig.grand/fig-rdf3-diff.eps}
   \caption{The 3-body correlation function.  The 1st row:
     atomistic.
     The 2nd to 5th row:
@@ -582,21 +610,102 @@ The numerical test presented in the previous section shows how an atomistic mode
 This means that if the theoretical considerations are correct, one should be able to show numerically that the proper exchange of energy and molecules is independent from the molecular model used in the coarse-grained region; that is, the filter of the transition region makes the atomistic region a Grand Canonical ensemble. For this reason we have carried on a further numerical test where the molecules in the coarse-grained region interact with a generic WCA potential which assures that only the density, but not the radial distribution function, of a liquid governed by this potential is the same as that of the liquid water( for the simulation set up see the Appendix).
 \begin{figure}
   \centering
-  \includegraphics[width=0.4\textwidth]{fig.grand/fig-rho-wca.eps}
-  \includegraphics[width=0.4\textwidth]{fig.grand/fig-count-wca.eps}
-  \caption{Density profile and fluctuation of WCA-based simulation of AdResS.}
+  \includegraphics[width=0.3\textwidth]{fig.grand/fig-rho-wca.eps}
+  \includegraphics[width=0.3\textwidth]{fig.grand/fig-count-wca.eps}
+  \caption{Density and fluctuation profile of the WCA AdResS.  The
+    results are compared with the full atomistic reference (denoted by
+    ``EX'') and the  standard AdResS (denoted by ``std. AdResS'').
+    The error bars indicate the statistical error up to a confidential
+    level of 95\%.
+  }
   \label{fig:wca-den}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.4\textwidth]{fig.grand/fig-rdf-wca-ex.eps}
-  \includegraphics[width=0.4\textwidth]{fig.grand/fig-rdf-hhoh-wca-ex.eps}
+  \includegraphics[width=0.30\textwidth]{fig.grand/fig-rdf-wca-ex.eps}
+  \includegraphics[width=0.30\textwidth]{fig.grand/fig-rdf-hhoh-wca-ex.eps}
+  \includegraphics[width=0.30\textwidth]{fig.grand/fig-pn.eps}
   \caption{
+    The distributions of WCA AdResS in the AT region.
+    From left to right: the COM-COM RDF, the H-H and H-O RDFs, and
+    the distribution of number of molecules in the AT region.
+    Notice in the right most plot the molecular number in the AT region,
+    i.e. $N_1$, is rescaled by the ensemble average: $N_1 / \langle N_1\rangle$.
   }
-  \label{fig:wca-rdf}
+  \label{fig:wca-dist}
 \end{figure}
-Results reported in Figs.\ref{fig:wca-den},\ref{fig:wca-rdf} show that in the atomistic region the accuracy at the second order and particle number fluctuations, for which the filter in the transition region is designed, are well preserved; that is the atomistic region exchange particle and energy with the reservoir in a proper Grand Canonical fashion. Being the molecules in the coarse-grained region a generic liquid model, we have proved numerically that indeed the adaptive technique employed here can be considered as a tool for general Grand Canonical Molecular Dynamics simulations.  
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{fig.grand/fig-rdf3-diff-ex.eps}
+  \caption{The 3-body correlation of WCA AdResS in the AT region.
+    Only the difference with respect to the full atomistic reference
+    (see the fist line of Fig.~\ref{fig:tmp2b})
+    is plotted in this figure. From up to down, the distance
+    between the first two molecules are $r_{12} =
+    0.27\,\textsf{nm},\ 0.33\,\textsf{nm},\  
+    0.80\,\textsf{nm}$, respectively.
+  }
+  \label{fig:wca-g3}
+\end{figure}
+
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.4\textwidth]{fig.grand/fig-rdf-wca-ex.eps}
+%   \includegraphics[width=0.4\textwidth]{fig.grand/fig-rdf-hhoh-wca-ex.eps}
+%   \caption{
+%   }
+%   \label{fig:wca-rdf}
+% \end{figure}
+
+\bluec{
+  The left plot of Fig.~\ref{fig:wca-den} shows that
+  the density profile of the
+  WCA AdResS is perfectly matching the all atomistic reference.
+  That indicates, in this case, the chemical potential balanced by
+  the thermodynamic force, and the marginal distribution of
+  the WCA AdResS is correct upto the first order.
+  The right plot of Fig.~\ref{fig:wca-den} presents the molecular
+  number fluctuation allover the system.
+  Surprisingly, even though the fluctuation WCA CG region is completely off,
+  the fluctuation in the AT region is still of good accuracy:
+  it is consistent with 
+  the full atomistic reference and the standard
+  AdResS simulation, considering the statistical error indicated by the
+  error bars in the plot.
+  Fig.~\ref{fig:wca-dist} shows several distributions of the WCA AdResS
+  in the atomistic region. The first two plots in the Figure presents
+  the COM-COM, H-O and H-H RDFs. Please note that since the RDFs in the
+  $\Delta$ region is basically wrong, by the theory developed in previous sections, we do not expect good consistency of the second order distribtion
+  functions, i.e. the considered RDFs. However, surprisingly, the
+  WCA RDFs still reaches every good accuracy: we cannot distinguish
+  them from the full atomistic reference system and the standard AdResS
+  within the width of the lines.
+  The rightmost plot in Fig.~\ref{fig:wca-dist} presents the
+  molecular number distribution in the AT region. The WCA distribution
+  is compared with the full atomistic reference system, and reaches
+  acceptable accuracy. However, a
+  small discrapency between the distributions is observed.
+  Notice that by matching the chemical potential, the 
+  theory in the Sec.~\ref{sec:pn1} tells us the distribution
+  only has the first order of accuracy.
+  More importantly, the system is almost the ``worst'' one we can expect: the
+  width of the AT, $\HY$ and CG regions are
+  1.00~\textsf{nm}, 2.75~\textsf{nm},
+  1.00~\textsf{nm}, respectively, which is far from the thermodynamic
+  limit. By increasing the width CG  region to 16.00~\textsf{nm}, no
+  such discrapency is visible (the trivial figure is not shown).
+  Figure~\ref{fig:wca-g3} compares the 3-body correlation $g^3$
+  with the atomistic reference
+  system (see the fist line of Fig.~\ref{fig:tmp2b}), and plots the difference.
+  It shows that the $g^3$ is of high accuracy, and no difference is observable.
+}
+
+Results reported in Figs.~\ref{fig:wca-den}, \ref{fig:wca-dist} and \ref{fig:wca-g3} show that in the atomistic region the accuracy at the second order and particle number fluctuations, for which the filter in the transition region is designed, are well preserved; that is the atomistic region exchange particle and energy with the reservoir in a proper Grand Canonical fashion. Being the molecules in the coarse-grained region a generic liquid model, we have proved numerically that indeed the adaptive technique employed here can be considered as a tool for general Grand Canonical Molecular Dynamics simulations.  
+
 
 \section{Conclusions}
 We have shown a detailed theoretical analysis about the validity, the limitations and meaning of the AdResS method within the framework of a Grand Canonical ensemble. Using strict formal arguments, we have interpreted the thermodynamic force, which in the original AdResS was derived in an empirical way, as a tool to balance the difference in chemical potential due to the different resolutions in space. Finally, we have shown that, under given hypothesis, $p(N_{1})$, the probability distribution in the atomistic region of AdResS is equivalent to that in the same region in a full atomistic simulation, up to the accuracy of a second order expansion. We have further strengthen our hypothesis and conclusions by carrying on a numerical experiment for the case of liquid water at ambient conditions where we could even go beyond the COM RDF. 
@@ -616,44 +725,9 @@ It was also supported in part by the National Science Foundation under Grant No.
 
 
 \appendix
-\section{Simulation protocols}
-The testing system contained 3456 SPC/E \cite{berendsen1987missing}
-water molecules in a $7.50\textsf{nm}\times 3.72\textsf{nm}\times
-3.72\textsf{nm}$ periodic box. The system was divided along the $x$ direction
-into one atomistic region of width $1.00\textsf{nm}$ and one
-coarse-grained region of width $1.00\textsf{nm}$ connected by two
-hybrid region of width $2.75\textsf{nm}$.
-The hybrid region was equally divided into three sub-regions (with width $\sim 0.9\textsf{nm}$)
-to calculate the local RDFs.
-These sub-regions are called HY I, HY II and HY III, from the AT side to the CG resolution side.
-The simulation was made at
-room temperature of $300\textsf{K}$. The time step was $\Delta t =
-0.002\textsf{ps}$. The cut-off radius $r_{c}$ used for all interactions was
-$0.90\textsf{nm}$. The electrostatic interaction method used for the
-atomistic region was the reaction field method. All simulations were
-performed by MD simulation software Gromacs \cite{gromacs}
-and VOTCA \cite{ruehle2009versatile}.
-In the WCA-based simulation, the interaction potential between particles in the coarse-grained region is given by
-\begin{align}
-  U(r) = 4\varepsilon
-  \big[
-  \big(\frac\sigma r\big)^{12}
-  -
-  \big(\frac\sigma r\big)^{6}
-  + \varepsilon
-  \big]
-  \qquad  r\leq \sigma^{1/6}
-\end{align}
-The parameters used in this study are $\varepsilon = 0.65$~\textsf{kJ/mol}
-and $\sigma = 0.30$~\textsf{nm}. These parameters are chosen such that
-the soft core of WCA is roughly the same as the structure-based coarse-grained
-water model.
-Other parameters used in the simulation are the
-same as the standard AdResS.
 
-
-\subsection{The number probability $p(N_1)$}
-In this section, we define at which level of approximation $p(N_{1})$, in AdResS is the same as in a full atomistic simulation. This must be done in order to justify the reliability of AdResS as a Grand Canonical set up in terms of probability distribution. In fact if  $p(N_{1})$ in AdResS is very different from the corresponding one of a full atomistic simulation, then clearly the AdResS method cannot be considered to provide realistic results since the artifacts due to the different $p(N_{1})$ would give a not realistic description of the system. 
+\section{The number probability $p(N_1)$}\label{app:2}
+In this section, we define at which level of approximation $p(N_{1})$, in AdResS is the same as in a full atomistic simulation. 
 Let us consider the marginal distribution $p(N_1)$
 \begin{align}\nonumber
   p(N_1)
@@ -823,12 +897,8 @@ about $\rho_0$:
 \end{align}
 The ``h.o.t.'' stands for higher order terms (greater than 2)
 of the density perturbation, which we neglect since they have been found numerically not relevant (see Ref.\cite{rdfcorr}).
-By using the conditions on the balance of the chemical potential derived in the previous section:
-\begin{align}\label{eqn:mu-eq}
-  \mu_{\CG} &= \mu_{\AT} + \omega_0\\\label{eqn:kappa-eq}
-  \kappa_{\CG} &= \kappa_{\AT}
-\end{align}
-We have $T_1$
+By using the conditions \eqref{eqn:mu-eq} and \eqref{eqn:kappa-eq},
+we have $T_1$
 \begin{align}\nonumber
   T_1
   = \,&
@@ -916,6 +986,43 @@ Since the difference between the probabilities
 $p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
 and $T_2$, we conclude that $p(N_1)$ is a good approximation to
 $p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, seem numerically not relevant and anyway, at this stage, not easy to treat at formal level.
+
+
+\section{Simulation protocols}
+The testing system contained 3456 SPC/E \cite{berendsen1987missing}
+water molecules in a $7.50\textsf{nm}\times 3.72\textsf{nm}\times
+3.72\textsf{nm}$ periodic box. The system was divided along the $x$ direction
+into one atomistic region of width $1.00\textsf{nm}$ and one
+coarse-grained region of width $1.00\textsf{nm}$ connected by two
+hybrid region of width $2.75\textsf{nm}$.
+The hybrid region was equally divided into three sub-regions (with width $\sim 0.9\textsf{nm}$)
+to calculate the local RDFs.
+These sub-regions are called HY I, HY II and HY III, from the AT side to the CG resolution side.
+The simulation was made at
+room temperature of $300\textsf{K}$. The time step was $\Delta t =
+0.002\textsf{ps}$. The cut-off radius $r_{c}$ used for all interactions was
+$0.90\textsf{nm}$. The electrostatic interaction method used for the
+atomistic region was the reaction field method. All simulations were
+performed by MD simulation software Gromacs \cite{gromacs}
+and VOTCA \cite{ruehle2009versatile}.
+In the WCA-based simulation, the interaction potential between particles in the coarse-grained region is given by
+\begin{align}
+  U(r) = 4\varepsilon
+  \big[
+  \big(\frac\sigma r\big)^{12}
+  -
+  \big(\frac\sigma r\big)^{6}
+  + \varepsilon
+  \big]
+  \qquad  r\leq \sigma^{1/6}
+\end{align}
+The parameters used in this study are $\varepsilon = 0.65$~\textsf{kJ/mol}
+and $\sigma = 0.30$~\textsf{nm}. These parameters are chosen such that
+the soft core of WCA is roughly the same as the structure-based coarse-grained
+water model.
+Other parameters used in the simulation are the
+same as the standard AdResS.
+
 
 
 \section{The details of the 3-body radial distribution function}
