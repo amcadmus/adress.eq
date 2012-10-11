@@ -79,8 +79,8 @@ set key bottom right
 # set arrow from .40, 1.3 to .36, 1.1 lw 1
 
 pl 1 ls 20 not,\
-'run.04_02_02.atom/rdf.inter.9/rdf.hh.425-516.out' w l ls 1 t 'H-H AT',\
-'run.04_02_02.atom/rdf.inter.9/rdf.oh.425-516.out' w l ls 11 t 'O-H AT',\
+'run.04_02_02.atom/rdf.inter.9/rdf.hh.425-516.out' w l ls 1 t 'H-H EX',\
+'run.04_02_02.atom/rdf.inter.9/rdf.oh.425-516.out' w l ls 11 t 'O-H EX',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.hh.425-516.out' w l ls 2 t 'H-H AdResS',\
 'run.04_02_02.allCorr/rdf.inter.9/rdf.oh.425-516.out' w l ls 21 t 'O-H AdResS'
 #'plot.rdf.box.1' w l ls 10 not
