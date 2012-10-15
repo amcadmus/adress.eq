@@ -225,11 +225,10 @@ with $N_1$ atomistic molecules:
   e^{ - \beta \mathcal H_{N_1}^{\AT}(\vect x_1)}
 \end{align}
 \redc{Let us consider
-$p(\vect x_1, N_1) = p(\vect x_1 | N_1)\,p(N_1)$, then
+$p(\vect x_1, N_1) = p(\vect x_1 | N_1)\,p(N_1)$. Then,
 from Eq.~\eqref{eqn:p} and \eqref{eqn:p-2},
-the conditional probability $p(\vect x_1 | N_1)$,
-for a truly Grand Canonical ensemble,
-should be}
+the conditional probability $p(\vect x_1 | N_1)$
+for a truly Grand Canonical ensemble turns out to be}
 % Let us consider:
 % \begin{align}
 %   p(\vect x_1, N_1) = p(\vect x_1 | N_1)\,p(N_1)
@@ -251,31 +250,36 @@ atomistic reference system, namely Eq.~\eqref{eqn:p-1}.  Then, if the
 probability of finding $N_1$ molecules in the atomistic region is also
 the same as the full atomistic reference system, namely
 Eq.~\eqref{eqn:p-2}, we can safely state that the atomistic region of AdResS
-samples configurations in a Grand Canonical fashion. In fact as underlined before, it must be noticed that a subsystem of full atomistic system is a natural Grand Canonical ensemble in the thermodynamic limit~\cite{lanford1973entropy}. 
+samples configurations in a Grand Canonical fashion. In fact as underlined before, it must be noticed that a subsystem of full atomistic system is a natural Grand Canonical ensemble in the thermodynamic limit \greenc{(see, e.g., Ref.~\onlinecite{lanford1973entropy})}. 
 The thermodynamic limit in our case is intended in such a way that at a fixed density, the size of
   both the AT and CG regions tend to infinite, and, at the same time,
   the ratio between the extension of AT and that of the CG regions goes to zero; as underlined before, in practical terms, in numerical simulation the system size does not go to infinity, however it can be large enough so that within a certain numerical accuracy the hypothesis of thermodynamic limit holds.
 
-\subsection{The probability $p(\vect x_1 | N_1)$}
-\label{sec:p-1}
-To prove the statement above regarding $p(\vect x_1 | N_1)$ which has been put forward in the previous section, we divide it into two parts:
+
+\greenc{\subsection{The conditional probability density $p(\vect x_1 | N_1)$}  \label{sec:p-1}
+
+%
+To prove the above statement about $p(\vect x_1 | N_1)$, we divide it into two parts:
 \begin{align}\label{eqn:divide-cond-p}
   p(\vect x_1 | N_1) = \sum_{N_2}\int
   p(\vect x_1 | N_1; \vect x_2, N_2) \,
   p(\vect x_2, N_2 | N_1)
   \,\dd d\vect x_2
 \end{align}
-$p(\vect x_1 | N_1; \vect x_2, N_2)$ is the probability obtained by fixing the
+where $p(\vect x_1 | N_1; \vect x_2, N_2)$ is the probability density obtained by fixing the
 coordinates and number of particles in the region $\HY$ and considering
-the distribution of the DOFs in the AT region.
+the distribution of the DOFs in the AT region, while $p(\vect x_2, N_2 | N_1)$ is the distribution in the hybrid region, conditional on the number $N_{1}$ of particles in the atomistic region. We briefly comment on the underlying assumptions that our calculation of the conditional probability density is based on: 
+
+\begin{enumerate}
+
 %As we have shown before,
-If we use the weighting function given by Eq.~\eqref{eqn:new-w},
+\item If we use the weighting function \eqref{eqn:new-w},
 then the AT region is interacting with the $\HY$ region
-\redc{as if the $\HY$ region were part of the AT region, because
-all hybrid molecules interacting with the AT molecules are weighted by 1.}
+\redc{as if the $\HY$ region were part of the AT region because
+all hybrid molecules interacting with the AT molecules have unit weight.}
 % in an atomistic way, 
-\redc{And} if we assume the AT and $\HY$ regions are short-range correlated,
-the probability can be approximated by:
+
+\item We assume that $p(\vect x_1 | N_1; \vect x_2, N_2)$  can be approximated by
 \begin{align}\label{eqn:p-1-1}
   p(\vect x_1 | N_1; \vect x_2, N_2)
   \propto &\,
@@ -288,32 +292,35 @@ with an atomistic Hamiltonian:
   \sum_{i,j=1}^{N_1}\frac12 U^{{\AT}}(\vect r_i - \vect r_j)  +
   \sum_{i=1}^{N_1}\sum_{j=N_1+1}^{N_2} U^{{\AT}}(\vect r_i - \vect r_j)   
 \end{align}
-which is exactly the same as for the equivalent subregion of the full atomistic system of reference.
-Here are some remarks on this argument:
-\begin{enumerate}\itemsep -1pt
-\item All interactions in the system are short-ranged with given cut-offs (the
-  electrostatic interaction is treated by the reaction field method),
-  so that the AT region does NOT interact in a direct way with the CG region.
-    Moreover, at least for the case of liquid water at ambient conditions, we will show with numerical tests that the hypothesis of short-range correlation is justified.
-\item The number of molecules and their coordinates are assumed to be
-  fixed in the $\HY$ region.  Under this assumption, we firstly study
-  the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$ of
-  the AT region embedded in the fixed $\HY$ environment, and then count
-  all possible realizations of configurations in the $\HY$ region, which is subject to
-  the distribution $p(\vect x_2, N_2 | N_1)$.
-  Eq.~\eqref{eqn:divide-cond-p} validates this two-stage approach of
-  investigating $p(\vect x_1 | N_1)$.
-\item Due to the point 2, correlations between the molecules
-  in $\HY$ and CG regions are not relevant in our argument, in fact
-  the DOFs in the $\HY$ region are anyway considered instantaneously fixed while sampling configurations in the AT and CG regions.
-While this would not be correct if we consider dynamic properties, it is instead correct if we look only at the sampling of configurations. For this, two ingredients are required (a) molecules in the AT region do not interact in a direct way with those in the CG region (as stated above) and (b) at the same time, in the transition region, we sample over all possible (fixed) configurations of $N_{2}$ in $p(\vect x_2, N_2 | N_1)$. 
+which is exactly the same as for the equivalent subregion of the full atomistic system of reference. (The approximation is essentially based on the assumption that AT and $\Delta$ regions are only short-range correlated, \redc{which is presented in the following.})
+
+%Here are some remarks on this argument:
+%\begin{enumerate}\itemsep -1pt
+\item We further assume that \emph{all} interactions in the system have finite range with given cut-off radius; the
+  electrostatic interaction is treated by the reaction field method. Specifically, we suppose that 
+  the AT region does not interact in a direct way with the CG region.
+  For the case of liquid water at ambient conditions, \redc{it is reasonable to assume that the system is only short-range correlated, i.e. the AT region is only correlated with the $\HY$ region.} We will show numerically that this is indeed the case.)
+  We suppose that all interactions are satisfy the superstability condition of Ref.~\onlinecite{ruelle1970} 
+  
+%\item We consider the number of molecules and their coordinates are
+%  fixed in the $\HY$ region. Under this assumption, we are allowed to firstly study
+%  the conditional probability $p(\vect x_1 | N_1; \vect x_2, N_2)$ of
+%  the AT region embedded in the fixed $\HY$ environment and then count
+%  all possible realizations of configurations in the $\HY$ region, which are governed by
+%  the distribution $p(\vect x_2, N_2 | N_1)$.
+%  
+    %Eq.~\eqref{eqn:divide-cond-p} validates this two-stage approach of investigating $p(\vect x_1 | N_1)$.
+
 \end{enumerate}
 
-\noindent
-At this point, the key question is whether the probability in the $\HY$ region, $p(\vect
-x_2, N_2 | N_1)$ is the same as that of the equivalent region in a \redc{fully} atomistic reference
-system. In general this seems not be the case, but it is possible to
-\redc{state} necessary conditions to enforce such an equivalence in terms of orders of the configurational probability of the system; the lowest orders involve~\cite{rdfcorr}:
+In accordance with the third assumption, we ignore correlations between the molecules
+  in $\HY$ and CG regions, in fact we even consider the DOFs in the $\HY$ region fixed 
+  while sampling configurations in the AT and CG regions. 
+%While this will not be correct if we consider dynamic properties, it is instead correct if we look only at the sampling of configurations. For this, two ingredients are required (a) molecules in the AT region do not interact in a direct way with those in the CG region (as stated above) and (b) at the same time, in the transition region, we sample over all possible (fixed) configurations of $N_{2}$ in $p(\vect x_2, N_2 | N_1)$. 
+The question then is, whether the probability $p(\vect
+x_2, N_2 | N_1)$ in the $\HY$ region  is the same as that of the equivalent region in a \redc{fully} atomistic reference
+system. In general this will not be the case, so we 
+\redc{state} necessary conditions to enforce such an equivalence to lowest order in the configurational probability of the system; the necessary conditions are~\cite{rdfcorr}:}
 % the marginal distribution functions 
 \begin{align}\label{eqn:p-1-cond1}
   \rho_{\HY}(\vect r) &= \rho_{\AT}(\vect r)\\\label{eqn:p-1-cond2}
@@ -347,19 +354,20 @@ as a tool to balance the chemical potential of the various resolutions and, as a
   \label{fig:tmp1}
 \end{figure}
 Here, two assumptions are made:
-\begin{enumerate}\itemsep -1pt
+\begin{enumerate}
 \item $N_2\ {\ll}\ N_1 \ll N_3$: the second inequality corresponds to
   the thermodynamic limit of the Grand Canonical ensemble. The first
   one actually assumes that the $\HY$ region is infinitely thin so that it
   can be viewed as an infinitesimal membrane that allows free exchange of molecules from
   the AT region to the CG region and vice versa.
-\item We now define a supplementary Hamiltonian:
+\item \greenc{We have 
   \begin{equation}
     \mathcal H(\vect x_1, N_1; \vect x_3, N_3) =
-    \mathcal H_{N_1}^{\AT}(\vect x_1) + \mathcal H_{N_3}^{\CG}(\vect x_3); 
+    \mathcal H_{N_1}^{\AT}(\vect x_1) + \mathcal H_{N_3}^{\CG}(\vect x_3). 
   \end{equation}
-  The condition above is true, in the thermodynamic limit, if the system is
-  short-range correlated.
+  The latter is reasonable if the system is
+  short-range correlated.}
+  
 \end{enumerate}
 The equilibrium in the AT and CG region is assured by the membrane $\HY$ via the thermodynamic force. Conceptually, we assume there is an infinitely thin
 ``filter'' (see Fig.~\ref{fig:tmp1}) located at the interface between
@@ -415,16 +423,15 @@ with natural relations:
 \end{align}
 % The following approach can be found in, for example,
 % Ref.~\cite{tuckeman2010statistical}.
-First, for convenience, we denote that
+\greenc{For convenience, we denote
 \begin{align}
   \tilde q_{N_1} = 
   e^{-\beta N_1\omega_0}
   Q_{\AT}(N_1, V_1, T)\,
-  Q_{\CG}(N - N_1, V_3, T),
+  Q_{\CG}(N - N_1, V_3, T).
 \end{align}
-and $\bar N_1$ is the value at which $\tilde q_{N_1}$ reaches
-its maximum, namely $\tilde q_{\bar N_1} = \max \tilde q_{N_1}$.
-Since $\tilde q_{N_1}$ is positive definite, a basic
+Further let $\bar N_1$ is the value at which $\tilde q_{N_1}$ reaches
+its unique maximum, namely $\tilde q_{\bar N_1} = \max \tilde q_{N_1}$. (The existence of a maximum follows from the superstability of the interactions that guarantees that particles do not cluster as $N\to\infty$; we further assume that it is unique.)} Since $\tilde q_{N_1}$ is positive definite, a basic
 observation is that
 \begin{align}
   \tilde q_{\bar N_1}
@@ -443,14 +450,13 @@ Due to the monotonicity of the logarithm, we have
   =
   \ln N + \ln\tilde q_{\bar N_1}.
 \end{align}
-If $\ln N \ll \ln \tilde q_{\bar N_1}$ (the validity will be discussed
-later), then 
+\greenc{If $\ln N \ll \ln \tilde q_{\bar N_1}$, Laplace's method yields (see, e.g., Ref.~\onlinecite[Sec.~4.3]{dembo1998}) 
 \begin{align}
   \ln\sum_{N_1=1}^N \tilde q_{N_1}
   \approx
   \ln\tilde q_{\bar N_1},
 \end{align}
-which is
+(The validity of the antecedent will be discussed later.) Hence}
 \begin{align}
   \ln Q(N, V, T)
   \approx
@@ -486,9 +492,9 @@ that the maximum $\bar N_1$ corresponds to the maximum
 value of probability $p(N_1)$; this is also the average molecule
 number in the AT region that is of statistical importance
 under the thermodynamic limit.
-\redc{Since $\bar
-N_1$ is the maximum of the the right hand side of
-Eq.~\eqref{eqn:a-energy-1}, by differentiating it with respect to $\bar N_1$ we have the relation:}
+\greenc{As the right hand side of
+Eq.~\eqref{eqn:a-energy-1} attains its maximum at $\bar
+N_1$ when the other thermodynamic variables are kept fixed, differentiating it with respect to $N_1$ entails}
 % Since $\bar
 % N_1$ is the maximum, by differentiating on the right hand side of
 % Eq.~\eqref{eqn:a-energy-1}, we have the relation:
@@ -536,8 +542,9 @@ should \redc{vanish} (the same argument as the Helmholtz free energy):
   p_{\AT} + \rho_0\omega_0 = p_{\CG}
 \end{align}
 which is exactly the definition of the thermodynamic force.
-The argument in this section is based on the fact that $\bar N_{1}$, rather than $N_{1}$ can be considered as representative of the configuration realizations in the AT region. This implies that the particle fluctuations, $\Delta N_{1}$,
-are negligible (compared to $\bar N_{1}$) in the AT region. This hypothesis is valid if the AT region is large enough so that $\bar N_{1}$ is large. This point seems to be true in all numerical experiments done so far (see e.g. Ref.\cite{debash}). In this way, we have shown the formal derivation of the thermodynamic force as a tool to balance the chemical potential between the two regions. For a Grand Canonical-like set up, the balance of chemical potential between open regions is a necessary condition to have the exchange of molecules in thermodynamic equilibrium and as a consequence we have formally justified why Eq.\ref{thf} is a necessary condition for AdResS to be considered an effective Grand Canonical set up.
+
+\greenc{We remind the reader that the argument in this section is essentially based on a large deviations principle (namely, Laplace's method) for the number of particles in the AT region that entailed that $\bar N_{1}$ rather than $N_{1}$ can be considered as representative of the configuration realizations in the AT region.} This implies that the particle fluctuations, $\Delta N_{1}$,
+are negligible compared to $\bar N_{1}$ in the AT region. This hypothesis is valid if the AT region is large enough so that $\bar N_{1}$ is large. This point seems to be true in all numerical experiments done so far (see, e.g., Ref.~\onlinecite{debash}). In this way, we have shown the formal derivation of the thermodynamic force as a tool to balance the chemical potential between the two regions. For a Grand Canonical-like set up, the balance of chemical potential between open regions is a necessary condition to have the exchange of molecules in thermodynamic equilibrium and as a consequence we have formally justified why Eq.\ref{thf} is a necessary condition for AdResS to be considered an effective Grand Canonical set up.
 
 
 \subsection{The number probability $p(N_1)$}
@@ -561,7 +568,7 @@ The 2nd order of accuracy, requires the equality for the compressibility:
 \begin{align}\label{eqn:kappa-eq}
   \kappa_{\CG} &= \kappa_{\AT}.
 \end{align}
-Eq.\ref{eqn:kappa-eq} implies that the \redc{COM-COM RDFs (COM stands for the center of mass, and RDF stands for the radial distribution function)} of the atomistic and coarse-grained region are matched \cite{han}.
+Eq.\ref{eqn:kappa-eq} implies that the \redc{COM-COM RDFs (here, again, COM stands for the center of mass, and RDF stands for the radial distribution function)} of the atomistic and coarse-grained region are matched \cite{han}.
 Essentially these are the physical requirements to show that up to the second order $p(N_1)$ in AdResS is the same as in the equivalent subregion of the full atomistic system of reference.
 Because of the lengthy arguments, specific details are reported in Appendix~\ref{app:1}.
 
@@ -612,12 +619,13 @@ as presented in the theoretical analysis, corresponds to that of a Grand Canonic
 One must be very careful about any statement on $p(\vect x_1, N_1)$ 
 due to the following three reasons:
 \begin{enumerate}
-\item The Boltzmann form of the distribution $p(\vect x_1|N_1; \vect x_2, N_2)$
-is in this case only an \redc{assumption}.
+\item \greenc{There is no hope whatsoever that the assumed Boltzmann form of the distribution $p(\vect x_1|N_1; \vect x_2, N_2)$ can be numerically verified  for any realistic test system.}. 
 \item Conditions \eqref{eqn:p-1-cond1} and \eqref{eqn:p-1-cond2}
 are only necessary, and are in general not sufficient to guarantee
 the correct distribution $p(\vect x_2, N_2 | N_1)$ in the hybrid region $\HY$.
-\item The particle number distribution $p(N_1)$ , from the conceptual point of view, can be correct only up to the second order.
+\item \greenc{Formally, the particle number density $p(N_1)$ is only a second-order approximation of the correct density $p_{\AT}(N_{1})$.
+    % (As is shown in Appendix~\ref{app:1}, the approximation error becomes exponentially small in the thermodynamic limit.)
+  }
 \end{enumerate}
 However, the number distribution $p(N_1)$ has already
 been proved to be numerically correct in Ref.~\cite{prlgc, rdfcorr} for the relevant case of liquid water. In this section, we want to test, with a numerical simulation, to what extent, other quantities, e.g. the configurational distribution $p(\vect x_1) = \sum_{N_1}p(\vect x_1, N_1)$, are correct. 
@@ -853,12 +861,8 @@ Calculating $T_1$:
   \big]
   \big\}
 \end{align}
-Since we work under the hypothesis that the atomistic region is much smaller than the whole system, it
-is reasonable to assume $n_1 \ll N$ and $N_1\ll N$, \redc{because the statistical importance of
-  $n_1\sim N$ or $N_1\sim N$ is negligible.}
-Notice the free energy is extensive.
-Due to the Euler's theorem~\cite{tuckeman2010statistical},
-we have
+\greenc{Notice that the free energy is extensive.
+By applying Euler's theorem~\cite{tuckeman2010statistical} we thus find 
 \begin{align}\label{eqn:Aat-0}
   A_{\AT}(N-n_1,V_3,T)
   &= V_3 A_{\AT}(\frac{N-n_1}{V_3},1,T)
@@ -869,11 +873,10 @@ we have
 \end{align}
 where $\hat N_1$ is the number of molecules in the atomistic region
 at the wished density $\rho_0$ of equilibrium, namely
-$\hat N_1 = \rho_0V_1 = N - \rho_0 V_3$.
-Notice \redc{that in} the thermodynamic limit, $\hat N_1$ is equivalent to
-$\bar N_1$.
+$\hat N_1 = \rho_0V_1 = N - \rho_0 V_3$. As we work under the hypothesis that the atomistic region is much smaller than the whole system, it
+is reasonable to assume $N_1\ll N$. Moreover we have found that, in the thermodynamic limit, $N_{1}\sim\hat N_1\sim\bar N_1$ which carries over to the running index $n_{1}$  in the grand canonical partition function that is non-negligible only if $n_{1}\sim\hat N_1\sim\bar N_1$. Hence 
 $A_{\AT}(\rho_0 + (\hat N_1 - n_1)/{V_3},1,T)$ and
-$A_{\CG}(\rho_0 + (\hat N_1 - N_1)/{V_3},1,T)$ are
+$A_{\CG}(\rho_0 + (\hat N_1 - N_1)/{V_3},1,T)$ can be regarded as} 
 the free energies per \emph{unit} volume, with
 the density perturbed from $\rho_0$ by  $(\hat N_1 - n_1)/{V_3}$
 and $(\hat N_1 - N_1)/{V_3}$, respectively.
@@ -883,13 +886,10 @@ deviates from $\hat N_1$, molecules enter into the coarse-grained
 region and the density is perturbed.
 \redc{In} the thermodynamic
 limit, $\hat N_1$ is comparable to $n_1$ and $N_1$, and all of them are
-supposed to be much much smaller than $N$ while $V_3$ is of the same order of magnitude of $V$ (the large CG region compared to the small AT region).
-Since $\rho_0 = N/V$ always holds, the perturbations
-$(\hat N_1 - n_1)/{V_3}$
-and $(\hat N_1 - N_1)/{V_3}$ are small.
-Therefore, we have the following
-Taylor expansions of the free energies \eqref{eqn:Aat-0} and \eqref{eqn:Acg-0}
-about $\rho_0$:
+supposed to be much much smaller than $N$ while $V_3$ is of the same order of magnitude of $V$ (the large CG region compared to the small AT region). \greenc{As a consequence the perturbations
+$(\hat N_1 - n_1)/{V_3}$ and $(\hat N_1 - N_1)/{V_3}$ are small, compared to $\rho_0 = N/V$ and
+Taylor expanding the free energies \eqref{eqn:Aat-0} and \eqref{eqn:Acg-0}
+about $\rho_0$ yields
 \begin{align}
   A_{\AT}(\rho_0 + \frac{\hat N_1 - n_1}{V_3},1,T)
   &= A_{\AT}(\rho_0,1,T)
@@ -902,7 +902,7 @@ about $\rho_0$:
   \Big(
   \frac{\hat N_1 - n_1}{V_3}
   \Big)^2
-  + \textrm{h.o.t.} \\
+  + o(1) \\
   A_{\CG}(\rho_0 + \frac{\hat N_1 - N_1}{V_3},1,T)
   &= A_{\CG}(\rho_0,1,T)
   +\mu_{\CG}
@@ -914,10 +914,9 @@ about $\rho_0$:
   \Big(
   \frac{\hat N_1 - N_1}{V_3}
   \Big)^2
-  + \textrm{h.o.t.} 
+  + o(1)
 \end{align}
-The ``h.o.t.'' stands for higher order terms (greater than 2)
-of the density perturbation, which we neglect since they have been found numerically not relevant (see Ref.\cite{rdfcorr}).
+(We use the Landau notation $o(1)$ to collect all terms that are asymptotically negligible, bearing in mind that in the thermodynamic limit $N_{1}\sim\hat{N}_{1}$ ;  see also Ref.~\onlinecite{rdfcorr}).
 By using the conditions \eqref{eqn:mu-eq} and \eqref{eqn:kappa-eq},
 we have $T_1$
 \begin{align}\nonumber
@@ -943,7 +942,7 @@ we have $T_1$
   \frac{\hat N_1 - N_1}{V_3}
   \Big)^2
   \Big]
-  +\textrm{h.o.t.}
+  + o(1)
   \Big]
   \Big\}
 \end{align}
@@ -995,18 +994,32 @@ and \eqref{eqn:kappa-eq}, we have:
   \frac{\hat N_1 - N_1}{V_3}
   \Big)^2
   \Big]
-  +\textrm{h.o.t.}
+  + o(1)
   \Big]
   \Big\}
 \end{align}
-Comparing $T_1$ and $T_2$, one can easily see that they are equivalent (at least) to the second leading
+\redc{Since the difference between the probabilities
+$p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
+and $T_2$ renomalized by the partition functions of the distributions,
+by
+invoking Laplace's method again,
+we see $p(N_1)$ and $p_{\AT}(N_1)$ agree up to
+the second leading
 order with respect to the density perturbations
 $(\hat N_1 - n_1)/{V_3}$
-and $(\hat N_1 - N_1)/{V_3}$.
-Since the difference between the probabilities
-$p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
-and $T_2$, we conclude that $p(N_1)$ is a good approximation to
-$p_{\AT}(N_1)$ to the second leading order. High orders, as anticipated before, seem numerically not relevant and anyway, at this stage, not easy to treat at formal level.
+and $(\hat N_1 - N_1)/{V_3}$,
+in the limit $V_{3}\to\infty$.}
+%one can easily see that they are equivalent (at least) to the second leading
+%order with respect to the density perturbations
+%$(\hat N_1 - n_1)/{V_3}$
+%and $(\hat N_1 - N_1)/{V_3}$.
+% Since the difference between the probabilities
+% $p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
+% and $T_2$, we conclude that $p(N_1)$ is a good approximation to
+% $p_{\AT}(N_1)$ up to an exponentially small error.
+}
+
+%High orders, as anticipated before, seem numerically not relevant and anyway, at this stage, not easy to treat at formal level.
 
 
 \section{Simulation protocols}
