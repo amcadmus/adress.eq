@@ -32,10 +32,10 @@ void trajAnalyzerInOut (const vector<double > & timeRecord,
       int countIn = 0;
       int countOut = 0;
       for (unsigned ii = 0; ii < indicator.size(); ++ii){
-	if (indicator[ii][lastIdx] == 0 && indicator[ii][tt] == 1){
+	if (indicator[ii][lastIdx] ==-1 && indicator[ii][tt] == 1){
 	  countIn ++;
 	}
-	if (indicator[ii][lastIdx] == 1 && indicator[ii][tt] == 0){
+	if (indicator[ii][lastIdx] == 1 && indicator[ii][tt] ==-1){
 	  countOut ++;
 	}
       }
@@ -54,7 +54,8 @@ void trajAnalyzerStay (const vector<double > & timeRecord,
   vector<vector<double> > intervalLengths (indicator.size());
   for (unsigned ii = 0; ii < indicator.size(); ++ii){
     int status = 0;  // 0 not counting, 1, -1 counting
-    double currentIntervalLength = 0.;
+    // double currentIntervalLength = timeRecord[1] - timeRecord[0];
+    double currentIntervalLength = 0.0;
     for (unsigned tt = 0; tt < indicator[ii].size(); ++tt){
       if (status == 0){
 	status = indicator[ii][tt];
@@ -65,12 +66,18 @@ void trajAnalyzerStay (const vector<double > & timeRecord,
 	}
 	else {
 	  intervalLengths[ii].push_back (currentIntervalLength * status);
+	  // currentIntervalLength = timeRecord[tt] - timeRecord[tt-1];
+	  currentIntervalLength = 0.;
 	  status = indicator[ii][tt];
 	}	
       }
     }
+    intervalLengths[ii].push_back (currentIntervalLength * status);
+    // if (ii == 2623){
+    //   cout << "here" << endl;}
   }
   for (unsigned ii = 0; ii < indicator.size(); ++ii){
+    if (intervalLengths[ii].size() == 0) continue;
     fprintf (fpout, "%d ", ii);
     for (unsigned jj = 0; jj < intervalLengths[ii].size(); ++jj){
       if (fabs(intervalLengths[ii][jj]) > intervalStay){
