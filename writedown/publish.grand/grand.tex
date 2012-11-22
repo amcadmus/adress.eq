@@ -1,5 +1,5 @@
 % \documentclass[aip,jcp,preprint,unsortedaddress,a4paper,onecolum]{revtex4-1}
-\documentclass[aip,jcp,a4paper,reprint,onecolumn]{revtex4-1}
+\documentclass[aps,a4paper,reprint,onecolumn]{revtex4}
 % \documentclass[aps,pre,twocolumn]{revtex4-1}
 % \documentclass[aps,jcp,groupedaddress,twocolumn,unsortedaddress]{revtex4}
 
@@ -93,7 +93,7 @@ Finally the numerical results are discussed.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{fig.grand/system.eps}
+  \includegraphics[width=0.9\textwidth]{system.eps}
   \caption{A schematic representation of liquid water in AdResS. CG indicates the region at coarse-grained resolution, AT that at atomistic resolution, and finally $\Delta$ the transition region where molecules change resolution according to a smooth switching function $w(x)$.}
   \label{fig:adress-water}
 \end{figure}
@@ -333,10 +333,10 @@ as a tool to balance the chemical potential of the various resolutions and, as a
 \begin{figure}
   \centering
   \begin{minipage}[t]{0.49\linewidth}
-  \includegraphics[width=0.6\textwidth]{fig.grand/partition.eps}    
+  \includegraphics[width=0.6\textwidth]{partition.eps}    
   \end{minipage}
   % \begin{minipage}[t]{0.49\linewidth}
-  % \includegraphics[width=0.6\textwidth]{fig.grand/partition-1.eps}    
+  % \includegraphics[width=0.6\textwidth]{partition-1.eps}    
   % \end{minipage}
   \caption{Schematic plot of the AdResS system in thermodynamic equilibrium. The thickness of the filter corresponds to $d_{\Delta}$.}
   \label{fig:tmp1}
@@ -564,10 +564,10 @@ Because of the lengthy arguments, specific details are reported in Appendix~\ref
 \section{A numerical test: Liquid Water}
 \begin{figure}
   \centering
-  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-375-425.eps}
-  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-425-516.eps}
-  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-516-608.eps}
-  \includegraphics[width=0.245\textwidth]{fig.grand/rdf-hhoh-608-700.eps}
+  \includegraphics[width=0.245\textwidth]{rdf-hhoh-375-425.eps}
+  \includegraphics[width=0.245\textwidth]{rdf-hhoh-425-516.eps}
+  \includegraphics[width=0.245\textwidth]{rdf-hhoh-516-608.eps}
+  \includegraphics[width=0.245\textwidth]{rdf-hhoh-608-700.eps}
   \caption{Local H-H and O-H $g(r)$'s.
     The red line is the curve corresponding to the reference explicit (all atom)
     simulation (EX).
@@ -587,7 +587,7 @@ Because of the lengthy arguments, specific details are reported in Appendix~\ref
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{fig.grand/fig-rdf3-diff.eps}
+  \includegraphics[width=0.9\textwidth]{fig-rdf3-diff.eps}
   \caption{The 3-body correlation function.  The 1st row corresponds to the reference all atom simulation.
     From the 2nd to 5th row:
     The difference between the function calculated in AdResS in the AT, HY I, HY II, and HY III
@@ -652,8 +652,8 @@ The numerical test presented in the previous section shows how an atomistic mode
 This means that if the theoretical considerations are correct, one should be able to show numerically that the proper exchange of energy and molecules is independent from the molecular model used in the coarse-grained region; that is, the filter of the transition region makes the atomistic region a Grand Canonical ensemble. For this reason we have carried out a further numerical test where the molecules in the coarse-grained region interact with a generic WCA potential which assures that only the density, but not the radial distribution function, of a liquid governed by this potential is the same as that of the liquid water (for the simulation set up see the Appendix~\ref{app:2}).
 \begin{figure}
   \centering
-  \includegraphics[width=0.3\textwidth]{fig.grand/fig-rho-wca.eps}
-  \includegraphics[width=0.3\textwidth]{fig.grand/fig-count-wca.eps}
+  \includegraphics[width=0.3\textwidth]{fig-rho-wca.eps}
+  \includegraphics[width=0.3\textwidth]{fig-count-wca.eps}
   \caption{Density and fluctuation profile of the case of the WCA potential in AdResS.  The
     results are compared with the full atomistic reference (denoted by
     ``EX'') and the  standard AdResS (denoted by ``std. AdResS'').
@@ -665,10 +665,10 @@ This means that if the theoretical considerations are correct, one should be abl
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.245\textwidth]{fig.grand/fig-rdf-all-wca-375-425.eps}
-  \includegraphics[width=0.245\textwidth]{fig.grand/fig-rdf-all-wca-425-516.eps}
-  \includegraphics[width=0.245\textwidth]{fig.grand/fig-rdf-all-wca-516-608.eps}
-  \includegraphics[width=0.245\textwidth]{fig.grand/fig-rdf-all-wca-608-700.eps}
+  \includegraphics[width=0.245\textwidth]{fig-rdf-all-wca-375-425.eps}
+  \includegraphics[width=0.245\textwidth]{fig-rdf-all-wca-425-516.eps}
+  \includegraphics[width=0.245\textwidth]{fig-rdf-all-wca-516-608.eps}
+  \includegraphics[width=0.245\textwidth]{fig-rdf-all-wca-608-700.eps}
   \caption{
     The COM-COM, H-O and H-H RDFs. 
     The red line is the curve corresponding to the reference explicit (all atom)
@@ -690,7 +690,7 @@ This means that if the theoretical considerations are correct, one should be abl
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{fig.grand/fig-rdf3-diff-wca-ex-hy1.eps}
+  \includegraphics[width=0.9\textwidth]{fig-rdf3-diff-wca-ex-hy1.eps}
   \caption{The 3-body correlation of WCA AdResS in the AT
     and HY I regions.
     The difference with respect to the full atomistic reference
@@ -738,8 +738,131 @@ It was also supported in part by the National Science Foundation under Grant No.
 
 
 \section*{References}
-\bibliography{ref}{}
-\bibliographystyle{unsrt}
+\begin{thebibliography}{10}
+
+\bibitem{jcp}
+M.~Praprotnik, L.~Delle~Site, and K.~Kremer.
+\newblock Adaptive resolution molecular-dynamics simulation: Changing the
+  degrees of freedom on the fly.
+\newblock {\em The Journal of Chemical Physics}, 123:224106, 2005.
+
+\bibitem{pre}
+M.~Praprotnik, L.~Delle~Site, and K.~Kremer.
+\newblock Adaptive resolution scheme for efficient hybrid atomistic-mesoscale
+  molecular dynamics simulations of dense liquids.
+\newblock {\em Physical Review E}, 73(6):066701, 2006.
+
+\bibitem{prlgc}
+S.~Fritsch, S.~Poblete, C.~Junghans, G.~Ciccotti, L.~Delle~Site, and K.~Kremer.
+\newblock Adaptive resolution molecular dynamics simulation through coupling to
+  an internal particle reservoir.
+\newblock {\em Physical Review Letters}, 108:170602, 2012.
+
+\bibitem{rdfcorr}
+H.~Wang, C.~Sch\"utte, and L.~Delle~Site.
+\newblock {Adaptive Resolution Simulation (AdResS): A smooth thermodynamic and
+  structural transition from atomistic to coarse grained resolution and vice
+  versa in a Grand Canonical fashion}.
+\newblock {\em Journal of Chemical Theory and Computation}, 8(8):2878--2887,
+  2012.
+
+\bibitem{wca}
+J.D. Weeks, D.~Chandler, and H.~Anderson.
+\newblock Deriving effective mesoscale potentials from atomistic simulations.
+\newblock {\em Journal of Chemical Physics}, 44:5237, 1971.
+
+\bibitem{pet1}
+T.~Cagin and B.M. Petitt.
+\newblock {\em Mol.Simul.}, 6:5, 1991.
+
+\bibitem{pet2}
+T.~Cagin and B.M. Petitt.
+\newblock {\em Mol.Phys.}, 72:169, 1991.
+
+\bibitem{pet3}
+J.~Li, T.~Cagin, and B.M. Petitt.
+\newblock {\em J.Chem.Phys.}, 96:1333, 1992.
+
+\bibitem{pet4}
+S.~Weerasinghe and B.M. Petitt.
+\newblock {\em Mol.Phys.}, 82:897, 1994.
+
+\bibitem{pet5}
+C.J. Lynch and B.M. Petitt.
+\newblock {\em J.Chem.Phys.}, 107:8594, 1997.
+
+\bibitem{flo}
+H.~Eslami and M\"{u}ller-Plathe F.
+\newblock {\em J.Comp.Chem.}, 28:1763, 2007.
+
+\bibitem{presolo}
+L.~Delle~Site.
+\newblock Some fundamental problems for an energy-conserving
+  adaptive-resolution molecular dynamics scheme.
+\newblock {\em Physical Review E}, 76(4):047701, 2007.
+
+\bibitem{prlcomm}
+M.~Praprotnik, S.~Poblete, L.~Delle~Site, and K.~Kremer.
+\newblock Comment on “adaptive multiscale molecular dynamics of
+  macromolecular fluids”.
+\newblock {\em Physical Review Letters}, 107(9):99801, 2011.
+
+\bibitem{lanford1973entropy}
+O.~Lanford.
+\newblock Entropy and equilibrium states in classical statistical mechanics.
+\newblock {\em Statistical mechanics and mathematical problems}, pages 1--113,
+  1973.
+
+\bibitem{ruelle1970}
+D.~Ruelle.
+\newblock Superstable interactions in classical statistical mechanics.
+\newblock {\em Comm. Math. Phys.}, 18:127--159, 1970.
+
+\bibitem{dembo1998}
+Amir Dembo and Ofer Zeitouni.
+\newblock {\em Large deviations techniques and applications}.
+\newblock Springer-Verlag, Berlin, 2010.
+
+\bibitem{debash}
+D.~Mukherji, N.F.A. van~der Vegt, K.~Kremer, and L.~Delle~Site.
+\newblock Kirkwood-buff analysis of liquid mixtures in an open boundary
+  simulation.
+\newblock {\em Journal of Chemical Theory and Computation}, 8(2):375--379,
+  2012.
+
+\bibitem{han}
+H.~Wang, C.~Junghans, and K.~Kremer.
+\newblock Comparative atomistic and coarse-grained study of water: What do we
+  lose by coarse-graining?
+\newblock {\em The European Physical Journal E: Soft Matter and Biological
+  Physics}, 28(2):221--229, 2009.
+
+\bibitem{tuckeman2010statistical}
+M.E. Tuckerman.
+\newblock {\em Statistical Mechanics: Theory and Molecular Simulation}.
+\newblock Oxford University Press, USA, 2010.
+
+\bibitem{berendsen1987missing}
+HJC Berendsen, JR~Grigera, and TP~Straatsma.
+\newblock The missing term in effective pair potentials.
+\newblock {\em Journal of Physical Chemistry}, 91(24):6269--6271, 1987.
+
+\bibitem{gromacs}
+B.~Hess, C.~Kutzner, D.~van~der Spoel, and E.~Lindahl.
+\newblock Gromacs 4: Algorithms for highly efficient, load-balanced, and
+  scalable molecular simulation.
+\newblock {\em Journal of Chemical Theory and Computation}, 4(3):435--447,
+  2008.
+
+\bibitem{ruehle2009versatile}
+V.~R\"uhle, C.~Junghans, A.~Lukyanov, K.~Kremer, and D.~Andrienko.
+\newblock Versatile object-oriented toolkit for coarse-graining applications.
+\newblock {\em Journal of Chemical Theory and Computation}, 5(12):3211--3223,
+  2009.
+
+\end{thebibliography}
+% \bibliography{ref}{}
+% \bibliographystyle{unsrt}
 
 
 \appendix
@@ -1055,7 +1178,7 @@ same as the standard AdResS.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.3\textwidth]{fig.grand/3mol.eps}
+  \includegraphics[width=0.3\textwidth]{3mol.eps}
   \caption{The schematic plot of the 3-body RDF.}\label{fig:tmp3}
 \end{figure}
 
