@@ -181,7 +181,7 @@ print_xv (FILE * fp) const
 {
   for (unsigned ii = 0; ii < nx; ++ii){
     for (unsigned jj = 0; jj < nv; ++jj){
-      fprintf (fp, "%f %f %.16e\n", gridx[ii], gridv[jj], values[ii][jj]);
+      fprintf (fp, "%f %f %.6e %.6e\n", gridx[ii], gridv[jj], values[ii][jj], backup_values[ii][jj]);
     }
     fprintf (fp, "\n");
   }
@@ -195,7 +195,7 @@ print_x (FILE * fp) const
     for (unsigned jj = 0; jj < nv; ++jj){
       avg += values[ii][jj] * hv;
     }
-    fprintf (fp, "%f %.16e\n", gridx[ii], avg);
+    fprintf (fp, "%f %.6e\n", gridx[ii], avg);
   }
 }
 
@@ -217,7 +217,7 @@ print_along_x (FILE * fp, const double x) const
   for (unsigned ii = 0; ii < nx; ++ii){
     if (fabs(gridx[ii] - x) <= 0.5 * hx){
       for (unsigned jj = 0; jj < nv; ++jj){
-	fprintf (fp, "%f %.16e\n", gridv[jj], values[ii][jj]);
+	fprintf (fp, "%f %.6e\n", gridv[jj], values[ii][jj]);
       }
       return;
     }

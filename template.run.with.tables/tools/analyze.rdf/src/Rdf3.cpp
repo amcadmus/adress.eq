@@ -179,12 +179,45 @@ calculate()
     // double r01 = i * binSize;
     hist[i] /= 4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho;
     // hist[i] /= 4. * M_PI * r0 * r1 * (r1 - r0) * rho;
-    dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho * double(natom) * hist[i]));
+    dists[i].average(1. / (4. / 3. * M_PI * (r1*r1*r1 - r0*r0*r0) * rho * rho * double(natom)));
   }
 
-  // for (unsigned ii = 0; ii < dists.size(); ++ii){
-  //   dists[ii].average();
-  // }
+  for (int i = 1; i < nbins; ++i){
+    double r = (i+0.5) * binSize;
+    double g2_01 = hist[i];
+    for (unsigned ii = 0; ii < dists[i].nx; ++ii){
+      double h1 = dists[i].hx * (ii + 0.5) + dists[i].x0;
+      for (unsigned jj = 0; jj < dists[i].nv; ++jj){
+	double h2 = dists[i].hv * (jj + 0.5) + dists[i].v0;
+	int idx;
+	double g2_02, g2_12;
+	double dd1 = sqrt (h1*h1 + h2*h2);
+	idx = int(dd1 / binSize);
+	if (idx >= nbins){
+	  g2_02 = 1.0;
+	}
+	else{
+	  g2_02 = hist[idx];
+	}
+	double dd2 = sqrt ((r-h1)*(r-h1) + h2*h2);
+	idx = int(dd2 / binSize);
+	if (idx >= nbins){
+	  g2_12 = 1.0;
+	}
+	else{
+	  g2_12 = hist[idx];
+	}
+	dists[i].backup_values[ii][jj] = dists[i].values[ii][jj];
+	if (dd1 < 0.24 || dd2 < 0.24){
+	  dists[i].values[ii][jj] = 0.;
+	}
+	else{
+	  dists[i].values[ii][jj] = dists[i].values[ii][jj] - (g2_01 + g2_02 + g2_12) + 2.0;
+	}
+	// printf ("%f %f %f   %f %f %f", r, h1, h2, g2_01, g2_02, g2_12);
+      }
+    }
+  }
 }
 
 
