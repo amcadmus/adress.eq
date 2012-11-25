@@ -76,15 +76,49 @@ void trajAnalyzerStay (const vector<double > & timeRecord,
     // if (ii == 2623){
     //   cout << "here" << endl;}
   }
+  vector<vector<double > > largeIntervalLengths (indicator.size());
   for (unsigned ii = 0; ii < indicator.size(); ++ii){
-    if (intervalLengths[ii].size() == 0) continue;
-    fprintf (fpout, "%d ", ii);
     for (unsigned jj = 0; jj < intervalLengths[ii].size(); ++jj){
       if (fabs(intervalLengths[ii][jj]) > intervalStay){
-	fprintf (fpout, "%f ", intervalLengths[ii][jj]);
+	largeIntervalLengths[ii].push_back (intervalLengths[ii][jj]);
       }
     }
-    fprintf (fpout, "\n");
+  }
+
+  for (unsigned ii = 0; ii < indicator.size(); ++ii){
+    if (largeIntervalLengths[ii].size() <= 1) continue;
+    int startIdx = 0;
+    bool findOut = false;
+    for (unsigned jj = 0; jj < largeIntervalLengths[ii].size(); ++jj){
+      if (largeIntervalLengths[ii][jj] < 0){
+	startIdx = jj;
+	findOut = true;
+	break;
+      }
+    }
+    if (findOut == true){
+      for (unsigned jj = startIdx+1; jj < largeIntervalLengths[ii].size(); ++jj){
+	if (largeIntervalLengths[ii][jj] > 0){
+	  fprintf (fpout, "%d ", ii);
+	  for (unsigned kk = 0; kk < largeIntervalLengths[ii].size(); ++kk){
+	    fprintf (fpout, "%f ", largeIntervalLengths[ii][kk]);
+	  }
+	  fprintf (fpout, "\n");
+	  break;
+	}
+      }
+    }
+    // double status = largeIntervalLengths[ii][0];
+    // for (unsigned jj = 1; jj < largeIntervalLengths[ii].size(); ++jj){
+    //   if (largeIntervalLengths[ii][jj] * status < 0) {
+    // 	fprintf (fpout, "%d ", ii);
+    // 	for (unsigned kk = 0; kk < largeIntervalLengths[ii].size(); ++kk){
+    // 	  fprintf (fpout, "%f ", largeIntervalLengths[ii][kk]);
+    // 	}
+    // 	fprintf (fpout, "\n");
+    // 	break;
+    //   }
+    // }
   }
 }
 
