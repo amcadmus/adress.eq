@@ -103,20 +103,34 @@ Finally the numerical results are discussed.
 
 In this work, the higher resolution refers to the atomistic
 description (AT) of a molecule, while the lower resolution refers to
-its corresponding coarse-grained (CG) model (for a pictorial representation of a typical AdResS set up, see Fig.\ref{fig:adress-water} for the case of liquid water).  We assume that the dynamics of the
+its corresponding coarse-grained (CG) model (for a pictorial representation of a typical AdResS set up, see Fig.\ref{fig:adress-water} for the case of liquid water).
+We assume that the dynamics of the
 system is subject to the Langevin equation, which is the thermostat
-usually used in the AdResS simulations:
-\begin{align}
-  \dd d\vect r_i &= \vect v_i\dd dt\\
-  m_i\dd d\vect v_i &= (-m_i\xi_i\vect v_i + \vect F_i)\,\dd dt + \sqrt{2\sigma_i}\;\dd d\vect W_t
-\end{align}
-where $\xi_i$ are friction coefficients,
-$m_i$ are the mass of atoms, $\sigma_i = k_BTm_i\xi_i$ with $T$ being
-the temperature, and
-$\dd d\vect W_t$ is the standard Wiener process. We denote the
+usually used in the AdResS simulations.
+% \begin{align}
+%   \dd d\vect r_i &= \vect v_i\dd dt\\
+%   m_i\dd d\vect v_i &= (-m_i\xi_i\vect v_i + \vect F_i)\,\dd dt + \sqrt{2\sigma_i}\;\dd d\vect W_t
+% \end{align}
+% where $\xi_i$ are friction coefficients,
+% $m_i$ are the mass of atoms, $\sigma_i = k_BTm_i\xi_i$ with $T$ being
+% the temperature, and
+% $\dd d\vect W_t$ is the standard Wiener process.
+We denote the
 phase space variable $\vect x = (\vect r_1,\cdots,\vect r_N, \vect v_1,\cdots,\vect v_N)$; $\vect r_i,
-\vect v_i$ are the degrees of freedoms (DOFs) of the system.  If the
-system is conservative, namely $\vect F_i = -\nabla_{\vect r_i}U$,
+\vect v_i$ are the \bluec{center-of-mass}
+degrees of freedoms (DOFs) of the system.
+\bluec{Please notice that for simplicity we do not explicitly write the
+  atomistic DOFs, but we should keep in mind that the interaction
+  between two  molecules of atomistic description
+  are the sum of all pair-wise atomic interactions.
+  Sometimes, also for the sake of simplicity,
+  we do not really distinguish the COM coordinates
+  of a molecule and the coordinates of all atoms on it, and simply
+  write $\vect r_i$, but the meaning of this notation is
+  clear from the context.
+}
+If the
+system is conservative, %, namely $\vect F_i = -\nabla_{\vect r_i}U$,
 then one obtains the equilibrium density distribution $p(\vect
 x)\propto e^{-\beta\mathcal H(\vect x)}$, where $\beta = 1/k_BT$ is the inverse temperature.
   In this paper, we assume that
@@ -141,36 +155,41 @@ denoted by $w = 1$, while the lower resolution is denoted by $w = 0$.
 Between the higher and lower resolutions, a hybrid region allows a 
 molecule to have both (interpolated) resolutions. The weighting function changes smoothly
 from 0 to 1; one possible form of such a function is:
+\bluec{
 \begin{align}\label{eqn:new-w}
   w(\vect r) =
   \left\{
     \begin{array}{lcl}
-      1 &\quad& \chi < 0\\
-      1  && 0 < \chi < r_c\\
-      \cos^2\big[\frac{\pi}{2(d_{\HY} - r_c)} (\chi - d_{\textrm{ex}} - r_c)\big] && r_c < \chi < d_{\HY} \\
-      0 &&  d_{\HY}  < \chi.
+      1 &\quad& \chi(\vect r) < 0\\
+      1  && 0 < \chi(\vect r) < r_c\\
+      \cos^2\big[\frac{\pi}{2(d_{\HY} - r_c)} (\chi(\vect r) - r_c)\big] && r_c < \chi(\vect r) < d_{\HY} \\
+      0 &&  d_{\HY}  < \chi(\vect r).
     \end{array}
   \right.
 \end{align}
-Where $\chi$ is the distance to the boundary of the higher resolution
-region, $\chi < 0$ means that the molecule is in the higher resolution
+Where $\chi(\vect r)$ is the distance between the
+molecule at $\vect r$ and the boundary of the higher resolution
+region, $\chi(\vect r) < 0$ }means that the molecule is in the higher resolution
 region, $d_{\HY}$ is the thickness of the hybrid region, $r_c$ is the
 cut-off radius of the atomistic interactions.  The intermolecular force is modeled by the following
 interpolation formula \cite{rdfcorr}:
+\bluec{
 \begin{align}
-  \vect F_{\alpha\beta} =
-  w_\alpha w_\beta\vect F^{\AT}_{\alpha\beta} +
-  (1-w_\alpha w_\beta)\vect F^{\CG}_{\alpha\beta} +
-  w_\alpha w_\beta (1-w_\alpha w_\beta)\vect F_{\alpha\beta}^{\rdf}.
+  \vect F_{ij} =
+  w_i w_j\vect F^{\AT}_{ij} +
+  (1-w_i w_j)\vect F^{\CG}_{i j} +
+  w_i w_j (1-w_i w_j)\vect F_{ij}^{\rdf}.
 \label{grf}
 \end{align}
-Where $ \vect F^{\AT}_{\alpha\beta}$, $ \vect F^{\CG}_{\alpha\beta}$
+Where $w_i = w(\vect r_i)$ and $w_j = w(\vect r_j)$.}
+$ \vect F^{\AT}_{ij}$, $ \vect F^{\CG}_{ij}$
 are the intermolecular interaction of the atomistic and coarse-grained
-resolutions, respectively.  $\vect F_{\alpha\beta}^{\rdf}$ is a force that corrects the COM-COM radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system(for specific details, see Ref.~\onlinecite{prlgc}):
+resolutions, respectively.
+$\vect F_{ij}^{\rdf}$ is a force that corrects the COM-COM radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system(for specific details, see Ref.~\onlinecite{prlgc}):
 \begin{equation}
-  {\vect F}_{\alpha}=
-  \sum_{\beta}{\vect F}_{\alpha\beta}+
-  {\vect F}^{\textrm{th}}(\vect r_\alpha),
+  {\vect F}_{i}=
+  \sum_{j}{\vect F}_{ij}+
+  {\vect F}^{\textrm{th}}(\vect r_i),
 \label{mody}
 \end{equation}
 which is defined by

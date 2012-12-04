@@ -153,6 +153,24 @@ Our interest is to show to a broad community (of simulators and not):\\
 
 (b) {\bf its efficiency}, that is to convince people, data in hand, that it is convenient to use this method.\\
 
+\bluec{
+  Another reason is the accessibility of AdResS: Since this method
+  is relatively new, nearly all mainstream MD packages do not provide
+  support for the AdResS.
+  And the implementing AdResS is not trivial, especially
+  for the users who are
+  application orientated, and are not familiar with the software design.
+  Fortunately, the AdResS method will be implemented in the
+  upcoming new release (4.6) of Gromacs (Actually one can already
+  download Gromacs with AdResS support from the developers' source
+  code reporsitory).
+  This refects the fact that more
+  and more people are interested in AdResS.  And more importantly, with the
+  new Gromacs, the application of AdResS becomes more
+  user-frindly and straightforward. We would expect more people will
+  be interested in AdResS and would like to try.
+}\\
+
 Our opinion is that a high visible journal as PRX would allow to advertise this work across various, but interlinked, disciplines of physics, and thus give a substantial impulse to points (a) and (b).\\
 Any other technical journal would have the effect of, most probably, confining the method to {\it `` a further technical''} progress; this would not reflect the reality.\\
 
@@ -163,7 +181,7 @@ clear is if the AdResS scheme is really the method of choice for doing GCE simul
 one first needs to invest the time to develop an appropriate model for the CG region.}}\\
 
 The referee may have misunderstood one point. We have actually shown on purpose that one does not need to develop a CG model but that any liquid of spheres at the same density as that of the atomistic region is fine.
-This is the reasons we have shown the tests with the liquid of WCA spherical particles. We believe this settles the question.\\
+This is the reasons we have shown the tests with the liquid of WCA spherical particles (\bluec{see Sec. V}). We believe this settles the question.\\
 
 {\color{teal} {\it Second, if one uses
 a large but homogeneous canonical system, then it should be possible to use several well-separated small
@@ -175,7 +193,7 @@ needs to be made. If that is not their intention, then I do not see why publicat
 needed}}\\
 
 We have tested the efficiency of our method by comparing it to the most popular current {\it ``Grand Canonical''} approach used in MD, that is the {IPM}.
-In general, there have been a large number of developments for the GC idea based on the ``grow-in'' and ``shrink-out'' MD approach (see e.g. for example [Lynch and Petitt, J. Chem. Phys. 107:8594 (1997)] and [Eslami and M\"uller-Plate,
+In general, there have been a large number of developments for the GC idea based on the ``grow-in'' and ``shrink-out'' MD approach (see for example [Lynch and Petitt, J. Chem. Phys. 107:8594 (1997)] and [Eslami and M\"uller-Plate,
   J. Comput. Chem. 28:1763 (2007)]) however, all of them  share the same basic principle and face the same problem
   of the IPM.
 \\
@@ -190,8 +208,8 @@ Actually the real question is if it would be really useful.
 In fact, there are two ways to improve the statistics:\\
 {\bf (I)} Accumulate the statistics of many systems.\\
 {\bf (II)} Run one system for very long time.\\
-In our case, the computation of the reservoir is so cheap that we can afford (for one atomistic region) long trajectories, certainly at highly satisfactory statistical level. In fact the
-  larger computational cost is due to the pairwise interaction (it can actually be more than 90\% of the total computational cost).
+In our case, the computation of the reservoir is so cheap that we can afford (for one atomistic region) long trajectories, certainly at highly satisfactory statistical level. In fact \bluec{the
+  largest computational cost of MD} is due to the pairwise interaction (it can actually be more than 90\% of the total computational cost).
   The atomistic water model involves 10 pairs interactions between two molecules (1 Lennard-Jones + 9 electrostatic interactions),
   while the CG water model requires only 1. Since the cut-off used for the CG water is the same as the atomistic water,
   the former is theoretically 10 times cheaper than the latter. The cut-off radius of the WCA particles is 2.7 times smaller than
