@@ -26,12 +26,12 @@
 \newcommand{\CG}{{\textrm{CG}}}
 \newcommand{\HY}{{\Delta}}
 \newcommand{\rdf}{{\textrm{rdf}}}
-
+\newcommand{\corr}{C^{(3)}}
 
 
 \begin{document}
 
-\title{The Reliability of the Adaptive Resolution Technique in Performing  Grand Canonical-Like Molecular Dynamics Simulations}
+\title{\redc{Grand Canonical-like Molecular Dynamics by Changing Particles' Resolution}}
 \author{Han Wang}
 \affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
 \author{Carsten Hartmann}
@@ -53,6 +53,7 @@
   potential difference between the different resolutions. From these results follows the main conclusion that the atomistic region exchanges
   molecules with the coarse-grained region in a Grand Canonical
   fashion with an accuracy up to (at least) second order. Numerical tests, for the relevant case of liquid water at ambient conditions, are carried out to strengthen the conclusions of the theoretical analysis.
+  \redc{Finally, in order to show the computational convenience of AdResS as a Grand Canonical set up, we compare our method to the Insertion Particle Method (IMP) in its most efficient computational implementation.} 
   This fruitful combination of theoretical principles and numerical evidence candidates the adaptive resolution technique as a natural, general and efficient protocol for Grand Canonical Molecular Dynamics for the case of large systems.
 \end{abstract}
 
@@ -184,10 +185,9 @@ where $p_{\AT}$ is the pressure of the atomistic resolution, $p_{\CG}$ that of t
 Such a thermodynamic force has been derived by empirical considerations regarding the equilibrium of open systems and is based on {\it forcing} the equality of the grand potential of the atomistic part with the rest of the system.
 This is then reduced to provide a balancing force to the difference of pressure at the wished uniform density of equilibrium. Regarding this point, one of the main results of this paper is that the thermodynamic force derived in this way corresponds to a force that balances the difference in chemical potential between the different regions. As a consequence (equilibrium of the chemical potential) the interpretation of the AdResS simulation as a Grand Canonical sampling is enforced even further.
  A crucial point of this work is the following: the 
-AdResS scheme is not Hamiltonian~\cite{presolo,prlcomm}; however, under the hypothesis of instantaneously
-freezing the DOFs in the hybrid region, the atomistic and
+AdResS scheme is not Hamiltonian~\cite{presolo,prlcomm}; however, \redc{under the hypothesis of fixing DOFs in the hybrid region for a statistical analysis}, the atomistic and
 coarse-grained regions can be considered (in good approximation) Hamiltonian; this line of thought gives rise to the basic
-idea of the present study as it is presented in the next sections.
+idea of the present study as it is presented in the next sections. \redc{Moreover Refs.\cite{presolo,prlcomm} also show that a space dependent interpolation of potentials, which would lead to a direct Hamiltonian approach, is neither satisfactory from the point of view of the physical consistency, nor for the computational efficiency in improving in a systematic way the accuracy of the results in the $AT$ region; instead this latter is one of the main results of this work.}
 
 \section{Theoretical considerations}
 \subsection{The outline of the basic idea}
@@ -265,7 +265,7 @@ To prove the above statement about $p(\vect x_1 | N_1)$, we divide it into two p
 \end{align}
 where $p(\vect x_1 | N_1; \vect x_2, N_2)$ is the probability density obtained by fixing the
 coordinates and number of particles in the region $\HY$ and considering
-the distribution of the DOFs in the AT region, while $p(\vect x_2, N_2 | N_1)$ is the distribution in the hybrid region, conditional on the number $N_{1}$ of particles in the atomistic region. We now comment on the underlying assumptions involved in the calculation of the conditional probability density: 
+the distribution of the DOFs in the AT region \redc{(see further clarifications below)}, while $p(\vect x_2, N_2 | N_1)$ is the distribution in the hybrid region, conditional on the number $N_{1}$ of particles in the atomistic region. We now comment on the underlying assumptions involved in the calculation of the conditional probability density: 
 
 \begin{enumerate}
 
@@ -282,7 +282,7 @@ all hybrid molecules interacting with the AT molecules have unit weight.
   \propto &\,
   e^{-\beta\mathcal H_{N_1}^{\AT}(\vect x_1; \vect x_2, N_2)}
 \end{align}
-with an atomistic Hamiltonian:
+\redc{where the Hamiltonian of the atomistic system is defined as}:
 \begin{align}\label{eqn:p-1-2}
   \mathcal H_{N_1}^{{\AT}}(\vect x_1; \vect x_2, N_2) = &\,
   \sum_{j=1}^{N_1}\frac12 m_i\vect v_i^2 + 
@@ -299,7 +299,7 @@ which is exactly the same as for the equivalent subregion of the full atomistic 
   For the case of liquid water at ambient conditions, it is reasonable to assume that the system is only short-range correlated, i.e. the AT region is only correlated with the $\HY$ region. We will show numerically that this is indeed the case.)
   We suppose that all interactions satisfy the superstability condition of Ref.~\onlinecite{ruelle1970}.
   
-
+\item \redc{The hypothesis of fixed molecules in the $\HY$ region, must not be intended in dynamical terms. This means that during the dynamical evolution of the system one should not suppose the molecules in the $\HY$ region to be frozen in their positions while molecules in other regions are moving. Instead this hypothesis must be intended in the sense of statistical analysis; within a statistical framework it is intended that for {\bf a given configuration} of molecules in the hybrid region the atomistic region explores a large (statistical) number of configurations. In such a case, the practical statistical analysis consists of taking a given configuration in the hybrid region, then consider the whole trajectory of a simulation and sort out all the configurations in the full atomistic region corresponding to the given configuration in the hybrid region. If one repeats the process for a large number of fixed configurations of the $\HY$ region, then the data of the trajectory sorted according to this criterion would lead to a statistics for the atomistic region equivalent to that obtainined by a sampling performed according to the {\bf given Hamiltonian} of the full atomistic region (Eq.\ref{eqn:p-1-2}).}
 
 \end{enumerate}
 
@@ -588,10 +588,9 @@ Because of the lengthy arguments, specific details are reported in Appendix~\ref
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{fig-rdf3-diff.eps}
-  \caption{The 3-body correlation function.  The 1st row corresponds to the reference all atom simulation.
-    From the 2nd to 5th row:
-    The difference between the function calculated in AdResS in the AT, HY I, HY II, and HY III
-    regions, respectively, and the reference function of the full atomistic case.
+  \caption{\redc{The 3-body correlation function $\corr$.  The 1st row corresponds to the reference all atom simulation.
+    The 2nd and 3rd row show the difference between the function calculated in AdResS in the AT, HY I
+    regions, respectively, and the reference function of the full atomistic case.}
     Different columns give different distances between
     the first two molecules: from left to right $r_{12} =
     0.27\,\textsf{nm},\ 0.33\,\textsf{nm},\  
@@ -618,11 +617,11 @@ However, the number distribution $p(N_1)$ has already
 been proved to be numerically correct in Ref.~\cite{prlgc, rdfcorr} for the relevant case of liquid water. In this section, we want to test, with a numerical simulation, to what extent, other quantities, e.g. the configurational distribution $p(\vect x_1) = \sum_{N_1}p(\vect x_1, N_1)$, are correct. 
 Obviously it is a prohibitive task for any complex molecular system to determine the high-dimensional configurational distribution,
 for this reason, instead, we study its marginal distributions up to the third order.
-Here we report the H-O and H-H RDFs (see Fig.~\ref{fig:tmp2a}), and the 3-body COM
-RDF $g^{(3)}(\vect r_1, \vect r_2, \vect r_2)$ (see Fig.~\ref{fig:tmp2b}). For simulation
-protocols and the definition of 3-body RDF, see the Appendixes~\ref{app:2} and \ref{app:3}.
+Here we report the H-O and H-H RDFs (see Fig.~\ref{fig:tmp2a}), and the 3-body \redc{correlation function
+$\corr(\vect r_1, \vect r_2, \vect r_2)$} (see Fig.~\ref{fig:tmp2b}). For simulation
+protocols and the definition \redc{$\corr$}, see the Appendix~\ref{app:2} and \ref{app:3}.
 The first order marginal distribution, that is the molecular density profile and the second order marginal distribution, that is the COM RDF are not presented here, we address the readers to Ref.~\cite{rdfcorr}. 
-Here we focus on the more delicate RDFs which involve the atomistic accuracy, and on the third order COM three-body distribution ($g^{3}$). From Fig.~\ref{fig:tmp2a} one can see that
+Here we focus on the more delicate RDFs which involve the atomistic accuracy, and on the third order COM three-body \redc{correlation function} ($\corr$). From Fig.~\ref{fig:tmp2a} one can see that
 the AdResS H-O and H-H RDFs are identical to those of 
 the full atomistic reference system in the AT region.
 Interestingly, despite the corrective force of the RFD is applied only to the COM RDF, also in the region HY I (that is close to the atomistic region) the H-O and H-H RDFs are the same as in the full atomistic case.
@@ -634,13 +633,11 @@ of the full atomistic reference system, because the atomistic nature
 is decreasing as a molecule travels from HY I to HY III, so it must be expected 
 that the orientational order is also fading away. In HY III, the H-O and H-H
 RDFs are structureless.
-Furthermore, we test the 3-body COM RDF in Fig.~\ref{fig:tmp2b} (for the definition of the three-body COM RDF see Appendix~\ref{app:3}).
+Furthermore, we test $\corr$ in Fig.~\ref{fig:tmp2b} (for the definition of the three-body \redc{correlation function $\corr$} see Appendix~\ref{app:3}).
 Interestingly, the three -body correlation is correctly reproduced
 by the AdResS in the AT and HY I  regions. This is a further strong argument in favor of the fact that in AdResS the AT region is embedded in an environment that, at least up to the three-body COM correlation is the same as the full atomistic reference system.
 In the HY II and HY III regions, the three-body correlation deviates from the
-full atomistic reference, when the first two molecules are close (the first
-two columns of Fig.\ref{fig:tmp2b}). This means that reproducing only two-body COM RDF \emph{does not}
-lead to the correct reproduction of the three-body COM RDF.
+full atomistic reference, \redc{in fact since the various $g(r)$'s already deviates, one cannot expect a higher order correlation function to match (if not by chance) the full atomistic function of reference}.
 Another important information of Fig.~\ref{fig:tmp2a} and \ref{fig:tmp2b},
 is that the hypothesis of short-range influence of a region over another employed in Eq.\ref{eqn:p-1-1} is numerically justified and thus we can state that for the case of liquid water at ambient conditions the AT region is only short-range
 correlated with the rest of the system.
@@ -710,24 +707,82 @@ This means that if the theoretical considerations are correct, one should be abl
 Fig.~\ref{fig:wca-dist} shows the COM-COM, H-O and H-H
     RDFs in the AT, HY I, HY II and HY III regions.
     All the RDFs are compared with full atomistic reference system (EX).
-    Finally, Fig.~\ref{fig:wca-g3} compares the 3-body correlation $g^3$
+    Finally, Fig.~\ref{fig:wca-g3} compares the 3-body correlation $\corr$
     with the atomistic reference
     system (this latter reported in the first row of Fig.~\ref{fig:tmp2b}), and plots the difference. It must be noticed that in this case, on purpose, we want to investigate a {\it ``worst case scenario''} and thus we did not apply the RDF corrective force in the transition region. In this way we can understand whether or not the application of the thermodynamic force only, is sufficient from the numerical point of view to reproduce the Grand Canonical-like environment for the AT region.
     According to our theoretical framework, in absence RDF corrective force only the first order of the distribution (i.e. the density profile)
     is corrected by the thermodynamic force in the $\HY$ region.
     However, numerically, Fig.~\ref{fig:wca-dist} shows a second order accuracy (correct RDFs) in the HY I region as well. Instead, the 3-body
     correlation in HY I deviates from the full atomistic reference; this is the price we pay for this ``worst case scenario'' set up. Nevertheless, the accuracy reached in the transition region is sufficient in order to have, at least up to the second order, the AT region of the WCA AdResS equivalent to the corresponding subregion in the full atomistic reference.
-    Furthermore, numerical results  (Fig.~\ref{fig:wca-g3}) show that, in the AT region, even the 3-body correlation $g^3$ is nonetheless very accurate. 
+    Furthermore, numerical results  (Fig.~\ref{fig:wca-g3}) show that, in the AT region, even the 3-body correlation $\corr$ is nonetheless very accurate. 
   This means that, from the numerical point of view, even only the work of the thermodynamic force, by allowing an exchange of particles under conditions of equilibrium of the chemical potential, is sufficient to assure the correct equilibrium of the atomistic region. The possible application of the corrective force on the RDF's in $\Delta$ in the case of liquid water is, in this case, numerically not required, but in case of necessity it would anyway represent a systematic tool for improving accuracy. 
-  Summarizing, results reported in Figs.~\ref{fig:wca-den}, \ref{fig:wca-dist} and \ref{fig:wca-g3} show that in the atomistic region the accuracy at the third order and particle number fluctuations, for which the filter in the transition region is designed, are well preserved; that is the atomistic region exchange particle and energy with the reservoir in a proper Grand Canonical fashion (up to the level of approximation decided {\it a priori}). Being the molecules in the coarse-grained region a generic liquid model, we have proved numerically that indeed the adaptive technique employed here can be considered as a tool for general Grand Canonical Molecular Dynamics simulations.  
+  Summarizing, results reported in Figs.~\ref{fig:wca-den}, \ref{fig:wca-dist} and \ref{fig:wca-g3} show that in the atomistic region the accuracy at the third order and particle number fluctuations, for which the filter in the transition region is designed, are well preserved; that is the atomistic region exchange particle and energy with the reservoir in a proper Grand Canonical fashion (up to the level of approximation decided {\it a priori}). Being the molecules in the coarse-grained region a generic liquid model, we have proved numerically that indeed the adaptive technique employed here can be considered as a tool for general Grand Canonical Molecular Dynamics simulations. 
+
+\section{Computational efficiency of AdResS as a Grand Canonical set up}
+\redc{In order to show the computational efficiency of the AdResS method as a Grand Canonical set up, we have carried on a numerical experiment to compare the performance of our method in {\it ``inserting''} and {\it ``removing''} molecules from the atomistic region and that of a highly popular approach used in Molecular Dynamics, the insertion particle method (IPM) \cite{ipm}. The IPM is very efficiently implemented into the GROMACS code \cite{gromacs} and thus it is a natural choice as a Grand Canonical-like set up for a very large portion of molecular dynamics simulators. The experiment consists of the following: We have considered a large full atomistic system and applied the highly optimized IPM to insert molecules. From this study we extract the efficiency of the IPM in terms of computational power and time required.
+Next, we consider an adaptive system whose number of molecules, in the atomistic plus hybrid region, is the same as the full atomistic system considered above; to this we add a rather large reservoir of coarse-grained particles. Also in this case the efficiency in measured terms of computational power and time required.
+The results show that while the IPM needs long trajectories at a non trivial computational cost, so that the insertion of {\bf one molecule} converges and data can be then collected for ``real'' statistics, the adaptive approach performs, in less time and at a much lower computational cost, {\it on-the-fly} dynamical {\bf multiple insertions} keeping the instantaneous equilibrium intact, that is the data can be collected on-the-fly for ``real'' statistics.
+ In fact, we used the equilibirum trajectory of length
+8~\textsf{ns} where the coordinates of water molecules were recorded every
+0.2~\textsf{ps}.  Using the IPM approach, in each frame, $10^5$ test particles were inserted
+at random position of the system. For each insertion, $10^5$ radomly
+chosen orientations were tried. The convergence is very
+slow, even at 8~\textsf{ns} the insertion process is not satisfactorily converged (see Fig\ref{fig:tmp4}), this means that data cannot be collected for analysis of physical properties.
+Compared to IPM, AdResS leads a very
+efficient {\it ``insertion''} of particles: in each 1~\textsf{ps} time interval,
+(on average) 34 water molecules entered into the atomistic region. Some of
+them came immediately back, because of a unfavorable entering
+configuration.  To investigate the proper insertion, we consider the
+time interval of 1~\textsf{ns}, and find 832 out of 3456 molecules
+were firstly in either the HY or CG region, and then travelled to the
+AT region and stayed there for longer than 60~\textsf{ps}, which
+indicates a mean square root displacement of roughly 1~\textsf{nm}
+in the AT region. A further advantage of AdResS in this context is that each frame of the trajectory can be used for the  analysis of physical properties, since at any instant the atomistic system is in thermodynamical equilibrium. 
+These results in terms of computational resources are summarized in table \ref{tab:tmp1}.}
+\begin{table}
+  \centering
+  \begin{tabular}{l|l|l|l|l}
+    & Sys. size ($\textsf{nm}^3$)
+    & Traj. length (\textsf{ns})
+    & CPU perf. (G FLOPS)
+    & CPU time (hours)\\    \hline
+    AdResS   &$29.9\times3.7\times3.7$ & 1 &  4.1 & 3.1\\
+    EX water & $3.7\times3.7\times3.7$ & 8 & 24.7 & 4.5 (traj.) + 36.7 (IPM)\\
+  \end{tabular}
+  \caption{\redc{CPU time.
+    The AdResS simulation contains 13824 molecules, while the EX 
+    water simulations contain 1728 molecules. In the AdResS simulation,
+    the size of the AT + HY regions is roughly the same as the EX water
+    simulation box.
+    ``Sys. size'' means the size of the box used in the simulaiton.
+    ``Traj. length'' means the equilibirum trajectory
+    used for the particle insertion in the IPM approach. Along the trajectories, frames
+    of configurations were recoreded every 0.2~\textsf{ps}.
+    ``CPU perf.'' is the CPU performance
+    counted by the floating-point operations per second (FLOPS).
+    ``CPU time'' the is wall clock time spend on the simulation.
+    For the particle insertion simulation, the CPU time is counted by two
+    parts: the time of generating the equilibirum trajectories (traj.)
+    and the time required by the IPM procedure.
+  }}
+  \label{tab:tmp1}
+\end{table}
+\begin{figure}
+  \centering
+  \includegraphics[]{fig-tpi.eps}
+  \caption{\redc{The chemical potential calculated by the test particle insertion method. The top panel shows the case of coarse-grained water and WCA liquid while the bottom panel shows the case of a full atomistic simulation. The convergence of the chemical potential means that the insertion of the molecule is properly done and sudsequent part of the trajectory can be used for ``statistical'' average in a Grand Canonical framework.}}
+  \label{fig:tmp4}
+\end{figure}
+\redc{Moreover, in previous work, Praprotnik {\it et al.} \cite{delgado2009coupling} have shown that the coarse-grained region of AdResS can be easily coupled to the continuum; this has the non trivial advantage that the insertion of a sphere in a liquid of spheres by IPM is by far much simpler than inserting an atomistically structured molecule in a liquid of atomistic molecules. Fig.\ref{fig:tmp4} shows the extremely fast convergence for inserting a particle in our ``reservoir'' of spherical particles compared to that of a full atomistic system. This means that in the long term perspective the part of the algorithm of Praprotnik {\it et al.} could be merged with our current approach and thus allow for even smaller sizes of the reservoir region. However, this extension, though conceptually straightforward goes beyond the scope of this paper. In general, there have been a large number of developments for the GC idea based on the {\it ``grow-in''} and {\it ``shrink-out''} MD approach (see e.g. Lynch and Petitt \cite{pet5} and Eslami and M\"uller-Plate \cite{flo}) however, all of them  share the same basic principle and face the same problem of the IPM. This numerical experiment shows that despite the need of a reservoir, our computation is by far more efficient than any other technique so far used.}
+ 
 
 
 \section{Conclusions}
 We have shown a detailed theoretical analysis about the validity, the limitations and meaning of the AdResS method within the framework of a Grand Canonical ensemble.
 Using strict formal arguments, we have demonstrated the origin of the thermodynamic force: a tool to balance the difference in chemical potential due to the different resolutions in space.
   The theoretical results, derived under the assumption of thermodynamic limit, are then checked with several numerical tests. These latter represent a {\it "worst scenario''} case since the conditions of simulation are not ideal as in the analytical procedure.
-Finally, we have shown that, under given hypothesis, $p(N_{1})$, the probability distribution in the atomistic region of AdResS, is equivalent to that in the same region in a full atomistic simulation up to the accuracy of second order. We have further strengthen our hypothesis and conclusions by carrying out a numerical experiment for the case of liquid water at ambient conditions where we could even go beyond the COM RDF. 
-A further numerical experiment was made where the atomistic-based coarse-grained model was substituted by a generic liquid of spheres interacting via WCA potential. Results show that the accuracy in the atomistic region is the same as that of AdResS based on a coarse-grained model derived from the full atomistic reference system; this strengthen the idea of AdResS as a tool for coupling the atomistic region to a generic source of energy and particles in a Grand Canonical manner.
+\redc{Next}, we have shown that, under given hypothesis, $p(N_{1})$, the probability distribution in the atomistic region of AdResS, is equivalent to that in the same region in a full atomistic simulation up to the accuracy of second order. We have further strengthen our hypothesis and conclusions by carrying out a numerical experiment for the case of liquid water at ambient conditions where we could even go beyond the COM RDF. 
+A further numerical experiment was made where the atomistic-based coarse-grained model was substituted by a generic liquid of spheres interacting via WCA potential. Results show that the accuracy in the atomistic region is the same as that of AdResS based on a coarse-grained model derived from the full atomistic reference system; this strengthen the idea of AdResS as a tool for coupling the atomistic region to a generic source of energy and particles in a Grand Canonical manner. \redc{Finally we validate the efficiency of our method as a Grand Canonical set up comparing its computational performance to that of well established and largely used alternative methods.} 
 In conclusion, these results provide a solid theoretical basis to explain the numerical reliability of the AdResS as an effective Grand Canonical set up and provide basis for further formal and numerical development of the adaptive idea in terms of matching probability distributions.
 
 
@@ -1050,31 +1105,80 @@ same as the standard AdResS.
 
 
 
-\section{The details of the 3-body radial distribution function}
+\section{\redc{The third order correlation function}}
 \label{app:3}
-
+\redc{
 \begin{figure}
   \centering
   \includegraphics[width=0.3\textwidth]{3mol.eps}
-  \caption{The schematic plot of the 3-body RDF.}\label{fig:tmp3}
+  \caption{The schematic plot of the 3-body correlation function.}\label{fig:tmp3}
 \end{figure}
-
-
-
-The 3-body RDF is defined by
+We consider the following definition of three-body correlation function of a molecular system:
 \begin{align}
-  g^{(3)}(\vect r_1, \vect r_2, \vect r_3) =
-  \frac{1}{\rho^3}N(N-1)(N-2) \,p^{(3)}(\vect r_1, \vect r_2, \vect r_3) 
+  \corr (\vect s_1, \vect s_2, \vect s_3)
+  =
+  \frac1{\rho(\vect s_1)\rho(\vect s_2)\rho(\vect s_3)}
+  \big\langle
+  (\hat\rho(\vect s_1) - \rho(\vect s_1))\cdot
+  (\hat\rho(\vect s_2) - \rho(\vect s_2))\cdot
+  (\hat\rho(\vect s_3) - \rho(\vect s_3))
+  \big\rangle
 \end{align}
-where $p^{(3)}(\vect r_1, \vect r_2, \vect r_3) $ is the 3-body
-probability distribution function. To plot this high-dimensional
-distribution, we first fix the distance between molecule 1 and 2 (Mol
-1 and 2 in Fig.~\ref{fig:tmp3}), then plot the RDF $g^{(3)}$ with
+where the transient density distribution $\hat\rho(\vect s)$ and the
+average density distribution $\rho(\vect s)$ are given
+by:
+\begin{align}
+  \hat\rho(\vect s) = \sum_{i=1}^N\delta(\vect s - \vect r_i)
+  \quad\textrm{and}\quad
+  \rho(\vect s) = \big\langle \hat\rho(\vect s)\big\rangle.
+\end{align}
+By assuming that the system is homogeneous, one easiliy can show that
+\begin{align}
+  \corr (\vect s_1, \vect s_2, \vect s_3)
+  =
+  \frac1{\rho^3}\,\rho(\vect s_1, \vect s_2, \vect s_3) -
+  \frac1{\rho^2}\,\big[
+  \rho(\vect s_1, \vect s_2) +
+  \rho(\vect s_1, \vect s_3) +
+  \rho(\vect s_2, \vect s_3)
+  \big] + 2
+\end{align}
+where
+\begin{align}
+  \rho(\vect s_1, \vect s_2)
+  =
+  \big\langle
+  \hat\rho(\vect s_1)\,  \hat\rho(\vect s_2)
+  \big\rangle
+  \quad\textrm{and}\quad
+  \rho(\vect s_1, \vect s_2, \vect s_3)
+  =
+  \big\langle
+  \hat\rho(\vect s_1)\,  \hat\rho(\vect s_2)\, \hat\rho(\vect s_3)
+  \big\rangle  
+\end{align}
+Since $g (\vect s_1, \vect s_2) = \rho(\vect s_1, \vect s_2)/\rho^2$
+is the two-body radial distribution function, it follows:
+\begin{align}
+  \corr (\vect s_1, \vect s_2, \vect s_3)
+  =
+  \frac1{\rho^3}\,\rho(\vect s_1, \vect s_2, \vect s_3) -
+  \big[
+  g(s_{12}) +
+  g(s_{13}) +
+  g(s_{23})
+  \big] + 2
+\end{align}
+where, for example, $s_{12} = \vert \vect s_1 -\vect s_2\vert$.
+
+Since we assume the system to be homogeneous, the visulization of this high-dimensional
+distribution is simplified as follows. We first fix the distance between molecule 1 and 2 (Mol
+1 and 2 in Fig.~\ref{fig:tmp3}), then plot the correlation function with
 respect to the position of the third molecule (Mol 3 in
 Fig.~\ref{fig:tmp3}).  The position of Mol 3 can be described by
 the variables $h_1$ and $h_2$ in Fig.~\ref{fig:tmp3}, which are
 the projection of Mol~3's position on the to the
-axis defined by Mol 1 and 2, see Fig.~\ref{fig:tmp3}.
+axis defined by Mol 1 and 2, see Fig.~\ref{fig:tmp3}.}
 
 
 
