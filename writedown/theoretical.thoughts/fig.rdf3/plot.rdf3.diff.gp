@@ -1,7 +1,7 @@
 set term post eps enh color solid size 17cm,9cm font 15
 set out 'fig-rdf3-diff.eps'
 
-#set border 4095 front linetype -1 linewidth 1.000
+# set border 4095 front linetype -1 linewidth 1.000
 set view map
 set samples 50, 25
 set isosamples 50, 25
@@ -41,7 +41,7 @@ set multiplot
 
 set origin -0.0,0.6
 unset xlabel
-set title 'r_{12} = 0.27 nm'
+set title 's_{12} = 0.27 nm'
 set cbrange [-1:1]
 set cbtics .5
 set ylabel 'EX C^{(3)}'
@@ -72,7 +72,7 @@ unset ylabel
 
 set origin 0.33, 0.6
 unset xlabel
-set title 'r_{12} = 0.33 nm'
+set title 's_{12} = 0.33 nm'
 set cbrange [-1:1]
 set cbtics .5
 set size 0.33,0.40
@@ -80,13 +80,13 @@ spl 'run.04_02_02.atom/rdf3.inter.9//rdf3.375-425.00.330.out' u 1:2:($3) every 2
 set size 0.33,0.37
 
 set origin 0.66, 0.6
-set title 'r_{12} = 0.80 nm'
+set title 's_{12} = 0.80 nm'
 set size 0.33,0.40
 spl 'run.04_02_02.atom/rdf3.inter.9//rdf3.375-425.00.800.out' u 1:2:($3) every 2 not
 set size 0.33,0.37
 
 # set origin 0.75, 0.6
-# set title 'r_{12} = 0.80 nm'
+# set title 's_{12} = 0.80 nm'
 # spl 'run.04_02_02.atom/rdf3.inter.9//rdf3.375-425.00.800.out' u 1:2:($3) every 4 not
 
 

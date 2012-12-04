@@ -40,7 +40,7 @@ set size 0.330,0.60
 
 set origin -0.0, 0.45
 unset title
-set title 'r_{12} = 0.27 nm'
+set title 's_{12} = 0.27 nm'
 set ylabel '{/Symbol D}C^{(3)} in AT'
 set size 0.330,0.66
 spl 'rerun.water.wca/rdf3.inter.9//diff.rdf3.375-425.00.270.out' u 1:2:($3) every 4 not
@@ -55,13 +55,13 @@ unset ylabel
 
 unset title
 
-set title 'r_{12} = 0.33 nm'
+set title 's_{12} = 0.33 nm'
 set origin 0.33, 0.45
 set size 0.330,0.66
 spl 'rerun.water.wca/rdf3.inter.9//diff.rdf3.375-425.00.330.out' u 1:2:($3) every 4 not
 set size 0.330,0.60
 
-set title 'r_{12} = 0.80 nm'
+set title 's_{12} = 0.80 nm'
 set origin 0.66, 0.45
 set size 0.330,0.66
 spl 'rerun.water.wca/rdf3.inter.9//diff.rdf3.375-425.00.800.out' u 1:2:($3) every 4 not
