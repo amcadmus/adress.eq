@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage{german}
 \usepackage{a4}
 \usepackage{xcolor}
@@ -50,15 +50,15 @@ Editor of Physical Review X
 
 \vspace{3cm}
 
-\textbf{Submission of a manuscript}
+\textbf{Manuscript revision: Reply to Referees}
 
 \vspace{2cm}
 Dear Dr. Miao\\
 Thank you very much for the reports about our paper. We would like to thank also the referees for the overall positive attitude towards our work and for the constructive criticisms.
-We have taken them into account and modify the paper were required. Below you find a list of the changes and point-by-point reply to the referees\\
-In the revised paper, all the additions are marked in red, to help the referees to located them immediately in the text.\\
+We have taken them into account and modified the paper where required. Below you find a point-by-point reply to the referees.\\
+In the revised paper, all the modifications/additions are marked in red, to help the referees to located them immediately in the text.\\
 {\bf Referee A; reply to  report}:\\
-{\color{red} {\it Although I find the work interesting, I have one major reservation that the authors should address. The
+{\color{teal} {\it Although I find the work interesting, I have one major reservation that the authors should address. The
 significance of the results regarding the three-body correlations is not clear. The molecules interact only
 using pairwise potentials, which to me indicates that correlations among any triplet of molecules are likely
 dominated by three sets of two-body correlations; that is, it is likely that three-body correlations contain
@@ -73,10 +73,9 @@ not a direct manifestation of two-body correlations is indeed in agreement betwe
 and the atomistic region in an AdResS simulation?}}\\
 We have shown what the Referee asked for, that is {\bf `` the part of the three-body correlations that is
 not a direct manifestation of two-body correlations is indeed in agreement between all-atom simulations
-and the atomistic region in an AdResS simulation''}\\.
+and the atomistic region in an AdResS simulation''}.\\
 This is reported in the new figures on the three-body correlations, for both cases, that is when the reservoir consists of coarse-grained particles whose potential is derived from the full atomistic model and for the case where the reservoir consists of WCA particles.
-The definition of the relevant part of the three-body correlation, not contained in the two-body correlation, is given in the technical section and it is defined as:
-\bluec{
+We employ now a different definition of the three-body correlation where the relevant part, not contained in the two-body correlation, is explicitly considered. This is defined as:
 \begin{equation}
   \corr (\vect s_1, \vect s_2, \vect s_3)
   =
@@ -93,21 +92,17 @@ where
   \quad\textrm{and}\quad
   \rho(\vect s) = \big\langle \hat\rho(\vect s)\big\rangle.
 \end{equation}
-}
-\\
-\bluec{
 Since the 2-body RDFs are not reproduced in regions HY II and HY III,
-we do not plot the 3-body correlation there.
+now we do not plot the 3-body correlation there.
 That is because, if the 2-body correlations (RDFs) are wrong, then it is of no sense to
-consider the 3-body correlation.
-}\\
+consider the 3-body correlation.\\
 
 Technical point 1, 2 and 3 have been corrected according to the referee suggestion.\\
 
 
 
 {\bf Referee A; reply to  additional comments:}\\
-{\color{red} {\it 1) does the work address a pressing need for grand-canonical
+{\color{teal} {\it 1) does the work address a pressing need for grand-canonical
 simulation methods of the computational physics community?\\
 
 I think one could plausibly say, yes. But that is a bit equivocal;
@@ -128,14 +123,14 @@ disadvantage in that one needs a reservoir of coarse-grained
 particles.}}\\
 In order to address this point, which is also one of the main concerns of Referee B (make a stronger case for the AdResS as a GC method),
 we have performed a numerical experiment, now reported in an added section in the paper entitled {\bf ``Computational efficiency''}.
-We have taken a large full atomistic system and perform the highly optimized (in GROMACS) {\bf Insertion Particle Method} (IPM) \bluec{we should use the terminology ``TPI'', which stands for the test particle insertion method.} and reported its efficiency in terms of computational power and time required.
+We have taken a large full atomistic system and perform the highly optimized (in GROMACS) {\bf Insertion Particle Method} (IPM)  and reported its efficiency in terms of computational power and time required.
 Then we have taken an adaptive system whose number of molecules in the atomistic, plus hybrid region is the same as the full atomistic considered above, plus a rather large reservoir of coarse-grained particles. We computed its efficiency also in terms of computational power and time required as for the full atomistic case.
-We show that while the \bluec{TPI} needs long trajectories and a non trivial computational costs, so that the insertion converges and data can be then collected for ``real'' statistics, the adaptive approach performs, in less time and at a much lower computational cost, {\it on-the-fly} dynamical {\bf multiple insertions} keeping the instantaneous equilibrium intact, that is the data can be collected on-the-fly for ``real'' statistics.\\
-This numerical experiment shows that despite the need of a reservoir, our computation is by far more efficient than any other technique so far used, thus it provides a ``concrete'' (though {\it partial}, see discussion below) answer to the concern of the referee: {\it  have an important disadvantage in that one needs a reservoir of coarse-grained particles}.\\
-This point can be addressed even in a better manner with a straightforward technical improvement:
+We show that while the IPM needs long trajectories and a non trivial computational costs, so that the insertion converges and data can be then collected for ``real'' statistics, the adaptive approach performs, in less time and at a much lower computational cost, {\it on-the-fly} dynamical {\bf multiple insertions} keeping the instantaneous equilibrium intact, that is the data can be collected on-the-fly for ``real'' statistics.\\
+This numerical experiment shows that despite the need of a reservoir, our computation is by far more efficient than any other technique so far used, thus it provides a ``concrete'' satisfying (though {\it partial}, see discussion below) answer to the concern of the referee: {\it ``... have an important disadvantage in that one needs a reservoir of coarse-grained particles''}.\\
+As anticipated above, this point can be addressed even in a better manner with a straightforward technical improvement:
 In past work Matej Praprotnik and collaborators (references provided in the paper) have shown that the coarse-grained region can be easily couple to continuum, in fact in this case the insertion of a sphere in a spherical liquid is by far much simpler than inserting an atomistically structured molecule in the atomistic region. We report the very fast convergence for inserting a particle in our ``reservoir'' systems, thus in the long run, we can add the part of the algorithm of Praprotnik et al. and thus allow for even smaller sizes of the reservoir region. However, this extension, is conceptually straightforward but at this stage for our purposes is not required, and thus goes beyond the scope of this paper. In this paper we have interest to show that the coarse-grained reservoir can be coupled to the atomistic system via mathematically precise criteria and these latter allow for a systematic control of the accuracy in the atomistic region; in any case already at this stage its efficiency is already highly satisfactory compared to other ``popular'' methods. Anyway the perspective of the possible extension to the continuum is mentioned in the paper so that it is clear that we have even large margins of improvements in efficiency if required.\\
 
-{\color{red} {\it 3) will the manuscript, once it is revised to address your scientific
+{\color{teal} {\it 3) will the manuscript, once it is revised to address your scientific
 questions and concerns, be widely adopted by the computational physics 
 community, or a great deal of further development by a limited number
 of specialists will be necessary before the method become widely
@@ -153,21 +148,24 @@ We do understand the concern of the editor and of the referee.\\
 However, while it is true that so far AdResS is {\bf mostly} used by people coming from Mainz,
 it is also true that the effort in Berlin goes along a different direction than the one currently pursued 
 in Mainz.\\
-Our interest is to show to a broad community (of simulators and not): (a) the many possible ways to {\bf use and interpret} the method and perhaps extend to other situations (currently there is an attempt to extend it to fluid mechanics for atmospheric physics), thus involving also the community of applied mathematicians (among which also the large portion of biomolecular simulators of Berlin and connected network);
+Our interest is to show to a broad community (of simulators and not):\\
+{\bf (a)} the many possible ways to {\bf use and interpret} the method and perhaps extend to other situations (currently there is an attempt to extend it to fluid mechanics for atmospheric physics), thus involving also the community of applied mathematicians (among which also the large portion of biomolecular simulators of Berlin and connected network).\\
+
 (b) {\bf its efficiency}, that is to convince people, data in hand, that it is convenient to use this method.\\
+
 Our opinion is that a high visible journal as PRX would allow to advertise this work across various, but interlinked, disciplines of physics, and thus give a substantial impulse to points (a) and (b).\\
 Any other technical journal would have the effect of, most probably, confining the method to {\it `` a further technical''} progress; this would not reflect the reality.\\
 
 
 {\bf Referee B}:
-{\color{red} {\it.... What is not
+{\color{teal} {\it.... What is not
 clear is if the AdResS scheme is really the method of choice for doing GCE simulations. To begin with,
 one first needs to invest the time to develop an appropriate model for the CG region.}}\\
 
-The referee may have misunderstood one point. We have actually shown on purpose that one does not need to develop a CG model, but any liquid of spheres at the same density as that of the atomistic region is fine.
-This is the reasons we have shown the tests with WCA liquid. We believe this settles the question.\\
+The referee may have misunderstood one point. We have actually shown on purpose that one does not need to develop a CG model but that any liquid of spheres at the same density as that of the atomistic region is fine.
+This is the reasons we have shown the tests with the liquid of WCA spherical particles. We believe this settles the question.\\
 
-{\color{red} {\it Second, if one uses
+{\color{teal} {\it Second, if one uses
 a large but homogeneous canonical system, then it should be possible to use several well-separated small
 subsystems to collect GCE statistics, and this would improve the efficiency of a fully atomistic approach.
 While the same should be possible, in principle, within AdResS, it is not clear how well the idea would
@@ -176,90 +174,98 @@ Generally, if the authors are intending to push their method as the method of ch
 needs to be made. If that is not their intention, then I do not see why publication in Phys. Rev. X is
 needed}}\\
 
-We have tested the efficiency of our method compared to the most popular current {\it ``Grand Canonical''} approach used in MD, that is the \bluec{TPI}.
-\bluec{Please also note that there were a lot of development of the ``grow-in'' and ``schrink-out'' MD approach
-  of doing GC, for example [Lynch and Pettitt, J. Chem. Phys. 107:8594 (1997)] and [Eslami and M\"uller-Plate,
-  J. Comput. Chem. 28:1763 (2007)]. They all share the same basic priciple and facing the same problem
-  as the TPI.}
+We have tested the efficiency of our method by comparing it to the most popular current {\it ``Grand Canonical''} approach used in MD, that is the {IPM}.
+In general, there have been a large number of developments for the GC idea based on the ``grow-in'' and ``shrink-out'' MD approach (see e.g. for example [Lynch and Petitt, J. Chem. Phys. 107:8594 (1997)] and [Eslami and M\"uller-Plate,
+  J. Comput. Chem. 28:1763 (2007)]) however, all of them  share the same basic principle and face the same problem
+  of the IPM.
 \\
-We have shown that at parity of size of the atomistic region, our method is by far more efficient in computational terms.\\
+We have shown that at parity of size of the atomistic region, our method is by far more efficient in computational terms of the most efficient existing GC implementation in MD (IPM in GROMACS).\\
 See also reply to Referee A.\\
-\bluec{
-  Setting up several  well-seperated small atomistic regions in the large particle resovior is a
-  clever idea to improve the efficiency of the sampling, however, the finite size effect and the
-  correlation between the atomistic regions are difficult to investigate.
-  In the paper we would prefer a single atomistic region in a large resovior, also becase
-  the extra computational load on the resovior is comparatively small to the atomistic region. Since the
-  majority computational cost is spend on the pairwise interaction (can be more than 90\% of the toatal computational cost),
-  we will only investigate the number of pairwise interactions in the resovior and the atomistic region.
-  The atomistic water model compute 10 pairs interactions between two molecules (1 Lennard-Jones + 9 electrostatic interactions),
-  while the CG water model only compute 1. Since the cut-off used for the CG water is the same as the atomistic water,
+Regarding the point of setting up several  well-separated small atomistic regions in a large (coarse-grained) particle reservoir, this is in principle
+  a fascinating idea to improve the efficiency of the sampling. Technically speaking, in the AdResS method this sort of implementation is not difficult;
+in fact, what is crucial is only the coupling between the atomistic and the coarse-grained region, then the definition of several (well separated, that is uncorrelated)
+atomistic ``islands'' in a ``large sea'' of coarse-grained molecules is conceptually and technically straightforward.\\
+If the referee, repute this technical aspects crucial for the acceptance, we may consider of doing it; however the code debugging may take quite some time and certainly a tedious process which we would prefer to avoid at this stage.
+Actually the real question is if it would be really useful.
+In fact, there are two ways to improve the statistics:\\
+{\bf (I)} Accumulate the statistics of many systems.\\
+{\bf (II)} Run one system for very long time.\\
+In our case, the computation of the reservoir is so cheap that we can afford (for one atomistic region) long trajectories, certainly at highly satisfactory statistical level. In fact the
+  larger computational cost is due to the pairwise interaction (it can actually be more than 90\% of the total computational cost).
+  The atomistic water model involves 10 pairs interactions between two molecules (1 Lennard-Jones + 9 electrostatic interactions),
+  while the CG water model requires only 1. Since the cut-off used for the CG water is the same as the atomistic water,
   the former is theoretically 10 times cheaper than the latter. The cut-off radius of the WCA particles is 2.7 times smaller than
-  the CG water, which indicates a further 19 times of speed up. In total, WCA resovior is theoretically
+  the CG water, which indicates a further 19 times of speed up. In total, the WCA reservoir is theoretically
   190 times cheaper than the atomistic
-  water. Therefore, one could use a considerably large resovior at comparatively cheap extra cost.
-  % Furthermore,
-  % one could use TPI thechnic in a finite size resovior to mimic particle number fluctuation in a infinitly large
-  % resovior, because we have shown that inserting particle in the CG region is very cheap.
-}
+  water. Therefore, one could use a considerably large reservoir at comparatively rather low cost.\\
+Moreover, the whole idea of a GC in MD is to focus on a small atomistic region where something is happening and mimic the rest of the system with a reservoir, thus technically speaking, in the future, the version of AdResS with multiple  atomistic regions it is not likely to be used often (if at all).\\
+However, as said above, if the referee considers this aspect a key-point for the acceptance, we may consider the possibility to make a further extension and show the case of multiple atomistic regions in a large coarse-grained reservoir.
 \\
 
-{\color{red} {\it The second point concerns the theoretical analysis. There is a disconnect between the actual AdResS
+{\color{teal} {\it The second point concerns the theoretical analysis. There is a disconnect between the actual AdResS
 dynamics and the theoretical analysis in several respects. In order to make the AdResS dynamics fit the
 Hamiltonian based analysis employed here, the authors need to make a number of ad hoc assumptions.
 Among these are the ideas that the hybrid region needs to be infitesimally thin and that if the particles
 in the hybrid region are frozen, then AdResS is approximately Hamiltonian.}}\\
 
-We do not agree with the referee regarding the word {\it ``disconnect''}.\
+We do not agree with the referee regarding the word {\it ``disconnect''}.\\
 Rather than {\it ``ad hoc assumptions''}, our {\it ``mathematical conditions''} or {\it ``physical hypothesis''}
-are actually conditions of {\bf validity} of the method. We have put this in clear terms, because we say that in order to be justified,
+are explicitly intended as rigorous formal conditions of {\bf validity} of the method. We have put this in clear terms, because we say that in order to be justified,
 the method should fulfill the conditions given. We are aware that they cannot be perfectly matched in a ``real'' simulation, thus we make numerical tests to see how far one can push away from these {\bf ideal} conditions.
-However, when the method does not work, we will know that some of these conditions are violated, so we have the control and understanding of the method.\\
+However, the advantage is that for systems where the method does not work, we will know that some of these conditions are violated ``too much'', which in turn implies that we have an ``objective'' control (and thus understanding) of the method.\\
 The {\it ``hypothesis''} of frozen hybrid region, is most probably a misunderstanding due to the use on our side of a non proper definition.\\
-We do not mean that during the dynamical process one should suppose the molecule of the hybrid region to be frozen in their positions. Instead the use of {\it ``frozen''} was intended in the sense that one must imagine, in a statistical framework, that for a given configuration of molecules in the hybrid region the atomistic region explores a large (statistical) number of configurations. The statistical process consists of taking the trajectory and ideally chose a given configuration in the hybrid region, then sort out all the corresponding configurations in the full atomistic region, if we repeat the process for a statistically large number of configuration of the hybrid region, then is as we have a statistics for the atomistic region which obeys to a sampling according to the {\bf given Hamiltonian} of the full atomistic region (see also reply below).\\
-We added a sentence along these lines in the paper, to make this concept more clear.\\
+We do not mean that during the dynamical process one should suppose the molecules of the hybrid region to be frozen in their positions. Instead the use of {\it ``frozen''} was intended in the sense that one must imagine, in a statistical framework, that for {\bf a given configuration} of molecules in the hybrid region the atomistic region explores a large (statistical) number of configurations. The statistical process consists of taking a given configuration in the hybrid region, then consider all the trajectories and sort out all the configurations in the full atomistic region corresponding to the given configuration in the hybrid region, if we repeat the process for a statistically large number of configurations of the hybrid region, then this is equivalent to have a statistics for the atomistic region which obeys to a sampling according to the {\bf given Hamiltonian} of the full atomistic region (see also reply below).\\
+We added this part in the paper, as a further clarification of the assumptions made.\\
 
-{\color{red} {\it What is the form of the approximate Hamiltonian (note that
+{\color{teal} {\it What is the form of the approximate Hamiltonian (note that
 this is never given)? How important are the deviations from a true Hamiltonian framework?}}\\
 
 We actually give the explicit expression for the Hamiltonian in the atomistic region,
 that is Eq.14.\\
-Moreover, if one considers the full atomistic reference system as {\it ``true Hamiltonian''} (which as a matter of fact it is) then we have shown that the deviations from this latter are very small and 
+Moreover, if one considers the full atomistic reference system as {\it ``true Hamiltonian''} (which as a matter of fact it is) then {\bf all our results} show that the deviations from this latter are very small and 
 can be systematically reduced.\\
 Also in this case we have added a sentence along these lines.\\
 
 
-{\color{red} {\it Is the analysis particular to the underlying AdResS
+{\color{teal} {\it Is the analysis particular to the underlying AdResS
 dynamics, or could a formally Hamiltonian dynamics also fit this analysis? Since AdResS lies at the heart
 of the paper, it would, in fact, be more satisfying to see an analysis of the AdResS dynamics as they are.}}
 
 We aim to show that in our atomistic region, the statistics is the same as a subsystem of a full atomistic system, thus a natural Grand Canonical.\\
-The way the atomistic region is coupled to the reservoir we have shown to be very efficient if done according to the AdResS.\\
-Thus the dynamics of the coarse-grained or hybrid region, is not of major interest, since it allows {\bf only} for a dynamical exchange between system and reservoir.\\
+The way the atomistic region is coupled to the reservoir we have shown to be very efficient if done according to the AdResS scheme.\\
+Thus the dynamics of the coarse-grained or hybrid region, is not of major interest, since its role is confined to {\bf only} a dynamical exchange between system and reservoir.\\
 However to justify why our atomistic region can be considered a GC we need to formulate the theory in terms of statistical (though dynamical) sampling.\\
 This paper is not about AdResS itself, but about its use as a Grand Canonical framework. Regarding the Hamiltonian framework, the point would be how one would then choose the coupling term with the reservoir?\\
-That is one, at the best, goes back to the \bluec{TPI}, that is one goes back to a much less computationally efficient method. Here, it is the difference from what we propose and a Hamiltonian approach.\\
+That is one, at the best, goes back to the {IPM}, that is one goes back to a much less computationally efficient method. Here, it is the difference from what we propose and a Hamiltonian approach.\\
 To clarify this point we have added a sentence in the text.\\
 
-{\color{red} {\it Even though the equations of motion are not Hamiltonian as formulated, are there any conservation laws
+{\color{teal} {\it Even though the equations of motion are not Hamiltonian as formulated, are there any conservation laws
 that the purely Newtonian form of the equations satisfy? If so, could the analysis approach of Tuckerman
 et al. [J. Chem. Phys. 115:1678 (2001)] be employed to analyze the dynamics directly? If not, could a
 Hamiltonian formulation of AdResS be constructed by interpolating on the AT, CG, and RDF potentials
 rather than on the forces?}}\\
 
-One of us, Luigi Delle Site, has spent a visiting period in the group of Giovanni Ciccotti in Rome attempting to find a connection between the approach of
- Tuckerman et al. and our current method. In fact it can be shown that this connection cannot be done, at least at the level that one can use it for practical purposes. The reason is that the transformation from the original set of coordinates to the set at time $t$, in the adaptive method, is rather difficult. In fact molecules change the number of degrees of freedom so one goes from a $n$-dimensional vector to an $m$-dimensional vector where $m$ is different from $n$, this in turn does not allow the definition of the metric determinant factor in a clear way. However despite this unsuccessful attempt, one cannot exclude that in the future a substantial generalization of the method of Tuckerman et al. may be applied to the adaptive , in any case this would neither exclude the main conclusions we are pushing forward with this work, nor would require technical further development of the current method as a GC tool.\\
-Regarding the question whether or not one can interpolate the potentials and have a Hamiltonian approach, our answer is negative. In fact in a paper by one of us (Luigi Delle Site, Phys.Rev.E 76, 047701 (2007)), cited in the current work, it has been shown that one can interpolate potentials at the price of having the wrong limit either in the CG region or in the atomistic and having a non-physical flux of particles due to the gradient of the interpolation function. Past attempts in this direction has considered this result purely formal, and later with a specific numerical experiments it has been shown that indeed the result is not only formal, but rather substantial (see Praprotnik et al. Phys.Rev.Lett. 107, 099801 (2011)).\\
-We cannot exclude that other attempts, even by our past collaborators, may be done in this direction, however the approach, if involves space dependent interpolations of potentials, can never be exactly Hamiltonian, it can only interpreted in terms of approximation of it (thus coming back to, at the best, ``same level'' of approximation of our current approach).\\
-We can also shown (but for this paper, it would be out of place), that technically speaking the very aspect of using the reaction field method (necessary to mimic electrostatic long range interactions of the CG region) leads to a non conservative algorithm even if one had a prefect Hamiltonian formulation (thus a thermostat is always needed).\\
+One of us, Luigi Delle Site, in 2009 has spent a visiting period of three months in the group of Giovanni Ciccotti in Rome attempting to find a connection between the approach of
+ Tuckerman et al. and our current method. In fact it can be shown that this connection cannot be done, at least at the level that one can use it for practical purposes. The reason is that the transformation from the original set of coordinates to the set at time $t$, in the adaptive method, is rather difficult. The problem is that molecules change the number of degrees of freedom, so one goes from an $n$-dimensional vector to an $m$-dimensional vector where $m$ is different from $n$, this in turn does not allow the definition of the metric determinant factor in a clear way. However despite this unsuccessful attempt, one cannot exclude that in the future a substantial generalization of the method of Tuckerman et al. may be applied to the adaptive , in any case this would neither exclude the main conclusions we are pushing forward with this work, nor would require technical further development of the current method as a GC tool.\\
+Regarding the question whether or not one can interpolate the potentials and have a Hamiltonian approach, our answer is negative. In fact in a paper by one of us (Luigi Delle Site, Phys.Rev.E 76, 047701 (2007)), cited in the current work, it has been shown that one can interpolate potentials at the price of having the wrong limit either in the CG region or in the atomistic and having a non-physical flux of particles due to the gradient of the interpolation function. Past attempts by other authors based on the interpolation of the potentials have considered the result above as purely formal with no practical consequences. This attitude made necessary later on to perform a specific numerical experiments where it has been shown that indeed the result is not only formal, but rather substantial (see Praprotnik et al. Phys.Rev.Lett. 107, 099801 (2011)).\\
+We cannot exclude that other attempts, even by our past collaborators, may be done in this direction, however as long as the adaptive approach involves space dependent interpolations of potentials (or Hamiltonians) it can never be exactly globally Hamiltonian, it can only interpreted in terms of approximation of it (thus coming back to, {\bf at the best}, ``same level'' of approximation of our current approach).\\
+We can also show (but for this paper, it would be out of place), that technically speaking the very aspect of using the reaction field method (necessary to mimic electrostatic long range interactions of the CG region) leads to a non conservative algorithm even if one had a prefect Hamiltonian formulation regarding the adaptive idea (thus a thermostat is always needed).\\
 
-However these comments made us rather confused and urged us to put forward the following question to the referee.\\
-Our question is why he/she would prefer a non physical Hamiltonian formulation (with unclear physical interpretation) to our current approach based on matching, in a controlled way, statistical distributions and fluctuations and where the physical quantities of interest are clearly defined and the physical hypothesis can be controlled. The current method may not be the most perfect possible but we have shown that it works reasonably well and in a very efficient computational way (compared to other, well established, methods, such as the \bluec{TPI}, whose physical interpretation is also not perfectly rigorous). The question is not rhetorical (and above all not ironical), we would like to understand why an artificial physical framework is preferable to another only on the basis of the ``more standard'' formalism (but less clear interpretation). We are confident that the referee sees our point of view.\\
+At this point we must admit that these comments made us rather confused and urged us to actually put forward the following question to the referee.\\
+Our question is why he/she would prefer a non physical Hamiltonian formulation (with unclear physical interpretation) to our current approach based on matching, in a controlled way, statistical distributions and fluctuations and where the physical quantities of interest are clearly defined and the physical hypothesis can be controlled. The current method may not be the most perfect possible but we have shown that it works reasonably well and in a very efficient computational way (compared to other, well established, methods, such as the {IPM}, whose physical interpretation is also not perfectly rigorous). The question is not rhetorical (and above all not ironical), we would like to understand why an artificial physical framework is preferable to another only on the basis of the ``more standard'' formalism (but less clear interpretation). We are confident that the referee sees our point of view.\\
 
 
 Regarding the minor corrections asked by the referee, they have been made following his/her indications.\\
 
-We are confident to have fulfilled the referees' and editor's expectations and that now our paper may be ready to appera on PRX.\\
+
+
+{\bf For Referee a and Referee b:}\\
+Given the emphasis we put on the Grand Canonical use of AdResS we propose to make the title a bit more general and appealing, our proposal is:\\
+{\bf Grand Canonical-like Molecular Dynamics by changing Particles' Resolution}.\\
+If the referees repute such a title inappropriate and want to suggest another title we will be happy of accepting the suggestion.\\
+
+
+Finally, we are confident to have fulfilled the referees' and editor's expectations and that now our paper may be ready to appear on PRX.\\
 
 
 Best Regards\\
