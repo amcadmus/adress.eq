@@ -85,12 +85,12 @@ Though the second order is numerically satisfying, higher level of accuracy can 
 
 From the numerical point of view, for systems which are large enough, a (relatively) small subsystem of a full atomistic region is a 
 natural Grand Canonical ensemble, for this reason the approach we use here is that of showing the equivalence between the atomistic region of AdResS and the same region in a full atomistic simulation.
-Extensive numerical tests, for the relevant case of liquid water at ambient conditions, are presented in order to show that the hypothesis done within the theoretical analysis are justified from the numerical point of view. Beyond our expectations, we have found that in the atomistic region of AdResS not only the accuracy can be tuned up to the second order, but, without any additional correction, even the three body correlation function of molecular centers of mass (COM) turns out to be the same as that of a full atomistic simulation. Finally, a further numerical test was carried out: the coarse-grained molecules are substituted by a liquid of spheres interacting via the Weeks-Chandler-Andersen (WCA)  potential \cite{wca} which \bluec{has} no reference to the atomistic resolution. We show that also in this case in the atomistic region, due to the work of the filter of the transition region, an accuracy up to the third order in the probability distribution is achieved.
+Extensive numerical tests, for the relevant case of liquid water at ambient conditions, are presented in order to show that the hypothesis done within the theoretical analysis are justified from the numerical point of view. Beyond our expectations, we have found that in the atomistic region of AdResS not only the accuracy can be tuned up to the second order, but, without any additional correction, even the three body correlation function of molecular centers of mass (COM) turns out to be the same as that of a full atomistic simulation. Finally, a further numerical test was carried out: the coarse-grained molecules are substituted by a liquid of spheres interacting via the Weeks-Chandler-Andersen (WCA)  potential \cite{wca} which has no reference to the atomistic resolution. We show that also in this case in the atomistic region, due to the work of the filter of the transition region, an accuracy up to the third order in the probability distribution is achieved.
 The results of this work allow us to make a step further in the possibility of employing the AdResS scheme as a natural, general numerical protocol for truly Grand Canonical Molecular Dynamics simulations
 independently from the nature of the particles acting as a reservoir in the coarse-grained region. The word {\it ``natural''} refers to the fact  that strictly speaking in statistical mechanics the Grand Canonical ensemble is defined in operative terms as a subsystem of an infinitely large system. Of course in simulation systems are never infinitely large, however they can be large enough to numerically satisfy this condition. 
-In this sense, in our approach molecules are exchanged between the atomistic domain and the coarse-grained reservoir in a straightforward (i.e.{\it ``natural''}) dynamical way. The advantage compared to previous Grand Canonical schemes for molecular dynamics is that the proper exchange of particles does not require the knowledge or the calculation of the chemical potential; this latter can be calculated by the particle insertion method, but the computational costs are in general high and the accuracy low, above all for dense liquid systems as those treated in this work \cite{pet1,pet2,pet3,pet4,pet5,flo}. 
+In this sense, in our approach molecules are exchanged between the atomistic domain and the coarse-grained reservoir in a straightforward (i.e.{\it ``natural''}) dynamical way. The advantage compared to previous Grand Canonical schemes for molecular dynamics is that the proper exchange of particles \redc{requires neither the knowledge or the calculation of the chemical potential, nor additional expensive insertion or removing of particles \cite{pet1,pet2,pet3,pet4,pet5,flo}; we actually compare the computational costs of our method to those of the IPM and show that for dense liquid systems AdResS is more efficient.} 
 The paper is organized as follows: first we briefly describe the essential principles on which AdResS is based, then we discuss the approximations under which one can write the probability distribution of the system in terms of Grand Canonical partition function. Next we show that the thermodynamic force balances the difference in chemical potential; this idea allows us to derive the necessary conditions of simulation to reach the accuracy in terms of orders of the probability distribution of the system. 
-Finally the numerical results are discussed.
+Finally the numerical results \redc{and the efficiency of the method} are discussed.
 
 \begin{figure}
   \centering
@@ -117,17 +117,16 @@ usually used in the AdResS simulations.
 % $\dd d\vect W_t$ is the standard Wiener process.
 We denote the
 phase space variable $\vect x = (\vect r_1,\cdots,\vect r_N, \vect v_1,\cdots,\vect v_N)$; $\vect r_i,
-\vect v_i$ are the \bluec{center-of-mass}
-degrees of freedoms (DOFs) of the system.
-\bluec{Please notice that for simplicity we do not explicitly write the
-  atomistic DOFs, but we should keep in mind that the interaction
-  between two  molecules of atomistic description
-  are the sum of all pair-wise atomic interactions.
-  Sometimes, also for the sake of simplicity,
-  we do not really distinguish the COM coordinates
-  of a molecule and the coordinates of all atoms on it, and simply
-  write $\vect r_i$, but the meaning of this notation is
-  clear from the context.
+\vect v_i$ are the \redc{center-of-mass}
+degrees of freedoms (DOFs) of the \redc{molecules}.
+\redc{For simplicity we do not explicitly write the
+  atomistic DOFs, but one should keep in mind that the interaction
+  between two  molecules with atomistic resolution
+  are given by the sum of all pair-wise atomic interactions.
+  Also for the sake of simplicity,
+  we do not explicitly distinguish between the COM and the atomistic coordinates,
+  using a generalized formalism where the coordinates are indicated simply as $\vect r_i$, however the interpretation of such a notation is
+  made clear by the specific context.
 }
 If the
 system is conservative, %, namely $\vect F_i = -\nabla_{\vect r_i}U$,
@@ -155,7 +154,7 @@ denoted by $w = 1$, while the lower resolution is denoted by $w = 0$.
 Between the higher and lower resolutions, a hybrid region allows a 
 molecule to have both (interpolated) resolutions. The weighting function changes smoothly
 from 0 to 1; one possible form of such a function is:
-\bluec{
+\redc{
 \begin{align}\label{eqn:new-w}
   w(\vect r) =
   \left\{
@@ -169,11 +168,11 @@ from 0 to 1; one possible form of such a function is:
 \end{align}
 Where $\chi(\vect r)$ is the distance between the
 molecule at $\vect r$ and the boundary of the higher resolution
-region, $\chi(\vect r) < 0$ }means that the molecule is in the higher resolution
+region, $\chi(\vect r) < 0$ }means that the molecule is in the high resolution
 region, $d_{\HY}$ is the thickness of the hybrid region, $r_c$ is the
 cut-off radius of the atomistic interactions.  The intermolecular force is modeled by the following
 interpolation formula \cite{rdfcorr}:
-\bluec{
+\redc{
 \begin{align}
   \vect F_{ij} =
   w_i w_j\vect F^{\AT}_{ij} +
@@ -185,7 +184,7 @@ Where $w_i = w(\vect r_i)$ and $w_j = w(\vect r_j)$.}
 $ \vect F^{\AT}_{ij}$, $ \vect F^{\CG}_{ij}$
 are the intermolecular interaction of the atomistic and coarse-grained
 resolutions, respectively.
-$\vect F_{ij}^{\rdf}$ is a force that corrects the COM-COM radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system(for specific details, see Ref.~\onlinecite{prlgc}):
+$\vect F_{ij}^{\rdf}$ is a force that corrects the COM-COM radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system (for specific details, see Ref.~\onlinecite{prlgc}):
 \begin{equation}
   {\vect F}_{i}=
   \sum_{j}{\vect F}_{ij}+
@@ -301,7 +300,7 @@ all hybrid molecules interacting with the AT molecules have unit weight.
   \propto &\,
   e^{-\beta\mathcal H_{N_1}^{\AT}(\vect x_1; \vect x_2, N_2)}
 \end{align}
-\redc{where the Hamiltonian of the atomistic \bluec{region (did you mean ``region'' rather than ``system'' here?)} is defined as}:
+\redc{where the Hamiltonian governing the physics of the molecules in the atomistic region is defined as}:
 \begin{align}\label{eqn:p-1-2}
   \mathcal H_{N_1}^{{\AT}}(\vect x_1; \vect x_2, N_2) = &\,
   \sum_{j=1}^{N_1}\frac12 m_i\vect v_i^2 + 
@@ -318,7 +317,7 @@ which is exactly the same as for the equivalent subregion of the full atomistic 
   For the case of liquid water at ambient conditions, it is reasonable to assume that the system is only short-range correlated, i.e. the AT region is only correlated with the $\HY$ region. We will show numerically that this is indeed the case.)
   We suppose that all interactions satisfy the superstability condition of Ref.~\onlinecite{ruelle1970}.
   
-\item \redc{\bluec{(a mixture of ``$\HY$'' with ``hybird'' and ``\AT'' with ``atomistic'', I tried to correct it)} The hypothesis of fixed molecules in the $\HY$ region, must not be intended in dynamical terms. This means that during the dynamical evolution of the system one should not suppose the molecules in the $\HY$ region to be frozen in their positions while molecules in other regions are moving. Instead this hypothesis must be intended in the sense of statistical analysis; within a statistical framework it is intended that for {\bf a given configuration} of molecules \bluec{in the $\HY$ region, the AT region} explores a large (statistical) number of configurations. In such a case, the practical statistical analysis consists of taking a given configuration in the $\HY$ region, then consider the whole trajectory of a simulation and sort out all the configurations in the AT region corresponding to the given configuration in the $\HY$ region. If one repeats the process for a large number of fixed configurations of the $\HY$ region, then the data of the trajectory sorted according to this criterion would lead to a statistics for the AT region equivalent to that obtainined by a sampling performed according to the {\bf given Hamiltonian} of the AT region (Eq.\ref{eqn:p-1-2}).}
+\item \redc{The hypothesis of fixed molecules in the $\HY$ region, must not be intended in dynamical terms. This means that during the dynamical evolution of the system one should not suppose the molecules in the $\HY$ region to be frozen in their positions while molecules in other regions are moving. Instead this hypothesis must be intended in the sense of statistical analysis; within a statistical framework it is intended that for {\bf a given configuration} of molecules in the $\HY$ region, the AT region explores a large (statistical) number of configurations. In such a case, the practical statistical analysis consists of taking a given configuration in the $\HY$ region, then consider the whole trajectory of a simulation and sort out all the configurations in the AT region corresponding to the given configuration in the $\HY$ region. If one repeats the process for a large number of fixed configurations of the $\HY$ region, then the data of the trajectory sorted according to this criterion would lead to a statistics for the AT region equivalent to that obtained by a sampling performed according to the {\bf given Hamiltonian} of the AT region (Eq.\ref{eqn:p-1-2}).}
 
 \end{enumerate}
 
@@ -613,11 +612,11 @@ Because of the lengthy arguments, specific details are reported in Appendix~\ref
     Different columns give different distances between
     the first two molecules: from left to right $s_{12} =
     0.27\,\textsf{nm},\ 0.33\,\textsf{nm},\  
-    0.80\,\textsf{nm}$.  The \bluec{horizontal} axis corresponds to the variable $h_1$, while \bluec{vertical}
+    0.80\,\textsf{nm}$.  The horizontal axis corresponds to the variable $h_1$, while vertical
     axis is the variable $h_2$ (see the Appendix~\ref{app:3} for the
-    definition of these variables).  \bluec{The magnitude of the correlation
+    definition of these variables).  The magnitude of the correlation
     and the differencies are indicated by
-    different colors.}
+    different colors.
   }
   \label{fig:tmp2b}
 \end{figure}
@@ -637,14 +636,14 @@ However, the number distribution $p(N_1)$ has already
 been proved to be numerically correct in Ref.~\onlinecite{prlgc, rdfcorr} for the relevant case of liquid water. In this section, we want to test, with a numerical simulation, to what extent, other quantities, e.g. the configurational distribution $p(\vect x_1) = \sum_{N_1}p(\vect x_1, N_1)$, are correct. 
 Obviously it is a prohibitive task for any complex molecular system to determine the high-dimensional configurational distribution,
 for this reason, instead, we study its marginal distributions up to the third order.
-Here we report the H-O and H-H RDFs (see Fig.~\ref{fig:tmp2a}), and the 3-body \bluec{COM correlation function
+Here we report the H-O and H-H RDFs (see Fig.~\ref{fig:tmp2a}), and the 3-body \redc{COM correlation function
 $\corr(\vect s_1, \vect s_2, \vect s_2)$} (see Fig.~\ref{fig:tmp2b}). For simulation
 protocols and the definition of \redc{$\corr$}, see the Appendix~\ref{app:2} and \ref{app:3}.
 The first order marginal distribution, that is the molecular density profile and the second order marginal distribution, that is the COM RDF are not presented here, we address the readers to Ref.~\onlinecite{rdfcorr}. 
 Here we focus on the more delicate RDFs which involve the atomistic accuracy, and on the third order COM three-body \redc{correlation function} ($\corr$). From Fig.~\ref{fig:tmp2a} one can see that
 the AdResS H-O and H-H RDFs are identical to those of 
 the full atomistic reference system in the AT region.
-Interestingly, despite the corrective force of the \bluec{RDF} is applied only to the COM RDF, also in the region HY I (that is close to the atomistic region) the H-O and H-H RDFs are the same as in the full atomistic case.
+Interestingly, despite the corrective force of the RDF is applied only to the COM RDF, also in the region HY I (that is close to the atomistic region) the H-O and H-H RDFs are the same as in the full atomistic case.
 This implies that the AT region
 is embedded in an environment where not only the COM-COM structural properties but also finer structural
 properties are the same as for the atomistic resolution.
@@ -652,7 +651,7 @@ In the HY II and III regions, the AdResS results obviously deviate from those
 of the full atomistic reference system, because the atomistic nature 
 is decreasing as a molecule travels from HY I to HY III, so it must be expected 
 that the orientational order is also fading away. In HY III, the H-O and H-H
-RDFs are \bluec{almost} structureless.
+RDFs are almost structureless.
 Furthermore, we test $\corr$ in Fig.~\ref{fig:tmp2b} (for the definition of the three-body \redc{correlation function $\corr$} see Appendix~\ref{app:3}).
 Interestingly, the three-body correlation is correctly reproduced
 by the AdResS in the AT and HY I  regions. This is a further strong argument in favor of the fact that in AdResS the AT region is embedded in an environment that, at least up to the three-body COM correlation is the same as the full atomistic reference system.
@@ -713,10 +712,9 @@ This means that if the theoretical considerations are correct, one should be abl
     The difference with respect to the full atomistic reference
     (see the fist line of Fig.~\ref{fig:tmp2b})
     is plotted in this figure. From left to right, the distance
-    between the first two molecules are \bluec{$s_{12} =
+    between the first two molecules are \redc{$s_{12} =
     0.27\,\textsf{nm},\ 0.33\,\textsf{nm},\  
-    0.80\,\textsf{nm}$, respectively.
-  ( and do we explain why the fig. is not symmetric? )}
+    0.80\,\textsf{nm}$, respectively.}
   }
   \label{fig:wca-g3}
 \end{figure}
@@ -740,72 +738,61 @@ Fig.~\ref{fig:wca-dist} shows the COM-COM, H-O and H-H
   Summarizing, results reported in Figs.~\ref{fig:wca-den}, \ref{fig:wca-dist} and \ref{fig:wca-g3} show that in the atomistic region the accuracy at the third order and particle number fluctuations, for which the filter in the transition region is designed, are well preserved; that is the atomistic region exchange particle and energy with the reservoir in a proper Grand Canonical fashion (up to the level of approximation decided {\it a priori}). Being the molecules in the coarse-grained region a generic liquid model, we have proved numerically that indeed the adaptive technique employed here can be considered as a tool for general Grand Canonical Molecular Dynamics simulations. 
 
 \section{Computational efficiency of AdResS as a Grand Canonical set up}
-\redc{In order to show the computational efficiency of the AdResS method as a Grand Canonical set up, we have carried on a numerical experiment to compare the performance of our method in {\it ``inserting''} and {\it ``removing''} molecules from the atomistic region and that of a highly popular approach used in Molecular Dynamics, the insertion particle method (IPM) \cite{ipm}. The IPM is very efficiently implemented into the GROMACS code \cite{gromacs} and thus it is a natural choice as a Grand Canonical-like set up for a very large portion of molecular dynamics simulators. The experiment consists of the following: We have considered a large full atomistic system and applied the highly optimized IPM to insert molecules. From this study we extract the efficiency of the IPM in terms of computational power and time required.
-Next, we consider an adaptive system whose number of molecules, in the atomistic plus hybrid region, is the same as the full atomistic system considered above; to this we add a rather large reservoir of coarse-grained particles. Also in this case the efficiency in measured terms of computational power and time required.
-The results show that while the IPM needs long trajectories at a non trivial computational cost, so that the insertion of {\bf one molecule} converges and data can be then collected for ``real'' statistics, the adaptive approach performs, in less time and at a much lower computational cost, {\it on-the-fly} dynamical {\bf multiple insertions} keeping the instantaneous equilibrium intact, that is the data can be collected on-the-fly for ``real'' statistics.
- In fact, we used the equilibirum trajectory of length
+\redc{In order to show the computational efficiency of the AdResS method as a Grand Canonical set up, we have carried out a numerical experiment to compare the performance of our method in {\it ``inserting''} and {\it ``removing''} molecules from the atomistic region and that of a highly popular approach used in Molecular Dynamics, the insertion particle method (IPM) \cite{ipm}. The IPM is very efficiently implemented into the GROMACS code \cite{gromacs} and thus it is a natural choice as a Grand Canonical-like set up for a very large portion of molecular dynamics simulators. The experiment consists of the following: we have considered a large full atomistic system and applied the highly optimized IPM to insert molecules. From this study we extract the efficiency of the IPM in terms of computational resources required.
+Next, we consider an adaptive system whose number of molecules, in the atomistic plus hybrid region, is at least the same as the full atomistic system considered (actually the for results presented here the size considered is even larger than that of the EX simulation); to this we add a rather large reservoir of coarse-grained particles (tests were carried out also with smaller reservoirs but the results were essentially the same as for the large reservoir). Also in this case the efficiency in measured terms of computational resources required.
+The results show that the IPM procedure itself requires a rather high computational cost, to which it must be added long trajectories so that the insertion of {\bf one molecule per time} converges and data can be then collected for ``real'' statistics. Instead, the adaptive approach performs, in less time and at a much lower computational cost, {\it on-the-fly} dynamical {\bf ``multiple insertions''} keeping the instantaneous equilibrium intact, which implies the additional advantage that data can be collected on-the-fly for ``real'' statistics at any time.
+ Specifically, we used an equilibrium trajectory of length
 8~\textsf{ns} where the coordinates of water molecules were recorded every
 0.2~\textsf{ps}.  Using the IPM approach, in each frame, $10^5$ test particles were inserted
-at random position of the system. For each insertion, $10^5$ radomly
+at random position of the system. For each insertion, $10^5$ randomly
 chosen orientations were tried. The convergence is very
-slow, even at 8~\textsf{ns} the insertion process is not satisfactorily converged (see Fig\ref{fig:tmp4}), this means that data cannot be collected for analysis of physical properties.
+slow, even at 8~\textsf{ns} the insertion process is not satisfactorily converged (see Fig~\ref{fig:tmp4}), this means that up to this point data cannot be collected for analysis of physical properties.
 Compared to IPM, AdResS leads a very
 efficient {\it ``insertion''} of particles: in each 1~\textsf{ps} time interval,
-(on average) \bluec{23} water molecules entered into the atomistic region. Some of
+(on average) 23 water molecules entered into the atomistic region. Some of
 them came immediately back, because of a unfavorable entering
 configuration.  To investigate the proper insertion, we consider the
-time interval of 1~\textsf{ns}, and find 832 out of 3456 molecules
+time interval of 1~\textsf{ns}, and find 832 out of 13824 molecules
 were firstly in either the HY or CG region, and then travelled to the
 AT region and stayed there for longer than 60~\textsf{ps}, which
 indicates a mean square root displacement of roughly 1~\textsf{nm}
-in the AT region. A further advantage of AdResS in this context is that each frame of the trajectory can be used for the  analysis of physical properties, since at any instant the atomistic system is in thermodynamical equilibrium. 
+in the AT region. Moreover, while for the EX simulation one must avoid size effects by choosing reasonable large systems, in AdResS the AT region can actually be chosen to be much smaller than the one used here, thus enhancing the amount of efficiency. Finally, even if one can afford a rather large atomistic system, thus a faster convergence, the cost of the insertion procedure will increase enormously because it would require a larger sampling due to the increased number of possibility to allocate a particle in the liquid. 
 These results in terms of computational resources are summarized in Table~\ref{tab:tmp1}.}
 \begin{table}
   \centering
   \begin{tabular}{l|l|l|l|l}
     & Sys. size ($\textsf{nm}^3$)
     & Traj. length (\textsf{ns})
-    & CPU perf. (G FLOPS)
     & CPU time (hours)\\    \hline
-    AdResS   &$29.9\times3.7\times3.7$ & 1 &  4.1 & 3.1\\
-    EX water & $3.7\times3.7\times3.7$ & 8 & 24.7 & 4.5 (traj.) + 36.7 (IPM)\\
+    AdResS   &$29.9\times3.7\times3.7$ & 1 & 3.1\\
+    EX water & $3.7\times3.7\times3.7$ & 8 & 4.5 (traj.) + 36.7 (IPM)\\
   \end{tabular}
-  \caption{\redc{\bluec{Efficiency comparison}.
-      The AdResS simulation contains 13824 molecules, while the
-      \bluec{full atomistic (EX)}
+  \caption{\redc{Comparison of computational efficiency.
+      The AdResS simulation contains 13824 molecules, while the full atomistic (EX)
       water simulations contain 1728 molecules. In the AdResS simulation,
-      the size of the AT + HY regions is roughly the same as the EX water
-      simulation box.
-      ``Sys. size'' means the size of the box used in the simulaiton.
-      ``Traj. length'' means the equilibirum trajectory
+      the size of the AT + HY regions ($6.7\times3.7\times3.7\textsf{nm}^3$) is even larger than that of the EX water
+      simulation box, so that we are actually in a {\it ``worst scenario''} situation. Moreover simulations with smaller reservoirs  gave essentially the same results reported for this system.
+      ``Sys. size'' means the size of the box used in the simulation.
+      ``Traj. length'' means the equilibrium trajectory
       used for the particle insertion in the IPM approach. Along the trajectories, frames
-      of configurations were recoreded every 0.2~\textsf{ps}.
-      ``CPU perf.'' is the CPU performance
-      counted by the floating-point operations per second (FLOPS).
+      of configurations were recorded every 0.2~\textsf{ps}.
       ``CPU time'' the is wall clock time spend on the simulation.
       For the particle insertion simulation, the CPU time is counted by two
-      parts: the time of generating the equilibirum trajectories (traj.)
-      and the time required by the IPM procedure.
+      parts: the time of generating the equilibrium trajectories (traj.) (not expensive)
+      and the time required by the IPM procedure (very expensive). Moreover, not only the insertion procedure is expensive on itself, but even after $8\textsf{ns}$ the insertion process has not actually converged (see Fig~\ref{fig:tmp4}). Simulations on longer time scales show that the full convergence is actually never reached, which suggests that the insertion procedure for a molecule as simple as water is not fully rigorous from the physical point of view.}
     }
-    \bluec{
-      ( do we explain why the CPU proformace of EX water is much higher than
-      the AdResS? vertically organize this table ? )}
-  }
   \label{tab:tmp1}
 \end{table}
 \begin{figure}
   \centering
   \includegraphics[]{fig-tpi.eps}
-  \caption{\redc{The chemical potential calculated by the \bluec{insertion particle method (IPM)}. The top panel shows the case of coarse-grained (CG) water and WCA liquid while the bottom panel shows the case of a full atomistic (EX) simulation.
-      \bluec{
-        The horizontal dashed line in the bottom panel
-        is used to guide the eyes, and shows
-        the result of EX water does not converge within 8 \textsf{ns}.
-      }
-      The convergence of the chemical potential means that the insertion of the molecule is properly done and sudsequent part of the trajectory can be used for ``statistical'' average in a Grand Canonical framework.}}
+  \caption{\redc{The chemical potential calculated by the insertion particle method (IPM). The top panel shows the case of coarse-grained (CG) water and WCA liquid while the bottom panel shows the case of a full atomistic (EX) simulation. The horizontal dashed line in the bottom panel
+        is used to guide the eyes and represent the ideal target. The plot shows
+        the result that for EX water the IPM procedure does not converge within 8 \textsf{ns};
+      in fact the convergence of the chemical potential means that the insertion of the molecule is properly done and the trajectory (with the associated IPM) can be used for ``statistical'' average in a Grand Canonical framework.}}
   \label{fig:tmp4}
 \end{figure}
-\redc{Moreover, in previous work, Praprotnik {\it et al.} \cite{delgado2009coupling} have shown that the coarse-grained region of AdResS can be easily coupled to the continuum; this has the non trivial advantage that the insertion of a sphere in a liquid of spheres by IPM is by far much simpler than inserting an atomistically structured molecule in a liquid of atomistic molecules. Fig.\ref{fig:tmp4} shows the extremely fast convergence for inserting a particle in our ``reservoir'' of spherical particles compared to that of a full atomistic system. This means that in the long term perspective the part of the algorithm of Praprotnik {\it et al.} could be merged with our current approach and thus allow for even smaller sizes of the reservoir region. However, this extension, though conceptually straightforward goes beyond the scope of this paper. In general, there have been a large number of developments for the GC idea based on the {\it ``grow-in''} and {\it ``shrink-out''} MD approach (see e.g. Lynch and Petitt \cite{pet5} and Eslami and M\"uller-Plate \cite{flo}) however, all of them  share the same basic principle and face the same problem of the IPM. This numerical experiment shows that despite the need of a reservoir, our computation is by far more efficient than any other technique so far used.}
+\redc{Moreover, in previous work, Praprotnik {\it et al.} \cite{delgado2009coupling} have shown that the coarse-grained region of AdResS can be easily coupled to the continuum; this has the non trivial advantage that the insertion of a sphere in a liquid of spheres by IPM is by far much simpler than inserting an atomistically structured molecule in a liquid of atomistic molecules. Fig.~\ref{fig:tmp4} shows the extremely fast convergence for inserting a particle in our ``reservoir'' of spherical particles compared to that of a full atomistic system. This means that in the long term perspective the part of the algorithm of Praprotnik {\it et al.} could be merged with our current approach and thus allow for even smaller sizes of the reservoir region. However, this extension, though conceptually straightforward goes beyond the scope of this paper. In general, there have been a large number of developments for the GC idea based on the {\it ``grow-in''} and {\it ``shrink-out''} MD approach (see e.g. Lynch and Petitt \cite{pet5} and Eslami and M\"uller-Plate \cite{flo}) however, all of them  share the same basic principle and face the same problem of the IPM. This numerical experiment shows that despite the need of a reservoir, our computation is by far more efficient than any other technique so far used.}
  
 
 
@@ -821,7 +808,7 @@ In conclusion, these results provide a solid theoretical basis to explain the nu
 \section*{Acknowledgement}
 This work was partially supported by the Deutsche Forschungsgemeinschaft (DFG) with the Heisenberg grant provided to L.D.S (grant code DE 1140/5-1) and by ITN Nanopoly provided to H.W and C.S.
 It was also supported in part by the National Science Foundation under Grant No. NSF PHY11-25915.
-\bluec{shall we thank Bernd Ensing?}
+
 
 
 
@@ -1078,7 +1065,7 @@ and \eqref{eqn:kappa-eq}, we have:
 \end{align}
 Since the difference between the probabilities
 $p(N_1)$ and $p_{\AT}(N_1)$ is basically the difference between $T_1$
-and $T_2$ renomalized by the partition functions of the distributions,
+and $T_2$ renormalized by the partition functions of the distributions,
 by
 invoking Laplace's method again,
 we see $p(N_1)$ and $p_{\AT}(N_1)$ agree up to
@@ -1119,7 +1106,6 @@ atomistic region was the reaction field method. All simulations were
 performed by MD simulation software Gromacs \cite{gromacs}
 and VOTCA \cite{ruehle2009versatile}.
 In the WCA-based simulation, the interaction potential between particles in the coarse-grained region is given by
-\bluec{
 \begin{align}
   U(r) = 4\varepsilon
   \big[
@@ -1130,7 +1116,6 @@ In the WCA-based simulation, the interaction potential between particles in the 
   + \varepsilon
   \qquad  r\leq 2^{1/6}\sigma
 \end{align}
-}
 The parameters used in this study are $\varepsilon = 0.65$~\textsf{kJ/mol}
 and $\sigma = 0.30$~\textsf{nm}. These parameters are chosen such that
 the soft core of WCA is roughly the same as the structure-based coarse-grained
@@ -1167,7 +1152,7 @@ by:
   \quad\textrm{and}\quad
   \rho(\vect s) = \big\langle \hat\rho(\vect s)\big\rangle.
 \end{align}
-By assuming that the system is homogeneous, one easiliy can show that
+By assuming that the system is homogeneous, one easily can show that
 \begin{align}
   \corr (\vect s_1, \vect s_2, \vect s_3)
   =
@@ -1206,7 +1191,7 @@ is the two-body radial distribution function, it follows:
 \end{align}
 where, for example, $s_{12} = \vert \vect s_1 -\vect s_2\vert$.
 
-Since we assume the system to be homogeneous, the visulization of this high-dimensional
+Since we assume the system to be homogeneous, the visualization of this high-dimensional
 distribution is simplified as follows. We first fix the distance between molecule 1 and 2 (Mol 1 and 2), then plot the correlation function with
 respect to the position of the third molecule (Mol 3, see
 Fig.~\ref{fig:tmp3}).  The position of Mol 3 can be described by
