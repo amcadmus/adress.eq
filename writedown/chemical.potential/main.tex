@@ -109,41 +109,41 @@ and $\vect r_{N+1}$ is uniformly distributed in volume $V$.
 \section{Three-point-charge rigid water model}
 
 Notice that for each water molecule, it has 6 degrees of freedoms (DOFs):
-3 translational DOFs and 3 rotational DOFs. The partitional function is 
+3 translational DOFs and 3 rotational DOFs.
+Then the number of DOF over the number of dimension is $6N/3  = 2N$.
+The partitional function is 
 \begin{align} \nonumber
-  Z(N,V,T)
+  Z(3N,V,T)
   =\,&
-  \frac{1}{N! h^{9N}}
-  \int\dd\vect r^{3N}
-  \prod_{i=1}^N\prod_{\alpha=1}^3
-  \delta( D_{\alpha}(\vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}))\,
-  e^{ -\beta\sum_{i<j} U(\vect r_{ij})}\\\nonumber
-  &\times
-  \int\dd\vect p^{3N}
-  \prod_{i=1}^N\prod_{\alpha=1}^3
-  \delta( C_{\alpha}(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}; \vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}))\,
+  \frac{1}{(2N)! h^{9N}}
+  \int_{\vect C_r({\{\vect r_i\}}) = 0}\dd\vect r^{3N}
+  e^{ -\beta\sum_{i<j} U(\vect r_{ij})}
+  \int_{\vect C_p({\{\vect r_i\}, \{\vect p_i\}}) = 0}\dd\vect p^{3N}
   e^{-\beta \sum_{i=1}^{3N}\frac{\vect p_i^2}{2m_i}}\\\nonumber
   =\,&
-  \frac{1}{N! h^{9N}}
-  \int\dd\vect r^{3N}
-  \prod_{i=1}^N\prod_{\alpha=1}^3
-  \delta( D_{\alpha}(\vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}))\,
-  e^{ -\beta\sum_{i<j} U(\vect r_{ij})}\\
+  \frac{1}{(2N)! h^{9N}}
+  \int_{\vect C_r({\{\vect r_i\}}) = 0}\dd\vect r^{3N}
+  e^{ -\beta\sum_{i<j} U(\vect r_{ij})}\\\nonumber
   &\times
   \prod_{i=1}^N
-  \int\dd\vect p_{3i+1}\dd\vect p_{3i+2}\dd\vect p_{3i+3}
-  \prod_{\alpha=1}^3
-  \delta( C_{\alpha}(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}; \vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}))\,
+  \int_{\vect C_p(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}; \vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}) = 0}
+  \dd\vect p_{3i+1}\dd\vect p_{3i+2}\dd\vect p_{3i+3}
   e^{-\beta (\frac{\vect p_{3i+1}^2}{2m_{3i+1}} + \frac{\vect p_{3i+2}^2}{2m_{3i+2}} +
-    \frac{\vect p_{3i+3}^2}{2m_{3i+3}} )}
+    \frac{\vect p_{3i+3}^2}{2m_{3i+3}} )}\\
 \end{align}
 where
 \begin{align}\label{eqn:c-r}
-  &D_{\alpha}(\vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}) = 0\\\label{eqn:c-p}
-  \textsf{and}\quad &C_{\alpha}(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}; \vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}) = 0
+  &\vect C_{r}(\{\vect r_i\}) = 0\\\label{eqn:c-p}
+  \textsf{and}\quad &
+  \vect C_{p}(\{\vect r_i\}, \{\vect p_i\}) = 0
 \end{align}
-are constraints according to the rigid H-O bonds and H-O-H angle. For each water molecule,
+are constraints according to the rigid H-O bonds and H-O-H angle.
+For each water molecule,
 there are in total 6 constrains: 3 for positions and 3 for momenta.
+The constrains for the momenta are
+\begin{align}
+  \vect C_p(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}; \vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}) = 0
+\end{align}
 Notice that the constraints for the momenta~\label{eqn:c-p} also depends
 on the position: the momenta are realated to each other
 in a way that depends on the orientation of the water molecule.
@@ -153,7 +153,9 @@ form. Threrefore, we can assume that \eqref{eqn:c-p} is not explicitly
 depends on the position of the atoms, or is only a function of an arbitrary
 configuration of water, namely:
 \begin{align}
-  C_{\alpha}(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}; \vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3}) = C_{\alpha}(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}) = 0
+  \vect C_{p}(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}; \vect r_{3i+1},\vect r_{3i+2}, \vect r_{3i+3})
+  =
+  \vect C_{p}(\vect p_{3i+1},\vect p_{3i+2}, \vect p_{3i+3}) = 0
 \end{align}
 
 \begin{figure}
@@ -169,103 +171,114 @@ We now calculate the single molecular partition funtion in the momenta space:
   q(V,T) =
   \int \dd\vect p_1\dd\vect p_2\dd\vect p_3
   \prod_{\alpha=1}^3
-  \delta (C_\alpha (\vect p_1,\vect p_2,\vect p_3))
+  \delta (C_p^\alpha (\vect p_1,\vect p_2,\vect p_3))
   e^{-\beta (\frac{\vect p_1^2}{2 m_1} + \frac{\vect p_2^2}{2 m_2} + \frac{\vect p_3^2}{2 m_3})}
 \end{align}
-without lost of generality, we assume 1 and 2 are hydrogen atoms, and 3 is an oxygen atoms.
-By defining ${\vect p}_1 = \vect p_1 - \vect p_3$
-and ${\vect p}_2 = \vect p_2 - \vect p_3$, we have
-\begin{align}\label{eqn:tmp9}
+Convert all momenta to velocity yields,
+\begin{align}
   q(V,T) =
-  \int\dd\vect p_3\,
-  e^{-\beta\frac{\vect p_3^2}{2m_3}}
-  \int\dd{\vect p}_1\dd\vect p_2
+  m^3_1 m^3_2 m^3_3 \int \dd\vect v_1\dd\vect v_2\dd\vect v_3
   \prod_{\alpha=1}^3
-  \delta (C_\alpha (\vect p_1-\vect p_3,\vect p_2-\vect p_3,\vect p_3))\,
-  e^{-\beta \big[\frac{(\vect p_1 - \vect p_3)^2}{2 m_1} + \frac{(\vect p_2 - \vect p_3)^2}{2 m_2}\big]}
+  \delta (C_p^\alpha (m_1\vect v_1,m_2\vect v_2,m_3\vect v_3))
+  e^{-\beta (\frac12m_1\vect v_1^2 + \frac12m_2\vect v_2^2 + \frac12m_3\vect v_3^2)}
 \end{align}
+Without lost of generality, we assume 1 and 2 are hydrogen atoms, and 3 is an oxygen atoms. The corresponding masses are $m_H$ and $m_O$.
 We assume the configuration of the water is given by two unit vectors $\vect s_1$ and
 $\vect s_2$, see Fig~\ref{fig:tmp1}. Note that they are no
 now, we can explicitly write down the constraints for the momenta:
 \begin{align}
-  \delta(C_1(\vect p_1-\vect p_3,\vect p_2-\vect p_3,\vect p_3))
-  &= \delta((\vect p_1-\vect p_3) \cdot \vect s_1)   \\
-  \delta(C_2(\vect p_2-\vect p_3,\vect p_2-\vect p_3,\vect p_3))
-  &= \delta((\vect p_2-\vect p_3) \cdot \vect s_2)   \\
-  \delta(C_3(\vect p_2-\vect p_3,\vect p_2-\vect p_3,\vect p_3))
-  &= \delta (
-  [(\vect p_1 - \vect p_3) - (\vect p_2 - \vect p_3)] \cdot (\vect s_1  - \vect s_2)
-  ) 
+  C_p^1 (m_1\vect v_1,m_2\vect v_2,m_3\vect v_3)
+  &= \vect v_1\cdot\vect s_1 - \vect v_3\cdot\vect s_1\\
+  C_p^2 (m_1\vect v_1,m_2\vect v_2,m_3\vect v_3)
+  &= \vect v_2\cdot\vect s_2 - \vect v_3\cdot\vect s_2\\
+  C_p^3 (m_1\vect v_1,m_2\vect v_2,m_3\vect v_3)
+  &= (\vect v_1 - \vect v_2)\cdot(\vect s_1 - \vect s_2)
 \end{align}
-It is obvious that replacing $\vect p_1 - \vect p_3$ by $\vect p_1$,
-and $\vect p_2 - \vect p_3$ by $\vect p_2$ helps simplifing the Eq.~\eqref{eqn:tmp9}:
+It would be convenient if we present $\vect v_1$ and $\vect v_2$
+by the relative velocities with respect to $\vect v_3$:
+$\vect v_1 = \vect v_1 - \vect v_3$ and 
+$\vect v_2 = \vect v_2 - \vect v_3$. We have
 \begin{align}
   q(V,T) =
-  \int\dd\vect p_3\,
-  e^{-\beta\frac{\vect p_3^2}{2m_3}}
-  \int\dd{\vect p}_1\dd\vect p_2
-  \prod_{\alpha=1}^3
-  \delta (C_\alpha (\vect p_1,\vect p_2; \vect s_1, \vect s_2))
-  e^{-\beta \big[\frac{\vect p_1^2}{2 m_1} + \frac{\vect p_2^2}{2 m_2}\big]}
+  m_H^6m_O^3
+  \int \dd\vect v_3
+  e^{-\beta \frac12m_O\vect v_3^2}
+  \int \dd\vect v_1\dd\vect v_2
+  \delta(\vect v_1\cdot\vect s_1)
+  \delta(\vect v_2\cdot\vect s_2)
+  \delta((\vect v_1 - \vect v_2)\cdot(\vect s_1 - \vect s_2))
+  e^{-\beta (\frac12m_H\vect v_1^2 + \frac12m_H\vect v_2^2)}
 \end{align}
-We denote the unit vector vertical to the molecular plain by $\vect c$. we have
+By presenting $\vect s_1$, $\vect s_2$,
+$\vect v_1$ and $\vect v_2$ in the local coordinate
+defined by $\vect e_1, \vect e_2, \vect e_3 = \vect e_1\times\vect e_2$
+(see Fig~\ref{fig:tmp1}), we define
 \begin{align}
-  \vect c = \frac{\vect s_2\times\vect s_1}{\vert \vect s_2\times\vect s_1\vert}
+\vect s_1 &= s_1\vect e_1 + s_2\vect e_2  \\
+\vect s_2 &= -s_1\vect e_1 + s_2\vect e_2    
 \end{align}
-So $\{\vect s_1, \vect c, \vect s_1\times\vect c\}$ defines a local coordinate
-at atom 1. So does $\{\vect s_2, \vect c, \vect s_2\times\vect c\}$ define
-a local coordinate at atom 2. Transform $\vect p_1$ and $\vect p_2$ by
+by considering the constraints, we have
 \begin{align}
-  \vect p_1
-  &= 
-  d_1\vect s_1 + w_1\vect c + v_1 \vect s_1\times\vect c \\
-  \vect p_2
-  &=
-  d_2\vect s_2 + w_2\vect c + v_2 \vect s_2\times\vect c 
+\vect v_1 &= v_1\vect e_1 - \frac{s_1}{s_2}v_1\vect e_2 + w_1\vect e_3\\
+\vect v_2 &= v_1\vect e_1 + \frac{s_1}{s_2}v_1\vect e_2 + w_2\vect e_3
 \end{align}
-Notice that these transforms only rotate the coordinate, so the Jacobians are 1.
-The constraints are now:
+The Leimann measure of the submanifold reads:
 \begin{align}
-  &\delta(\vect p_1\cdot\vect s_1) = \delta (d_1) \\
-  &\delta(\vect p_2\cdot\vect s_2) = \delta (d_2) \\
-  &\delta((\vect p_1 - \vect p_2)\cdot(\vect s_1 - \vect s_2))
-  = \delta (v_1(\vect s_1\times\vect c)\cdot(\vect s_1-\vect s_2) - 
-  v_2(\vect s_2\times\vect c)\cdot(\vect s_1-\vect s_2))
-  = \delta (\nu (v_1 - v_2) )
+  g = \sqrt{
+    \bigg(
+    \frac{\partial(\vect v_1, \vect v_2)}
+    {\partial(v_1,w_1,w_2)}
+    \bigg)^T
+    \cdot
+    \bigg(
+    \frac{\partial(\vect v_1, \vect v_2)}
+    {\partial(v_1,w_1,w_2)}
+    \bigg)
+  }
+  = \sqrt 2 \;\nu
 \end{align}
-where
+We denote $\nu^2 = (s_1^2 + s_2^2) / s_2^2$.
+The partition function writes,
 \begin{align}
-\nu = (\vect s_1\times\vect c)\cdot(\vect s_1-\vect s_2)
-= (\vect s_2\times\vect c)\cdot(\vect s_1-\vect s_2).  
+  q(V,T) =
+  \frac{h^\frac32}{m_H^3}
+  m_H^6 m_O^3
+  \int \dd\vect v_3
+  e^{-\beta \frac12m_O\vect v_3^2}
+  \int \dd v_1\dd w_1\dd w_2\:g\cdot
+  e^{-\beta (m_H\nu^2 v_1^2 + \frac12m_H w_1^2 + \frac12m_H w_2^2)}
 \end{align}
-Actually, $\vert\nu\vert = \sin(\phi_{HOH})$, where $\phi_{HOH}$ is the
-H-O-H angle.
-For the SPC/E water model, $\vert\nu\vert = \sin(109.47^{\circ}) = 0.94282$.
-Threrefore, we have 
-\begin{align}\nonumber
-  q(V,T)
+The prefector ${h^\frac32}/{m_H^3}$ comes from the Heissenberg's principle
+of uncertainty: $\dd r\dd p = h$, and here we
+heuristically denote $\dd p = \sqrt h$, or
+$\dd v  = \sqrt h/m$.
+By calculating the integral by hand, we have 
+\begin{align}
+  q(V,T) &=
+  \frac{h^\frac32}{m_H^3}
+  m_H^6 m_O^3
+  \sqrt 2\,\nu\,
+  \sqrt{
+    \bigg(
+    \frac{2\pi k_BT}{m_O}
+    \bigg)^3
+  }
+  \cdot
+  \sqrt{
+    \frac{2\pi k_BT}{2\nu^2m_H}
+  }
+  \cdot
+  \sqrt{
+    \bigg(
+    \frac{2\pi k_BT}{m_H}
+    \bigg)^2
+  }\\
   &=
-  \int\dd\vect p_3\,
-  e^{-\beta\frac{\vect p_3^2}{2m_3}}
-  h^{\frac32}
-  \frac1{\vert\nu\vert}
-  \int\dd v\, \dd w_1\,\dd w_2\,
-  e^{-\beta
-    \big[
-    \frac{w_1^2 + v^2}{2 m_1} + 
-    \frac{w_2^2 + v^2}{2 m_2}
-    \big]
-  } \\
-  &=
-  \frac{h^{\frac32}}{\vert\nu\vert}
-  \sqrt{(2\pi m_3 k_BT)^3}
-  \sqrt{2\pi m_1 k_BT}
-  \sqrt{2\pi m_2 k_BT}
-  \sqrt{2\pi (m_1 + m_2) k_BT}
-  \\
-  &=
-  \frac{h^{\frac32}}{\vert\nu\vert}
-  \sqrt{m_1 m_2 (m_1+m_2) m_3^3 (2\pi k_BT)^6}
+  {h^\frac32}
+  \sqrt{
+    (2\pi m_Hk_BT)^3
+    (2\pi m_Ok_BT)^3
+  }
 \end{align}
   % \sqrt{2\pi m_1 k_BT}
   % \sqrt{2\pi m_2 k_BT}
@@ -274,20 +287,18 @@ The chemical potential is
 \begin{align}\nonumber
   \mu 
   \approx\,&
-  -k_BT \ln
+  -\frac13 k_BT \ln
   \bigg[
-  \frac{Z(N+1,V,T)}{Z(N,V,T)}
+  \frac{Z(3N+3,V,T)}{Z(N,V,T)}
   \bigg] \\ \nonumber
   =\,&
-  -k_BT \ln
+  -\frac13k_BT \ln
   \bigg[
-  \frac{1}{N h^9}
-  \frac{h^{\frac32}}{\vert \nu\vert}
-  \sqrt{m_1 m_2 (m_1+m_2) m_3^3 (2\pi k_BT)^6}\\\label{eqn:mu-water-tmp1}
+  \frac{1}{N h^9}\,
+  {h^{\frac32}}
+  \sqrt{m_H^3m_O^3 (2\pi k_BT)^6}\\\label{eqn:mu-water-tmp1}
   &\times
-  \int\dd\vect r_{3N+1}\,\dd\vect r_{3N+2}\,\dd\vect r_{3N+3}
-  \prod_{\alpha=1}^3
-  \delta(D_\alpha(\vect r_{3N+1}\,\vect r_{3N+2}\,\vect r_{3N+3}))
+  \int_{\vect C^N_r(\vect r_{3N+1}\,\vect r_{3N+2}\,\vect r_{3N+3})=0}\dd\vect r_{3N+1}\,\dd\vect r_{3N+2}\,\dd\vect r_{3N+3}
   \Big\langle e^{-\beta\Delta U} \Big\rangle_{\vect r_1, \cdots,\vect r_{3N}}
   \bigg]
   % \\ \nonumber  
@@ -310,40 +321,21 @@ It is more convenient to consider the relative position:
 $\vect r_{3N+1} = \vect r_{3N+1}  - \vect r_{3N+3}$ and
 $\vect r_{3N+2} = \vect r_{3N+2}  - \vect r_{3N+3}$, and the form
 of the integral in Eq.~\eqref{eqn:mu-water-tmp1} does not change.
-We change $\vect r_{3N+1}$ and $\vect r_{3N+1}$ into the spherical coordinate, 
-namely, $\vect r_{3N+1} = (r_{3N+1}, \theta_{3N+1}, \phi_{3N+1})$ and
-$\vect r_{3N+2} = (r_{3N+2}, \theta_{3N+2}, \phi_{3N+2})$.
-Notice the coordinate of $\vect r_{3N+2}$ is measured with respect to
-$\vect r_{3N+1}$, more specifically, $\phi_{3N+2}$ is the angle between
-$\vect r_{3N+1}$ and $\vect r_{3N+2}$.
-We want to calculate the partition function, which is the measure of
-a radomly posited and oriented water molecule.
-\begin{align}\nonumber
-  Z_c =\,&
-  \int \dd \vect r_{3N+3}
-  \int_0^\infty\dd r_{3N+1} \int_0^{2\pi}\dd \theta_{3N+1} \int_0^\pi\dd\phi_{3N+1}
-  \int_0^\infty\dd r_{3N+2} \int_0^{2\pi}\dd \theta_{3N+2} \int_0^\pi\dd\phi_{3N+2}
-  \\\nonumber
-  &\,
-  r_{3N+1}^2\sin(\phi_{3N+1})
-  r_{3N+2}^2\sin(\phi_{3N+2})
-  \delta(r_{3N+1} - r_{OH})
-  \delta(r_{3N+2} - r_{OH})
-  \frac{1}{r_{OH}}\delta(\phi_{3N+2} - \phi_{HOH})
-  \\\nonumber
-  =\,&
-  V\cdot 4\pi r_{OH}^2 \cdot 2\pi r_{OH}\sin(\phi_{HOH}) h^{\frac32}
-\end{align}
+Since the extra chemical potential is calculated by the uniform
+sampling of the hyper-isosurface defined by the constrains 
+$\vect C^N_r(\vect r_{3N+1}\,\vect r_{3N+2}\,\vect r_{3N+3})=0$, the
+measure of which is therefore needed:
+$V\cdot 4\pi r_{OH}^2\cdot 2\pi r_{OH}\sin(\phi_{HOH}) h^\frac32$.
 Therefore,
 \begin{align}
   \mu
   \approx &\,
-  -k_BT \ln
+  -\frac13k_BT \ln
   \bigg[
-  \frac{8\pi^2 r_{OH}^3 V \sin(\phi_{HOH})}{N h^6 \vert \nu\vert}
-  \sqrt{m_1 m_2 (m_1+m_2) m_3^3 (2\pi k_BT)^6}
+  \frac{8\pi^2 r_{OH}^3 V \sin(\phi_{HOH})}{N h^6}
+  \sqrt{m_H^3m_O^3 (2\pi k_BT)^6}
   \bigg]
-  -k_BT \ln
+  -\frac13 k_BT \ln
   \bigg[
   \Big\langle
   e^{-\beta\Delta U}
