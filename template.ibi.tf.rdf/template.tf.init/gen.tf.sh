@@ -58,12 +58,19 @@ mv -f out.gro conf.gro
 
 # prepare dens.SOL.xvg
 echo "# prepare dens.SOL.xvg"
-echo "0 0 0" > dens.SOL.xvg
-tmp=`echo "$boxx/3.0" | bc -l`
-echo "$tmp 0 0" >> dens.SOL.xvg
-tmp=`echo "$boxx/3.0 * 2.0" | bc -l`
-echo "$tmp 0 0" >> dens.SOL.xvg
-echo "$boxx 0 0" >> dens.SOL.xvg
+rm -f dens.SOL.xvg
+for i in `seq 0 0.05 $boxx`;
+do
+    echo "$i 0 0" >> dens.SOL.xvg
+done
+# echo "0 0 0" > dens.SOL.xvg
+# tmp=`echo "$boxx/4.0" | bc -l`
+# echo "$tmp 0 0" >> dens.SOL.xvg
+# tmp=`echo "$boxx/4.0 * 2.0" | bc -l`
+# echo "$tmp 0 0" >> dens.SOL.xvg
+# tmp=`echo "$boxx/4.0 * 3.0" | bc -l`
+# echo "$tmp 0 0" >> dens.SOL.xvg
+# echo "$boxx 0 0" >> dens.SOL.xvg
 
 # copy dir
 echo "# copy dir"
