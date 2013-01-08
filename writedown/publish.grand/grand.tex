@@ -27,6 +27,15 @@
 \newcommand{\HY}{{\Delta}}
 \newcommand{\rdf}{{\textrm{rdf}}}
 \newcommand{\corr}{C^{(3)}}
+\newcommand{\thf}{{\textrm{th}}}
+\newcommand{\dof}{{\textrm{dof}}}
+\newcommand{\res}{{\textrm{res}}}
+\newcommand{\thermo}{{\textrm{stat}}}
+\newcommand{\hadress}{{\textrm{H}}}
+\newcommand{\dadress}{{\textrm{D}}}
+\newcommand{\mh}{\mathcal H}
+\newcommand{\kin}{\textrm{kin}}
+\newcommand{\trans}{\textrm{T}}
 
 
 \begin{document}
@@ -49,7 +58,7 @@
   functions in the hybrid region, where molecules change resolution, are two necessary conditions for
   considering the atomistic and coarse-grained regions in AdResS equivalent to subsystems
   of a full atomistic system with an accuracy up to the second order with respect to the probability distribution of the system. Moreover, we show that the
-  work done by a thermodynamic force in the transition region, that is a force originally derived on the basis of empirical thermodynamic considerations, is formally equivalent to balance the chemical
+  work done by \redc{the  transition region} is formally equivalent to balance the chemical
   potential difference between the different resolutions. From these results follows the main conclusion that the atomistic region exchanges
   molecules with the coarse-grained region in a Grand Canonical
   fashion with an accuracy up to (at least) second order. Numerical tests, for the relevant case of liquid water at ambient conditions, are carried out to strengthen the conclusions of the theoretical analysis.
@@ -89,7 +98,7 @@ Extensive numerical tests, for the relevant case of liquid water at ambient cond
 The results of this work allow us to make a step further in the possibility of employing the AdResS scheme as a natural, general numerical protocol for truly Grand Canonical Molecular Dynamics simulations
 independently from the nature of the particles acting as a reservoir in the coarse-grained region. The word {\it ``natural''} refers to the fact  that strictly speaking in statistical mechanics the Grand Canonical ensemble is defined in operative terms as a subsystem of an infinitely large system. Of course in simulation systems are never infinitely large, however they can be large enough to numerically satisfy this condition. 
 In this sense, in our approach molecules are exchanged between the atomistic domain and the coarse-grained reservoir in a straightforward (i.e.{\it ``natural''}) dynamical way. The advantage compared to previous Grand Canonical schemes for molecular dynamics is that the proper exchange of particles requires neither the knowledge or the calculation of the chemical potential, nor additional expensive insertion or removing of particles \cite{pet1,pet2,pet3,pet4,pet5,flo}; we actually compare the computational costs of our method to those of the IPM and show that for dense liquid systems AdResS is more efficient.
-The paper is organized as follows: first we briefly describe the essential principles on which AdResS is based, then we discuss the approximations under which one can write the probability distribution of the system in terms of Grand Canonical partition function. Next we show that the thermodynamic force balances the difference in chemical potential; this idea allows us to derive the necessary conditions of simulation to reach the accuracy in terms of orders of the probability distribution of the system. 
+The paper is organized as follows: first we briefly describe the essential principles on which AdResS is based, then we discuss the approximations under which one can write the probability distribution of the system in terms of Grand Canonical partition function. Next we show that the thermodynamic force \redc{and the thermostat} balances the difference in chemical potential; this idea allows us to derive the necessary conditions of simulation to reach the accuracy in terms of orders of the probability distribution of the system. 
 Finally the numerical results and the efficiency of the method are discussed.
 
 \begin{figure}
@@ -181,24 +190,24 @@ Where $w_i = w(\vect r_i)$ and $w_j = w(\vect r_j)$.
 $ \vect F^{\AT}_{ij}$, $ \vect F^{\CG}_{ij}$
 are the intermolecular interaction of the atomistic and coarse-grained
 resolutions, respectively.
-$\vect F_{ij}^{\rdf}$ is a force that corrects the COM-COM radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further one body force, named thermodynamic force, ${\vect F}^{\textrm{th}}$, is applied to ensure the correct thermodynamic equilibrium of the system (for specific details, see Ref.~\onlinecite{prlgc}):
+$\vect F_{ij}^{\rdf}$ is a force that corrects the COM-COM radial distribution function (RDF) in the transition region $\Delta$ ~\cite{rdfcorr}. A further one body force, named thermodynamic force, ${\vect F}_\thf$, is applied to ensure the correct thermodynamic equilibrium of the system (for specific details, see Ref.~\onlinecite{prlgc}):
 \begin{equation}
   {\vect F}_{i}=
   \sum_{j}{\vect F}_{ij}+
-  {\vect F}^{\textrm{th}}(\vect r_i),
+  {\vect F}_\thf(\vect r_i),
 \label{mody}
 \end{equation}
 which is defined by
 \begin{equation}
   p_{\AT}+
   \rho_0
-  \int_{\Delta} {\vect F}^\text{th}(\vect r)\,\dd d\vect r
+  \int_{\Delta} {\vect F}_\thf(\vect r)\,\dd d\vect r
   =p_{\CG},
   \label{thf}
 \end{equation}
 where $p_{\AT}$ is the pressure of the atomistic resolution, $p_{\CG}$ that of the coarse-grained resolution, $\rho_{0}$ is the equilibrium number density, corresponding to that of a full atomistic simulation.
 Such a thermodynamic force has been derived by empirical considerations regarding the equilibrium of open systems and is based on {\it forcing} the equality of the grand potential of the atomistic part with the rest of the system.
-This is then reduced to provide a balancing force to the difference of pressure at the wished uniform density of equilibrium. Regarding this point, one of the main results of this paper is that the thermodynamic force derived in this way corresponds to a force that balances the difference in chemical potential between the different regions. As a consequence (equilibrium of the chemical potential) the interpretation of the AdResS simulation as a Grand Canonical sampling is enforced even further.
+This is then reduced to provide a balancing force to the difference of pressure at the wished uniform density of equilibrium. \redc{\emph{please rephrase this sentence:} Regarding this point, one of the main results of this paper is that the thermodynamic force derived in this way corresponds to a force that balances the difference in chemical potential between the different regions. }As a consequence (equilibrium of the chemical potential) the interpretation of the AdResS simulation as a Grand Canonical sampling is enforced even further.
  A crucial point of this work is the following: the 
 AdResS scheme is not Hamiltonian~\cite{presolo,prlcomm}; however, under the hypothesis of fixing DOFs in the hybrid region for a statistical analysis, the atomistic and
 coarse-grained regions can be considered (in good approximation) Hamiltonian; this line of thought gives rise to the basic
@@ -339,10 +348,11 @@ These are the minimal necessary conditions involving the basic DOF's, that is th
 In general, the conditions of Eq.\ref{eqn:p-1-cond1} and Eq.\ref{eqn:p-1-cond2} would assure that at least at the first and second order $p(\vect x_2, N_2 | N_1)$ in the AdResS is the same as that of a full atomistic simulation. One needs to go at least at the second order, so that at the interface between the atomistic and transition region, the radial distribution functions of the atomistic part are not affected by artifact due to the deviation of the RDF's of the $\HY$ region from the correct atomistic reference. 
 We have shown numerically how the RDF correction, can be numerically implemented~\cite{rdfcorr}.
 Higher accuracy can be then systematically reached by enforcing the equivalence of higher orders of the distribution in the transition region.
-Next, we must show that $p(N_{1})$ is the same in AdResS and in the reference full atomistic simulation. The basic outline of arguments will be given in a following section while the (long) explicit calculations are reported in the Appendix~\ref{app:1}, however, before proceeding further we must first treat a key ingredient of this equivalence, that is the thermodynamic force. This force, in fact, is the crucial tool for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme (i.e. molecules are exchanged between the AT and CG region in conditions of equilibrium). 
-
+Next, we must show that $p(N_{1})$ is the same in AdResS and in the reference full atomistic simulation. \redc{\emph{please reconsider}: The basic outline of arguments will be given in a following section while the (long) explicit calculations are reported in the Appendix~\ref{app:1}, however, before proceeding further we must first treat a key ingredient of this equivalence, that is the thermodynamic force. This force, in fact, is the crucial tool for assuring the thermodynamic and statistical equilibrium of the AdResS system when compared to the reference full atomistic simulation. In the next section, we will show how this force, derived on intuitive ground to enforce the equality of some basic thermodynamic relations, as shown in Eq.\ref{thf}, is in fact formally equivalent to introduce the balance of chemical potential between the various region at the desired density of equilibrium. The balance of chemical potential is implicitly a strong argument in favor of the idea of AdResS as Grand Canonical-like scheme (i.e. molecules are exchanged between the AT and CG region in conditions of equilibrium). 
+}
 
 \subsection{Thermodynamic force: from empirical intuition to strict formalization within the Grand Canonical framework}
+\label{sec:th-gc}
 Intuitive thermodynamic considerations led to formula \eqref{thf}. In this section we show that, despite the argument used in Eq.\ref{thf} from Refs.\cite{prlgc,rdfcorr} has a strong empirical component, one can formally justify this force
 as a tool to balance the chemical potential of the various resolutions and, as a consequence,  a key aspect in interpreting AdResS as an effective Grand Canonical set up. 
 \begin{figure}
@@ -372,7 +382,7 @@ Here, two assumptions are made:
   short-range correlated.
   
 \end{enumerate}
-The equilibrium in the AT and CG region is assured by the membrane $\HY$ via the thermodynamic force. Conceptually, we assume there is an infinitely thin
+\redc{The equilibrium in the AT and CG region is assured by the membrane $\HY$.} Conceptually, we assume there is an infinitely thin
 ``filter'' (see Fig.~\ref{fig:tmp1}) located at the interface between
 the AT and CG regions. When a molecule enters into
 the AT region or leaves it, the filter does some work per molecule, $\omega_0$, on the atomistic system in order to assure the thermodynamic equilibrium.
@@ -505,12 +515,14 @@ N_1$ when the other thermodynamic variables are kept fixed, differentiating it w
   \omega_0 = \mu_{\CG}(N - \bar N_1, V_3, T)  - \mu_{\AT}(\bar N_1, V_1, T)
 \end{align}
 This means that the difference in the chemical potential between the AT and CG
-regions is taken care by the work of the filter.
-Now, if the thermodynamic force of Eq.\ref{thf} ensures an
-equilibrium that is the same as the full atomistic reference system,
-the related work produced by the thermodynamic force is nothing else than $\omega_0 $.
-In turn, this implies that the thermodynamic force assures the balance between the chemical potentials of the AT and CG resolution,
-namely:
+regions is taken care by the work of the filter. \redc{Now if
+the filter ensures and equilibrium
+that is the same as the full atomistic reference system, then}
+% Now, if the thermodynamic force of Eq.\ref{thf} ensures an
+% equilibrium that is the same as the full atomistic reference system,
+% the related work produced by the thermodynamic force is nothing else than $\omega_0 $.
+% In turn, this implies that the thermodynamic force assures the balance between the chemical potentials of the AT and CG resolution,
+% namely:
 \begin{align}\label{eqn:w-mu-diff}
   \omega_0 = \mu_{\CG}(\rho_0V_3, V_3, T) - \mu_{AT}(\rho_0 V_1, V_1, T)
 \end{align}
@@ -518,36 +530,73 @@ $\rho_0$ is the number density at which the atomistic and coarse-grained
 resolutions should match,
 namely $\bar N_1 = \rho_0V_1$ and $N - \bar N_1 = \rho_0(V - V_1)$ should apply.
 Eq.~\eqref{eqn:w-mu-diff} is a necessary
-condition for the thermodynamic force that ensures
+condition for \redc{the hybrid region} that ensures
 the correct equilibrium of the AT and CG regions.\\
 
 \noindent
-On the other hand, if we translate from the language of Helmholtz free
-energy into that of the grand potential, we have that
-under the thermodynamic limit, they are the same.
-Next, assuming the system reaches an
-equilibrium of flat number density profile of $\rho_0$ all over the AdResS simulation box, 
-Eq.~\eqref{eqn:a-energy-1} becomes:
-\begin{align}\label{eqn:g-energy-1}
-  G(\mu, V, T) \approx
-  \rho_0V_1\omega_0
-  + G_{\AT}(\mu_{\AT}, V_1, T) + G_{\CG}(\mu_{\CG}, V - V_1, T)
+\redc{
+The work done by the filter is composed by two parts:
+\begin{align}\label{eqn:w0-inte-qstat}
+  \omega_0 = \omega^\dadress_\thf + Q_\thermo,
 \end{align}
-where
+where $\omega_\thf$ is the integral of the thermodynamic force,
+% (the superscript D indicate this the thermodynamic force of the
+% force interpolation AdResS),
+and $Q_\thermo$ is the extra heat provided
+by the thermostat that equilibriates
+the system. This term exists for two reasons,
+firstly, the kinetic energy of a molecule is grows when it gains
+DOFs, and the extra DOFs are warmed up by the thermostat.
+Secondly, the force interpolation scheme is
+not conservative, so there is an artificial energy generation in the
+hybrid region, which is equilibriated by the thermostat~\cite{prlcomm}.
+We will show in Appendix~\ref{app:0} that
+$Q_\thermo = \omega_\dof + \omega_\res$, where $\omega_\dof$ is the
+kinetic energy increment
+due to the extra DOFs when a low resolution molecule gains
+finer resolution. According to the equipartition theorem, this term
+is equal to $\frac12 k_BT$ times the number of extra DOFs.
+The energy of changing representation $\omega_\res$ is defined by
 \begin{align}
-  G(\mu, V, T) = A(N, V, T) - \mu_{\AT} \bar N_1 - \mu_{\CG}(N - \bar N_1)
+  \omega_\res
+  = \int\dd d\vect r\,\nabla w(\vect r)\,
+  \big\langle w\, (U^\AT - U^\CG)\big\rangle_{\vect r}
 \end{align}
-Because of the equilibrium situation, the derivatives of r.h.s. of
-Eq.~\eqref{eqn:g-energy-1} with respect to atomistic volume $V_1$
-should vanish (the same argument as the Helmholtz free energy):
-\begin{align}
-  \rho_0\omega_0 = -p_{\AT}+p_{\CG} \quad\Longrightarrow\quad
-  p_{\AT} + \rho_0\omega_0 = p_{\CG}
-\end{align}
-which is exactly the definition of the thermodynamic force.
+where $\langle \cdot \rangle_{\vect r}$ is
+the local ensemble average measured at position $\vect r$, and $U^\AT - U^\CG$
+is the differece between the atomistic and coarse-grained intermolecular
+interaction.
+}
+\\
 
+% \noindent
+% On the other hand, if we translate from the language of Helmholtz free
+% energy into that of the grand potential, we have that
+% under the thermodynamic limit, they are the same.
+% Next, assuming the system reaches an
+% equilibrium of flat number density profile of $\rho_0$ all over the AdResS simulation box, 
+% Eq.~\eqref{eqn:a-energy-1} becomes:
+% \begin{align}\label{eqn:g-energy-1}
+%   G(\mu, V, T) \approx
+%   \rho_0V_1\omega_0
+%   + G_{\AT}(\mu_{\AT}, V_1, T) + G_{\CG}(\mu_{\CG}, V - V_1, T)
+% \end{align}
+% where
+% \begin{align}
+%   G(\mu, V, T) = A(N, V, T) - \mu_{\AT} \bar N_1 - \mu_{\CG}(N - \bar N_1)
+% \end{align}
+% Because of the equilibrium situation, the derivatives of r.h.s. of
+% Eq.~\eqref{eqn:g-energy-1} with respect to atomistic volume $V_1$
+% should vanish (the same argument as the Helmholtz free energy):
+% \begin{align}
+%   \rho_0\omega_0 = -p_{\AT}+p_{\CG} \quad\Longrightarrow\quad
+%   p_{\AT} + \rho_0\omega_0 = p_{\CG}
+% \end{align}
+% which is exactly the definition of the thermodynamic force.
+
+\noindent
 We remind the reader that the argument in this section is essentially based on a large deviations principle (namely, Laplace's method) for the number of particles in the AT region that entailed that $\bar N_{1}$ rather than $N_{1}$ can be considered as representative of the configuration realizations in the AT region. This implies that the particle fluctuations, $\Delta N_{1}$,
-are negligible compared to $\bar N_{1}$ in the AT region. This hypothesis is valid if the AT region is large enough so that $\bar N_{1}$ is large. This point seems to be true in all numerical experiments done so far (see, e.g., Ref.~\onlinecite{debash}). In this way, we have shown the formal derivation of the thermodynamic force as a tool to balance the chemical potential between the two regions. For a Grand Canonical-like set up, the balance of chemical potential between open regions is a necessary condition to have the exchange of molecules in thermodynamic equilibrium and as a consequence we have formally justified why Eq.\ref{thf} is a necessary condition for AdResS to be considered an effective Grand Canonical set up.
+are negligible compared to $\bar N_{1}$ in the AT region. This hypothesis is valid if the AT region is large enough so that $\bar N_{1}$ is large. This point seems to be true in all numerical experiments done so far (see, e.g., Ref.~\onlinecite{debash}). In this way, we have shown the formal derivation of the thermodynamic force \redc{and the thermostat} as a tool to balance the chemical potential between the two regions. For a Grand Canonical-like set up, the balance of chemical potential between open regions is a necessary condition to have the exchange of molecules in thermodynamic equilibrium and as a consequence we have formally justified why Eq.\ref{thf} is a necessary condition for AdResS to be considered an effective Grand Canonical set up.
 
 
 \subsection{The number probability $p(N_1)$}
@@ -565,7 +614,7 @@ Essentially the arguments of this equivalence are two; the 1st order accuracy of
 \begin{align}\label{eqn:mu-eq}
   \mu_{\CG} &= \mu_{\AT} + \omega_0
 \end{align}
-This, in the previous section, has been shown to hold because of the action of the thermodynamic force for the thermodynamic limit. 
+This, in the previous section, has been shown to hold because of the action of the \redc{transition region} for the thermodynamic limit. 
 Whether or not the size of standard and feasible molecular simulations can be considered, effectively, in the thermodynamic limit will be checked later on with numerical tests; however we can anticipate that the answer is positive for systems whose size and time of simulation are nowadays routinely done.
 The 2nd order of accuracy, requires the equality for the compressibility:
 \begin{align}\label{eqn:kappa-eq}
@@ -725,13 +774,13 @@ Fig.~\ref{fig:wca-dist} shows the COM-COM, H-O and H-H
     All the RDFs are compared with full atomistic reference system (EX).
     Finally, Fig.~\ref{fig:wca-g3} compares the 3-body correlation $\corr$
     with the atomistic reference
-    system (this latter reported in the first row of Fig.~\ref{fig:tmp2b}), and plots the difference. It must be noticed that in this case, on purpose, we want to investigate a {\it ``worst case scenario''} and thus we did not apply the RDF corrective force in the transition region. In this way we can understand whether or not the application of the thermodynamic force only, is sufficient from the numerical point of view to reproduce the Grand Canonical-like environment for the AT region.
+    system (this latter reported in the first row of Fig.~\ref{fig:tmp2b}), and plots the difference. It must be noticed that in this case, on purpose, we want to investigate a {\it ``worst case scenario''} and thus we did not apply the RDF corrective force in the transition region. In this way we can understand whether or not the application of the \redc{\emph{several places of mentioning thermodynamic force, is it OK?} thermodynamic force} only, is sufficient from the numerical point of view to reproduce the Grand Canonical-like environment for the AT region.
     According to our theoretical framework, in absence RDF corrective force only the first order of the distribution (i.e. the density profile)
-    is corrected by the thermodynamic force in the $\HY$ region.
+    is corrected by the \redc{thermodynamic force} in the $\HY$ region.
     However, numerically, Fig.~\ref{fig:wca-dist} shows a second order accuracy (correct RDFs) in the HY I region as well. Instead, the 3-body
     correlation in HY I deviates from the full atomistic reference; this is the price we pay for this ``worst case scenario'' set up. Nevertheless, the accuracy reached in the transition region is sufficient in order to have, at least up to the second order, the AT region of the WCA AdResS equivalent to the corresponding subregion in the full atomistic reference.
     Furthermore, numerical results  (Fig.~\ref{fig:wca-g3}) show that, in the AT region, even the 3-body correlation $\corr$ is nonetheless very accurate. 
-  This means that, from the numerical point of view, even only the work of the thermodynamic force, by allowing an exchange of particles under conditions of equilibrium of the chemical potential, is sufficient to assure the correct equilibrium of the atomistic region. The possible application of the corrective force on the RDF's in $\Delta$ in the case of liquid water is, in this case, numerically not required, but in case of necessity it would anyway represent a systematic tool for improving accuracy. 
+  This means that, from the numerical point of view, even only the work of the \redc{thermodynamic force}, by allowing an exchange of particles under conditions of equilibrium of the chemical potential, is sufficient to assure the correct equilibrium of the atomistic region. The possible application of the corrective force on the RDF's in $\Delta$ in the case of liquid water is, in this case, numerically not required, but in case of necessity it would anyway represent a systematic tool for improving accuracy. 
   Summarizing, results reported in Figs.~\ref{fig:wca-den}, \ref{fig:wca-dist} and \ref{fig:wca-g3} show that in the atomistic region the accuracy at the third order and particle number fluctuations, for which the filter in the transition region is designed, are well preserved; that is the atomistic region exchange particle and energy with the reservoir in a proper Grand Canonical fashion (up to the level of approximation decided {\it a priori}). Being the molecules in the coarse-grained region a generic liquid model, we have proved numerically that indeed the adaptive technique employed here can be considered as a tool for general Grand Canonical Molecular Dynamics simulations. 
 
 \section{Computational efficiency of AdResS as a Grand Canonical set up}
@@ -790,12 +839,33 @@ These results in terms of computational resources are summarized in Table~\ref{t
   \label{fig:tmp4}
 \end{figure}
 Moreover, in previous work, Praprotnik {\it et al.} \cite{delgado2009coupling} have shown that the coarse-grained region of AdResS can be easily coupled to the continuum; this has the non trivial advantage that the insertion of a sphere in a liquid of spheres by IPM is by far much simpler than inserting an atomistically structured molecule in a liquid of atomistic molecules. Fig.~\ref{fig:tmp4} shows the extremely fast convergence for inserting a particle in our ``reservoir'' of spherical particles compared to that of a full atomistic system. This means that in the long term perspective the part of the algorithm of Praprotnik {\it et al.} could be merged with our current approach and thus allow for even smaller sizes of the reservoir region. However, this extension, though conceptually straightforward goes beyond the scope of this paper. In general, there have been a large number of developments for the GC idea based on the {\it ``grow-in''} and {\it ``shrink-out''} MD approach (see e.g. Lynch and Petitt \cite{pet5} and Eslami and M\"uller-Plate \cite{flo}) however, all of them  share the same basic principle and face the same problem of the IPM. This numerical experiment shows that despite the need of a reservoir, our computation is by far more efficient than any other technique so far used.
- 
 
+\redc{
+  It is also possible to use the AdResS to measure the chmical potential.
+  Since applying IPM is general much easier for the CG molecule, 
+  by relation~\eqref{eqn:w-mu-diff} that gives the chemical potential
+  difference between the AT and CG resolutions, the chemical potential of
+  the AT resolution can be easily calculated.
+  Since the chemical potential is the first order quantity of the
+  system, we only consider the first order correction (the thermodynamic
+  force without RDF correction) and the first order CG model --
+  the WCA potential.
+  For water system the resulting chemical potential is -22.7\,\textsf{kJ/mol}.
+  Unfortunatly, we do not have the converged IPM result to compare,
+  however, we find our result consists with the literature value
+  -23.5\,\textsf{kJ/mol}~\cite{flo} very well.
+  To be more sure, we also test the method in the modeling system:
+  the AT molecules are modelled by spherical particles
+  interacting via the $r^{-12}$ repulsive
+  interaction, the CG molecules are modelled by the WCA potential.
+  The AdResS measured chemical potential is 56.0\,\textsf{kJ/mol},
+  which is consistent with
+  the IPM  result: 55.4 \,\textsf{kJ/mol}.
+}
 
 \section{Conclusions}
 We have shown a detailed theoretical analysis about the validity, the limitations and meaning of the AdResS method within the framework of a Grand Canonical ensemble.
-Using strict formal arguments, we have demonstrated the origin of the thermodynamic force: a tool to balance the difference in chemical potential due to the different resolutions in space.
+Using strict formal arguments, we have demonstrated the \redc{work of the transition region as} a tool to balance the difference in chemical potential due to the different resolutions in space.
   The theoretical results, derived under the assumption of thermodynamic limit, are then checked with several numerical tests. These latter represent a {\it "worst scenario''} case since the conditions of simulation are not ideal as in the analytical procedure.
 Next, we have shown that, under given hypothesis, $p(N_{1})$, the probability distribution in the atomistic region of AdResS, is equivalent to that in the same region in a full atomistic simulation up to the accuracy of second order. We have further strengthen our hypothesis and conclusions by carrying out a numerical experiment for the case of liquid water at ambient conditions where we could even go beyond the COM RDF. 
 A further numerical experiment was made where the atomistic-based coarse-grained model was substituted by a generic liquid of spheres interacting via WCA potential. Results show that the accuracy in the atomistic region is the same as that of AdResS based on a coarse-grained model derived from the full atomistic reference system; this strengthen the idea of AdResS as a tool for coupling the atomistic region to a generic source of energy and particles in a Grand Canonical manner. Finally we validate the efficiency of our method as a Grand Canonical set up comparing its computational performance to that of well established and largely used alternative methods.
@@ -815,6 +885,200 @@ It was also supported in part by the National Science Foundation under Grant No.
 
 
 \appendix
+
+\section{Calculating the work of the thermostat}\label{app:0}
+\redc{
+  To calculate the work of the thermostat, it is convenient to use
+  an auxilary Hamiltonian approach, 
+where we consider the potential interpolation of the
+high and low resolutions:
+\begin{align}
+  U =
+  \sum_{i<j} w_i w_j\,
+  U^\AT_{ij}
+  +
+  \sum_{i<j}(1- w_i w_j)\,
+  U^\CG_{ij}
+\end{align}
+The corresponding intermolecular force is given by
+\begin{align}\label{eqn:interpol-f}
+  \vect F_{ij} =
+  w_i w_j
+  \vect F^\AT_{ij}
+  +
+  (1- w_i w_j)
+  \vect F_{ij}^\CG
+  -
+  \nabla w_i \,w_j
+  (U^\AT_{ij} - U^\CG_{ij})
+\end{align}
+We define the force of changing representation:
+\begin{align}
+  \vect F_{\res,i} = 
+  \sum_j \nabla w_i \,w_j (U^\AT_{ij} - U^\CG_{ij})
+\end{align}
+The difference between the potential interpolation and force
+interpolation AdResS is the extra force of
+changing representation $\vect F_\res$,
+which violates the Newton's
+action-reaction law.
+By using the same process as the force interpolation AdResS,
+we can calculate the thermodynamic force for the
+energy interpolation interpolation AdResS,
+which is denoted by $\vect F_\thf^\hadress$
+(the superscript H indicates this is the thermodynamic force of the
+potential interpolation based AdResS). Numerical result shows
+(not presented in the paper) that the energy interpolation AdResS
+has the same equilibrium as the force interpolation AdResS
+upto the first order (correct equilibrium density).
+With the potential interpolation, we can write the global Hamiltonian
+for the whole system.
+Since the
+potential interpolation reduces to the AT and CG potentials in the AT and
+CG regions, by assuming the filter is infinitely thin, we approximately
+write the fixed-number partition function:
+\begin{align}
+  q(N, V, T)
+  \approx
+  \frac1{N!}\int\dd d\vect x_1\dd d\vect x_3\,
+  e^{\mh(\vect x_1, N_1, \vect x_3, N_3) +  N_1(\omega^\hadress_\thf + \omega_\dof)}
+  =
+  \frac1{N!}\int\dd d\vect x_1\dd d\vect x_3\,
+  e^{\mh^\AT_{N_1}(\vect x_1) +\mh^\CG_{N_3}( \vect x_3) +
+  N_1(\omega^\hadress_\thf + \omega_\dof)}
+\end{align}
+Since the system is energy conservative,
+the work of the filter is identical to $\omega^\hadress_\thf+ \omega_\dof$,
+whre $\omega^\hadress_\thf$ is the integral
+of the thermodynamic force, and  $\omega_\dof$ is the extra
+kinetic energy, when turning on extra degrees of freedom in
+the AT region. For rigid water system, $\omega_\dof = \frac32
+k_BT$. Following the same argument of the proof in
+Sec.~\ref{sec:th-gc}, we have
+\begin{align}\label{eqn:mueq-h}
+  \omega^\hadress_\thf + \omega_\dof = \mu_\CG - \mu_\AT
+\end{align}
+We will show
+later the Hamiltonian only provides us with theoretical convenience
+for writing down the canonical partition function of the system, in
+practice, the traditional force interpolation AdResS is more
+applicable. We will also show later the relation between the AdResS of
+potential interpolation and force interpolation.
+\\
+
+\noindent
+Now assume an infinitesimal increment of the volume $\Delta V$ of the
+AT region, and the same decrement of the volume $-\Delta V$ of the CG
+region. Without lost of generality, we assume this
+volume change is  along the $x$ axis.
+The volume of the hybrid region is kept the same,
+so it is a ``piston''
+moves toward the CG region by $\Delta L$,
+where we assume $\Delta V = \Delta L\cdot A$, where $A$ is the
+cutting surface area (the size of box along $y$ times the size along $z$).
+Please also notice by this infinitesimal change of volume, one can
+guarantee no molecules changes resolution.
+Therefore, the change of the free energy of the system is
+\begin{align}
+  \Delta A \approx
+  A_\AT(N_1, V_1+\Delta V, T) +
+  A_\CG(N_3, V_3-\Delta V, T) -
+  \int\dd d x\, \rho_0 A\cdot \Delta L\cdot
+  \Big[
+  \vect F^\hadress_\thf(x) -
+  \big\langle \vect F_\res(x)\big\rangle
+  \Big]
+\end{align}
+The last term comes from the work done on the piston. It is composed by
+two parts, the fist is the work done by the thermodynamic force, and the
+second is due to 
+the force of changing representation, which does not satisfies the Newton's
+action-reaction law. The fist and second part of Eq.~\eqref{eqn:interpol-f}
+do not contribute, because they obey the Newton's action-reaction law, so
+they are self-canceled.
+By some straightforward calculations, we have 
+\begin{align}\label{eqn:peq-d}
+  \Delta A \approx
+  -p_\AT\Delta V + p_\CG\Delta V -
+  \rho_0 \Delta V (\omega_\thf^\hadress - \omega_\res)  
+\end{align}
+Where $ \omega_\res$ is the work of changing representation,
+\begin{align}
+  \omega_\res
+  = \int\dd d x\,\langle \vect F_\res (x)\rangle
+  = \int\dd d x\,\nabla\omega(x)\,
+  \big\langle \omega\, (U^\AT - U^\CG)\big\rangle_x
+\end{align}
+In equilibrium, $\Delta A / \Delta V = 0$ yields
+\begin{align}\label{eqn:peq-h}
+  \rho_0 (\omega_\thf^\hadress - \omega_\res) = p_\CG - p_\AT
+\end{align}
+For the force interpolation AdResS, by definition Eq.~\eqref{thf},
+we have
+\begin{align}\label{eqn:peq-d}
+  \rho_0\, \omega_\thf^\dadress  = p_\CG - p_\AT  
+\end{align}
+The superscript D indicate the work is of the force interpolation AdResS.
+From Eq.~\eqref{eqn:peq-h} and \eqref{eqn:peq-d}, we have the relation between
+the potential interpolation and force interpolation AdResS:
+\begin{align}\label{eqn:hd-rel}
+  \omega_\thf^\dadress =  \omega_\thf^\hadress - \omega_\res 
+\end{align}
+In the water system considered by the present paper,
+$\omega^\hadress_\thf - \omega^\dadress_\thf = 34.9 \,\textsf{kJ/mol}$, and
+if measure in the energy interpolation AdResS simulation,
+$\omega_\res = 35.0 \,\textsf{kJ/mol}$,
+if measure in the force interpolation AdResS simulation,
+$\omega_\res = 34.6 \,\textsf{kJ/mol}$.
+Since the force of changing representation has always the same
+direction as $-\nabla w$, and so does the thermodynamic force, the
+above equation indicates that the force of changing representation is
+actually canceled by the thermodynamic force in the potential
+interpolation AdResS, and ends up the same simulation as the force
+interpolation AdResS. The consistence of the $\omega_\res$ measurement
+also indicates this point. Therefore, we propose the relation between
+the thermodynamic force of the energy interpolation AdResS and
+force interpolation AdResS:
+\begin{align}
+  \vect F_\thf^\dadress \approx \vect F_\thf^\hadress - \vect F_\res
+\end{align}
+The numerical proof of this relation in the water system
+is given in Fig.~\ref{fig:diff-thf}.
+In practice, the force interpolation AdResS has
+the convenience of systematically improve the accuracy,
+so it is much more favorable than the potential interpolation
+AdResS.\\
+\begin{figure}
+  \centering
+  \includegraphics[]{diff-thf.eps}
+  \caption{\redc{The difference between the thermodynamic force of the
+    energy interpolation and force interpolation AdResS.
+    The green solid line shows the difference of the thermodynamic
+    forces, i.e. $\vect F_\thf^\hadress - \vect F_\thf^\dadress$.
+    The red and blue cross indicates the work of changing
+    representation. The former was measured in an energy interpolation
+    AdResS, while the later was measured in a force interpolation
+    AdResS.}
+  }
+  \label{fig:diff-thf}
+\end{figure}
+
+\noindent
+In the  equilibrium of energy interpolation AdResS, the work
+of the filter is $\omega_\thf^\hadress + \omega_\dof$. In the equilibrium
+of the force interpolation AdResS,
+by using relation Eq.~\ref{eqn:hd-rel},
+the work of the filter is
+$\omega_\thf^\dadress + Q_\thermo = \omega^\hadress_\thf + \omega_\dof
+- \omega_\res -\omega_\dof + Q_\thermo$. Since the energy and force
+interpolation reach the same thermodynamic equilibrium, the work
+of the filter should be the same, this eventually indicates
+\begin{align}
+  Q_\thermo = \omega_\res + \omega_\dof.  
+\end{align}
+}
+
+
 
 \section{The number probability $p(N_1)$}\label{app:1}
 In this section, we define at which level of approximation $p(N_{1})$, in AdResS is the same as in a full atomistic simulation. 
