@@ -1,0 +1,93 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{german}
+\usepackage{a4}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{pslatex}
+
+\newcommand{\bluec}[1]{{\color{blue} #1}}
+\newcommand{\corr}{C^{(3)}}
+\newcommand{\vect}[1]{\textbf{\textit{#1}}}
+
+\pagestyle{empty}
+\parindent0cm
+\addtolength{\textheight}{2cm}
+\renewcommand{\sfdefault}{cmss}
+\renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\kopf}{\noindent
+\raisebox{2.5cm}[0cm][0cm]
+{
+\parbox[c]{0.88\textwidth}
+{
+\begin{center}
+\textsc{Luigi Delle Site, Heisenberg Fellow}
+\end{center}
+}
+}
+\raisebox{2cm}[0cm][0cm]{\rule{\textwidth}{0.2mm}}}
+
+
+\begin{document}
+%\kopf
+
+\hfill\raisebox{1.5cm}[0cm][0cm]
+{\parbox[t]{0.34\textwidth}
+{Luigi Delle Site\\
+Heisenberg Fellow\\
+Institute for Mathematics, Freie Universit\"{a}t Berlin\\
+Arnimallee 6, D-14195 Berlin\\
+Tel:\ \ (030) 838 75367\\
+Fax:\ \ (030) 838 75412\\
+{\small e-mail:\\luigi.dellesite@fu-berlin.de}
+}}
+
+\noindent\raisebox{1.05cm}[0cm][0cm]
+{\fbox{\parbox[t]{0.45\textwidth}
+{To Dr.Ling Miao\\
+Editor of Physical Review X 
+}}}
+
+\vspace{3cm}
+
+\textbf{Manuscript revision: Reply to the first Referee}
+
+\vspace{2cm}
+Dear Dr. Miao\\
+Thank you very much for the reports about our paper. We are very happy to see that the paper is considered for publication on PRX and that the two referee reports are very positive.\\
+We have fulfilled the minor requests of the first referee. 
+Next, you have also asked to fulfill and comment his/her major request:\\
+ {\it ``However, to make things perfectly clear, I think the authors should explain how this approach could be
+used to achieve the primary purpose of IPM; that is, computing the chemical potential. How could I set up
+an AdDreS-based simulation to compute the chemical potential''}.\\
+
+Although at the beginning we thought that one of the advantages of our method was that the explicit calculation of the chemical potential was not required for  Grand Canonical simulations and despite the primary intention of this paper is not that of developing {\bf also} a more efficient tool for the calculation of the chemical potential, after we have performed the comparison between AdResS and IMP we started to wonder whether AdResS could be also an efficient method to calculate such a quantity.  For this reason we have spent some time during these holidays and developed something along these directions. In first instance we thought to develop it further in the future (applying to a very large variety of systems) and then make out of it a proper paper. However, since the referee asked for it, we decided to show our idea and test it on a broad variety of toy systems (spherical liquids) and one realistic important system (liquid water).\\
+In the revised version we include our current results. Essentially what we have added is the following: We provide a way to calculate the chemical potential with AdResS and prove numerically the equivalence (within a difference, at the worst,  of $8\%$) with the results obtained with IPM for several cases, the most important of which, as we said, is liquid water. However, despite the successful application, since in the current formulation the procedure is based on very practical considerations, we would prefer that it is considered a preliminary approach that needs further conceptual and, possibly, numerical improvements, although it seems that the essential ingredients are all well identified and properly treated. We have explicitly written this consideration in the revised version.\\
+
+An important point that we must bring to your attention and to the attention of the referee is the following: while developing the procedure for calculating the chemical potential, we found out from numerical experiments that the work of the thermodynamic force was not sufficient for understanding the difference in chemical potential between atomistic and coarse-grained (reservoir) resolution. In fact, from some previous papers on AdResS (of which the references are given in this work)  we were aware that there was an additional work done by the thermostat  due to the fact that the transition region is actually finite and that in this region the particles slowly acquire a different molecular representation. However because of the approximation of infinitesimally thin transition region and exact separation of interactions, we have erroneously implied that the work of the thermostat must have been numerically negligible.\\
+The theoretical derivation of the balance of the chemical potentials presented in previous version of the paper is not wrong, but the assumptions are too ideal for real calculations. We are happy to have identified this weakness and amended for it by adding the work of the thermostat in the formal derivation (the formal derivation remains essentially the same, only the work of the thermostat is added to that of the thermodynamic force) and revised few sentences to make them consistent with the addition of the new quantity. The only question left was how to calculate it numerically in an efficient way. The efficient numerical calculation of this quantity  is at the basis of the procedure we have then developed for the calculation of the chemical potential.\\
+Indirectly, this revised and more precise formulation should satisfy also the second referee regarding the point where he states:\\
+{\it ``....I might not agree with the more ecumenical
+aspects of their approach...}\\
+In fact now there are less ecumenical aspects and more numerically proved statements.\\
+
+As for the previous revision, the additions/corrections are in red to allow the referee to locate them in the text.\\
+
+Finally, at this point the value of the paper goes much beyond the level we had at the first submission to PRX, thus we are confident that now it may be ready for acceptance.\\
+
+Below we also provide the  the required accompanying Popular Summary as you have asked in the last e-mail:\\
+
+{\bf An algorithm which allows Molecules to change representation according to their position in space during a simulation can be employed as a Grand Canonical scheme in Molecular Dynamics with the obvious advantage of treating a relatively small region at a high resolution coupled with a reservoir that assures thermodynamic equilibrium.
+}\\
+
+In case the paper is accepted and a representative figure is require we will prepare a proper one.
+
+
+
+Best Regards\\
+
+
+
+Luigi Delle Site\\
+(On behalf of all authors)\\
+\end{document}
