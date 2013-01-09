@@ -28,7 +28,10 @@
 \newcommand{\rdf}{{\textrm{rdf}}}
 \newcommand{\thf}{{\textrm{th}}}
 \newcommand{\dof}{{\textrm{dof}}}
-\newcommand{\res}{{\textrm{res}}}
+\newcommand{\res}{{\textrm{rep}}}
+\newcommand{\ext}{{\textrm{extra}}}
+\newcommand{\exc}{{\textrm{exc}}}
+\newcommand{\thermo}{{\textrm{Q}}}
 \newcommand{\hadress}{{\textrm{H}}}
 \newcommand{\dadress}{{\textrm{D}}}
 \newcommand{\mh}{\mathcal H}
@@ -88,13 +91,24 @@ The difference between the potential interpolation and force
 interpolation AdResS is the extra force of
 changing representation $\vect F_\res$,
 which violates the Newton's
-action-reaction law. With the potential interpolation, we can write down
+action-reaction law.
+The equilibrium of the potential interpolation AdResS
+is ensured by the thermodynamic force that is denoted
+by $\vect F_\thf^\hadress$.
+Throughout this note,
+we use the superscript H to indicate this is the thermodynamic force of the
+potential interpolation  AdResS, and to distinguish that
+of the force interpolation AdResS (standard AdResS)
+that is denoted by superscript D.
+With the potential interpolation, we can write down
 the \emph{global} Hamiltonian for the \emph{whole} system.
 By coupling this system
 to the Langevin thermostat, we can safely write the Boltzmann
 distribution for the system, i.e.  $\frac 1Ze^{\beta\mh}$.  Since the
 potential interpolation reduces to the AT and CG potentials in the AT and
-CG regions, by assuming the filter is infinitely thin, we approximately
+CG regions,
+% by assuming the filter is infinitely thin,
+we approximately
 write the fixed-number partition function (like the eq.(16) of the old prove)
 \begin{align}
   q(N, V, T)
@@ -107,27 +121,37 @@ write the fixed-number partition function (like the eq.(16) of the old prove)
   N_1(\omega^\hadress_\thf + \omega_\dof)}
 \end{align}
 $\omega^\hadress_\thf$ is the energy contribution due to the integral
-of the thermodynamic force,
-and the superscript H indicates this is the thermodynamic force of the
-potential interpolation based AdResS.  $\omega_\dof$ is the energy
+of the thermodynamic force.
+$\omega_\dof$ is the energy
 given by the thermostat, when turning on extra degrees of freedom in
 the AT region. For rigid water system, $\omega_\dof = \frac32
 k_BT$. Following the same argument of the old proof, we have
 \begin{align}\label{eqn:mueq-h}
   \omega^\hadress_\thf + \omega_\dof = \mu_\CG - \mu_\AT
 \end{align}
-\redc{Here, the new proof is basically the same as the old one, the
-  difference is at the very beginning: the force interpolation
-  AdResS is lack of a global
-Hamiltonian, one cannot safely \emph{assume} the Boltzmann distribution
-of the {whole} system, i.e., the 1st line of Eq~(16) of the old proof is
-problematic.}
 We will show
-later the Hamiltonian only provides us with theoretical convenience
+later the Hamiltonian approach only provides us with theoretical convenience
 for writing down the canonical partition function of the system, in
 practice, the traditional force interpolation AdResS is more
 applicable. We will also show later the relation between the AdResS of
 potential interpolation and force interpolation.
+For the force interpolation AdResS, the chemical potential difference 
+(provided in the new manuscript) is
+\begin{align}\label{eqn:mueq-d}
+  \omega^\dadress_\thf + \omega_\dof + \omega_\thermo^\ext = \mu_\CG - \mu_\AT  
+\end{align}
+The work of the thermostat is composed by two parts: $\omega_\dof +
+\omega_\thermo^\ext$. The second term is the extra work of the
+thermostat, which comes from the lack of energy conservation due to
+the force interpolation, and the different interaction in different
+resolution regions. They was not counted by the old manuscript, and shown in
+the new manuscript to be crucial for measuring the chemical potential.
+% \redc{Here, the new proof is basically the same as the old one, the
+%   difference is at the very beginning: the force interpolation
+%   AdResS is lack of a global
+% Hamiltonian, one cannot safely \emph{assume} the Boltzmann distribution
+% of the {whole} system, i.e., the 1st line of Eq~(16) of the old proof is
+% problematic.}
 \\
 
 \noindent
@@ -185,15 +209,39 @@ the potential interpolation and force interpolation AdResS:
 \begin{align}\label{eqn:hd-rel}
   \omega_\thf^\hadress - \omega_\res =  \omega_\thf^\dadress 
 \end{align}
+From Eq.~\eqref{eqn:mueq-h}, \eqref{eqn:mueq-d} and \eqref{eqn:hd-rel}, we
+find the extra work of the thermostat being identical to the work of changing
+representation:
+\begin{align}
+  \omega_\thermo^\ext = \omega_\res
+\end{align}
 Since the force of changing representation has always the same
 direction as $-\nabla w$, and so does the thermodynamic force, the
 above equation indicates that the force of changing representation is
 actually canceled by the thermodynamic force in the potential
 interpolation AdResS, and ends up the same simulation as the force
-interpolation AdResS.  In practice, the force interpolation AdResS has
+interpolation AdResS. This indicates a much stronger statement than Eq.~\eqref{eqn:hd-rel}:
+\begin{align}
+  \vect F_\thf^\hadress - \langle\vect F_\res\rangle = \vect F_\thf^\dadress
+\end{align}
+This relation is numerically checked by the AdResS water simulation, please see Fig.~\ref{fig:tmp1}.
+\begin{figure}
+  \centering
+  \includegraphics[]{fig/diff.thf/diff-thf.eps}
+  \caption{The difference between the thermodynamic force of the
+    potential interpolation-based scheme and force interpolation of the standard AdResS.
+    The green solid line shows the difference of the thermodynamic
+    forces, i.e. $\Delta{\vect F}_\thf={\vect F}_\thf^\hadress-{\vect F}_\thf^\dadress$.
+    The blue and red symbols indicate the quantity $\langle \vect F_\res\rangle = \langle w\nabla w(U^{\AT}-U^{\CG})\rangle$ calculated in the two different approaches (blue corresponds to the standard AdResS while red to the Hamiltonian-based approach). The equivalence between the two approaches is suggested by the fact that $\Delta{\vect F}_\thf$ corresponds to $\langle \vect F_\res\rangle$, and that this latter is actually the same independently from the approach used to calculate it.}
+  \label{fig:tmp1}
+\end{figure}
+In practice, the force interpolation AdResS has
 the convenience of systematically improve the accuracy,
 so it is much more favorable than the potential interpolation
-AdResS.
+AdResS. In comparison, the potential interpolation AdResS
+shown here only has the first order of accuracy (only the density is
+fixed by the $\vect F_\thf^\hadress$), and the systematical accuracy
+improvement looks complicated.
 
 
 \section{Numerical tests}
@@ -235,7 +283,6 @@ The result of the water system is:
     &p_\CG - p_\AT = (9627.52 - 350.1) \,\textsf{Bar} / \rho_0 = 16.8  \,\textsf{kJ/mol} \\
     &\omega^\dadress_\thf = 16.6  \,\textsf{kJ/mol}
   \end{align}
-  continue to the next page...
 \item check Eq.~\eqref{eqn:hd-rel}
   \begin{align}
     &\omega^\hadress_\thf - \omega^\dadress_\thf = 34.9 \,\textsf{kJ/mol}\\
