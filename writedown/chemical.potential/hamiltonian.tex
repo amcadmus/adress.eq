@@ -1,0 +1,511 @@
+% \documentclass[aip,jcp,preprint,unsortedaddress,a4paper,onecolum]{revtex4-1}
+\documentclass[aip,jcp,a4paper,reprint,onecolumn]{revtex4-1}
+% \documentclass[aps,pre,twocolumn]{revtex4-1}
+% \documentclass[aps,jcp,groupedaddress,twocolumn,unsortedaddress]{revtex4}
+
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage[dvips]{graphicx}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\makeatletter
+\makeatother
+
+\newcommand{\recheck}[1]{{\color{red} #1}}
+\newcommand{\redc}[1]{{\color{red} #1}}
+\newcommand{\bluec}[1]{{\color{blue} #1}}
+\newcommand{\greenc}[1]{{\color{green} #1}}
+\newcommand{\vect}[1]{\textbf{\textit{#1}}}
+\newcommand{\dd}[0]{\textsf{d}}
+
+\newcommand{\AT}{{\textrm{{AT}}}}
+\newcommand{\EX}{{\textrm{EX}}}
+\newcommand{\CG}{{\textrm{CG}}}
+\newcommand{\HY}{{\Delta}}
+\newcommand{\rdf}{{\textrm{rdf}}}
+\newcommand{\mh}{\mathcal H}
+\newcommand{\kin}{\textrm{kin}}
+\newcommand{\trans}{\textrm{T}}
+\newcommand{\footh}{\textrm{\tiny H}}
+\newcommand{\footo}{\textrm{\tiny O}}
+\newcommand{\dgenq}{\dot{\underline{\vect q}}}
+\newcommand{\dgenp}{\dot{\underline{\vect p}}}
+\newcommand{\genq}{{\underline{\vect q}}}
+\newcommand{\genp}{{\underline{\vect p}}}
+
+
+\begin{document}
+
+\title{Analytical investigation of the chemical potential in three-point-charge water system}
+\author{Han Wang}
+\author{Christof Sch\"utte}
+\author{Luigi Delle Site}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+\section{The Hamiltonian approach of chemical potential}
+The indexes of the molecules in the system are denoted by
+the Latin alphabeta, while the atoms on the molecule are denoted
+by the Greek alphabeta. The coordinate of a atom that is written
+as $\vect r_{i,\alpha}$ indicates that it is the $\alpha$-th atom on
+the $i$-th molecule. The COM coordinate of the molecule is denoted
+by $\vect R_i$. Clearly
+\begin{align}
+  \vect R_i = \vect R_i(\vect r_{i,1}, \cdots, \vect r_{i,A}) =
+  \sum_{\alpha=1}^A\frac{m_{i,\alpha}\vect r_{i,\alpha}}{M_i}
+\end{align}
+We use the potential interpolation of the
+system:
+\begin{align}
+  V =
+  \sum_{i,j} w(\vect R_i) w(\vect R_j)
+  \sum_{\alpha,\beta} V^\AT (\vect r_{i,\alpha} - \vect r_{j,\beta})
+  +
+  \sum_{i,j}[1- w(\vect R_i) w(\vect R_j)]
+  V^\CG(\vect R_i - \vect R_j)
+\end{align}
+The computer program actually keeps track of the dynamics of all atoms
+even though the molcules are in the CG region. This treatment makes the
+theoretical analysis easy, and it also saves the computational cost,
+because in the CG region only the COM-COM interactions are calculated.
+
+\section{Integrating out the rotational degrees of freedom in the partition function}
+
+Only in this section, for simplicity, we denote the three atoms on
+water molecule by $\vect r_1, \vect r_2, \vect r_3$, and the COM
+coordinate by $\vect R$. The water molecule, as modeled by a rigid
+body, can be fully described by the COM coordinate and three Eulerian
+angles: $(\phi, \theta, \psi)$. The rotational matrix is given by
+\begin{align}
+  A =
+  \left[
+  \begin{array}{rrr}
+    \cos\psi \cos\phi - \cos\theta \sin\phi \sin\psi &
+    \cos\psi \sin\phi + \cos\theta \cos\phi \sin\psi &
+    \sin\psi \sin\theta \\
+    -\sin\psi \cos\phi - \cos\theta \sin\phi \cos\psi &
+    -\sin\psi \sin\phi + \cos\theta \cos\phi \cos\psi &
+    \cos\psi \sin\theta \\
+     \sin\theta \sin\phi &
+     -\sin\theta \cos\phi &
+     \cos\theta
+   \end{array}
+   \right]
+\end{align}
+Then the atom positions  $\vect r_1, \vect r_2, \vect r_3$ are given by
+\begin{align}\label{eqn:trans-1}
+  \vect r_1 & = \vect R + A\cdot \tilde {\vect r}_1\\\label{eqn:trans-2}
+  \vect r_2 & = \vect R + A\cdot \tilde {\vect r}_2\\\label{eqn:trans-3}
+  \vect r_3 & = \vect R + A\cdot \tilde {\vect r}_3
+\end{align}
+where
+\begin{align}
+  \tilde{\vect r}_1 &= [0, y_\footh, z_\footh]^\trans\\
+  \tilde{\vect r}_2 &= [0, -y_\footh, z_\footh]^\trans\\
+  \tilde{\vect r}_3 &= [0, 0, z_\footo]^\trans
+\end{align}
+the numbers $y_\footh, z_\footh, z_\footo$ are constants determined by the geometry
+of water molecule.  The transformation
+\eqref{eqn:trans-1}--\eqref{eqn:trans-3} yields
+\begin{align}
+  \vect r_1 &= \vect R
+  +
+  \left[
+    \begin{array}{r}
+      y_\footh(\cos\psi \sin\phi + \cos\theta \cos\phi \sin\psi) +
+      z_\footh \sin\psi \sin\theta\\
+      y_\footh (-\sin\psi \sin\phi + \cos\theta \cos\phi \cos\psi) +
+      z_\footh \cos\psi \sin\theta \\
+      - y_\footh \sin\theta \cos\phi + z_\footh \cos\theta
+    \end{array}
+  \right] \\
+  \vect r_2 &= \vect R
+  +
+  \left[
+    \begin{array}{r}
+      -y_\footh(\cos\psi \sin\phi + \cos\theta \cos\phi \sin\psi) +
+      z_\footh \sin\psi \sin\theta\\
+      -y_\footh (-\sin\psi \sin\phi + \cos\theta \cos\phi \cos\psi) +
+      z_\footh \cos\psi \sin\theta \\
+      - y_\footh \sin\theta \cos\phi + z_\footh \cos\theta
+    \end{array}
+  \right]\\
+  \vect r_3 &= \vect R
+  +
+  \left[
+    \begin{array}{r}
+      z_\footo \sin\psi \sin\theta\\
+      z_\footo \cos\psi \sin\theta \\
+      z_\footo \cos\theta
+    \end{array}
+  \right]
+\end{align}
+\begin{align}
+  \frac
+  {\partial (\vect r_1, \vect r_2, \vect r_3)}
+  {\partial (\vect R, \phi, \theta, \psi)}
+  =
+  \left[
+  \tiny
+  \begin{array}{rrrrrr}
+    1 & 0 & 0 &
+    y_\footh(\cos\psi \cos\phi - \cos\theta \sin\phi \sin\psi) &
+    - y_\footh \sin\theta \cos\phi \sin\psi +
+    z_\footh \sin\psi \cos\theta &
+    y_\footh(-\sin\psi \sin\phi + \cos\theta \cos\phi \cos\psi) +
+    z_\footh \cos\psi \sin\theta\\
+    0 & 1 & 0 &
+    y_\footh (-\sin\psi \cos\phi - \cos\theta \sin\phi \cos\psi) &
+    - y_\footh \sin\theta \cos\phi \cos\psi +
+    z_\footh \cos\psi \cos\theta &
+    y_\footh (-\cos\psi \sin\phi - \cos\theta \cos\phi \sin\psi) -
+    z_\footh \sin\psi \sin\theta \\    
+    0 & 0 & 1 &
+    y_\footh \sin\theta \sin\phi &
+    - y_\footh \cos\theta \cos\phi - z_\footh \sin\theta &
+    0 \\
+    1 & 0 & 0 &
+    -y_\footh(\cos\psi \cos\phi - \cos\theta \sin\phi \sin\psi) &
+    y_\footh \sin\theta \cos\phi \sin\psi +
+    z_\footh \sin\psi \cos\theta &
+    -y_\footh(-\sin\psi \sin\phi + \cos\theta \cos\phi \cos\psi) +
+    z_\footh \cos\psi \sin\theta\\
+    0 & 1 & 0 &
+    -y_\footh (-\sin\psi \cos\phi - \cos\theta \sin\phi \cos\psi) &
+    y_\footh \sin\theta \cos\phi \cos\psi +
+    z_\footh \cos\psi \cos\theta &
+    -y_\footh (-\cos\psi \sin\phi - \cos\theta \cos\phi \sin\psi) -
+    z_\footh \sin\psi \sin\theta \\    
+    0 & 0 & 1 &
+    -y_\footh \sin\theta \sin\phi &
+    y_\footh \cos\theta \cos\phi - z_\footh \sin\theta &
+    0 \\    
+    1 & 0 & 0 &
+    0 &
+    z_\footo \sin\psi \cos\theta &
+    z_\footo \cos\psi \sin\theta \\
+    0 & 1 & 0 &
+    0 &
+    z_\footo \cos\psi \cos\theta &
+    -z_\footo \sin\psi \sin\theta \\
+    0 & 0 & 1 &
+    0 &
+    -z_\footo \sin\theta &
+    0
+  \end{array}
+  \right]
+\end{align}
+
+\section{Partition function for rigid water model}
+
+We use the generalized coordinate for the system: $(\vect R, \phi,
+\theta, \psi)$. For convenience, we denote $\genq = (\phi,
+\theta, \psi)$, and $\dgenq = (\dot\phi,
+\dot\theta, \dot\psi)$.  For the CG part, the kinetic energy
+is written as
+\begin{align}
+  K =
+  \sum_{i=1}^N\frac 12 M_i\dot{\vect R}_i^2 +
+  \sum_{i=1}^N\frac 12 \boldsymbol\omega^\trans_i \vect J_i\boldsymbol\omega_i
+\end{align}
+and the potential energy is
+\begin{align}
+  V = \sum_{i,j} V^\CG(\vect R_i - \vect R_j)
+\end{align}
+where $\boldsymbol\omega$ is the angular velocity and $\vect J$ is the
+initia of rotation. In Eulerian angle, the angular velocity can be expressed
+as
+\begin{align}
+  \boldsymbol\omega =
+  \left[
+    \begin{array}{r}
+      \sin\psi \sin\theta \dot\phi + \cos\psi \dot\theta\\
+      \cos\psi \sin\theta \dot\phi - \sin\psi \dot\theta\\
+      \cos\theta \dot\phi + \dot\psi
+    \end{array}
+  \right]
+  =
+  \left[
+    \begin{array}{rrr}
+      \sin\psi \sin\theta &  \cos\psi & 0 \\
+      \cos\psi \sin\theta & -\sin\psi & 0 \\
+      \cos\theta & 0 & 1
+    \end{array}
+  \right]
+  \cdot
+  \left[
+    \begin{array}{r}
+      \dot\phi\\
+      \dot\theta\\
+      \dot\psi
+    \end{array}
+  \right]
+  :=
+  \vect B \cdot \dgenq
+\end{align}
+therefore,
+\begin{align}
+  K = 
+  \sum_{i=1}^N\frac 12 M_i\dot{\vect R}_i^2 +
+  \sum_{i=1}^N\frac 12\,
+  \dgenq_i^\trans \cdot\vect B_i^\trans \vect J_i \vect B_i\cdot\dgenq
+\end{align}
+The Lagrangian reads
+\begin{align}
+  \mathcal L = K - V = 
+  \sum_{i=1}^N\frac 12 M_i\dot{\vect R}_i^2 +
+  \sum_{i=1}^N\frac 12\,
+  \dgenq_i^\trans \cdot\vect B_i^\trans \vect J_i \vect B_i\cdot\dgenq_i
+  -
+  \sum_{i,j} V^\CG(\vect R_i - \vect R_j)
+\end{align}
+The general momenta are
+\begin{align}
+  \vect P_i & =
+  \frac{\partial \mathcal L}{\partial \dot {\vect R}_i} =
+  M_i \dot {\vect R}_i \\
+  \genp_i & =
+  \frac{\partial \mathcal L}{\partial \dgenq_i} =
+  \frac12 \vect B_i^\trans (\vect J_i + \vect J_i^\trans) \vect B_i\cdot\dgenq_i
+  =
+  \frac{\partial \mathcal L}{\partial \dgenq_i} =
+  \vect B_i^\trans \vect J_i  \vect B_i\cdot\dgenq_i
+\end{align}
+The Hamiltonian is
+\begin{align}\nonumber
+  \mathcal H =&
+  \sum_{i=1}^N \vect P_i\cdot \dot{\vect R}_i + 
+  \sum_{i=1}^N \genp_i \cdot\dgenq_i - \mathcal L \\
+  =&
+  \sum_{i=1}^N\frac 12 M_i\dot{\vect R}_i^2 +
+  \sum_{i=1}^N\frac 12\,
+  \dgenq_i^\trans \cdot\vect B_i^\trans \vect J_i \vect B_i\cdot\dgenq_i
+  +
+  \sum_{i,j} V^\CG(\vect R_i - \vect R_j) \\
+  :=&
+  \tilde{ \mathcal H}
+  +
+  \sum_{i=1}^N\frac 12\,
+  \dgenq_i^\trans \cdot\vect B_i^\trans \vect J_i \vect B_i\cdot\dgenq_i
+\end{align}
+
+The partition function of the system is
+\begin{align}\nonumber
+  Z(N, V, T)
+  &=
+  \frac{1}{N! 2^N h^{6N}}
+  \int \dd\vect P^N \dd\vect R^N \dd\genp^N \dd\genq^N
+  e^{-\beta \mathcal H} \\ \nonumber
+  &=
+  \frac{1}{N! h^{3N}}
+  \int \dd\vect P^N \dd\vect R^N e^{-\beta \tilde{ \mathcal H}}
+  \times
+  \frac{1}{2^N h^{3N}}
+  \int \dd\genp^N \dd\genq^N
+  \exp 
+  \Big\{
+  -\beta \sum_{i=1}^N\frac 12\,
+  \dgenq_i^\trans \cdot\vect B_i^\trans \vect J_i \vect B_i\cdot\dgenq_i
+  \Big\}\\
+  &=
+  \tilde Z(N, V, T)
+  \times 
+  \frac{1}{2^N h^{3N}}
+  \prod_{i=1}^N
+  \int \dd\genp_i \dd\genq_i
+  \exp 
+  \Big\{
+  -\beta \, \frac 12\,
+  \dgenq_i^\trans \cdot\vect B_i^\trans \vect J_i \vect B_i\cdot\dgenq_i
+  \Big\}
+\end{align}
+where $\tilde Z$ is the partition function of the system with
+spherical particles.
+To calculate the chemical potential, we insert a molecule into the
+system and compare the partition function:
+\begin{align}\nonumber
+  \frac{Z(N+1, V, T)}
+  {Z(N, V, T)}
+  &=
+  \frac{\tilde Z(N+1, V, T)}
+  {\tilde Z(N, V, T)}
+  \times
+  \frac 1{2h^{3}}
+  \int \dd\genp\, \dd\genq
+  \exp 
+  \Big\{
+  -\beta \, \frac 12\,
+  \dgenq^\trans \cdot\vect B^\trans \vect J \vect B\cdot\dgenq
+  \Big\} \\
+  &=
+  \frac{\tilde Z(N+1, V, T)}
+  {\tilde Z(N, V, T)}
+  \times
+  \frac 1{2h^{3}}
+  \int \dd\genp\, \dd\genq
+  \exp 
+  \Big\{
+  -\beta \, \frac 12\,
+  \genp^\trans \cdot (\vect B^\trans \vect J \vect B)^{-1}\cdot\genp
+  \Big\} 
+\end{align}
+there we assumed that $\vect B^\trans \vect J \vect B$ is
+inversible. As a mater of fact, $ \det (\vect B^\trans \vect J \vect
+B)= \sin^2\theta \cdot \det \vect J $, which is singular when $\theta
+= M \pi, \ M\in \mathbb Z$.  Therefore, $\vect B^\trans \vect J \vect
+B$ is inversible almost everywhere.
+The single particle rotational partition function is
+\begin{align}\nonumber
+  \hat Q (T) &=
+  \frac 1{2h^{3}}
+  \int \dd\genp\, \dd\genq
+  \exp 
+  \Big\{
+  -\beta \, \frac 12\,
+  \genp^\trans \cdot (\vect B^\trans \vect J \vect B)^{-1}\cdot\genp
+  \Big\} \\\nonumber
+  &=
+  \frac 1{2h^{3}}
+  \int \dd\genq \int \dd\genp
+  \exp 
+  \Big\{
+  -\beta \, \frac 12\,
+  \genp^\trans \cdot (\vect B^\trans \vect J \vect B)^{-1}\cdot\genp 
+  \Big\} \\\nonumber
+  &=
+  \frac 1{2h^{3}}
+  \int \dd\genq \,
+  (2\pi k_B T)^{\frac32} \, \vert \sin\theta\vert \cdot (\det \vect J)^{\frac12}\\
+  \nonumber
+  &=
+  \frac {(2\pi k_B T)^{\frac32} (\det \vect J)^{\frac12}}{2h^{3}}
+  \int_0^{2\pi}\dd\phi \int_0^\pi \sin\theta\,\dd\theta \int_0^{2\pi}\dd\psi\\
+  &=
+  4\pi^2\,\frac {(2\pi k_B T)^{\frac32} (\det \vect J)^{\frac12}}{h^{3}}
+\end{align}
+$\vect J$ is computed as:
+\begin{align}
+  \vect J =
+  \left[
+    \begin{array}{ccc}
+      2m_\footh (y_\footh^2 + z_\footh^2) + m_\footo z_\footo^2 & 0 & 0\\
+      0 & 2m_\footh z_\footh^2 + m_\footo z_\footo^2 & 0 \\
+      0 & 0 & 2m_\footh y_\footh^2
+    \end{array}
+  \right]
+\end{align}
+Therefore,
+\begin{align}
+  \mu = \tilde\mu -
+  k_B T\ln
+  \bigg[
+  8\pi^2\,\frac {(2\pi k_B T)^{\frac32} (\det \vect J)^{\frac12}}{h^{3}}
+  \bigg]
+\end{align}
+
+For the explicit water, the Hamiltonian is 
+\begin{align}
+  \mathcal H =&
+  \sum_{i=1}^N\frac 12 M_i\dot{\vect R}_i^2 +
+  \sum_{i=1}^N\frac 12\,
+  \dgenq_i^\trans \cdot\vect B_i^\trans \vect J_i \vect B_i\cdot\dgenq_i
+  +
+  \sum_{i,j} V^\AT(\vect R_i, \genq_i; \vect R_j, \genq_j) 
+\end{align}
+The partition function is
+\begin{align}\nonumber
+  Z(N, V, T)
+  &=
+  \frac{1}{N! 2^N h^{6N}}
+  \int \dd\vect P^N \dd\vect R^N \dd\genp^N \dd\genq^N
+  e^{-\beta \mathcal H}\\\nonumber
+  &=
+  \frac{1}{N! 2^N h^{6N}}
+  \int \dd\vect R^N\dd \genq^N
+  e^{-\beta\sum_{i,j} V^\AT(\vect R_i, \genq_i; \vect R_j, \genq_j) }
+  \int \dd\vect P^N
+  e^{-\beta \sum_{i=1}^N\frac{{\vect P}_i^2}{2M_i}}
+  \int \dd\genp^N
+  e^{-\beta \sum_{i=1}^N\frac12 \genp\cdot(\vect B_i^\trans\vect J_i\vect B_i)^{-1}\cdot\genp}\\
+  &=
+  \frac{(2\pi M k_BT)^\frac{3N}2 (2\pi \det(\vect J)^\frac13 k_BT)^\frac{3N}2}
+  {N! 2^N h^{6N}}
+  \int \dd\vect R^N\dd \genq^N
+  \prod_{i=1}^N \sin\theta_i\,
+  e^{-\beta\sum_{i,j} V^\AT(\vect R_i, \genq_i; \vect R_j, \genq_j) }  
+\end{align}
+to calculate the chemical potential, we compute:
+\begin{align}\nonumber
+  \frac{Z(N+1, V, T)}
+  {Z(N, V, T)}
+  =&\,
+  \frac{(2\pi M k_BT)^\frac{3}2 (2\pi \det(\vect J)^\frac13 k_BT)^\frac{3}2 }{ 2 (N+1) h^6 }\times \\\nonumber
+  &\,
+  \int \dd R_{N+1} \int\sin\theta_{N+1}\dd\genq_{N+1}
+  \int \dd\vect R^N\dd \genq^N
+  e^{-\beta\Delta V}
+  \frac{
+    \prod_{i=1}^N \sin\theta_i\,
+    e^{-\beta\sum_{i,j} V^\AT(\vect R_i, \genq_i; \vect R_j, \genq_j) }
+  }
+  {
+    \int \dd\vect R^N\dd \genq^N
+    \prod_{i=1}^N \sin\theta_i\,
+    e^{-\beta\sum_{i,j} V^\AT(\vect R_i, \genq_i; \vect R_j, \genq_j) }
+  } \\\nonumber
+  =&\,
+  \frac{(2\pi M k_BT)^\frac{3}2 (2\pi \det(\vect J)^\frac13 k_BT)^\frac{3}2 }{ 2 (N+1) h^6 } \times
+   8\pi^2 V
+  \int \frac1V\dd R_{N+1} \int \frac{\sin\theta_{N+1}}{8\pi^2}\dd\genq_{N+1}
+  \Big\langle
+  e^{-\beta\Delta V}
+  \Big\rangle_{1,\cdots,N} \\
+  =&\,
+  \frac{4\pi^2 V (2\pi M k_BT)^\frac{3}2 (2\pi \det(\vect J)^\frac13 k_BT)^\frac{3}2 }{ (N+1) h^6 }
+  \Big\langle
+  e^{-\beta\Delta V}
+  \Big\rangle_{1,\cdots,N}^{N+1}  
+\end{align}
+Therefore,
+\begin{align}
+  \mu = -k_BT \ln
+  \bigg[
+  \frac V{N+1}
+  \Big(
+  \frac{2\pi M k_BT}{h^2}
+  \Big)^\frac32
+  \bigg]
+  -
+  k_BT\ln
+  \bigg[
+  4\pi^2
+  \Big(
+  \frac{2\pi \det(\vect J)^\frac13 k_BT}{h^2}
+  \Big)^\frac32
+  \bigg]
+  -
+  k_BT\ln
+  \bigg[
+  \Big\langle
+  e^{-\beta\Delta V}
+  \Big\rangle_{1,\cdots,N}^{N+1}  
+  \bigg]  
+\end{align}
+The average $\langle\cdot\rangle_{1,\cdots,N}^{N+1}$ means that the
+DOFs of $1,\cdots,N$ molecules are subject to the canonical distribution,
+while the $N+1$-th molecule is subject to the uniform distribution.
+
+
+\end{document}
+
+
+
+
+
