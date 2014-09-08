@@ -1,0 +1,143 @@
+% \documentclass[aip,jcp,preprint,unsortedaddress,a4paper,onecolum]{revtex4-1}
+\documentclass[aip,jcp,a4paper,reprint,onecolumn]{revtex4-1}
+% \documentclass[aps,pre,twocolumn]{revtex4-1}
+% \documentclass[aps,jcp,groupedaddress,twocolumn,unsortedaddress]{revtex4}
+
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage[dvips]{graphicx}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\makeatletter
+\makeatother
+
+\newcommand{\recheck}[1]{{\color{red} #1}}
+\newcommand{\redc}[1]{{\color{red} #1}}
+\newcommand{\bluec}[1]{{\color{blue} #1}}
+\newcommand{\vect}[1]{\textbf{\textit{#1}}}
+\newcommand{\dd}[1]{\textsf{#1}}
+
+\newcommand{\AT}{{\textrm{{AT}}}}
+\newcommand{\EX}{{\textrm{EX}}}
+\newcommand{\CG}{{\textrm{CG}}}
+\newcommand{\HY}{{\Delta}}
+\newcommand{\rdf}{{\textrm{rdf}}}
+
+
+
+\begin{document}
+
+\title{The Reliability of the Adaptive Resolution Technique in Performing  Grand Canonical-Like Molecular Dynamics Simulations}
+\author{Han Wang}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
+\author{Carsten Hartmann}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
+\author{Christof Sch\"utte}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
+\author{Luigi Delle Site}
+\email{luigi.dellesite@fu-berlin.de}
+\affiliation{Institute for Mathematics, Freie Universit\"at Berlin, Germany}
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+% The COM, H-O and H-H RDFs are shown in Fig.~\ref{fig:tmp1a} and \ref{fig:tmp2a}
+
+\begin{figure}
+  \centering
+  \includegraphics[]{fig/fig-rho.eps}
+  \includegraphics[]{fig/fig-count.eps}
+  \caption{Density profile and fluctuation (simulation not finished) of WCA AdResS.}
+  \label{fig:den}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.32\textwidth]{fig/fig-rdf-375-425.eps}
+  \includegraphics[width=0.32\textwidth]{fig/fig-rdf-425-516.eps}
+  \includegraphics[width=0.32\textwidth]{fig/fig-rdf-470-516.eps}
+  \includegraphics[width=0.32\textwidth]{fig/fig-rdf-516-608.eps}
+  \includegraphics[width=0.32\textwidth]{fig/fig-rdf-608-700.eps}
+  \includegraphics[width=0.32\textwidth]{fig/fig-rdf-700-750.eps}
+  \caption{Local COM $g(r)$'s.
+    The red line is the curve corresponding to the reference explicit (all atom)
+    simulation (AT).
+    The curve obtained by employing the standard AdResS and WCA AdResS
+    method is represented in green and blue, respectively.
+    The hybrid region is equally
+    divided into three parts: HY I, HY II and HY III, the widths of
+    which are roughly equal to the cut-off radius, i.e. 9 \textsf{nm}.    
+    The top part of each panel shows the region where the $g(r)$ is calculated,
+    and the value of weighting function $w(x)$ there.
+    From left to right, up to down, the panels correspond to the AT region, 
+    the HY I subregion of $\Delta$,
+    the left half of HY I subregion of $\Delta$,
+    the HY II subregion of $\Delta$,
+    the HY III subregion of $\Delta$,
+    and the CG region, respectively.
+  }
+  \label{fig:tmp1a}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.245\textwidth]{fig/fig-rdf-hhoh-375-425.eps}
+  \includegraphics[width=0.245\textwidth]{fig/fig-rdf-hhoh-425-516.eps}
+  \includegraphics[width=0.245\textwidth]{fig/fig-rdf-hhoh-516-608.eps}
+  \includegraphics[width=0.245\textwidth]{fig/fig-rdf-hhoh-608-700.eps}
+  \caption{Local H-H and O-H $g(r)$'s.
+    The red line is the curve corresponding to the reference explicit (all atom)
+    simulation (AT).
+    The curve obtained by employing the standard AdResS and WCA AdResS
+    method is represented in green and blue, respectively.
+    The hybrid region is equally
+    divided into three parts: HY I, HY II and HY III, the widths of
+    which are roughly equal to the cut-off radius, i.e. 9 \textsf{nm}.    
+    The top part of each panel shows the region where the $g(r)$ is calculated,
+    and the value of weighting function $w(x)$ there.
+    From left to right, up to down, the panels correspond to the AT region, 
+    the HY I subregion of $\Delta$,
+    the left half of HY I subregion of $\Delta$,
+    the HY II subregion of $\Delta$,
+    the HY III subregion of $\Delta$,
+    and the CG region, respectively.
+  }
+  \label{fig:tmp2a}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig/fig-rdf3.more.eps}
+  \caption{The 3-body correlation function.  The 1st row:
+    atomistic.
+    The 2nd to 5th row:
+    AdResS with TIF-IBI correction in the AT, HY I, HY II, and HY III
+    regions, respectively.
+    Different columns give different distant between
+    the first two molecules: from left to right $r_{12} =
+    0.27\,\textsf{nm},\ 0.33\,\textsf{nm},\  
+    0.80\,\textsf{nm}$.  The $x$ axis is the variable $h_1$, while $y$
+    axis is the variable $h_2$ (please refer to the Appendix for the
+    definition of these variables).  The magnitude that indicated by
+    different colors presents the magnitude of $g^{(3)}$.
+  }
+  \label{fig:tmp2b}
+\end{figure}
+
+
+
+
+% \section*{References}
+% \bibliography{ref}{}
+% \bibliographystyle{unsrt}
+
+
+
+\end{document}

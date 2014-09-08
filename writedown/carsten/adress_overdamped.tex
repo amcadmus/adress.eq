@@ -1,0 +1,212 @@
+\documentclass{amsart}
+\usepackage{geometry}                
+\geometry{a4paper}                  
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Q}{{\mathbf Q}}
+\newcommand{\Z}{{\mathbf Z}}
+\newcommand{\N}{{\mathbf N}}
+\newcommand{\T}{{\mathbf T}}
+\newcommand{\bk}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\ip}{\langle\cdot,\cdot\rangle}
+\newcommand{\grad}{{\rm grad}\,}
+\newcommand{\di}{{\rm div}\,}
+\newcommand{\vol}{{\rm vol}}
+\newcommand{\argmin}{\mathop{\rm argmin}}%
+\newcommand{\argmax}{\mathop{\rm argmax}}%
+\newcommand{\EXP}[1]{\, e\mbox{\raisebox{1.3ex}{$\,#1$}}\,}
+\newcommand{\II}{I\hspace{-0.1cm}I}
+\newcommand{\cL}{{\mathcal L}}
+\newcommand{\cH}{{\mathcal H}}
+\newcommand{\sB}{{\mathscr B}}
+\newcommand{\sM}{{\mathscr M}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cR}{{\mathcal R}}
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cN}{{\mathcal N}}
+\newcommand{\cM}{{\mathcal M}}
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cX}{{\mathcal X}}
+\newcommand{\PV}{{\mathcal P}^V}
+\newcommand{\PH}{{\mathcal P}^H}
+\newcommand{\pP}{{\mathscr P}}
+\newcommand{\qQ}{{\mathscr Q}}
+\newcommand{\bV}{{\mathbb V}}
+\newcommand{\bH}{{\mathbb H}}
+\newcommand{\bJ}{{\mathbb J}}
+\newcommand{\rd}{{\mathrm d}}
+\newcommand{\bq}{{\bm q}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\bz}{{\bm y}}
+\newcommand{\bE}{{\mathbf E}}
+\newcommand{\bP}{{\mathbf P}}
+\newcommand{\bQ}{{\mathbf Q}}
+\newcommand{\bbE}{{\mathbb E}}
+\newcommand{\bbP}{{\mathbb P}}
+\newcommand{\nN}{{\mathfrak Q}}
+\newcommand{\wW}{{\mathfrak S}}
+\newcommand{\kk}{{\mathbf k}}
+\newcommand{\one}{{\mathbf 1}}
+\newcommand{\zero}{{\mathbf 0}}
+%\newcommand{\D}{{\mathbf D}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\erfi}{{\rm erfi}}
+\newcommand{\erf}{{\rm erf}}
+\newcommand{\wrt}{with respect to }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\title{Sharp interface limit of the adaptive resolution scheme}
+%\author{}
+\date{\today}                                          
+
+\begin{document}
+\maketitle
+\section{Adaptive Langevin dynamics}
+
+Consider a Markov process $x^{\eps}_{t}\in \R^{n}$ satisfying the overdamped Langevin equation 
+\begin{equation}\label{lang}
+dx^{\eps}_{t}  = f^{\eps}(x^{\eps}_{t})dt + \sqrt{2} dw_{t} 
+\end{equation}
+with $x^{\eps}_{0}=x$ where $w_{t}$ is Brownian motion in $\R^{n}$ and $f^{\eps}$ is the force
+ \begin{equation}\label{force}
+f^{\eps}(x) = (a^{\eps}(x_{2})-1)\nabla V_{\rm ex}(x_{1},x_{2}) - a^{\eps}(x_{2})\nabla V_{\rm cg}(x_{2},x_{3})\,.
+\end{equation}
+(All constants such as temperature or friction coefficient have been set to one.) 
+Here $x=(x_{1},x_{2},x_{3})\in\R^{n_{1}+n_{2},n_{3}}$ with $n_{1}+n_{2}+n_{3}=n$ and $a^{\eps}\colon\R^{n_{2}}\to[0,1],\, a^{\eps}(x_{2})=a(x_{2}/\eps)$ is a family of interpolation functions that take the value $a=0$ in the explicit region and $a=1$ in the coarse-grained region (as indicated by the notation $V_{\rm ex}$ and $V_{\rm cg}$ for the interaction potentials). 
+
+
+\subsection{Kolmogorov backward equation (Heisenberg picture)}
+ 
+We are interested in the probability distribution $\rho^{\eps}$ of $(x^{\eps}_{t})$. Specifically, we consider the function
+\begin{equation*}
+\phi^{\eps}(x,t) = \bE\left[g(x^{\eps}_{t})\,\right|\left.x^{\eps}_{0}=x\right]
+\end{equation*}
+that solves the Kolmogorov backward equation
+\begin{equation}\label{bke}
+\left(\frac{\partial}{\partial t} - L^{\eps} \right)\phi^{\eps}(x,t) = 0\,,\quad \phi^{\eps}(x,0)=g(x)\,.
+\end{equation}
+Here $L^{\eps}$ is the linear operator
+\begin{equation*}
+L^{\eps} = \Delta + f^{\eps}(x)\cdot\nabla
+\end{equation*}
+with $\nabla$ denoting the nabla operator and $\Delta=\nabla\cdot\nabla$ being the Laplacian in $x$. Notice that formally
+\begin{align*}
+\int\phi(x,t)\rho_{0}(x)\,dx & = \int (e^{L^{\eps}t}g)(x)\rho_{0}(x)\,dx\\
+ & = \int g(x) (e^{A^{\eps}t}\rho_{0})(x)\,dx\\
+ & = \int g(x)\rho^{\eps}(x,t)\,dx
+\end{align*}
+where $A^{\eps}=(L^{\eps})^{*}$ is the adjoint of $L^{\eps}$ \wrt the scalar product
+\begin{equation*}
+\bk{\varphi}{\psi} = \int \varphi(x)\psi(x)\,dx\,,
+\end{equation*}
+i.e., $\bk{L^{\eps}\varphi}{\psi}=\bk{\varphi}{A^{\eps}\psi}$ and $\rho^{\eps}=e^{A^{\eps}t}\rho_{0}$ is the solution of the Fokker-Planck equation
+\begin{equation}\label{bke}
+\left(\frac{\partial}{\partial t} - A^{\eps} \right)\rho^{\eps}(x,t) = 0\,,\quad \rho^{\eps}(x,0)=\rho_{0}(x)\,,
+\end{equation}
+In particular for $\rho_{0}(x)=\delta(x-\tilde{x})$ we have
+\begin{equation*}
+\phi^{\eps}(\tilde{x},t) = \int g(x)(e^{A^{\eps}t}\rho_{0})(x)\,dx\,,
+\end{equation*}
+in other words, $\phi^{\eps}$ encodes as much information as $\rho^{\eps}$. 
+
+\begin{figure}
+ \begin{center}
+   \includegraphics[width=90mm]{adress-eps}
+     \caption{Example of an interpolation function: $a^{\eps}(x_{2})=a(x_{2}/\eps)$.}\label{fig:a}
+   \end{center}
+\end{figure}
+
+
+
+\section{Sharp interface limit of the backward equation}
+
+We are interested in the sharp interface limit of (\ref{lang}) when the interpolation regime of the function $a^{\eps}(x_{2})=a(x_{2}/\eps)$ shrinks to zero  (see Figure \ref{fig:a} for illustration). To this end, we define the interpolation region as the open cylinder set 
+\begin{equation*}
+\cC_{\eps} = \left\{(x_{1},x_{2},x_{3})\in\R^{n_{1}+n_{2}+n_{3}}\colon \|x_{2}\|_{\infty} < \eps/2 \right\} 
+\end{equation*}
+and suppose that $a^{\eps}(x_{2})=1-a^{\eps}(-x_{2})$, i.e., $a^{\eps}$ is point symmetric about $x_{2}=0$. We seek an perturbative expansion for $\phi^{\eps}$ for the solution of the backward equation (\ref{bke}) using the ansatz
+\begin{equation*}
+\phi^{\eps}(x) = \phi_{0}\left(x,\frac{x_{2}}{\eps}\right)+\eps\phi_{1}\left(x,\frac{x_{2}}{\eps}\right)+\eps^{2}\phi_{2}\left(x,\frac{x_{2}}{\eps}\right)+\ldots\,.
+\end{equation*}
+In other words, we assume that the solution explicitly depends on the scaled variable $y=x_{2}/\eps$, $y\in ]-1/2,1/2[^{n_{2}}$ that can be considered a local boundary layer variable. We further assume that the $\phi_{j}(\cdot,y)$ are uniformly bounded and periodic in the second argument. 
+\subsection{Two-scale expansion of the solution} We define
+\begin{equation*}
+f(x,y) = (a(y)-1)\nabla_{x}V_{\rm ex}(x_{1},x_{2}) - a(y)\nabla_{x}V_{\rm cg}(x_{2},x_{3})\,.
+\end{equation*} 
+In terms of the new variables $(x_{1},x_{2},x_{3},y)=(x_{1},x_{2},x_{3},x_{2}/\eps)$ the derivative \wrt the interface variable $x_{2}$ transform as 
+\begin{equation*}
+\nabla_{x_{2}} \mapsto \nabla_{x_{2}} + \frac{1}{\eps}\nabla_{y}\,,
+\end{equation*}
+which turns the operator $L^{\eps}$ into
+\begin{equation*}
+L^{\eps} = L_{0} + \frac{1}{\eps}L_{1} + \frac{1}{\eps^{2}}L_{2}
+\end{equation*}
+where 
+\begin{equation*}
+\begin{aligned}
+L_{0} & = \Delta_{x} + f(x,y)\cdot\nabla_{x}\\
+L_{1} & = \nabla_{x_{2}}\cdot\nabla_{y}  + \nabla_{y}\cdot \nabla_{x_{2}}+ f_{2}(x,y)\cdot\nabla_{y}\\
+L_{2} & = \Delta_{y}
+\end{aligned}
+\end{equation*}
+Here $f_{2}$ denotes the components of $f=(f_{1},f_{2},f_{3})$ corresponding to $x_{2}$. Inserting the ansatz into (\ref{bke}) and equating different powers of $\eps$ yields a hierarchy of equations the first three of which are
+\begin{equation*}
+L_{2} \phi_{0} = 0\,,\quad L_{2} \phi_{1} = -L_{1}u_{0}\,,\quad L_{2} \phi_{2} = \frac{\partial u_{0}}{\partial t} - L_{0}u_{0} - L_{1}u_{1}\,.
+\end{equation*}
+It follows by the maximum principle and the periodicity of $\phi_{j}(\cdot,y)$ that $\phi_{0}=\phi_{0}(x)$ is independent of $y$. By the same argument $\phi_{1}$ must not depend on $y$, so that the third equation becomes
+\begin{equation}\label{orderone}
+L_{2} \phi_{2} = \frac{\partial u_{0}}{\partial t} - L_{0}u_{0}\,.
+\end{equation}
+It is helpful regard (\ref{orderone}) as a linear equation of the form $L_{2}\phi=g$, noting that 
+\begin{equation*}
+g \in {\rm range}(L_{2})\quad\Longleftrightarrow\quad g \in ({\rm ker}(L^{*}_{2}))^{\perp} \,,
+\end{equation*}
+with orthogonality in the sense of the respective $L^{2}$ scalar product. This is to say that the equation $L_{2}\phi=g$ has a solution if and only if $\bk{\psi}{g}=0$ for all $\psi\in{\rm ker}(L^{*}_{2})$. Since the Laplacian equipped with periodic boundary conditions is essentially selfadjoint and the kernel of $L_{2}^{*}=\Delta_{y}$ contains only the constants in $y$, solvability of (\ref{orderone}) requires that 
+\begin{equation*}
+\int_{\|y\|_{\infty}\le 1/2} \left(\frac{\partial u_{0}}{\partial t} - L_{0}u_{0}\right)dy = 0\,,
+\end{equation*}
+or, in other words,
+\begin{equation*}
+\frac{\partial u_{0}}{\partial t} = \left(\Delta_{x} +  \bar{f}(x)\cdot\nabla_{x}\right) u_{0}\,,\quad \bar{f}(x) = \int_{\|y\|_{\infty}\le 1/2} f(x,y)\,dy\,.
+\end{equation*}
+The last integral can be carried out analytically; since $a(y)$ is point symmetric about the origin, it follows that $a(y)$ averages to $\bar{a}=1/2$, by which we find 
+\begin{equation*}
+\bar{f}(x) = - \frac{1}{2}\nabla V(x), \quad V(x) = V_{\rm ex}(x_{1},x_{2}) + V_{\rm cg}(x_{2},x_{3})\,.
+\end{equation*}
+\subsection{Limiting equation and stationary distribution}
+The operator
+\begin{equation*}
+\bar{L} = \Delta - \frac{1}{2}\nabla V\cdot\nabla
+\end{equation*}
+is the generator of a diffusion process $x_{t}\in\R^{n}$ that satisfies the averaged Langevin equation
+\begin{equation}\label{lang0}
+dx_{t}  = -\frac{1}{2}\nabla V(x_{t})dt + \sqrt{2} dw_{t}\,,\quad x_{0}=x\,,
+\end{equation}
+and which admits the stationary probability distribution
+\begin{equation*}
+\rho(x) = \frac{1}{Z_{1/2}}\exp\left(-\frac{1}{2} V(x)\right)\,,\quad Z_{1/2}=\int\exp\left(-\frac{1}{2} V(x)\right)\,dx\,.
+\end{equation*}
+Under suitable regularity assumptions on $a$, $V_{\rm ex}$ and $V_{\rm cg}$ in (\ref{lang})---excluding Coulomb, Lennard-Jones and the alike---it can be moreover shown that 
+\begin{equation*}
+\lim_{\eps\to 0}\bE \|x_{t}^{\eps} - x_{t}\|_{\infty}= 0\,,
+\end{equation*}
+uniformly on any finite time interval $[0,T]$, which implies that $x_{t}^{\eps}\to x_{t}$ in probability. 
+
+
+
+\end{document}  
